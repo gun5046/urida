@@ -13,4 +13,8 @@
     <string name="fragment_study_cardview_quiz">낱말 퀴즈</string>
     <string name="fragment_study_cardview_resolve">다시 풀어보기</string>
 
+    <!--    fragment_picture-->
+    <string name="fragment_picture_cardview_camera">촬영하기</string>
+    <string name="fragment_picture_cardview_gallery">갤러리에서 불러오기</string>
+
 </resources>
