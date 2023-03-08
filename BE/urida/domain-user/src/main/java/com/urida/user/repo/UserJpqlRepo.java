@@ -5,11 +5,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 @Repository
 @RequiredArgsConstructor
 public class UserJpqlRepo {
-
+    @PersistenceContext
     private final EntityManager em;
 
     public User findBySocialId(String type, String id){
