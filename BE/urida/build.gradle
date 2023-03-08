@@ -46,12 +46,26 @@ subprojects {
 }
 
 project(':core-web'){
+    bootJar{
+        enabled=false
+    }
+    jar{
+        enabled=true
+    }
+
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'org.springframework.boot:spring-boot-starter-web-services'
+        api 'org.springframework.boot:spring-boot-starter-web'
+        api 'org.springframework.boot:spring-boot-starter-web-services'
     }
 }
 project(':domain-board'){
+    bootJar{
+        enabled=false
+    }
+    jar{
+        enabled=true
+    }
+
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         runtimeOnly 'com.mysql:mysql-connector-j'
@@ -59,6 +73,14 @@ project(':domain-board'){
 
 }
 project(':domain-problem'){
+    bootJar{
+        enabled=false
+    }
+    jar{
+        enabled=true
+    }
+
+
     dependencies {
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         runtimeOnly 'com.mysql:mysql-connector-j'
@@ -81,19 +103,22 @@ project(':domain-user'){
 project(':urida-board'){
     dependencies {
         implementation project(':core-web')
-        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation project(':domain-board')
+
     }
 }
 project(':urida-user'){
     dependencies {
         implementation project(':core-web')
-        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation project(':domain-user')
+
     }
 }
 project(':urida-problem'){
     dependencies {
         implementation project(':core-web')
-        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation project(':domain-problem')
+
     }
 }
 
