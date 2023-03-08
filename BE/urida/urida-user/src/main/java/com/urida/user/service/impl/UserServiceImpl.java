@@ -1,11 +1,13 @@
 package com.urida.user.service.impl;
 
 import com.urida.user.dto.LoginDto;
+import com.urida.user.dto.RegisterDto;
 import com.urida.user.entity.User;
 import com.urida.user.repo.UserJpqlRepo;
 import com.urida.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -25,18 +27,28 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Transactional
     @Override
-    public void saveLanguage(int lang) {
+    public void saveUser(RegisterDto registerDto) {
+        User user = User.builder()
+                .nickname(registerDto.getNickname())
+                .social_id(registerDto.getSocial_id())
+                .type(registerDto.getType())
+                .language(registerDto.getLanguage())
+                .build();
 
+        userJpqlRepo.saveUser(user);
     }
 
     @Override
-    public void checkNickname(String nickname) {
+    public Boolean checkNickname(String nickname) {
 
-    }
+        Optional<User> user = userJpqlRepo.checkNickname(nickname);
 
-    @Override
-    public void saveNickname(String nickname) {
-
+        if(user.isPresent()){
+            return false;
+        }else{
+            return true;
+        }
     }
 }

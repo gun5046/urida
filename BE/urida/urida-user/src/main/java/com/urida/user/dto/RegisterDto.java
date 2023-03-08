@@ -1,25 +1,16 @@
-package com.urida.user.entity;
+package com.urida.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
-@Entity
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long uid;
+public class RegisterDto {
     private String nickname;
-
-    @Column(name="social_id")
     private String social_id;
     private int language;
     private String type;

@@ -2,10 +2,12 @@ package com.urida.user.controller;
 
 
 import com.urida.user.dto.LoginDto;
+import com.urida.user.dto.RegisterDto;
 import com.urida.user.entity.User;
 import com.urida.user.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final UserService userService;
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/login")
     public User login(@ModelAttribute LoginDto loginDto){
@@ -21,18 +24,20 @@ public class UserController {
         return user;
     }
 
-    @PostMapping("/language")
-    public Boolean saveLanguage(@RequestParam int lang){
-        userService.saveLanguage(lang);
+    @PostMapping("/register")
+    public Boolean saveUser(@RequestBody RegisterDto registerDto){
+        try {
+            System.out.println(registerDto.getSocial_id());
+            userService.saveUser(registerDto);
+        }catch(Exception e){
+            logger.error(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     @GetMapping("/nickname")
     public Boolean checkNickname(@RequestParam String nickname){
-        userService.checkNickname(nickname);
-    }
-
-    @PostMapping("/nickname")
-    public Boolean saveNickname(@RequestParam String nickname){
-        userService.saveNickname(nickname);
+        return userService.checkNickname(nickname);
     }
 }

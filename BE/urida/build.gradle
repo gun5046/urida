@@ -56,6 +56,7 @@ project(':core-web'){
     dependencies {
         api 'org.springframework.boot:spring-boot-starter-web'
         api 'org.springframework.boot:spring-boot-starter-web-services'
+
     }
 }
 project(':domain-board'){
@@ -67,6 +68,8 @@ project(':domain-board'){
     }
 
     dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+        runtimeOnly 'com.h2database:h2'
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         runtimeOnly 'com.mysql:mysql-connector-j'
     }
@@ -82,6 +85,8 @@ project(':domain-problem'){
 
 
     dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+        runtimeOnly 'com.h2database:h2'
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         runtimeOnly 'com.mysql:mysql-connector-j'
     }
@@ -104,21 +109,24 @@ project(':urida-board'){
     dependencies {
         implementation project(':core-web')
         implementation project(':domain-board')
-
+        implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+        runtimeOnly 'com.h2database:h2'
     }
 }
 project(':urida-user'){
     dependencies {
         implementation project(':core-web')
         implementation project(':domain-user')
-
+        implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+        runtimeOnly 'com.h2database:h2'
     }
 }
 project(':urida-problem'){
     dependencies {
         implementation project(':core-web')
         implementation project(':domain-problem')
-
+        implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+        runtimeOnly 'com.h2database:h2'
     }
 }
 

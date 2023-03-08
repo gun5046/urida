@@ -1,14 +1,13 @@
 package com.urida.user.service;
 
 import com.urida.user.dto.LoginDto;
+import com.urida.user.dto.RegisterDto;
 import com.urida.user.entity.User;
 
 public interface UserService {
     User login(LoginDto loginDto);
 
-    void saveLanguage(int lang);
+    void saveUser(RegisterDto registerDto);
 
-    void checkNickname(String nickname);
-
-    void saveNickname(String nickname);
+    Boolean checkNickname(String nickname);
 }
