@@ -12,5 +12,7 @@
     <string name="fragment_study_cardview_learn">낱말 익히기</string>
     <string name="fragment_study_cardview_quiz">낱말 퀴즈</string>
     <string name="fragment_study_cardview_resolve">다시 풀어보기</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

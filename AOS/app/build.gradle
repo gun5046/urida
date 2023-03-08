@@ -16,6 +16,12 @@ android {
         versionCode 1
         versionName "1.0"
 
+        manifestPlaceholders = [Kakao_API_KEY: "13b66e0b9e990177d4b06d6e78dc6314"]
+        buildConfigField "String","Kakao_API_KEY","\"13b66e0b9e990177d4b06d6e78dc6314\""
+        buildConfigField "String","OAUTH_CLIENT_ID","\"IoMTBJkwtbxrbuyQr8zF\""
+        buildConfigField "String","OAUTH_CLIENT_SECRET","\"4z90cNhKyQ\""
+        buildConfigField "String","OAUTH_CLIENT_NAME","\"EducationForMulticulturalFamily\""
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -82,6 +88,12 @@ dependencies {
     //Glide
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
+
+    //Kakao
+    implementation "com.kakao.sdk:v2-user:2.13.0"
+
+    //Naver
+    implementation "com.navercorp.nid:oauth-jdk8:5.4.0"
 
 
     implementation 'androidx.core:core-ktx:1.7.0'
