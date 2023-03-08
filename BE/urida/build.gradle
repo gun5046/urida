@@ -80,16 +80,19 @@ project(':domain-user'){
 
 project(':urida-board'){
     dependencies {
+        implementation project(':core-web')
         implementation 'org.springframework.boot:spring-boot-starter-web'
     }
 }
 project(':urida-user'){
     dependencies {
+        implementation project(':core-web')
         implementation 'org.springframework.boot:spring-boot-starter-web'
     }
 }
 project(':urida-problem'){
     dependencies {
+        implementation project(':core-web')
         implementation 'org.springframework.boot:spring-boot-starter-web'
     }
 }
