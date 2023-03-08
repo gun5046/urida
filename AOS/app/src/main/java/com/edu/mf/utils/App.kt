@@ -1,0 +1,132 @@
+package com.edu.mf.utils
+
+import android.app.Application
+import android.util.Log
+
+
+private const val TAG = "APP_지훈"
+class App : Application(){
+
+    companion object{
+        var PROBLEMS : ArrayList<ArrayList<LinkedHashMap<String,String>>> = arrayListOf()
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        setFruitsImage()
+        setAnimalImage()
+    }
+
+    private fun setFruitsImage(){
+        var fruitsList = arrayListOf<LinkedHashMap<String,String>>()
+        var fruitstHash = linkedMapOf<String,String>()
+        fruitstHash.put("사과","apple")
+        fruitstHash.put("아보카도","avocado")
+        fruitstHash.put("바나나","banana")
+        fruitstHash.put("피망","bellpepper")
+        fruitstHash.put("브로콜리","broccoli")
+        fruitstHash.put("양상추","cabbage")
+        fruitstHash.put("당근","carrot")
+        fruitstHash.put("체리","cherry")
+        fruitstHash.put("옥수수","corn")
+        fruitstHash.put("오이","cucumber")
+        fruitstHash.put("가지","eggplant")
+        fruitstHash.put("마늘","garlic")
+        fruitstHash.put("생강","ginger")
+        fruitstHash.put("포도","grape")
+        fruitstHash.put("청포도","greengrape")
+        fruitstHash.put("대파","greenonion")
+        fruitstHash.put("대추","jujube")
+        fruitstHash.put("키위","kiwi")
+        fruitstHash.put("레몬","lemon")
+        fruitstHash.put("상추","lettuce")
+        fruitstHash.put("귤","mandarin")
+        fruitstHash.put("망고","mango")
+        fruitstHash.put("메론","melon")
+        fruitstHash.put("버섯","mushroom")
+        fruitstHash.put("양배추","napacabbage")
+        fruitstHash.put("양파","onion")
+        fruitstHash.put("오렌지","orange")
+        fruitstHash.put("참외","orientalmelon")
+        fruitstHash.put("파프리카","paprika")
+        fruitstHash.put("완두콩","pea")
+        fruitstHash.put("복숭아","peach")
+        fruitstHash.put("배","pear")
+        fruitstHash.put("고추","pepper")
+        fruitstHash.put("감","persimmon")
+        fruitstHash.put("파인애플","pineapple")
+        fruitstHash.put("감자","potato")
+        fruitstHash.put("호박","pumkin")
+        fruitstHash.put("무","radish")
+        fruitstHash.put("시금치","spinich")
+        fruitstHash.put("딸기","strawberry")
+        fruitstHash.put("고구마","sweetpotato")
+        fruitstHash.put("토마토","tomato")
+        fruitstHash.put("수박","watermelon")
+        fruitsList.add(fruitstHash)
+        Log.d(TAG, "setFruitsData:${fruitstHash.size}")
+        PROBLEMS.add(fruitsList)
+    }
+
+    private fun setAnimalImage(){
+        var animalsHash = linkedMapOf<String,String>()
+        var animalList  = arrayListOf<LinkedHashMap<String,String>>()
+
+        animalsHash.put("악어","alligator")
+        animalsHash.put("곰","bear")
+        animalsHash.put("꿀벌","bee")
+        animalsHash.put("나비","butterfly")
+        animalsHash.put("카멜레온","cameleon")
+        animalsHash.put("고양이","cat")
+        animalsHash.put("닭","chicken")
+        animalsHash.put("치타","chita")
+        animalsHash.put("소","cow")
+        animalsHash.put("게","crap")
+        animalsHash.put("달팽이","snail")
+        animalsHash.put("사슴","deer")
+        animalsHash.put("두더지","mole")
+        animalsHash.put("강아지","dog")
+        animalsHash.put("오리","duck")
+        animalsHash.put("코끼리","elephant")
+        animalsHash.put("물고기","fish")
+        animalsHash.put("여우","fox")
+        animalsHash.put("개구리","frog")
+        animalsHash.put("기린","giraffe")
+        animalsHash.put("해파리","jellyfish")
+        animalsHash.put("하마","hippo")
+        animalsHash.put("하이에나","hiena")
+        animalsHash.put("말","horse")
+        animalsHash.put("잠자리","dragonfly")
+        animalsHash.put("캥거루","kanguroo")
+        animalsHash.put("사자","lion")
+        animalsHash.put("병아리","chick")
+        animalsHash.put("미어캣","meercat")
+        animalsHash.put("메뚜기","grasshoper")
+        animalsHash.put("악어","alligator")
+        animalsHash.put("원숭이","monkey")
+        animalsHash.put("쥐","mouse")
+        animalsHash.put("무당벌레","ladybug")
+        animalsHash.put("너구리","raccoon")
+        animalsHash.put("문어","octopus")
+        animalsHash.put("오랑우탄","orangutan")
+        animalsHash.put("부엉이","owl")
+        animalsHash.put("팬더","panda")
+        animalsHash.put("돼지","pig")
+        animalsHash.put("풍뎅이","beetle")
+        animalsHash.put("토끼","rabbit")
+        animalsHash.put("사마귀","mentis")
+        animalsHash.put("상어","shark")
+        animalsHash.put("양","sheep")
+        animalsHash.put("뱀","snake")
+        animalsHash.put("호랑이","tiger")
+        animalsHash.put("거북이","turtle")
+        animalsHash.put("고래","whale")
+        animalsHash.put("늑대","wolf")
+        animalsHash.put("염소","goat")
+
+        animalList.add(animalsHash)
+        PROBLEMS.add(animalList)
+        
+    }
+
+}
