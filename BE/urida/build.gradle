@@ -1,0 +1,96 @@
+buildscript {
+
+    ext {
+        springBootVersion = '2.7.9'
+    }
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+    }
+}
+
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    group 'com.ssafy'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '11'
+
+    compileJava.options.encoding = 'UTF-8'
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    }
+
+    tasks.named('test') {
+        useJUnitPlatform()
+    }
+    tasks.register("prepareKotlinBuildScriptModel"){}
+}
+
+project(':core-web'){
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+        implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    }
+}
+project(':domain-board'){
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        runtimeOnly 'com.mysql:mysql-connector-j'
+    }
+
+}
+project(':domain-problem'){
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        runtimeOnly 'com.mysql:mysql-connector-j'
+    }
+}
+project(':domain-user'){
+    bootJar{
+        enabled=false
+    }
+    jar{
+        enabled=true
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+        runtimeOnly 'com.mysql:mysql-connector-j'
+    }
+}
+
+project(':urida-board'){
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+    }
+}
+project(':urida-user'){
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+    }
+}
+project(':urida-problem'){
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+    }
+}
+

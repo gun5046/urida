@@ -1,0 +1,11 @@
+rootProject.name = 'urida'
+
+include 'core-web'
+
+include 'domain-board'
+include 'domain-problem'
+include 'domain-user'
+
+include 'urida-board'
+include 'urida-problem'
+include 'urida-user'
