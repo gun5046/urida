@@ -9,3 +9,5 @@ include 'domain-user'
 include 'urida-board'
 include 'urida-problem'
 include 'urida-user'
+
+include 'error'
