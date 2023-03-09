@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">EducationForMulticulturalFamily</string>
+
+    <!--    fragment_main-->
+    <string name="fragment_main_cardview_community_another_friends">다른친구들은 뭐하고 지낼까?</string>
+    <string name="fragment_main_cardview_community_transfer_community">커뮤니티로 이동</string>
+    <string name="fragment_main_cardview_study_transfer_study">단어학습</string>
+    <string name="fragment_main_cardview_drawing_transfer_drawing">그림으로 찾기</string>
+    <string name="fragment_main_cardview_picture_transfer_picture">사진으로 찾기</string>
+
+    <!--    fragment_study-->
+    <string name="fragment_study_cardview_learn">낱말 익히기</string>
+    <string name="fragment_study_cardview_quiz">낱말 퀴즈</string>
+    <string name="fragment_study_cardview_resolve">다시 풀어보기</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
