@@ -26,18 +26,17 @@ public class UserController {
 
     @PostMapping("/register")
     public Boolean saveUser(@RequestBody RegisterDto registerDto){
-        try {
-            System.out.println(registerDto.getSocial_id());
-            userService.saveUser(registerDto);
-        }catch(Exception e){
-            logger.error(e.getMessage());
-            return false;
-        }
+        userService.saveUser(registerDto);
         return true;
     }
 
     @GetMapping("/nickname")
     public Boolean checkNickname(@RequestParam String nickname){
         return userService.checkNickname(nickname);
+    }
+
+    @GetMapping("/info")
+    public User getUserInfo(@RequestParam Long uid){
+        return userService.getUserInfo(uid);
     }
 }

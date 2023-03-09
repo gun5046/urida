@@ -10,4 +10,6 @@ public interface UserService {
     void saveUser(RegisterDto registerDto);
 
     Boolean checkNickname(String nickname);
+
+    User getUserInfo(Long uid);
 }

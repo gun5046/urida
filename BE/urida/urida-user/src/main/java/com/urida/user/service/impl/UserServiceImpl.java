@@ -1,5 +1,7 @@
 package com.urida.user.service.impl;
 
+import com.urida.exception.NoDataException;
+import com.urida.exception.SaveException;
 import com.urida.user.dto.LoginDto;
 import com.urida.user.dto.RegisterDto;
 import com.urida.user.entity.User;
@@ -17,7 +19,8 @@ public class UserServiceImpl implements UserService {
     private  final UserJpqlRepo userJpqlRepo;
 
     @Override
-    public User login(LoginDto loginDto) {
+    public User login(LoginDto loginDto){
+
         Optional<User> user = userJpqlRepo.findBySocialId(loginDto.getType(), loginDto.getId());
 
         if(user.isPresent()){
@@ -29,26 +32,39 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void saveUser(RegisterDto registerDto) {
+    public void saveUser(RegisterDto registerDto){
+
         User user = User.builder()
                 .nickname(registerDto.getNickname())
                 .social_id(registerDto.getSocial_id())
                 .type(registerDto.getType())
                 .language(registerDto.getLanguage())
                 .build();
-
-        userJpqlRepo.saveUser(user);
+        try {
+            userJpqlRepo.saveUser(user);
+        }catch(Exception e){
+            throw new SaveException("Value invalid");
+        }
     }
 
     @Override
-    public Boolean checkNickname(String nickname) {
+    public Boolean checkNickname(String nickname){
 
         Optional<User> user = userJpqlRepo.checkNickname(nickname);
-
         if(user.isPresent()){
             return false;
         }else{
             return true;
         }
+    }
+
+    @Override
+    public User getUserInfo(Long uid) {
+        Optional<User> user = userJpqlRepo.findByUid(uid);
+
+        if(!user.isPresent()){
+            throw new NoDataException("User-Is-Not-Exist");
+        }
+        return user.get();
     }
 }

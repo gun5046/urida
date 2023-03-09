@@ -10,7 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 @EnableWebMvc
 public class WebConfiguration implements WebMvcConfigurer {
-
     public void addCorsMappings(CorsRegistry registry) {
 //		System.out.println("CORS Setting");
 //		Allow all origins.

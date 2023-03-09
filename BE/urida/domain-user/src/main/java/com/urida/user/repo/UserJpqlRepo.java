@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserJpqlRepo {
 
+    @PersistenceContext
     private final EntityManager em;
 
     public Optional<User> findBySocialId(String type, String id) {
@@ -37,6 +39,14 @@ public class UserJpqlRepo {
     public Optional<User> checkNickname(String nickname) {
         List<User> user = em.createQuery("select u from User u where nickname = :nickname", User.class)
                 .setParameter("nickname",nickname)
+                .getResultList();
+
+        return user.stream().findAny();
+    }
+
+    public Optional<User> findByUid(Long uid) {
+        List<User> user = em.createQuery("select u from User u where uid = :uid", User.class)
+                .setParameter("uid",uid)
                 .getResultList();
 
         return user.stream().findAny();
