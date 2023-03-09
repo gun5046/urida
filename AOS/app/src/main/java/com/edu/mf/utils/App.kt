@@ -7,12 +7,22 @@ import android.util.Log
 class App : Application(){
 
     companion object{
-        var PICTURES : ArrayList<ArrayList<String>> = arrayListOf()
         const val TAG = "App_지훈"
+        var PICTURES : ArrayList<ArrayList<String>> = arrayListOf()
+        lateinit var sharedPreferencesUtil:SharedPreferencesUtil
     }
 
     override fun onCreate() {
         super.onCreate()
+        sharedPreferencesUtil = SharedPreferencesUtil(applicationContext)
+
+        setImageData()
+    }
+
+    /**
+     * 이미지 데이터 생성
+     */
+    private fun setImageData(){
         setPictures()
         setFruitsImage()
         setJobImage()
