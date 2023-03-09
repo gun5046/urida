@@ -1,0 +1,13 @@
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="315">
+    <vector
+        android:height="200dp"
+        android:viewportHeight="30"
+        android:viewportWidth="30"
+        android:width="200dp">
+        <path android:fillColor="#00000000"
+            android:pathData="M2.5,21.5L8.049,19.365C8.404,19.229 8.582,19.161 8.748,19.072C8.895,18.992 9.036,18.901 9.168,18.798C9.317,18.683 9.451,18.548 9.72,18.279L21,7C22.105,5.895 22.105,4.104 21,3C19.896,1.895 18.105,1.895 17,3L5.72,14.28C5.451,14.548 5.317,14.683 5.201,14.832C5.099,14.964 5.007,15.105 4.928,15.252C4.839,15.418 4.771,15.596 4.634,15.951L2.5,21.5ZM2.5,21.5L4.558,16.149C4.705,15.766 4.779,15.574 4.905,15.487C5.016,15.41 5.152,15.381 5.284,15.406C5.435,15.435 5.58,15.58 5.87,15.87L8.13,18.129C8.42,18.42 8.565,18.565 8.594,18.715C8.619,18.847 8.59,18.984 8.513,19.094C8.425,19.221 8.234,19.294 7.851,19.442L2.5,21.5Z"
+            android:strokeColor="#000000" android:strokeLineCap="round"
+            android:strokeLineJoin="round" android:strokeWidth="2"/>
+    </vector>
+</rotate>
