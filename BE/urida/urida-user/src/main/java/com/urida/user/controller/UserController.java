@@ -1,6 +1,7 @@
 package com.urida.user.controller;
 
 
+import com.urida.exception.InputException;
 import com.urida.user.dto.LoginDto;
 import com.urida.user.dto.RegisterDto;
 import com.urida.user.entity.User;
@@ -8,6 +9,8 @@ import com.urida.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,13 +22,19 @@ public class UserController {
     Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @GetMapping("/login")
-    public User login(@ModelAttribute LoginDto loginDto){
+    public User login(@Validated @ModelAttribute LoginDto loginDto, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InputException("RequestData(LoginDto) invalid");
+        }
         User user = userService.login(loginDto);
         return user;
     }
 
     @PostMapping("/register")
-    public Boolean saveUser(@RequestBody RegisterDto registerDto){
+    public Boolean saveUser(@Validated @RequestBody RegisterDto registerDto, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InputException("RequestData(RegisterDto))invalid");
+        }
         userService.saveUser(registerDto);
         return true;
     }

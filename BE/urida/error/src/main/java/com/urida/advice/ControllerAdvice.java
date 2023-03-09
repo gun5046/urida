@@ -1,7 +1,9 @@
 package com.urida.advice;
 
+import com.urida.exception.InputException;
 import com.urida.exception.NoDataException;
 import com.urida.exception.SaveException;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +22,15 @@ public class ControllerAdvice {
         return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = NoDataException.class)
+    @ExceptionHandler(value = SaveException.class)
     public ResponseEntity<?> throwSaveException(SaveException e){
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Error",e.getMessage());
+        return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = InputException.class)
+    public ResponseEntity<?> throwInputException(InputException e){
         HttpHeaders headers = new HttpHeaders();
         headers.set("Error",e.getMessage());
         return new ResponseEntity<>(headers, HttpStatus.BAD_REQUEST);
