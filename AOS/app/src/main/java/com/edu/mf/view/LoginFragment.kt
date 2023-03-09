@@ -45,6 +45,7 @@ class LoginFragment : Fragment() {
                     Log.i(TAG, "로그인 성공 ${token.accessToken}")
                     UserApiClient.instance.me { user, error ->
                         Log.d(TAG, "onViewCreated: ${user?.id}")
+                        mainActivity.addFragment(LanguageFragment())
                     }
                 }
             }
@@ -63,7 +64,8 @@ class LoginFragment : Fragment() {
                     NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
                         override fun onSuccess(response: NidProfileResponse) {
                             val userId = response.profile?.id
-                            Toast.makeText(requireContext(), "네이버 아이디 로그인 성공! ${userId}", Toast.LENGTH_SHORT).show()
+                            mainActivity.addFragment(LanguageFragment())
+//                            Toast.makeText(requireContext(), "네이버 아이디 로그인 성공! ${userId}", Toast.LENGTH_SHORT).show()
                             Log.d(TAG, "onSuccess: ${userId}")
                         }
                         override fun onFailure(httpStatus: Int, message: String) {

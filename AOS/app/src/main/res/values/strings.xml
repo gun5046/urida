@@ -15,4 +15,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--    fragment_language-->
+    <string name="fragment_language_korean">한국어</string>
+    <string name="fragment_language_english">English</string>
+    <string name="fragment_language_chinese">中文</string>
+    <string name="fragment_language_vietnamese">Tiếng Việt</string>
+
+
 </resources>
