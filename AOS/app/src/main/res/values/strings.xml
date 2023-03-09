@@ -21,5 +21,9 @@
     <string name="fragment_language_chinese">中文</string>
     <string name="fragment_language_vietnamese">Tiếng Việt</string>
 
+    <!--    dialog_nickname-->
+    <string name="dialog_nickname_text">닉네임을 설정해주세요</string>
+    <string name="dialog_nickname_editText">닉네임</string>
+    <string name="dialog_nickname_button">확인</string>
 
 </resources>

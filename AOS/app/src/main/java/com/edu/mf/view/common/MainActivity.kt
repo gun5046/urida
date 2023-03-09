@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         changeFragment(LoginFragment())
     }
 
-    private fun changeFragment(fragment: Fragment){
+    fun changeFragment(fragment: Fragment){
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.framelayout_main, fragment)
@@ -54,5 +54,10 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.framelayout_main, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    fun popFragment(){
+        supportFragmentManager
+            .popBackStack()
     }
 }
