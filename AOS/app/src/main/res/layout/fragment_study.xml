@@ -12,15 +12,15 @@
         android:src="@drawable/ic_study_main"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardview_learn"/>
+        app:layout_constraintTop_toBottomOf="@+id/cardview_fragment_study_learn"/>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_learn"
+        android:id="@+id/cardview_fragment_study_learn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         app:layout_constraintTop_toBottomOf="@+id/imageview_guide"
-        app:layout_constraintBottom_toTopOf="@+id/cardview_quiz"
+        app:layout_constraintBottom_toTopOf="@+id/cardview_fragment_study_quiz"
         app:layout_constraintVertical_bias="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -54,12 +54,12 @@
 
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_quiz"
+        android:id="@+id/cardview_fragment_study_quiz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/cardview_learn"
-        app:layout_constraintBottom_toTopOf="@+id/cardview_resolve"
+        app:layout_constraintTop_toBottomOf="@+id/cardview_fragment_study_learn"
+        app:layout_constraintBottom_toTopOf="@+id/cardview_fragment_study_resolve"
         app:layout_constraintVertical_bias="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,11 +92,11 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_resolve"
+        android:id="@+id/cardview_fragment_study_resolve"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/cardview_quiz"
+        app:layout_constraintTop_toBottomOf="@+id/cardview_fragment_study_quiz"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="1">
 
