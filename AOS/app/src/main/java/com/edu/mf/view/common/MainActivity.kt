@@ -7,12 +7,14 @@ import androidx.fragment.app.Fragment
 import com.edu.mf.BuildConfig
 import com.edu.mf.R
 import com.edu.mf.databinding.ActivityMainBinding
+import com.edu.mf.utils.App
 import com.edu.mf.view.LanguageFragment
 import com.edu.mf.view.LoginFragment
 import com.edu.mf.view.MainFragment
 import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.util.Utility
 import com.navercorp.nid.NaverIdLoginSDK
+import java.util.*
 
 private const val TAG = "MainActivity"
 
@@ -35,10 +37,8 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //Application 클래스 만들어서 SDK 뺴놓고, User객체 및 언어 설정시 어떤 상황인지 판단하는 변수 빼놔야 함
-        KakaoSdk.init(this, BuildConfig.Kakao_API_KEY)
-        NaverIdLoginSDK.initialize(this, BuildConfig.OAUTH_CLIENT_ID, BuildConfig.OAUTH_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_NAME)
-
+        Log.d(TAG, "onCreate: ")
+        changeLocale(App.sharedPreferencesUtil.getLanguageCode())
         changeFragment(LoginFragment())
     }
 
@@ -61,4 +61,26 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
             .popBackStack()
     }
+
+    fun changeLocale(type: Int){
+        var locale = Locale("ko", "KR")
+        when(type){
+            0 -> {
+                locale = Locale("ko", "KR")
+            }
+            1 -> {
+                locale = Locale("zh", "CN")
+            }
+            2 -> {
+                locale = Locale("vi", "VN")
+            }
+            3 -> {
+                locale = Locale("en", "US")
+            }
+        }
+        val configuration = this.resources.configuration
+        configuration.setLocale(locale)
+        resources.updateConfiguration(configuration, resources.displayMetrics)
+    }
+
 }

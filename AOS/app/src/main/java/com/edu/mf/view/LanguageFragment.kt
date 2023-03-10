@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.edu.mf.R
 import com.edu.mf.databinding.DialogNicknameBinding
 import com.edu.mf.databinding.FragmentLanguageBinding
+import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import java.util.Locale
@@ -30,35 +31,23 @@ class LanguageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.layoutKorean.setOnClickListener {
-//            val locale = Locale("ko", "KR")
-//            val configuration = requireContext().resources.configuration
-//            configuration.setLocale(locale)
-//            mainActivity.recreate()
-//            mainActivity.changeFragment(this)
-            showBottomDialog()
-        }
-        binding.layoutEnglish.setOnClickListener {
-//            val locale = Locale("en", "US")
-//            val configuration = requireContext().resources.configuration
-//            configuration.setLocale(locale)
-//            mainActivity.recreate()
-//            mainActivity.changeFragment(this)
+            mainActivity.changeLocale(0)
+            App.sharedPreferencesUtil.setLanguageCode(0)
             showBottomDialog()
         }
         binding.layoutChinese.setOnClickListener {
-//            val locale = Locale("zh", "CN")
-//            val configuration = requireContext().resources.configuration
-//            configuration.setLocale(locale)
-//            mainActivity.recreate()
-//            mainActivity.changeFragment(this)
+            mainActivity.changeLocale(1)
+            App.sharedPreferencesUtil.setLanguageCode(1)
             showBottomDialog()
         }
         binding.layoutVietnam.setOnClickListener {
-//            val locale = Locale("vi", "VN")
-//            val configuration = requireContext().resources.configuration
-//            configuration.setLocale(locale)
-//            mainActivity.recreate()
-//            mainActivity.changeFragment(this)
+            mainActivity.changeLocale(2)
+            App.sharedPreferencesUtil.setLanguageCode(2)
+            showBottomDialog()
+        }
+        binding.layoutEnglish.setOnClickListener {
+            mainActivity.changeLocale(3)
+            App.sharedPreferencesUtil.setLanguageCode(3)
             showBottomDialog()
         }
     }
