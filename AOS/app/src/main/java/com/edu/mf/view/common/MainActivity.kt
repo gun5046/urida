@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         KakaoSdk.init(this, BuildConfig.Kakao_API_KEY)
         NaverIdLoginSDK.initialize(this, BuildConfig.OAUTH_CLIENT_ID, BuildConfig.OAUTH_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_NAME)
 
-        changeFragment(LoginFragment())
+        changeFragment(MainFragment())
     }
 
     private fun changeFragment(fragment: Fragment){

@@ -16,6 +16,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--    fragment_drawing-->
+    <string name="fragment_drawing_button_drawing_result">이게 뭘까요?</string>
     <string name="fragment_drawing_dialog_title">색상 선택</string>
     <string name="fragment_drawing_dialog_custom">다른색 선택</string>
     <string name="fragment_drawing_dialog_presets">팔레트에 추가</string>

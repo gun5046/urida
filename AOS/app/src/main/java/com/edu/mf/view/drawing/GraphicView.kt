@@ -19,11 +19,11 @@ class GraphicView(context: Context): View(context){
         when(event.action){
             MotionEvent.ACTION_DOWN -> {
                 //path.moveTo(x.toFloat(), y.toFloat())
-                pointList.add(Point(x, y, false, paint.color))
+                pointList.add(Point(x, y, false, paint.strokeWidth, paint.color))
             }
             MotionEvent.ACTION_MOVE -> {
                 //path.lineTo(x.toFloat(), y.toFloat())
-                pointList.add(Point(x, y, true, paint.color))
+                pointList.add(Point(x, y, true, paint.strokeWidth, paint.color))
                 invalidate()
             }
             MotionEvent.ACTION_UP -> {
@@ -38,8 +38,9 @@ class GraphicView(context: Context): View(context){
         super.onDraw(canvas)
 
         paint.isAntiAlias = true
+        paint.strokeCap = Paint.Cap.ROUND
         paint.style = Paint.Style.STROKE
-        paint.strokeWidth = 5.0F
+
 
         val originalColor = paint.color
         for (i in 1 until pointList.size) {
@@ -48,6 +49,7 @@ class GraphicView(context: Context): View(context){
 
             if (nowPoint.move) {
                 paint.color = nowPoint.color
+                paint.strokeWidth = nowPoint.width
 
                 canvas!!.drawLine(
                     prevPoint.x.toFloat(),
@@ -81,5 +83,6 @@ data class Point(
     var x: Int,
     var y: Int,
     var move: Boolean,
+    var width: Float,
     var color: Int
 )
