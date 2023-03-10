@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EducationForMulticulturalFamily</string>
+    <string name="dialog_nickname_button">查看</string>
+    <string name="dialog_nickname_editText">昵称</string>
+    <string name="dialog_nickname_text">请设置昵称</string>
+</resources>

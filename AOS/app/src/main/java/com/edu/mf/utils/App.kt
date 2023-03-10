@@ -2,6 +2,9 @@ package com.edu.mf.utils
 
 import android.app.Application
 import android.util.Log
+import com.edu.mf.BuildConfig
+import com.kakao.sdk.common.KakaoSdk
+import com.navercorp.nid.NaverIdLoginSDK
 
 
 class App : Application(){
@@ -15,6 +18,8 @@ class App : Application(){
     override fun onCreate() {
         super.onCreate()
         sharedPreferencesUtil = SharedPreferencesUtil(applicationContext)
+        KakaoSdk.init(this, BuildConfig.Kakao_API_KEY)
+        NaverIdLoginSDK.initialize(this, BuildConfig.OAUTH_CLIENT_ID, BuildConfig.OAUTH_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_NAME)
 
         setImageData()
     }
