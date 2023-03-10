@@ -109,6 +109,8 @@ project(':urida-board') {
     dependencies {
         implementation project(':core-web')
         implementation project(':domain-board')
+        implementation project(':error')
+        implementation 'org.springdoc:springdoc-openapi-ui:1.6.14'
 
     }
 }
