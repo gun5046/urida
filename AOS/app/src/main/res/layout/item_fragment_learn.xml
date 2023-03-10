@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="data"
-            type="String" />
-    </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:padding="10dp"
+    android:layout_margin="10dp"
     android:background="@drawable/learn_list_black_10"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -19,7 +13,6 @@
         android:id="@+id/textview_item_learn_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@{data}"
         android:textSize="26sp"
         android:textColor="@color/black"
         android:fontFamily="@font/kakao_bold"

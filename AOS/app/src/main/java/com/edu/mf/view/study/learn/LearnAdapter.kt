@@ -1,5 +1,7 @@
 package com.edu.mf.view.study.learn
 
+import android.provider.ContactsContract.Data
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -22,8 +24,7 @@ class LearnAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LearnViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val binding = ItemFragmentLearnBinding.inflate(inflater,parent,false)
-
+        val binding = DataBindingUtil.inflate<ItemFragmentLearnBinding>(inflater,R.layout.item_fragment_learn,parent,false)
         return LearnViewHolder(binding)
     }
 

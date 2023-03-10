@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentLearnBinding
 
@@ -13,14 +14,13 @@ import com.edu.mf.databinding.FragmentLearnBinding
 class LearnFragment: Fragment() {
     private var categories = arrayListOf<String>()
     private lateinit var learnAdapter: LearnAdapter
-
+    private lateinit var binding:FragmentLearnBinding
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding:FragmentLearnBinding =
-            DataBindingUtil.inflate(inflater,R.layout.fragment_learn,container,false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_learn,container,false)
 
         return binding.root
     }
@@ -35,6 +35,7 @@ class LearnFragment: Fragment() {
      */
     private fun init(){
         setCategoryData()
+        setAdapter()
     }
     /**
      * category 데이터 입력
@@ -52,7 +53,11 @@ class LearnFragment: Fragment() {
      * adapter 초기화
      */
     private fun setAdapter(){
+        learnAdapter = LearnAdapter()
         learnAdapter.setList(categories)
-        binding
+        binding.recyclerviewFragmentLearnList.apply{
+            layoutManager = LinearLayoutManager(context)
+            adapter = learnAdapter
+        }
     }
 }
