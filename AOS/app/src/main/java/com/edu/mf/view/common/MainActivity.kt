@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
     fun addFragment(fragment: Fragment){
         supportFragmentManager
             .beginTransaction()
+            .setCustomAnimations(R.anim.slide_in_right,R.anim.slide_out_left)
             .replace(R.id.framelayout_main, fragment)
             .addToBackStack(null)
             .commit()

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentLearnBinding
+import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.MainViewModel
 
 
@@ -46,6 +47,7 @@ class LearnFragment: Fragment(),LearnSelectCategoryDialog.CreateSelectProblemDia
      * category 데이터 입력
      */
     private fun setCategoryData(){
+        categories.clear()
         categories.add("과일/채소")
         categories.add("직업")
         categories.add("동물")

@@ -2,18 +2,23 @@ package com.edu.mf.view.study.learn
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
 import com.edu.mf.databinding.DialogFragmentLearnSelectProblemBinding
 import com.edu.mf.repository.model.study.PCategory
+import com.edu.mf.view.common.MainActivity
+import com.edu.mf.viewmodel.MainViewModel
 
 class LearnSelectCategoryDialog(
     createSelectProblemDialogListener: CreateSelectProblemDialogListener
 ) : DialogFragment(){
-
+    private lateinit var mainActivity: MainActivity
+    private lateinit var viewModel: MainViewModel
     private var _binding: DialogFragmentLearnSelectProblemBinding? = null
     private val binding get() = _binding!!
     private var createSelectProblemDialog:CreateSelectProblemDialogListener?=null
@@ -31,15 +36,17 @@ class LearnSelectCategoryDialog(
         _binding = DialogFragmentLearnSelectProblemBinding.inflate(inflater,container,false)
         val view = binding.root
         init()
-
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        mainActivity = MainActivity.getInstance()!!
         binding.buttonDialogLearnCancle.setOnClickListener {
             dismiss()
         }
         binding.buttonDialogLearnOk.setOnClickListener {
+            Log.i("TAG지훈", "onCreateView: ")
             createSelectProblemDialog?.onOkButtonClick()
+            dismiss()
+            mainActivity.addFragment(LearnMainFragment())
         }
-
-
         return view
     }
     private fun init(){
@@ -53,7 +60,19 @@ class LearnSelectCategoryDialog(
             dialogAdapter = LearnDialogAdapter()
             dialogAdapter.setOnDialogClickListener(object : LearnDialogAdapter.OnClickLearnDialogListener{
                 override fun onClick(view: View, position: Int) {
-                    view.setBackgroundResource(R.drawable.learn_list_gray_10)
+                    for(i in 0..3){
+                        when(i){
+                            position->{
+                                viewModel.changePCategory(position)
+                                categories[i].isClicked = true
+                            }
+                            else->{
+                                categories[i].isClicked = false
+                            }
+                        }
+                    }
+                    setCategories()
+                    dialogAdapter.notifyDataSetChanged()
                 }
 
             })

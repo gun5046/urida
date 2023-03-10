@@ -18,8 +18,14 @@ class LearnDialogAdapter():
     inner class LearnDialogViewHolder(val binding : ItemDialogFragmentSelectBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(data : PCategory){
+
             binding.textviewItemDialogTitle.text = data.title
             binding.textivewItemDialogSubtitle.text = data.sub_title
+            if(data.isClicked){
+                binding.itemDialogSelect.setBackgroundResource(R.drawable.learn_list_gray_10)
+            }else{
+                binding.itemDialogSelect.setBackgroundResource(R.drawable.learn_list_black_10)
+            }
             binding.itemDialogSelect.setOnClickListener {
                 learnDialogListener.onClick(it,layoutPosition)
             }
@@ -35,7 +41,6 @@ class LearnDialogAdapter():
 
     override fun onBindViewHolder(holder: LearnDialogViewHolder, position: Int) {
         holder.bind(datas[position])
-        Log.i("TAG지훈", "onBindViewHolder: ${datas[position]}")
     }
 
     override fun getItemCount(): Int {
