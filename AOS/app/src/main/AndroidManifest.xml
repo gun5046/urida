@@ -41,6 +41,9 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <activity android:name=".view.drawing.ColorPickerActivity"
+            android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"/>
     </application>
 
 </manifest>
