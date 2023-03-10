@@ -1,8 +1,8 @@
 package com.urida.entity;
 
+import com.urida.user.entity.User;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
 
 import javax.persistence.*;
 
@@ -31,7 +31,4 @@ public class Problem {
     @ManyToOne
     @JoinColumn(name = "user_uid")
     private User user;
-
-
-
 }

@@ -123,6 +123,7 @@ project(':urida-problem') {
         implementation project(':domain-user')
         implementation project(':core-web')
         implementation project(':domain-problem')
+        implementation project(':error')
 
     }
 }
