@@ -14,21 +14,21 @@ import javax.persistence.*;
 public class Problem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long proId;
+    private Long pro_id;
 
     @Column(nullable = true)
-    private int sentenceId;
+    private int sentence_id;
     @Column(nullable = false)
-    private int answerId;
+    private int answer_id;
 
     @Column(nullable = false)
     private int type;
     @Column(nullable = false)
-    private int categoryId;
+    private int category_id;
     @ColumnDefault("1")
-    private int wrongCnt;
+    private int wrong_cnt;
 
     @ManyToOne
-    @JoinColumn(name = "user_uid")
+    @JoinColumn(name = "uid")
     private User user;
 }

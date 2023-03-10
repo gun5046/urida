@@ -1,10 +1,10 @@
-package com.problem.controller;
+package com.urida.controller;
 
-import com.problem.dto.ProblemSaveDto;
-import com.problem.impl.ProblemService;
+import com.urida.dto.ProblemSaveDto;
+import com.urida.impl.ProblemService;
 import com.urida.entity.Problem;
 import com.urida.exception.InputException;
-import com.urida.user.entity.User;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +32,8 @@ public class ProblemController {
         if(bindingResult.hasErrors()){
             throw new InputException("RequestData(RegisterDto))invalid");
         }
+
+        System.out.println(problemSaveDto);
         problemService.saveProblem(problemSaveDto);
         return true;
     }
@@ -39,5 +41,10 @@ public class ProblemController {
     @GetMapping("/list")
     public List<Problem> getListProblem(@RequestParam Long userId){
         return problemService.getListProblem(userId);
+    }
+
+    @DeleteMapping("/delete")
+    public void deleteProblem(@RequestParam Long userId, @RequestParam Long proId){
+        problemService.deleteProblem(userId, proId);
     }
 }

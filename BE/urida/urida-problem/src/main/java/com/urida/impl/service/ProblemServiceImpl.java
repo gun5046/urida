@@ -1,7 +1,8 @@
-package com.problem.impl.service;
+package com.urida.impl.service;
 
-import com.problem.dto.ProblemSaveDto;
-import com.problem.impl.ProblemService;
+import com.urida.dto.ProblemSaveDto;
+import com.urida.exception.SaveException;
+import com.urida.impl.ProblemService;
 import com.urida.entity.Problem;
 import com.urida.repo.ProblemJpqlRepo;
 import com.urida.user.entity.User;
@@ -33,19 +34,20 @@ public class ProblemServiceImpl implements ProblemService {
     @Transactional
     public void saveProblem(ProblemSaveDto problemSaveDto) {
         Optional<User> user = userJpqlRepo.findByUid(problemSaveDto.getUid());
-
+        System.out.println(user);
         if (user.isPresent()){
             Problem problem = Problem.builder()
-                    .sentenceId(problemSaveDto.getSentence_id())
-                    .answerId(problemSaveDto.getAnswer_id())
+                    .sentence_id(problemSaveDto.getSentence_id())
+                    .answer_id(problemSaveDto.getAnswer_id())
                     .type(problemSaveDto.getType())
-                    .categoryId(problemSaveDto.getCategory_id())
-                    .wrongCnt(problemSaveDto.getWrong_cnt())
+                    .category_id(problemSaveDto.getCategory_id())
+                    .wrong_cnt(problemSaveDto.getWrong_cnt())
                     .user(user.get())
                     .build();
             try {
                 problemJpqlRepo.saveProblem(problem);
             }catch(Exception e){
+                throw new SaveException("Value invalid");
             }
         }
     }
@@ -55,5 +57,11 @@ public class ProblemServiceImpl implements ProblemService {
         List<Problem> problems = problemJpqlRepo.findByUserId(userId);
 
         return problems;
+    }
+
+    @Transactional
+    @Override
+    public void deleteProblem(Long userId, Long proId) {
+        problemJpqlRepo.deleteProInList(userId, proId);
     }
 }
