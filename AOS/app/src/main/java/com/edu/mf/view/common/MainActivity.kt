@@ -3,13 +3,15 @@ package com.edu.mf.view.common
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
 import com.edu.mf.databinding.ActivityMainBinding
 import com.edu.mf.view.MainFragment
+import com.edu.mf.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var mainViewModel: MainViewModel
     init {
         instance = this
     }
@@ -26,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         changeFragment(MainFragment())
     }
 
