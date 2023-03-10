@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        KakaoSdk.init(this, BuildConfig.Kakao_API_KEY)
+        NaverIdLoginSDK.initialize(this, BuildConfig.OAUTH_CLIENT_ID, BuildConfig.OAUTH_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_NAME)
+
         Log.d(TAG, "onCreate: ")
         changeLocale(App.sharedPreferencesUtil.getLanguageCode())
         //changeFragment(LoginFragment())

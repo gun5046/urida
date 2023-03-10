@@ -9,82 +9,77 @@
         android:id="@+id/imageview_guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_study_main"
+        android:src="@drawable/ic_guide2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardview_fragment_study_learn"/>
+        app:layout_constraintTop_toBottomOf="@+id/cardview_learn"/>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_fragment_study_learn"
+        android:id="@+id/cardview_learn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/primary_purple"
+        app:cardCornerRadius="30dp"
         app:layout_constraintTop_toBottomOf="@+id/imageview_guide"
-        app:layout_constraintBottom_toTopOf="@+id/cardview_fragment_study_quiz"
+        app:layout_constraintBottom_toTopOf="@+id/cardview_quiz"
         app:layout_constraintVertical_bias="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/study_card_purple_10"
-            android:padding="10dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/textview_learn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_study_cardview_learn"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/kakao_otf_bold"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_study_main"
-                android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/textview_learn"
+                android:src="@drawable/ic_learn"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
-
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_fragment_study_quiz"
+        android:id="@+id/cardview_quiz"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/cardview_fragment_study_learn"
-        app:layout_constraintBottom_toTopOf="@+id/cardview_fragment_study_resolve"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/primary_blue"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/cardview_learn"
+        app:layout_constraintBottom_toTopOf="@+id/cardview_resolve"
         app:layout_constraintVertical_bias="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/study_card_skyblue_10"
-            android:padding="10dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/textview_quiz"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_study_cardview_quiz"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/kakao_otf_bold"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_drawing_main"
-                android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/textview_quiz"
+                android:src="@drawable/ic_quiz"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -92,37 +87,35 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_fragment_study_resolve"
+        android:id="@+id/cardview_resolve"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/cardview_fragment_study_quiz"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/primary_teal_100"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintTop_toBottomOf="@+id/cardview_quiz"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/study_card_green_10"
-            android:padding="10dp">
+            android:padding="20dp">
 
             <TextView
                 android:id="@+id/textview_resolve"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fragment_study_cardview_resolve"
-                android:textSize="16sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/kakao_otf_bold"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_picture_main"
-                android:layout_marginTop="10dp"
-                app:layout_constraintTop_toBottomOf="@+id/textview_resolve"
+                android:src="@drawable/ic_resolve"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
