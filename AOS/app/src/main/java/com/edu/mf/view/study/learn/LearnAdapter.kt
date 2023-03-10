@@ -3,6 +3,7 @@ package com.edu.mf.view.study.learn
 import android.provider.ContactsContract.Data
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -11,14 +12,17 @@ import com.edu.mf.databinding.ItemFragmentLearnBinding
 
 
 class LearnAdapter(
-
 ) : RecyclerView.Adapter<LearnAdapter.LearnViewHolder>(){
     private val datas = ArrayList<String>()
+    private lateinit var categoryClickListener : CategoryClickListener
 
-    class LearnViewHolder(val binding:ItemFragmentLearnBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class LearnViewHolder(val binding:ItemFragmentLearnBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(data:String){
             binding.textviewItemLearnTitle.text = data
+            binding.buttonItemLearnStart.setOnClickListener {view->
+                categoryClickListener.onClick(view,layoutPosition)
+            }
         }
     }
 
@@ -38,5 +42,11 @@ class LearnAdapter(
     fun setList(lists:ArrayList<String>){
         datas.clear()
         datas.addAll(lists)
+    }
+    interface CategoryClickListener{
+        fun onClick(view: View, position:Int)
+    }
+    fun setOnCategoryClickListener(categoryClickListener: CategoryClickListener){
+        this.categoryClickListener = categoryClickListener
     }
 }
