@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <TextView
+        android:id="@+id/textview_fragment_learn_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="낱말익히기"/>
+        android:layout_height="wrap_content"
+        android:text="낱말 익히기"
+        android:textSize="36sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/kakao_bold"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_fragment_learn_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/learn_list_black_10"
+        app:layout_constraintTop_toBottomOf="@id/textview_fragment_learn_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
