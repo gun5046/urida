@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">EducationForMulticulturalFamily</string>
+    <string name="dialog_nickname_button">kiểm tra</string>
+    <string name="dialog_nickname_editText">tên nick</string>
+    <string name="dialog_nickname_text">Vui lòng đặt biệt hiệu</string>
+</resources>
