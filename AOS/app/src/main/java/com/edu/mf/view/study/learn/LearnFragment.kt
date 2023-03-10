@@ -14,7 +14,7 @@ import com.edu.mf.databinding.FragmentLearnBinding
 import com.edu.mf.viewmodel.MainViewModel
 
 
-class LearnFragment: Fragment() {
+class LearnFragment: Fragment(),LearnSelectCategoryDialog.CreateSelectProblemDialogListener{
     private var categories = arrayListOf<String>()
     private val TAG = "LearnFragment_지훈"
     private lateinit var viewModel: MainViewModel
@@ -67,10 +67,15 @@ class LearnFragment: Fragment() {
         learnAdapter.setOnCategoryClickListener(object : LearnAdapter.CategoryClickListener{
             override fun onClick(view: View, position: Int) {
                 viewModel.changeCategory(position)
-
+                val dialog = LearnSelectCategoryDialog(this@LearnFragment)
+                dialog.isCancelable = false
+                dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
             }
-
         })
+    }
+
+    override fun onOkButtonClick() {
+
     }
 
 
