@@ -27,7 +27,7 @@ class LearnFragment: Fragment(),LearnSelectCategoryDialog.CreateSelectProblemDia
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_learn,container,false)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         return binding.root
     }
 
@@ -69,6 +69,7 @@ class LearnFragment: Fragment(),LearnSelectCategoryDialog.CreateSelectProblemDia
         learnAdapter.setOnCategoryClickListener(object : LearnAdapter.CategoryClickListener{
             override fun onClick(view: View, position: Int) {
                 viewModel.changeCategory(position)
+                Log.i(TAG, "onClick: ${viewModel.selectedCategory}")
                 val dialog = LearnSelectCategoryDialog(this@LearnFragment)
                 dialog.isCancelable = false
                 dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")

@@ -36,7 +36,7 @@ class LearnSelectCategoryDialog(
         _binding = DialogFragmentLearnSelectProblemBinding.inflate(inflater,container,false)
         val view = binding.root
         init()
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         mainActivity = MainActivity.getInstance()!!
         binding.buttonDialogLearnCancle.setOnClickListener {
             dismiss()
