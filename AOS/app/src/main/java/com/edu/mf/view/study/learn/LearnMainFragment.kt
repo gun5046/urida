@@ -20,7 +20,7 @@ class LearnMainFragment : Fragment() {
     private lateinit var viewmodel : MainViewModel
     private lateinit var app:App
     private val TAG = "LearnMainFragment_지훈"
-    private var currentIndex=25
+    private var currentIndex=0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

@@ -22,6 +22,8 @@ class App : Application(){
         NaverIdLoginSDK.initialize(this, BuildConfig.OAUTH_CLIENT_ID, BuildConfig.OAUTH_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_NAME)
 
         setImageData()
+
+
     }
 
     /**
