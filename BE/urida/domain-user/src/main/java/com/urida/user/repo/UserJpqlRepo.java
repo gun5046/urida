@@ -59,4 +59,11 @@ public class UserJpqlRepo {
 
         return user.stream().findAny();
     }
+
+    public void saveLanguage(Long uid, int language) {
+        em.createNativeQuery("update user u set language = :language where uid := uid")
+                .setParameter("language",language)
+                .setParameter("uid",uid)
+                .executeUpdate();
+    }
 }

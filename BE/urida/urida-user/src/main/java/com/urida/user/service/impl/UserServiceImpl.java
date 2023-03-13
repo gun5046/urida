@@ -1,7 +1,9 @@
 package com.urida.user.service.impl;
 
+import com.urida.exception.InputException;
 import com.urida.exception.NoDataException;
 import com.urida.exception.SaveException;
+import com.urida.user.dto.LanguageDto;
 import com.urida.user.dto.LoginDto;
 import com.urida.user.dto.RegisterDto;
 import com.urida.user.entity.User;
@@ -73,5 +75,14 @@ public class UserServiceImpl implements UserService {
             throw new NoDataException("User-Is-Not-Exist");
         }
         return user.get();
+    }
+
+    @Override
+    public void changeLanguage(LanguageDto languageDto) {
+        try {
+            userJpqlRepo.saveLanguage(languageDto.getUid(), languageDto.getLanguage());
+        }catch (Exception e){
+            throw new InputException("Invalid Data");
+        }
     }
 }
