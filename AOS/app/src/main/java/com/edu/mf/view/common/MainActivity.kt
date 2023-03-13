@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.edu.mf.BuildConfig
 import com.edu.mf.R
 import com.edu.mf.databinding.ActivityMainBinding
+import com.edu.mf.repository.api.UserService
 import com.edu.mf.utils.App
 import com.edu.mf.view.LanguageFragment
 import com.edu.mf.view.LoginFragment
@@ -20,6 +21,7 @@ private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    val loginService = App.userRetrofit.create(UserService::class.java)
 
     init {
         instance = this
