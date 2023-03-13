@@ -9,6 +9,7 @@ import retrofit2.http.POST
 import retrofit2.http.Query
 
 interface UserService {
+
     @GET("user/info")
     fun info(@Query("uid") uid: Int): Call<User>
 
