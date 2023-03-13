@@ -29,8 +29,7 @@ class App : Application(){
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         setImageData()
-        for(i in 0..5)
-        Log.i(TAG, "onCreate: ${PICTURES[i].size}")
+        
 
     }
 
