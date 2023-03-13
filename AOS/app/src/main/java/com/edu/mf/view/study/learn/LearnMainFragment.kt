@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentLearnMainBinding
@@ -21,6 +22,7 @@ class LearnMainFragment : Fragment() {
     private lateinit var app:App
     private val TAG = "LearnMainFragment_지훈"
     private var currentIndex=0
+    private var bookMark : String = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,15 +31,20 @@ class LearnMainFragment : Fragment() {
         viewmodel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         app = App()
         binding.answer = App.PICTURES[viewmodel.selectedCategory][currentIndex]
-        binding.current = currentIndex
+        binding.current = bookMark
         binding.list = App.PICTURES[viewmodel.selectedCategory]
+        binding.handlers = LearnMainFragment()
+        binding.viewModels = viewmodel
         return binding.root
     }
     
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         init()
+        viewmodel.setCurrentIndex(0)
+        viewmodel.currentIndex.observe(viewLifecycleOwner, Observer {
+            viewmodel.changeBookMark("${it+1}/${App.PICTURES[viewmodel.selectedCategory].size+1}")
+        })
     }
 
     private fun init(){
@@ -48,7 +55,6 @@ class LearnMainFragment : Fragment() {
      * category별 이미지 리소스 저장
      */
     private fun setImageCategory(){
-        Log.i(TAG, "setImageCategory:${viewmodel.selectedCategory},${viewmodel.selectedPCategory}")
         when(viewmodel.selectedCategory){
             0->{
                 binding.imageviewFragmentLearnMainImage.setImageResource(resources.getIdentifier(
@@ -81,6 +87,5 @@ class LearnMainFragment : Fragment() {
 
 
     }
-
-
+    
 }
