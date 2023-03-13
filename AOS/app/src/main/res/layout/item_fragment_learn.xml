@@ -2,6 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="clickListener"
+            type="com.edu.mf.view.study.learn.LearnAdapter.CategoryClickListener" />
+
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:padding="10dp"
     android:layout_margin="10dp"

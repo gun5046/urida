@@ -29,6 +29,9 @@ class App : Application(){
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         setImageData()
+        for(i in 0..5)
+        Log.i(TAG, "onCreate: ${PICTURES[i].size}")
+
     }
 
     /**
@@ -221,6 +224,11 @@ class App : Application(){
         PICTURES[3].add("지우개")
         PICTURES[3].add("비상문")
         PICTURES[3].add("안경")
+        PICTURES[3].add("꽃")
+        PICTURES[3].add("냉장고")
+        PICTURES[3].add("구두")
+        PICTURES[3].add("열쇠")
+        PICTURES[3].add("사물함")
         PICTURES[3].add("마스크")
         PICTURES[3].add("마이크")
         PICTURES[3].add("휴대폰")
