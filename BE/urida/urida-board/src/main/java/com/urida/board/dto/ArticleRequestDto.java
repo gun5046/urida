@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ArticleDto {
+public class ArticleRequestDto {
 
     @NotEmpty
     private String title;

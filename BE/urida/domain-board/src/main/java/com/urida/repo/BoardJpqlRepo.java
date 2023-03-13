@@ -53,7 +53,7 @@ public class BoardJpqlRepo {
     }
 
     //게시글 제목 검색
-    public List<Board> searchBoard(String title) {
+    public List<Board> searchByTitle(String title) {
         try {
             return em.createQuery(
                             "select b from Board b where b.title like :title", Board.class)

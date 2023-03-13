@@ -1,6 +1,6 @@
 package com.urida.board.controller;
 
-import com.urida.board.dto.ArticleDto;
+import com.urida.board.dto.ArticleRequestDto;
 import com.urida.board.service.BoardService;
 import com.urida.entity.Board;
 import com.urida.exception.InputException;
@@ -40,10 +40,10 @@ public class BoardController {
             @ApiResponse(responseCode = "404", description = "사용자 없음"),
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    public Board createArticle(@Validated @RequestBody ArticleDto articleDto, BindingResult bindingResult) {
+    public Board createArticle(@Validated @RequestBody ArticleRequestDto articleRequestDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new InputException("RequestData(ArticleDto)invalid");
         }
-        return boardService.createArticle(articleDto);
+        return boardService.createArticle(articleRequestDto);
     }
 }

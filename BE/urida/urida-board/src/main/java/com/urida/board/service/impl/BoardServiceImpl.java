@@ -1,6 +1,6 @@
 package com.urida.board.service.impl;
 
-import com.urida.board.dto.ArticleDto;
+import com.urida.board.dto.ArticleRequestDto;
 import com.urida.board.service.BoardService;
 import com.urida.entity.Board;
 import com.urida.exception.SaveException;
@@ -26,11 +26,12 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board createArticle(ArticleDto articleDto) {
+    public Board createArticle(ArticleRequestDto articleRequestDto) {
 
         Board article = Board.builder()
-                .title(articleDto.getTitle())
-                .content(articleDto.getContent())
+                // writer 정보는 어떻게 넘기나
+                .title(articleRequestDto.getTitle())
+                .content(articleRequestDto.getContent())
                 .time(LocalDateTime.now())
                 .build();
 
@@ -43,12 +44,14 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board updateArticle(ArticleDto articleDto, Long id) {
-        return null;
+    public Board updateArticle(ArticleRequestDto articleRequestDto, Long id) {
+        Board targetArticle = boardJpqlRepo.findById(id);
+        String content = articleRequestDto.getContent();
+        targetArticle.
     }
 
     @Override
     public void deleteArticle(Long id) {
-
+        boardJpqlRepo.removeArticle(id);
     }
 }
