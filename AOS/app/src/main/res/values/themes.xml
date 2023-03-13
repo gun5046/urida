@@ -13,7 +13,10 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowLightNavigationBar">true</item>
-        <!-- Customize your theme here. -->
+        
+        <!-- font -->
+        <item name="android:buttonStyle">@style/KakaoBold</item>
+        <item name="android:textViewStyle">@style/NexonGothicBold</item>
     </style>
 
     <!-- Drawing_color picker activity transparent -->
