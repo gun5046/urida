@@ -14,7 +14,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserJpqlRepo {
 
-    @PersistenceContext
     private final EntityManager em;
 
     public Optional<User> findBySocialId(String type, String id) {
