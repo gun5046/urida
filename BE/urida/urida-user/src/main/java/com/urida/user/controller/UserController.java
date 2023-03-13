@@ -2,6 +2,7 @@ package com.urida.user.controller;
 
 
 import com.urida.exception.InputException;
+import com.urida.user.dto.LanguageDto;
 import com.urida.user.dto.LoginDto;
 import com.urida.user.dto.RegisterDto;
 import com.urida.user.entity.User;
@@ -44,7 +45,7 @@ public class UserController {
         return user;
     }
 
-    @GetMapping("/nickname")
+    @GetMapping("/")
     @ApiOperation(value = "닉네임 중복 확인", notes = "닉네임 없음 -> true 리턴 / 있음 -> false")
     public Boolean checkNickname(@RequestParam String nickname){
         return userService.checkNickname(nickname);
@@ -55,4 +56,14 @@ public class UserController {
     public User getUserInfo(@RequestParam Long uid){
         return userService.getUserInfo(uid);
     }
+
+    @PostMapping("/")
+    @ApiOperation(value = "유저가입", notes = "RegisterDto 받아서 유저 DB저장/ User값 리턴, Input 값 오류 -> 403 error/error메시지 확인할 것 ")
+    public void changeLanguage(@Validated @ModelAttribute LanguageDto languageDto, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            throw new InputException("RequestData(RegisterDto))invalid");
+        }
+        userService.changeLanguage(languageDto);
+    }
+
 }
