@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentDrawingBinding
@@ -21,6 +22,7 @@ class DrawingFragment: Fragment() {
     private lateinit var binding: FragmentDrawingBinding
     private lateinit var mainActivity: MainActivity
     private lateinit var toolList: ArrayList<ImageView>
+    private lateinit var matrix: MutableList<MutableList<MutableList<Int>>>
 
     companion object{
         lateinit var graphicView:GraphicView
@@ -48,7 +50,6 @@ class DrawingFragment: Fragment() {
         graphicView.paint.strokeWidth = 10.0F
 
         initList()
-        //extendLayout()
         penClickListener()
         penLongClickListener()
 
@@ -57,18 +58,45 @@ class DrawingFragment: Fragment() {
             graphicView.undo()
 
             CoroutineScope(Dispatchers.Main).launch {
-                delay(200)
+                delay(100)
                 binding.imageviewEraser.y = -104F
             }
         }
+
+        binding.buttonDrawingResult.setOnClickListener {
+            // 서버로 행렬 전송
+            makeMatrix()
+        }
     }
 
-    // drawTools layout 크기 변경
-    private fun extendLayout(){
-        val drawToolsLayout = binding.constraintlayoutDrawTools
-        val layoutParams = drawToolsLayout.layoutParams
-        layoutParams.height = drawToolsLayout.resources.getDimensionPixelOffset(R.dimen.layout_size)
-        binding.constraintlayoutDrawTools.layoutParams = layoutParams
+    // 3차원 행렬 만들기
+    private fun makeMatrix(){
+        val pointList = GraphicView.pointList
+        var xList = ArrayList<Int>()
+        var yList = ArrayList<Int>()
+
+        matrix = mutableListOf()
+        for (i in 1 until pointList.size){
+            if (!pointList[i].move){
+                if (xList.size != 0 && yList.size != 0){
+                    matrix.add(arrayListOf(xList, yList))
+                    xList = ArrayList()
+                    yList = ArrayList()
+                }
+            }
+            xList.add(pointList[i].x)
+            yList.add(pointList[i].y)
+        }
+        matrix.add(arrayListOf(xList, yList))
+
+        println(matrix.toString())
+        getDisplaySize()
+    }
+
+    // get canvas size
+    private fun getDisplaySize(){
+        val width = binding.constraintlayoutCanvas.width
+        val height = binding.constraintlayoutCanvas.height
     }
 
     // pen 클릭 이벤트
@@ -89,7 +117,7 @@ class DrawingFragment: Fragment() {
         }
 
         binding.imageviewPenGreen.setOnClickListener {
-            graphicView.paint.color = Color.GREEN
+            graphicView.paint.color = ContextCompat.getColor(requireContext(), R.color.primary_teal_200)
             penPullPut(3)
         }
 

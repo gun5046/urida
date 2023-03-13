@@ -3,26 +3,29 @@ package com.edu.mf.view.drawing
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
-import android.graphics.Path
 import android.view.MotionEvent
 import android.view.View
 
 class GraphicView(context: Context): View(context){
-    private val pointList = ArrayList<Point>()
-    private val path = Path()
     var paint = Paint()
+
+    companion object{
+        val pointList = ArrayList<Point>()
+    }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         val x = event!!.x.toInt()
         val y = event.y.toInt()
 
+        if (x < 0 || y < 0){
+            return false
+        }
+
         when(event.action){
             MotionEvent.ACTION_DOWN -> {
-                //path.moveTo(x.toFloat(), y.toFloat())
                 pointList.add(Point(x, y, false, paint.strokeWidth, paint.color))
             }
             MotionEvent.ACTION_MOVE -> {
-                //path.lineTo(x.toFloat(), y.toFloat())
                 pointList.add(Point(x, y, true, paint.strokeWidth, paint.color))
                 invalidate()
             }
@@ -40,7 +43,6 @@ class GraphicView(context: Context): View(context){
         paint.isAntiAlias = true
         paint.strokeCap = Paint.Cap.ROUND
         paint.style = Paint.Style.STROKE
-
 
         val originalColor = paint.color
         for (i in 1 until pointList.size) {
