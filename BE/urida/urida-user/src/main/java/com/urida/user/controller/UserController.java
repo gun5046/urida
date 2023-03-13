@@ -35,13 +35,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    @ApiOperation(value = "유저가입", notes = "RegisterDto 받아서 유저 DB저장/ Boolean값 리턴, Input 값 오류 -> 403 error ")
-    public Boolean saveUser(@Validated @RequestBody RegisterDto registerDto, BindingResult bindingResult){
+    @ApiOperation(value = "유저가입", notes = "RegisterDto 받아서 유저 DB저장/ User값 리턴, Input 값 오류 -> 403 error/error메시지 확인할 것 ")
+    public User saveUser(@Validated @RequestBody RegisterDto registerDto, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             throw new InputException("RequestData(RegisterDto))invalid");
         }
-        userService.saveUser(registerDto);
-        return true;
+        User user = userService.saveUser(registerDto);
+        return user;
     }
 
     @GetMapping("/nickname")

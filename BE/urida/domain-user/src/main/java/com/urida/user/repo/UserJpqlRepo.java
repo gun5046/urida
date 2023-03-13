@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +48,14 @@ public class UserJpqlRepo {
     public Optional<User> findByUid(Long uid) {
         List<User> user = em.createQuery("select u from User u where uid = :uid", User.class)
                 .setParameter("uid",uid)
+                .getResultList();
+
+        return user.stream().findAny();
+    }
+
+    public Optional<User> findByNickname(String nickname) {
+        List<User> user = em.createQuery("select u from User u where nickname = :nickname", User.class)
+                .setParameter("nickname",nickname)
                 .getResultList();
 
         return user.stream().findAny();

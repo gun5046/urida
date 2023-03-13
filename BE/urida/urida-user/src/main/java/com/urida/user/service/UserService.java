@@ -7,7 +7,7 @@ import com.urida.user.entity.User;
 public interface UserService {
     User login(LoginDto loginDto);
 
-    void saveUser(RegisterDto registerDto);
+    User saveUser(RegisterDto registerDto);
 
     Boolean checkNickname(String nickname);
 
