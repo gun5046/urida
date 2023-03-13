@@ -1,8 +1,9 @@
 package com.urida.board.controller;
 
 import com.urida.board.dto.ArticleRequestDto;
+import com.urida.board.dto.ArticleUpdateDto;
 import com.urida.board.service.BoardService;
-import com.urida.entity.Board;
+import com.urida.board.entity.Board;
 import com.urida.exception.InputException;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -31,6 +32,9 @@ public class BoardController {
 
     // 개별 게시글 조회
     @GetMapping("/{id}")
+    public Board getArticle(@PathVariable Long id) {
+        return boardService.getArticle(id);
+    }
 
     // 게시글 작성
     @PostMapping("/create")
@@ -45,5 +49,10 @@ public class BoardController {
             throw new InputException("RequestData(ArticleDto)invalid");
         }
         return boardService.createArticle(articleRequestDto);
+    }
+
+    @PutMapping("/{id}")
+    public void updateArticle(@PathVariable Long id, @RequestBody ArticleUpdateDto articleUpdateDto) {
+        Board article = boardService.updateArticle(articleUpdateDto, id);
     }
 }

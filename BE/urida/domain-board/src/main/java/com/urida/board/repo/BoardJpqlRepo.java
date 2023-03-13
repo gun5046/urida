@@ -1,7 +1,7 @@
-package com.urida.repo;
+package com.urida.board.repo;
 
 
-import com.urida.entity.Board;
+import com.urida.board.entity.Board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -37,7 +37,12 @@ public class BoardJpqlRepo {
 //                .setParameter("time", board.getTime())
 //                .setParameter("assessment", board.getAssessment())
 //                .executeUpdate();
-        em.persist(board);
+        if (board.getBoard_id() == null) {
+            em.persist(board);
+        } else {
+            em.merge(board);
+        }
+
     }
 
     // 게시글 삭제

@@ -5,22 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
-import java.time.LocalDateTime;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ArticleRequestDto {
+public class ArticleUpdateDto {
 
-    @NotEmpty
-    private String title;
-
-    @NotEmpty
     private String content;
 
     private String dateTime;
-
-    private Long uid;
 }

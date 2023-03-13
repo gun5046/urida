@@ -1,16 +1,21 @@
 package com.urida.board.service.impl;
 
 import com.urida.board.dto.ArticleRequestDto;
+import com.urida.board.dto.ArticleUpdateDto;
 import com.urida.board.service.BoardService;
-import com.urida.entity.Board;
+import com.urida.board.entity.Board;
+import com.urida.exception.NoDataException;
 import com.urida.exception.SaveException;
-import com.urida.repo.BoardJpqlRepo;
+import com.urida.board.repo.BoardJpqlRepo;
+import com.urida.user.entity.User;
+import com.urida.user.repo.UserJpqlRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +23,8 @@ import java.util.List;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardJpqlRepo boardJpqlRepo;
+    private final UserJpqlRepo userJpqlRepo;
+
 
     @Override
     @Transactional(readOnly = true)
@@ -26,32 +33,53 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public Board getArticle(Long id) {
+        return boardJpqlRepo.findById(id);
+    }
+
+    @Override
     public Board createArticle(ArticleRequestDto articleRequestDto) {
+        Optional<User> user = userJpqlRepo.findByUid(articleRequestDto.getUid());
+        if(user.isPresent()) {
+            Board article = Board.builder()
+                    .title(articleRequestDto.getTitle())
+                    .content(articleRequestDto.getContent())
+                    .time(LocalDateTime.now().toString())
+                    .writer(user.get())
+                    .build();
 
-        Board article = Board.builder()
-                // writer 정보는 어떻게 넘기나
-                .title(articleRequestDto.getTitle())
-                .content(articleRequestDto.getContent())
-                .time(LocalDateTime.now())
-                .build();
-
-        try {
-            boardJpqlRepo.saveArticle(article);
-            return article;
-        } catch(Exception e) {
-            throw new SaveException("Value invalid");
+            try {
+                boardJpqlRepo.saveArticle(article);
+                return article;
+            } catch (Exception e) {
+                throw new SaveException("Value invalid");
+            }
+        }else{
+            throw new NoDataException("Value invalid");
         }
     }
 
     @Override
-    public Board updateArticle(ArticleRequestDto articleRequestDto, Long id) {
+    public Board updateArticle(ArticleUpdateDto articleUpdateDto, Long id) {
         Board targetArticle = boardJpqlRepo.findById(id);
-        String content = articleRequestDto.getContent();
-        targetArticle.
+        String content = articleUpdateDto.getContent();
+        Board updatedArticle = Board.builder()
+                .title(targetArticle.getTitle())
+                .content(content)
+                .time(LocalDateTime.now().toString())
+                .writer(targetArticle.getWriter())
+                .build();
+        try {
+            boardJpqlRepo.saveArticle(updatedArticle);
+            return updatedArticle;
+        } catch (Exception e) {
+            throw new SaveException("Value invalid");
+        }
     }
 
-    @Override
+   @Override
     public void deleteArticle(Long id) {
-        boardJpqlRepo.removeArticle(id);
+       boardJpqlRepo.removeArticle(id);
     }
 }
