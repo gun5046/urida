@@ -78,10 +78,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void changeLanguage(LanguageDto languageDto) {
         try {
             userJpqlRepo.saveLanguage(languageDto.getUid(), languageDto.getLanguage());
         }catch (Exception e){
+            System.out.println(e);
             throw new InputException("Invalid Data");
         }
     }

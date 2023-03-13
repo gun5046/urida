@@ -61,7 +61,7 @@ public class UserJpqlRepo {
     }
 
     public void saveLanguage(Long uid, int language) {
-        em.createNativeQuery("update user u set language = :language where uid := uid")
+        em.createNativeQuery("update user u set language = :language where uid = :uid")
                 .setParameter("language",language)
                 .setParameter("uid",uid)
                 .executeUpdate();
