@@ -10,6 +10,7 @@ import android.widget.Toast
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentLoginBinding
 import com.edu.mf.databinding.FragmentPictureBinding
+import com.edu.mf.repository.model.User
 import com.edu.mf.view.common.MainActivity
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
@@ -17,6 +18,9 @@ import com.navercorp.nid.oauth.NidOAuthLogin
 import com.navercorp.nid.oauth.OAuthLoginCallback
 import com.navercorp.nid.profile.NidProfileCallback
 import com.navercorp.nid.profile.data.NidProfileResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 private const val TAG = "LoginFragment"
 
@@ -44,8 +48,7 @@ class LoginFragment : Fragment() {
                 else if (token != null) {
                     Log.i(TAG, "로그인 성공 ${token.accessToken}")
                     UserApiClient.instance.me { user, error ->
-                        Log.d(TAG, "onViewCreated: ${user?.id}")
-                        mainActivity.addFragment(LanguageFragment())
+                        login(user?.id.toString(), "kakao")
                     }
                 }
             }
@@ -63,10 +66,9 @@ class LoginFragment : Fragment() {
                     //로그인 유저 정보 가져오기
                     NidOAuthLogin().callProfileApi(object : NidProfileCallback<NidProfileResponse> {
                         override fun onSuccess(response: NidProfileResponse) {
-                            val userId = response.profile?.id
-                            mainActivity.addFragment(LanguageFragment())
+                            login(response.profile?.id ?: "", "naver")
+//                            mainActivity.addFragment(LanguageFragment())
 //                            Toast.makeText(requireContext(), "네이버 아이디 로그인 성공! ${userId}", Toast.LENGTH_SHORT).show()
-                            Log.d(TAG, "onSuccess: ${userId}")
                         }
                         override fun onFailure(httpStatus: Int, message: String) {
                             val errorCode = NaverIdLoginSDK.getLastErrorCode().code
@@ -90,5 +92,25 @@ class LoginFragment : Fragment() {
                 }
             })
         }
+    }
+
+    fun login(id: String, type: String){
+        mainActivity.loginService.login(id, type).enqueue(object : Callback<User>{
+            override fun onResponse(call: Call<User>, response: Response<User>) {
+                if(response.code() == 200){
+                    val user = response.body()!!
+                    if(user.uid != null){
+                        mainActivity.changeFragment(MainFragment())
+                    } else {
+                        mainActivity.addFragment(LanguageFragment())
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<User>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+            }
+
+        })
     }
 }
