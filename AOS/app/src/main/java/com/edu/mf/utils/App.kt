@@ -5,6 +5,8 @@ import android.util.Log
 import com.edu.mf.BuildConfig
 import com.kakao.sdk.common.KakaoSdk
 import com.navercorp.nid.NaverIdLoginSDK
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class App : Application(){
@@ -13,6 +15,7 @@ class App : Application(){
         const val TAG = "App_지훈"
         var PICTURES : ArrayList<ArrayList<String>> = arrayListOf()
         lateinit var sharedPreferencesUtil:SharedPreferencesUtil
+        lateinit var userRetrofit: Retrofit
     }
 
     override fun onCreate() {
@@ -21,6 +24,10 @@ class App : Application(){
         KakaoSdk.init(this, BuildConfig.Kakao_API_KEY)
         NaverIdLoginSDK.initialize(this, BuildConfig.OAUTH_CLIENT_ID, BuildConfig.OAUTH_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_NAME)
 
+        userRetrofit = Retrofit.Builder()
+            .baseUrl("http://j8d202.p.ssafy.io:8081/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
         setImageData()
     }
 
