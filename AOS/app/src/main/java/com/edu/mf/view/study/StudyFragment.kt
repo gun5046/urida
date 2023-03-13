@@ -29,15 +29,15 @@ class StudyFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
-            cardviewFragmentStudyLearn.setOnClickListener {
+            cardviewLearn.setOnClickListener {
                 mainActivity.addFragment(LearnFragment())
             }
 
-            cardviewFragmentStudyQuiz.setOnClickListener {
+            cardviewQuiz.setOnClickListener {
                 mainActivity.addFragment(QuizFragment())
             }
 
-            cardviewFragmentStudyResolve.setOnClickListener {
+            cardviewResolve.setOnClickListener {
                 mainActivity.addFragment(ResolveFragment())
             }
         }

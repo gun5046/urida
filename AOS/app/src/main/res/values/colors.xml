@@ -10,7 +10,51 @@
     <color name="primary_teal_200">#16D784</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+    <color name="grey_icon">#FFB1A2A2</color>
+    <color name="grey_500_transparent">#9e9e9ebb</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
-    <color name="grey_icon">#FFB1A2A2</color>
+
+    <array name="drawing_palette">
+        <item>@color/drawing_red_500</item>
+        <item>@color/drawing_pink_500</item>
+        <item>@color/drawing_light_pink_500</item>
+        <item>@color/drawing_purple_500</item>
+        <item>@color/drawing_deep_purple_500</item>
+        <item>@color/drawing_indigo_500</item>
+        <item>@color/drawing_blue_500</item>
+        <item>@color/drawing_light_blue_500</item>
+        <item>@color/drawing_cyan_500</item>
+        <item>@color/drawing_teal_500</item>
+        <item>@color/drawing_green_500</item>
+        <item>@color/drawing_light_green_500</item>
+        <item>@color/drawing_lime_500</item>
+        <item>@color/drawing_yellow_500</item>
+        <item>@color/drawing_amber_500</item>
+        <item>@color/drawing_orange_500</item>
+        <item>@color/drawing_brown_500</item>
+        <item>@color/drawing_blue_grey_500</item>
+        <item>@color/drawing_grey_500</item>
+    </array>
+
+    <color name="drawing_red_500">#f44336</color>
+    <color name="drawing_pink_500">#e91e63</color>
+    <color name="drawing_light_pink_500">#ff1493</color>
+    <color name="drawing_purple_500">#9c27b0</color>
+    <color name="drawing_deep_purple_500">#673ab7</color>
+    <color name="drawing_indigo_500">#3f51b5</color>
+    <color name="drawing_blue_500">#2196f3</color>
+    <color name="drawing_light_blue_500">#03a9f4</color>
+    <color name="drawing_cyan_500">#00bcd4</color>
+    <color name="drawing_teal_500">#009688</color>
+    <color name="drawing_green_500">#4caf50</color>
+    <color name="drawing_light_green_500">#8bc34a</color>
+    <color name="drawing_lime_500">#cddc39</color>
+    <color name="drawing_yellow_500">#ffeb3b</color>
+    <color name="drawing_amber_500">#ffc107</color>
+    <color name="drawing_orange_500">#ff9800</color>
+    <color name="drawing_brown_500">#795548</color>
+    <color name="drawing_grey_500">#9e9e9e</color>
+    <color name="drawing_blue_grey_500">#607d8b</color>
+
 </resources>

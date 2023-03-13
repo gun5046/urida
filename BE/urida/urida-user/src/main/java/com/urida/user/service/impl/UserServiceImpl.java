@@ -1,7 +1,9 @@
 package com.urida.user.service.impl;
 
+import com.urida.exception.InputException;
 import com.urida.exception.NoDataException;
 import com.urida.exception.SaveException;
+import com.urida.user.dto.LanguageDto;
 import com.urida.user.dto.LoginDto;
 import com.urida.user.dto.RegisterDto;
 import com.urida.user.entity.User;
@@ -11,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Service
@@ -32,19 +35,25 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void saveUser(RegisterDto registerDto){
+    public User saveUser(RegisterDto registerDto){
 
-        User user = User.builder()
+        User register = User.builder()
                 .nickname(registerDto.getNickname())
                 .social_id(registerDto.getSocial_id())
                 .type(registerDto.getType())
                 .language(registerDto.getLanguage())
                 .build();
+        Optional<User> user;
         try {
-            userJpqlRepo.saveUser(user);
+            userJpqlRepo.saveUser(register);
+            user = userJpqlRepo.findByNickname(registerDto.getNickname());
         }catch(Exception e){
             throw new SaveException("Value invalid");
         }
+        if(!user.isPresent()){
+            throw new NoDataException("User-Is-Not-Exist");
+        }
+        return user.get();
     }
 
     @Override
@@ -66,5 +75,16 @@ public class UserServiceImpl implements UserService {
             throw new NoDataException("User-Is-Not-Exist");
         }
         return user.get();
+    }
+
+    @Override
+    @Transactional
+    public void changeLanguage(LanguageDto languageDto) {
+        try {
+            userJpqlRepo.saveLanguage(languageDto.getUid(), languageDto.getLanguage());
+        }catch (Exception e){
+            System.out.println(e);
+            throw new InputException("Invalid Data");
+        }
     }
 }

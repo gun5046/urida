@@ -24,4 +24,15 @@
     <string name="dialog_nickname_editText">닉네임</string>
     <string name="dialog_nickname_button">확인</string>
 
+    <!--    fragment_drawing-->
+    <string name="fragment_drawing_button_drawing_result">이게 뭘까요?</string>
+    <string name="fragment_drawing_dialog_title">색상 선택</string>
+    <string name="fragment_drawing_dialog_custom">다른색 선택</string>
+    <string name="fragment_drawing_dialog_presets">팔레트에 추가</string>
+    <string name="fragment_drawing_dialog_complete">완료</string>
+
+    <!--    fragment_picture-->
+    <string name="fragment_picture_cardview_camera">촬영하기</string>
+    <string name="fragment_picture_cardview_gallery">갤러리에서 불러오기</string>
+
 </resources>

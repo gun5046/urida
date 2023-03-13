@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +14,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserJpqlRepo {
 
-    @PersistenceContext
     private final EntityManager em;
 
     public Optional<User> findBySocialId(String type, String id) {
@@ -50,5 +50,20 @@ public class UserJpqlRepo {
                 .getResultList();
 
         return user.stream().findAny();
+    }
+
+    public Optional<User> findByNickname(String nickname) {
+        List<User> user = em.createQuery("select u from User u where nickname = :nickname", User.class)
+                .setParameter("nickname",nickname)
+                .getResultList();
+
+        return user.stream().findAny();
+    }
+
+    public void saveLanguage(Long uid, int language) {
+        em.createNativeQuery("update user u set language = :language where uid = :uid")
+                .setParameter("language",language)
+                .setParameter("uid",uid)
+                .executeUpdate();
     }
 }

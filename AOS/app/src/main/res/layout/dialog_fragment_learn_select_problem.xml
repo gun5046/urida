@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/learn_list_black_10">
+
+    <TextView
+        android:id="@+id/textview_dialog_learn_select_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="문제 유형을 선택해주세요"
+        android:textSize="26sp"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/kakao_otf_bold"
+        android:textColor="@color/black"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_dialog_learn_select_problem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/textview_dialog_learn_select_title"
+        app:layout_constraintBottom_toTopOf="@id/button_dialog_learn_ok"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_dialog_learn_cancle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:text="뒤로 가기"
+        android:fontFamily="@font/kakao_otf_bold"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:background="@drawable/learn_list_black_10"
+        app:layout_constraintTop_toBottomOf="@id/recyclerview_dialog_learn_select_problem"
+        app:layout_constraintRight_toLeftOf="@id/button_dialog_learn_ok"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_dialog_learn_ok"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="문제 풀기"
+        android:fontFamily="@font/kakao_otf_bold"
+        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:background="@drawable/learn_list_black_10"
+        app:layout_constraintTop_toBottomOf="@id/recyclerview_dialog_learn_select_problem"
+        app:layout_constraintLeft_toRightOf="@id/button_dialog_learn_cancle"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
