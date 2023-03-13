@@ -19,22 +19,19 @@ class LearnMainFragment : Fragment() {
 
     private lateinit var binding : FragmentLearnMainBinding
     private lateinit var viewmodel : MainViewModel
-    private lateinit var app:App
     private val TAG = "LearnMainFragment_지훈"
-    private var currentIndex=0
-    private var bookMark : String = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_learn_main,container,false)
         viewmodel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-        app = App()
-        binding.answer = App.PICTURES[viewmodel.selectedCategory][currentIndex]
-        binding.current = bookMark
-        binding.list = App.PICTURES[viewmodel.selectedCategory]
-        binding.handlers = LearnMainFragment()
-        binding.viewModels = viewmodel
+
+        binding.apply {
+            binding.list = App.PICTURES[viewmodel.selectedCategory]
+            binding.vm = viewmodel
+        }
+        binding.lifecycleOwner = this
         return binding.root
     }
     
@@ -42,50 +39,21 @@ class LearnMainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         viewmodel.setCurrentIndex(0)
+        viewmodel.setCurrentAnswer(App.PICTURES[viewmodel.selectedCategory][0])
         viewmodel.currentIndex.observe(viewLifecycleOwner, Observer {
-            viewmodel.changeBookMark("${it+1}/${App.PICTURES[viewmodel.selectedCategory].size+1}")
+            Log.i(TAG, "onViewCreated: ${it}")
+            viewmodel.changeBookMark("${it+1}/${App.PICTURES[viewmodel.selectedCategory].size}")
+            binding.imageviewFragmentLearnMainImage.setImageResource(resources.getIdentifier(
+                "pictures_${viewmodel.selectedCategory}_${it}","drawable",requireActivity().packageName))
+            viewmodel.setCurrentAnswer(App.PICTURES[viewmodel.selectedCategory][it])
         })
+
     }
 
     private fun init(){
-        setImageCategory()
-    }
-
-    /**
-     * category별 이미지 리소스 저장
-     */
-    private fun setImageCategory(){
-        when(viewmodel.selectedCategory){
-            0->{
-                binding.imageviewFragmentLearnMainImage.setImageResource(resources.getIdentifier(
-                    "fruits_0_${currentIndex}","drawable",requireActivity().packageName))
-            }
-            1->{
-                binding.imageviewFragmentLearnMainImage.setImageResource(resources.getIdentifier(
-                    "jobs_1_${currentIndex}","drawable",requireActivity().packageName))
-            }
-            2->{
-                binding.imageviewFragmentLearnMainImage.setImageResource(resources.getIdentifier(
-                    "animals_2_${currentIndex}","drawable",requireActivity().packageName))
-            }
-            3->{
-                binding.imageviewFragmentLearnMainImage.setImageResource(resources.getIdentifier(
-                    "objects_3_${currentIndex}","drawable",requireActivity().packageName))
-            }
-            4->{
-                binding.imageviewFragmentLearnMainImage.setImageResource(resources.getIdentifier(
-                    "places_4_${currentIndex}","drawable",requireActivity().packageName))
-            }
-            else->{
-                binding.imageviewFragmentLearnMainImage.setImageResource(resources.getIdentifier(
-                    "actions_5_${currentIndex}","drawable",requireActivity().packageName))
-            }
-
-
-
-        }
-
 
     }
+
+
     
 }

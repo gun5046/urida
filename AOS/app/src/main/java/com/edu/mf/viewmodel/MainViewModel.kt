@@ -6,6 +6,9 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel(){
 
+    private var _answer : MutableLiveData<String> = MutableLiveData()
+    val answer get() = _answer
+
     private var _selectedCategory : Int = -1
     val selectedCategory get() = _selectedCategory
 
@@ -31,6 +34,9 @@ class MainViewModel : ViewModel(){
     }
     fun setCurrentIndex(index:Int){
         _currentIndex.value = index
+    }
+    fun setCurrentAnswer(answer:String){
+        _answer.value = answer
     }
     fun increaseIndex(){
         _currentIndex.value = _currentIndex.value?.plus(1)
