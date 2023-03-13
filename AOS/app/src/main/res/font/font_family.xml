@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <font
+        app:fontStyle="normal"
+        app:font="@font/kakao_regular"/>
+
+    <font
+        app:fontStyle="normal"
+        app:font="@font/kakao_bold"/>
+
+    <font
+        app:fontStyle="normal"
+        app:font="@font/kakao_otf_regular"/>
+
+    <font
+        app:fontStyle="normal"
+        app:font="@font/kakao_otf_bold"/>
+
+    <font
+        app:fontStyle="normal"
+        app:font="@font/nexon_gothic_light"/>
+
+    <font
+        app:fontStyle="normal"
+        app:font="@font/nexon_gothic_medium"/>
+
+    <font
+        app:fontStyle="normal"
+        app:font="@font/nexon_gothic_bold"/>
+
+</font-family>
