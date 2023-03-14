@@ -14,7 +14,6 @@ import com.edu.mf.view.LanguageFragment
 import com.edu.mf.view.LoginFragment
 import com.edu.mf.view.MainFragment
 import com.kakao.sdk.common.KakaoSdk
-import com.kakao.sdk.common.util.Utility
 import com.navercorp.nid.NaverIdLoginSDK
 import java.util.*
 import com.edu.mf.viewmodel.MainViewModel
@@ -94,5 +93,4 @@ class MainActivity : AppCompatActivity() {
         configuration.setLocale(locale)
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
-
 }

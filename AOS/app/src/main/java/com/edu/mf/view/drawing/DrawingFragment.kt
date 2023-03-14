@@ -66,6 +66,7 @@ class DrawingFragment: Fragment() {
         binding.buttonDrawingResult.setOnClickListener {
             // 서버로 행렬 전송
             makeMatrix()
+            mainActivity.changeFragment(DrawingResultListFragment())
         }
     }
 
