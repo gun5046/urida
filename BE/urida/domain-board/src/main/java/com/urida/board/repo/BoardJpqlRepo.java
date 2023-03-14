@@ -1,6 +1,7 @@
 package com.urida.board.repo;
 
 
+import com.urida.board.dto.BoardDto;
 import com.urida.board.entity.Board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -16,13 +17,23 @@ public class BoardJpqlRepo {
     private final EntityManager em;
 
     // 특정 게시물
-    public Board findById(Long boardId) {
+    public BoardDto findById(Long boardId) {
 //        List<Board> article = em.createQuery(
 //                        "select b from Board b where id = :board_id", Board.class)
 //                .setParameter("board_id", board_id)
 //                .getResultList();
 //        return article.stream().findAny();
-        return em.find(Board.class, boardId);
+        Board board = em.find(Board.class, boardId);
+        Long uid = board.getUser().getUid();
+
+        return BoardDto.builder()
+                .board_id(board.getBoard_id())
+                .uid(uid)
+                .view(board.getView()+1)
+                .title(board.getTitle())
+                .dateTime(board.getTime())
+                .content(board.getContent())
+                .build();
     }
 
     // 게시글 저장

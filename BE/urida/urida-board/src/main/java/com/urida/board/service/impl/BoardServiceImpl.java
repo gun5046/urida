@@ -2,6 +2,7 @@ package com.urida.board.service.impl;
 
 import com.urida.board.dto.ArticleRequestDto;
 import com.urida.board.dto.ArticleUpdateDto;
+import com.urida.board.dto.BoardDto;
 import com.urida.board.service.BoardService;
 import com.urida.board.entity.Board;
 import com.urida.exception.NoDataException;
@@ -34,9 +35,9 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Board getArticle(Long id) {
+    public BoardDto getArticle(Long id) {
         return boardJpqlRepo.findById(id);
+
     }
 
     @Override
@@ -57,27 +58,34 @@ public class BoardServiceImpl implements BoardService {
                 System.out.println(e.toString());
                 throw new SaveException("Value invalid");
             }
-        }else{
+        } else{
             throw new NoDataException("Value invalid");
         }
     }
 
     @Override
     public Board updateArticle(ArticleUpdateDto articleUpdateDto, Long id) {
-        Board targetArticle = boardJpqlRepo.findById(id);
-        String content = articleUpdateDto.getContent();
-        Board updatedArticle = Board.builder()
-                .title(targetArticle.getTitle())
-                .content(content)
-                .time(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")))
-                .user(targetArticle.getUser())
-                .build();
+        BoardDto targetArticle = boardJpqlRepo.findById(id);
+        Optional<User> currUser = userJpqlRepo.findByUid(targetArticle.getUid());
+        String newContent = articleUpdateDto.getContent();
 
-        try {
-            boardJpqlRepo.saveArticle(updatedArticle);
-            return updatedArticle;
-        } catch (Exception e) {
-            throw new SaveException("Value invalid");
+        if(currUser.isPresent()) {
+            Board updatedArticle = Board.builder()
+                    .board_id(targetArticle.getBoard_id())
+                    .title(targetArticle.getTitle())
+                    .content(newContent)
+                    .time(LocalDateTime.now().toString())
+                    .user(currUser.get())
+                    .build();
+
+            try {
+                boardJpqlRepo.saveArticle(updatedArticle);
+                return updatedArticle;
+            } catch (Exception e) {
+                throw new SaveException("Value invalid");
+            }
+        } else {
+            throw new NoDataException("Value invalid");
         }
     }
 

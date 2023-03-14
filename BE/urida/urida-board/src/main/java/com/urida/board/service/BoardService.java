@@ -2,6 +2,7 @@ package com.urida.board.service;
 
 import com.urida.board.dto.ArticleRequestDto;
 import com.urida.board.dto.ArticleUpdateDto;
+import com.urida.board.dto.BoardDto;
 import com.urida.board.entity.Board;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface BoardService {
     List<Board> getArticles();
 
     // 개별 게시글 조회
-    Board getArticle(Long id);
+    BoardDto getArticle(Long id);
 
     // 게시글 작성
     Board createArticle(ArticleRequestDto articleRequestDto);

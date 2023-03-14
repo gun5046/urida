@@ -2,6 +2,7 @@ package com.urida.board.controller;
 
 import com.urida.board.dto.ArticleRequestDto;
 import com.urida.board.dto.ArticleUpdateDto;
+import com.urida.board.dto.BoardDto;
 import com.urida.board.service.BoardService;
 import com.urida.board.entity.Board;
 import com.urida.exception.InputException;
@@ -32,7 +33,7 @@ public class BoardController {
 
     // 개별 게시글 조회
     @GetMapping("/{id}")
-    public Board getArticle(@PathVariable Long id) {
+    public BoardDto getArticle(@PathVariable Long id) {
         return boardService.getArticle(id);
     }
 
@@ -52,7 +53,8 @@ public class BoardController {
     }
 
     @PutMapping("/{id}")
-    public void updateArticle(@PathVariable Long id, @RequestBody ArticleUpdateDto articleUpdateDto) {
+    public BoardDto updateArticle(@PathVariable Long id, @RequestBody ArticleUpdateDto articleUpdateDto) {
         Board article = boardService.updateArticle(articleUpdateDto, id);
+        return boardService.getArticle(id);
     }
 }
