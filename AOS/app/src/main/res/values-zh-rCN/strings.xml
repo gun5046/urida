@@ -4,4 +4,7 @@
     <string name="dialog_nickname_button">查看</string>
     <string name="dialog_nickname_editText">昵称</string>
     <string name="dialog_nickname_text">请设置昵称</string>
+    <string name="dialog_nickname_unallowed">只允许英文小写字母、大写字母和数字</string>
+    <string name="dialog_nickname_blank">请输入您的昵称</string>
+    <string name="dialog_nickname_duplicate">这是一个重复的昵称</string>
 </resources>

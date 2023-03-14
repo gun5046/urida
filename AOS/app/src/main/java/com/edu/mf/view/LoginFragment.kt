@@ -11,6 +11,7 @@ import com.edu.mf.R
 import com.edu.mf.databinding.FragmentLoginBinding
 import com.edu.mf.databinding.FragmentPictureBinding
 import com.edu.mf.repository.model.User
+import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
@@ -18,6 +19,9 @@ import com.navercorp.nid.oauth.NidOAuthLogin
 import com.navercorp.nid.oauth.OAuthLoginCallback
 import com.navercorp.nid.profile.NidProfileCallback
 import com.navercorp.nid.profile.data.NidProfileResponse
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -95,22 +99,38 @@ class LoginFragment : Fragment() {
     }
 
     fun login(id: String, type: String){
-        mainActivity.loginService.login(id, type).enqueue(object : Callback<User>{
-            override fun onResponse(call: Call<User>, response: Response<User>) {
-                if(response.code() == 200){
-                    val user = response.body()!!
-                    if(user.uid != null){
-                        mainActivity.changeFragment(MainFragment())
-                    } else {
-                        mainActivity.addFragment(LanguageFragment())
-                    }
+//        mainActivity.loginService.login(id, type).enqueue(object : Callback<User>{
+//            override fun onResponse(call: Call<User>, response: Response<User>) {
+//                if(response.code() == 200){
+//                    val user = response.body()!!
+//                    if(user.uid != null){
+//                        mainActivity.changeFragment(MainFragment())
+//                    } else {
+//                        mainActivity.addFragment(LanguageFragment())
+//                    }
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<User>, t: Throwable) {
+//                Log.d(TAG, "onFailure: ${t.message}")
+//            }
+//
+//        })
+        CoroutineScope(Dispatchers.IO).launch {
+            val response = mainActivity.loginService.login(id, type)
+            if(response.isSuccessful){
+                mainActivity.user = mainActivity.loginService.login(id, type).body()
+                if(mainActivity.user!!.uid != null){
+                    mainActivity.changeFragment(MainFragment())
+                    App.sharedPreferencesUtil.setUser(response.body()!!)
+                } else {
+                    mainActivity.user!!.social_id = id
+                    mainActivity.user!!.type = type
+                    mainActivity.addFragment(LanguageFragment())
                 }
+            } else {
+                Log.d(TAG, "login: ${response.code()}")
             }
-
-            override fun onFailure(call: Call<User>, t: Throwable) {
-                Log.d(TAG, "onFailure: ${t.message}")
-            }
-
-        })
+        }
     }
 }
