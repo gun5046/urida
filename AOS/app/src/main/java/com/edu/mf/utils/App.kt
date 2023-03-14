@@ -5,8 +5,11 @@ import android.util.Log
 import com.edu.mf.BuildConfig
 import com.kakao.sdk.common.KakaoSdk
 import com.navercorp.nid.NaverIdLoginSDK
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 
 class App : Application(){
@@ -16,6 +19,7 @@ class App : Application(){
         var PICTURES : ArrayList<ArrayList<String>> = arrayListOf()
         lateinit var sharedPreferencesUtil:SharedPreferencesUtil
         lateinit var userRetrofit: Retrofit
+        lateinit var drawingRetrofit: Retrofit
     }
 
     override fun onCreate() {
@@ -24,13 +28,23 @@ class App : Application(){
         KakaoSdk.init(this, BuildConfig.Kakao_API_KEY)
         NaverIdLoginSDK.initialize(this, BuildConfig.OAUTH_CLIENT_ID, BuildConfig.OAUTH_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_NAME)
 
+        val okHttpClient = OkHttpClient.Builder()
+            .readTimeout(5000, TimeUnit.MILLISECONDS)
+            .connectTimeout(5000, TimeUnit.MILLISECONDS)
+            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+            .build()
+
         userRetrofit = Retrofit.Builder()
             .baseUrl("http://j8d202.p.ssafy.io:8081/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         setImageData()
-        
 
+        drawingRetrofit = Retrofit.Builder()
+            .baseUrl("http://luminarie.online:8084/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(okHttpClient)
+            .build()
     }
 
     /**
