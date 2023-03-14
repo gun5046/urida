@@ -8,6 +8,7 @@ import com.edu.mf.BuildConfig
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
 import com.edu.mf.databinding.ActivityMainBinding
+import com.edu.mf.repository.api.DrawingService
 import com.edu.mf.repository.api.UserService
 import com.edu.mf.utils.App
 import com.edu.mf.view.LanguageFragment
@@ -23,6 +24,7 @@ private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val loginService = App.userRetrofit.create(UserService::class.java)
+    val drawingService = App.drawingRetrofit.create(DrawingService::class.java)
 
     private lateinit var mainViewModel: MainViewModel
     init {

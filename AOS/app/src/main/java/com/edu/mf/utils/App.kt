@@ -3,6 +3,7 @@ package com.edu.mf.utils
 import android.app.Application
 import android.util.Log
 import com.edu.mf.BuildConfig
+import com.google.gson.GsonBuilder
 import com.kakao.sdk.common.KakaoSdk
 import com.navercorp.nid.NaverIdLoginSDK
 import okhttp3.OkHttpClient
@@ -41,7 +42,7 @@ class App : Application(){
         setImageData()
 
         drawingRetrofit = Retrofit.Builder()
-            .baseUrl("http://luminarie.online:8084/")
+            .baseUrl("http://j8d202.p.ssafy.io:8084/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

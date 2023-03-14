@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.edu.mf.databinding.FragmentDrawingResultListBinding
+import com.edu.mf.viewmodel.DrawingViewModel
 
 class DrawingResultListFragment: Fragment() {
     private lateinit var binding: FragmentDrawingResultListBinding
@@ -21,5 +22,7 @@ class DrawingResultListFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.drawingViewModel = DrawingViewModel()
     }
 }
