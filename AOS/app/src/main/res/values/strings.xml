@@ -19,10 +19,14 @@
     <string name="fragment_language_chinese" translatable="false">中文</string>
     <string name="fragment_language_vietnamese" translatable="false">Tiếng Việt</string>
     <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+
     <!--    dialog_nickname-->
     <string name="dialog_nickname_text">닉네임을 설정해주세요</string>
     <string name="dialog_nickname_editText">닉네임</string>
     <string name="dialog_nickname_button">확인</string>
+    <string name="dialog_nickname_blank">닉네임을 입력해주세요.</string>
+    <string name="dialog_nickname_duplicate">중복되는 닉네임입니다.</string>
+    <string name="dialog_nickname_unallowed">영어 알파벳 소문자, 대문자, 숫자만 허용됩니다.</string>
 
     <!--    fragment_drawing-->
     <string name="fragment_drawing_button_drawing_result">이게 뭘까요?</string>
