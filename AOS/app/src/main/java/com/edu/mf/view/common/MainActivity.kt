@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
 import com.edu.mf.databinding.ActivityMainBinding
 import com.edu.mf.repository.api.UserService
+import com.edu.mf.repository.model.User
 import com.edu.mf.utils.App
 import com.edu.mf.view.LanguageFragment
 import com.edu.mf.view.LoginFragment
@@ -24,6 +25,7 @@ private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val loginService = App.userRetrofit.create(UserService::class.java)
+    var user: User? = null
 
     private lateinit var mainViewModel: MainViewModel
     init {
@@ -46,11 +48,15 @@ class MainActivity : AppCompatActivity() {
         KakaoSdk.init(this, BuildConfig.Kakao_API_KEY)
         NaverIdLoginSDK.initialize(this, BuildConfig.OAUTH_CLIENT_ID, BuildConfig.OAUTH_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_NAME)
 
-        Log.d(TAG, "onCreate: ")
-        changeLocale(App.sharedPreferencesUtil.getLanguageCode())
-        //changeFragment(LoginFragment())
+        user = App.sharedPreferencesUtil.getUser()
+        if(user != null) {
+            changeLocale(user!!.language)
+            changeFragment(MainFragment())
+        } else {
+            changeFragment(LoginFragment())
+        }
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        changeFragment(MainFragment())
+//        changeFragment(MainFragment())
     }
 
     fun changeFragment(fragment: Fragment){

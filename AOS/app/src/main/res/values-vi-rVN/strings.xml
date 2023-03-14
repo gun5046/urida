@@ -4,4 +4,7 @@
     <string name="dialog_nickname_button">kiểm tra</string>
     <string name="dialog_nickname_editText">tên nick</string>
     <string name="dialog_nickname_text">Vui lòng đặt biệt hiệu</string>
+    <string name="dialog_nickname_unallowed">Chỉ cho phép chữ thường, chữ hoa và số tiếng Anh.</string>
+    <string name="dialog_nickname_blank">Vui lòng nhập nickname của bạn.</string>
+    <string name="dialog_nickname_duplicate">Đây là một biệt hiệu trùng lặp.</string>
 </resources>
