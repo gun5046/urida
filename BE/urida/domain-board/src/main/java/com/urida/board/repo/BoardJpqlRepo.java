@@ -16,6 +16,10 @@ public class BoardJpqlRepo {
 
     private final EntityManager em;
 
+    public Board getArticle(Long id) {
+        return em.find(Board.class, id);
+    }
+
     // 특정 게시물
     public BoardDto findById(Long boardId) {
 //        List<Board> article = em.createQuery(
@@ -59,8 +63,7 @@ public class BoardJpqlRepo {
 
     // 게시글 삭제
     public void removeArticle(Long boardId) {
-        Board board = em.find(Board.class, boardId);
-        em.remove(board);
+        em.remove(getArticle(boardId));
     }
 
     //게시글 전체조회
@@ -85,15 +88,15 @@ public class BoardJpqlRepo {
 
     // 게시글 좋아요
     public int likeArticle(Long id) {
-        Board board = em.find(Board.class, id);
-        board.like();
-        return board.getAssessment();
+        getArticle(id).like();
+        return getArticle(id).getAssessment();
     }
 
     // 게시글 좋아요 취소
     public int dislikeArticle(Long id) {
-        Board board = em.find(Board.class, id);
-        board.dislike();
-        return board.getAssessment();
+//        Board board = em.find(Board.class, id);
+//        board.dislike();
+        getArticle(id).dislike();
+        return getArticle(id).getAssessment();
     }
 }
