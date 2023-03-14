@@ -24,12 +24,15 @@ class App : Application(){
         KakaoSdk.init(this, BuildConfig.Kakao_API_KEY)
         NaverIdLoginSDK.initialize(this, BuildConfig.OAUTH_CLIENT_ID, BuildConfig.OAUTH_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_NAME)
 
+
+
         userRetrofit = Retrofit.Builder()
             .baseUrl("http://j8d202.p.ssafy.io:8081/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         setImageData()
         
+
 
     }
 

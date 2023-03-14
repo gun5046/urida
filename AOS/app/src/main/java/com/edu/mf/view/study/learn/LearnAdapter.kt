@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.edu.mf.R
 import com.edu.mf.databinding.ItemFragmentLearnBinding
 
 
 class LearnAdapter(
+
 ) : RecyclerView.Adapter<LearnAdapter.LearnViewHolder>(){
     private val datas = ArrayList<String>()
     private lateinit var categoryClickListener : CategoryClickListener
@@ -29,6 +31,8 @@ class LearnAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LearnViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = DataBindingUtil.inflate<ItemFragmentLearnBinding>(inflater,R.layout.item_fragment_learn,parent,false)
+
+
         return LearnViewHolder(binding)
     }
 

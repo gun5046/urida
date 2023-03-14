@@ -9,7 +9,6 @@ import com.edu.mf.databinding.FragmentQuizBinding
 
 class QuizFragment: Fragment() {
     private lateinit var binding: FragmentQuizBinding
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

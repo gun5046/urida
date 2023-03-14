@@ -30,6 +30,7 @@ class LearnFragment: Fragment(),LearnSelectCategoryDialog.CreateSelectProblemDia
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_learn,container,false)
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         mainActivity = MainActivity.getInstance()!!
+        Log.i(TAG, "onCreateView: ${viewModel.mode}")
         return binding.root
     }
 

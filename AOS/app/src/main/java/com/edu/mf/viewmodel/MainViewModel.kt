@@ -12,6 +12,12 @@ import java.util.*
 private const val TAG = "MainViewModel"
 class MainViewModel : ViewModel(){
 
+    /**
+     * 단어 학습 모드 선택
+     * 1 : 낱말 익히기 , 2 : 낱말 퀴즈
+     */
+    private var _mode : MutableLiveData<Int> = MutableLiveData()
+    val mode : LiveData<Int> get() = _mode
 
     private var textToSpeech: TextToSpeech? = null
     private var _answer : MutableLiveData<String> = MutableLiveData()
@@ -28,6 +34,10 @@ class MainViewModel : ViewModel(){
 
     private var _bookMark : MutableLiveData<String> = MutableLiveData()
     val bookMark get() = _bookMark
+
+    fun setMode(mode:Int){
+        _mode.value = mode
+    }
 
     fun changeCategory(selected:Int){
         _selectedCategory = selected
@@ -66,7 +76,7 @@ class MainViewModel : ViewModel(){
 
         })
     }
-    fun TTS(){
+    fun startTTS(){
         textToSpeech?.speak(App.PICTURES[selectedCategory][currentIndex.value!!],TextToSpeech.QUEUE_FLUSH,null,null)
     }
 }
