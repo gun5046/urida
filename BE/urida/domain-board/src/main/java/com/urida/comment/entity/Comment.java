@@ -1,42 +1,34 @@
-package com.urida.board.entity;
+package com.urida.comment.entity;
 
+import com.urida.board.entity.Board;
 import com.urida.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
-
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class Board {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "board_id")
-    private Long board_id;
-
-    private String title;
+    private Long comment_id;
 
     private String content;
 
-    @ColumnDefault("0")
-    private int view;
+    private String dateTime;
 
-    private String time;
-
-    @ColumnDefault("0")
-    private int assessment;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private Board board;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uid")
     private User user;
-
 }

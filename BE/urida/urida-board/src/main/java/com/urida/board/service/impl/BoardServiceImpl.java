@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,13 +47,14 @@ public class BoardServiceImpl implements BoardService {
                     .title(articleRequestDto.getTitle())
                     .content(articleRequestDto.getContent())
                     .time(LocalDateTime.now().toString())
-                    .writer(user.get())
+                    .user(user.get())
                     .build();
 
             try {
                 boardJpqlRepo.saveArticle(article);
                 return article;
             } catch (Exception e) {
+                System.out.println(e.toString());
                 throw new SaveException("Value invalid");
             }
         }else{
@@ -67,9 +69,10 @@ public class BoardServiceImpl implements BoardService {
         Board updatedArticle = Board.builder()
                 .title(targetArticle.getTitle())
                 .content(content)
-                .time(LocalDateTime.now().toString())
-                .writer(targetArticle.getWriter())
+                .time(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")))
+                .user(targetArticle.getUser())
                 .build();
+
         try {
             boardJpqlRepo.saveArticle(updatedArticle);
             return updatedArticle;
