@@ -8,6 +8,7 @@ import com.edu.mf.BuildConfig
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
 import com.edu.mf.databinding.ActivityMainBinding
+import com.edu.mf.repository.api.DrawingService
 import com.edu.mf.repository.api.UserService
 import com.edu.mf.repository.model.User
 import com.edu.mf.utils.App
@@ -15,7 +16,6 @@ import com.edu.mf.view.LanguageFragment
 import com.edu.mf.view.LoginFragment
 import com.edu.mf.view.MainFragment
 import com.kakao.sdk.common.KakaoSdk
-import com.kakao.sdk.common.util.Utility
 import com.navercorp.nid.NaverIdLoginSDK
 import java.util.*
 import com.edu.mf.viewmodel.MainViewModel
@@ -25,6 +25,7 @@ private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val loginService = App.userRetrofit.create(UserService::class.java)
+    val drawingService = App.drawingRetrofit.create(DrawingService::class.java)
     var user: User? = null
 
     private lateinit var mainViewModel: MainViewModel
@@ -100,5 +101,4 @@ class MainActivity : AppCompatActivity() {
         configuration.setLocale(locale)
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
-
 }

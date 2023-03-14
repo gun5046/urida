@@ -3,6 +3,7 @@ package com.edu.mf.view.drawing
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,18 +12,24 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentDrawingBinding
+import com.edu.mf.repository.model.drawing.DrawingRequest
+import com.edu.mf.repository.model.drawing.DrawingResponse
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.viewmodel.DrawingViewModel
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DrawingFragment: Fragment() {
     private lateinit var binding: FragmentDrawingBinding
     private lateinit var mainActivity: MainActivity
     private lateinit var toolList: ArrayList<ImageView>
-    private lateinit var matrix: MutableList<MutableList<MutableList<Int>>>
+    private lateinit var matrix: MutableList<ArrayList<ArrayList<Int>>>
 
     companion object{
         lateinit var graphicView:GraphicView
@@ -64,8 +71,9 @@ class DrawingFragment: Fragment() {
         }
 
         binding.buttonDrawingResult.setOnClickListener {
-            // 서버로 행렬 전송
             makeMatrix()
+            sendMatrix()
+            mainActivity.changeFragment(DrawingResultListFragment())
         }
     }
 
@@ -90,13 +98,32 @@ class DrawingFragment: Fragment() {
         matrix.add(arrayListOf(xList, yList))
 
         println(matrix.toString())
-        getDisplaySize()
+        pointList.clear()
     }
 
-    // get canvas size
-    private fun getDisplaySize(){
-        val width = binding.constraintlayoutCanvas.width
-        val height = binding.constraintlayoutCanvas.height
+    // 3차원 행렬 서버로 전송
+    private fun sendMatrix(){
+        mainActivity.drawingService.drawingResult(
+            DrawingRequest(
+                matrix.toCollection(ArrayList<ArrayList<ArrayList<Int>>>())
+                , binding.constraintlayoutCanvas.width
+                , binding.constraintlayoutCanvas.height
+            )
+        ).enqueue(object : Callback<DrawingResponse>{
+            override fun onResponse(
+                call: Call<DrawingResponse>,
+                response: Response<DrawingResponse>
+            ) {
+                if (response.code() == 200){
+                    val body = response.body()!!
+                    DrawingViewModel().setDrawingResponse(body)
+                }
+            }
+
+            override fun onFailure(call: Call<DrawingResponse>, t: Throwable) {
+                Log.d("", "onFailure: ${t.message}")
+            }
+        })
     }
 
     // pen 클릭 이벤트
