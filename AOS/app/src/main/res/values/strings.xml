@@ -35,6 +35,9 @@
     <string name="fragment_drawing_dialog_presets">팔레트에 추가</string>
     <string name="fragment_drawing_dialog_complete">완료</string>
 
+    <!--    fragment_drawing_result_list-->
+    <string name="fragment_drawing_button_drawing_guess">중 하나인 것 같아요.</string>
+
     <!--    fragment_picture-->
     <string name="fragment_picture_cardview_camera">촬영하기</string>
     <string name="fragment_picture_cardview_gallery">갤러리에서 불러오기</string>
