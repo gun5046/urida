@@ -37,8 +37,25 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public BoardDto getArticle(Long id) {
         return boardJpqlRepo.findById(id);
-
     }
+
+   /* @Override
+    public void increaseView(Long id) {
+        BoardDto targetArticle = getArticle(id);
+        Optional<User> currUser = userJpqlRepo.findByUid(targetArticle.getUid());
+        int newCount = targetArticle.getView() + 1;
+
+        Board article = Board.builder()
+                .board_id(targetArticle.getBoard_id())
+                .title(targetArticle.getTitle())
+                .content(targetArticle.getContent())
+                .view(newCount)
+                .time(targetArticle.getDateTime())
+                .user(currUser.get())
+                .build();
+        boardJpqlRepo.saveArticle(article);
+    }
+*/
 
     @Override
     public Board createArticle(ArticleRequestDto articleRequestDto) {
@@ -92,5 +109,15 @@ public class BoardServiceImpl implements BoardService {
    @Override
     public void deleteArticle(Long id) {
        boardJpqlRepo.removeArticle(id);
+    }
+
+    @Override
+    public int likeArticle(Long id) {
+        return boardJpqlRepo.likeArticle(id);
+    }
+
+    @Override
+    public int dislikeArticle(Long id) {
+        return boardJpqlRepo.dislikeArticle(id);
     }
 }

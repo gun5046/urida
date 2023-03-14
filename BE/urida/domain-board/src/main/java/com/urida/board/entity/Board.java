@@ -39,4 +39,23 @@ public class Board {
     @JoinColumn(name = "uid")
     private User user;
 
+    // == 비지니스 로직 == //
+    
+    /* 조회 수 증가*/
+    public void addView(){
+        this.view++;
+    }
+
+    /* 좋아요 추가*/
+    public void like(){
+        this.assessment++;
+    }
+
+    /* 좋아요 취소*/
+    public void dislike(){
+        if(this.assessment > 0) {
+            this.assessment--;
+        }
+    }
+
 }

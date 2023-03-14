@@ -34,6 +34,7 @@ public class BoardController {
     // 개별 게시글 조회
     @GetMapping("/{id}")
     public BoardDto getArticle(@PathVariable Long id) {
+//        boardService.increaseView(id);
         return boardService.getArticle(id);
     }
 
@@ -52,9 +53,29 @@ public class BoardController {
         return boardService.createArticle(articleRequestDto);
     }
 
+    // 게시글 수정
     @PutMapping("/{id}")
     public BoardDto updateArticle(@PathVariable Long id, @RequestBody ArticleUpdateDto articleUpdateDto) {
         Board article = boardService.updateArticle(articleUpdateDto, id);
         return boardService.getArticle(id);
+    }
+
+    // 게시글 삭제
+    @DeleteMapping("/{id}")
+    public void deleteArticle(@PathVariable Long id) {
+        Long targetId = boardService.getArticle(id).getBoard_id();
+        boardService.deleteArticle(id);
+    }
+
+    // 게시글 좋아요
+    @PutMapping("/like/{id}")
+    public int likeArticle(@PathVariable Long id) {
+        return boardService.likeArticle(id);
+    }
+
+    // 게시글 좋아요 취소
+    @PutMapping("/dislike/{id}")
+    public int dislikeArticle(@PathVariable Long id) {
+        return boardService.dislikeArticle(id);
     }
 }

@@ -15,6 +15,9 @@ public interface BoardService {
     // 개별 게시글 조회
     BoardDto getArticle(Long id);
 
+    // 게시글 조회 수 증가
+   /* void increaseView(Long id);*/
+
     // 게시글 작성
     Board createArticle(ArticleRequestDto articleRequestDto);
 
@@ -25,7 +28,9 @@ public interface BoardService {
     void deleteArticle(Long id);
 
     // 좋아요 누르기
+    int likeArticle(Long id);
 
     // 좋아요 취소하기
+    int dislikeArticle(Long id);
 
 }
