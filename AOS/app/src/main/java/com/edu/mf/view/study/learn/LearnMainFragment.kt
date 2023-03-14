@@ -52,8 +52,7 @@ class LearnMainFragment : Fragment() {
                 "pictures_${viewmodel.selectedCategory}_${it}","drawable",requireActivity().packageName))
             viewmodel.setCurrentAnswer(App.PICTURES[viewmodel.selectedCategory][it])
         })
-        setTTS()
-
+        viewmodel.setTTS()
     }
 
     private fun init(){
@@ -80,24 +79,6 @@ class LearnMainFragment : Fragment() {
             4->SharedPreferencesUtil(requireContext()).setPlacesBookMark(viewmodel.currentIndex.value!!)
             else->SharedPreferencesUtil(requireContext()).setActionsBookMark(viewmodel.currentIndex.value!!)
         }
-    }
-    private fun setTTS(){
-        textToSpeech = TextToSpeech(applicationContext,TextToSpeech.OnInitListener {
-            if(it==TextToSpeech.SUCCESS){
-                val result = textToSpeech!!.setLanguage(Locale.KOREAN)
-                if(result==TextToSpeech.LANG_MISSING_DATA||result==TextToSpeech.LANG_NOT_SUPPORTED){
-                    Toast.makeText(requireContext(),"해당 언어는 지원되지 않습니다", Toast.LENGTH_SHORT).show()
-                    return@OnInitListener
-                }
-            }else{
-                Log.d(TAG, "error")
-            }
-
-        })
-    }
-    fun TTS(){
-        textToSpeech?.speak(App.PICTURES[viewmodel.selectedCategory][viewmodel.currentIndex.value!!],TextToSpeech.QUEUE_FLUSH,null,null)
-        Log.i(TAG, "TTS: ${App.PICTURES[viewmodel.selectedCategory][viewmodel.currentIndex.value!!]}")
     }
 
     override fun onPause() {

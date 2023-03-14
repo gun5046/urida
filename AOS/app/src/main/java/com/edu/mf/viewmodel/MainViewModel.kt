@@ -1,11 +1,19 @@
 package com.edu.mf.viewmodel
 
+import android.speech.tts.TextToSpeech
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.edu.mf.utils.App
+import com.navercorp.nid.NaverIdLoginSDK
+import java.util.*
 
+private const val TAG = "MainViewModel"
 class MainViewModel : ViewModel(){
 
+
+    private var textToSpeech: TextToSpeech? = null
     private var _answer : MutableLiveData<String> = MutableLiveData()
     val answer get() = _answer
 
@@ -43,5 +51,22 @@ class MainViewModel : ViewModel(){
     }
     fun decreaseIndex(){
         _currentIndex.value = _currentIndex.value?.minus(1)
+    }
+    fun setTTS(){
+        textToSpeech = TextToSpeech(NaverIdLoginSDK.applicationContext,TextToSpeech.OnInitListener {
+            if(it==TextToSpeech.SUCCESS){
+                val result = textToSpeech!!.setLanguage(Locale.KOREAN)
+                if(result==TextToSpeech.LANG_MISSING_DATA||result==TextToSpeech.LANG_NOT_SUPPORTED){
+                    Log.i(TAG, "setTTS: 지원하지 않는 언어입니다.")
+                    return@OnInitListener
+                }
+            }else{
+                Log.d(TAG, "error")
+            }
+
+        })
+    }
+    fun TTS(){
+        textToSpeech?.speak(App.PICTURES[selectedCategory][currentIndex.value!!],TextToSpeech.QUEUE_FLUSH,null,null)
     }
 }
