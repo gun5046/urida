@@ -1,5 +1,6 @@
 package com.edu.mf.view
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ import com.navercorp.nid.profile.NidProfileCallback
 import com.navercorp.nid.profile.data.NidProfileResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,6 +46,70 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        CoroutineScope(Dispatchers.IO).launch {
+            while (true){
+                delay(3000)
+                requireActivity().runOnUiThread {
+                    ObjectAnimator.ofFloat(binding.textLoginKorean, "alpha", 1f, 0f).apply {
+                        duration = 500
+                        start()
+                    }
+                }
+                delay(500)
+                requireActivity().runOnUiThread {
+                    ObjectAnimator.ofFloat(binding.textLoginEnglish, "alpha", 0f, 1f).apply {
+                        duration = 500
+                        start()
+                    }
+                }
+                delay(500)
+                delay(3000)
+                requireActivity().runOnUiThread {
+                    ObjectAnimator.ofFloat(binding.textLoginEnglish, "alpha", 1f, 0f).apply {
+                        duration = 500
+                        start()
+                    }
+                }
+                delay(500)
+                requireActivity().runOnUiThread {
+                    ObjectAnimator.ofFloat(binding.textLoginChinese, "alpha", 0f, 1f).apply {
+                        duration = 500
+                        start()
+                    }
+                }
+                delay(500)
+                delay(3000)
+                requireActivity().runOnUiThread {
+                    ObjectAnimator.ofFloat(binding.textLoginChinese, "alpha", 1f, 0f).apply {
+                        duration = 500
+                        start()
+                    }
+                }
+                delay(500)
+                requireActivity().runOnUiThread {
+                    ObjectAnimator.ofFloat(binding.textLoginVietnamese, "alpha", 0f, 1f).apply {
+                        duration = 500
+                        start()
+                    }
+                }
+                delay(500)
+                delay(3000)
+                requireActivity().runOnUiThread {
+                    ObjectAnimator.ofFloat(binding.textLoginVietnamese, "alpha", 1f, 0f).apply {
+                        duration = 500
+                        start()
+                    }
+                }
+                delay(500)
+                requireActivity().runOnUiThread {
+                    ObjectAnimator.ofFloat(binding.textLoginKorean, "alpha", 0f, 1f).apply {
+                        duration = 500
+                        start()
+                    }
+                }
+                delay(500)
+            }
+        }
         binding.imageviewKakao.setOnClickListener {
             UserApiClient.instance.loginWithKakaoTalk(requireContext()) { token, error ->
                 if (error != null) {
