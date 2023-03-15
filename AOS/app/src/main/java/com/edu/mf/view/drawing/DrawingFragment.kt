@@ -10,10 +10,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.viewmodel.viewModelFactory
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentDrawingBinding
 import com.edu.mf.repository.model.drawing.DrawingRequest
 import com.edu.mf.repository.model.drawing.DrawingResponse
+import com.edu.mf.view.common.EventObserver
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.DrawingViewModel
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
@@ -25,11 +28,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+private const val TAG = "DrawingFragment"
 class DrawingFragment: Fragment() {
     private lateinit var binding: FragmentDrawingBinding
     private lateinit var mainActivity: MainActivity
     private lateinit var toolList: ArrayList<ImageView>
     private lateinit var matrix: MutableList<ArrayList<ArrayList<Int>>>
+    private lateinit var drawingViewModel:DrawingViewModel
 
     companion object{
         lateinit var graphicView:GraphicView
@@ -45,6 +50,7 @@ class DrawingFragment: Fragment() {
         binding = FragmentDrawingBinding.inflate(inflater, container, false)
         mainActivity = MainActivity.getInstance()!!
         graphicView = GraphicView(this.requireContext())
+        drawingViewModel = DrawingViewModel()
 
         return binding.root
     }
@@ -52,7 +58,7 @@ class DrawingFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.constraintlayoutCanvas.addView(graphicView)
+        binding.constraintlayoutFragmentDrawingCanvas.addView(graphicView)
         graphicView.paint.color = Color.BLACK
         graphicView.paint.strokeWidth = 10.0F
 
@@ -60,21 +66,31 @@ class DrawingFragment: Fragment() {
         penClickListener()
         penLongClickListener()
 
-        binding.imageviewEraser.setOnClickListener {
-            binding.imageviewEraser.y = -60F
+        binding.imageviewFragmentDrawingEraser.setOnClickListener {
+            binding.imageviewFragmentDrawingEraser.y = -60F
             graphicView.undo()
 
             CoroutineScope(Dispatchers.Main).launch {
                 delay(100)
-                binding.imageviewEraser.y = -104F
+                binding.imageviewFragmentDrawingEraser.y = -104F
             }
         }
 
-        binding.buttonDrawingResult.setOnClickListener {
+        binding.buttonFragmentDrawingDrawingResult.setOnClickListener {
             makeMatrix()
             sendMatrix()
-            mainActivity.changeFragment(DrawingResultListFragment())
         }
+    }
+
+    // response 결과에 따라 이동할 Fragment 결정
+    private fun changeFragment(){
+        drawingViewModel.drawingResponse.observe(viewLifecycleOwner, Observer{
+            when(it.predictionType){
+                0 -> mainActivity.changeFragment(DrawingResultFragment(it))
+                1 -> mainActivity.changeFragment(DrawingResultListFragment(it))
+                2 -> mainActivity.changeFragment(DrawingResultRedrawingFragment())
+            }
+        })
     }
 
     // 3차원 행렬 만들기
@@ -97,7 +113,6 @@ class DrawingFragment: Fragment() {
         }
         matrix.add(arrayListOf(xList, yList))
 
-        println(matrix.toString())
         pointList.clear()
     }
 
@@ -105,9 +120,9 @@ class DrawingFragment: Fragment() {
     private fun sendMatrix(){
         mainActivity.drawingService.drawingResult(
             DrawingRequest(
-                matrix.toCollection(ArrayList<ArrayList<ArrayList<Int>>>())
-                , binding.constraintlayoutCanvas.width
-                , binding.constraintlayoutCanvas.height
+                matrix.toCollection(ArrayList())
+                , binding.constraintlayoutFragmentDrawingCanvas.width
+                , binding.constraintlayoutFragmentDrawingCanvas.height
             )
         ).enqueue(object : Callback<DrawingResponse>{
             override fun onResponse(
@@ -116,44 +131,48 @@ class DrawingFragment: Fragment() {
             ) {
                 if (response.code() == 200){
                     val body = response.body()!!
-                    DrawingViewModel().setDrawingResponse(body)
+                    drawingViewModel.setDrawingResponse(body)
+
+                    changeFragment()
                 }
             }
 
             override fun onFailure(call: Call<DrawingResponse>, t: Throwable) {
-                Log.d("", "onFailure: ${t.message}")
+                Log.d(TAG, "onFailure: ${t.message}")
             }
         })
     }
 
     // pen 클릭 이벤트
     private fun penClickListener(){
-        binding.imageviewPalette.setOnClickListener {
+        binding.imageviewFragmentDrawingPalette.setOnClickListener {
             startActivity(Intent(context, ColorPickerActivity::class.java))
             penPullPut(0)
         }
 
-        binding.imageviewPenRed.setOnClickListener {
+        binding.imageviewFragmentDrawingPenRed.setOnClickListener {
             graphicView.paint.color = Color.RED
             penPullPut(1)
         }
 
-        binding.imageviewPenYellow.setOnClickListener {
+        binding.imageviewFragmentDrawingPenYellow.setOnClickListener {
             graphicView.paint.color = Color.YELLOW
             penPullPut(2)
         }
 
-        binding.imageviewPenGreen.setOnClickListener {
-            graphicView.paint.color = ContextCompat.getColor(requireContext(), R.color.primary_teal_200)
+        binding.imageviewFragmentDrawingPenGreen.setOnClickListener {
+            graphicView.paint.color = ContextCompat.getColor(
+                requireContext(), R.color.primary_teal_200
+            )
             penPullPut(3)
         }
 
-        binding.imageviewPenBlue.setOnClickListener {
+        binding.imageviewFragmentDrawingPenBlue.setOnClickListener {
             graphicView.paint.color = Color.BLUE
             penPullPut(4)
         }
 
-        binding.imageviewPenBlack.setOnClickListener {
+        binding.imageviewFragmentDrawingPenBlack.setOnClickListener {
             graphicView.paint.color = Color.BLACK
             penPullPut(5)
         }
@@ -173,33 +192,33 @@ class DrawingFragment: Fragment() {
     // pen 롱 클릭 이벤트
     private fun penLongClickListener(){
         binding.apply {
-            imageviewPalette.setOnLongClickListener {
-                cardviewPenWidth.visibility = View.VISIBLE
+            imageviewFragmentDrawingPalette.setOnLongClickListener {
+                cardviewFragmentDrawingPenWidth.visibility = View.VISIBLE
                 penWidthClickListener()
                 return@setOnLongClickListener true
             }
-            imageviewPenRed.setOnLongClickListener {
-                cardviewPenWidth.visibility = View.VISIBLE
+            imageviewFragmentDrawingPenRed.setOnLongClickListener {
+                cardviewFragmentDrawingPenWidth.visibility = View.VISIBLE
                 penWidthClickListener()
                 return@setOnLongClickListener true
             }
-            imageviewPenYellow.setOnLongClickListener {
-                cardviewPenWidth.visibility = View.VISIBLE
+            imageviewFragmentDrawingPenYellow.setOnLongClickListener {
+                cardviewFragmentDrawingPenWidth.visibility = View.VISIBLE
                 penWidthClickListener()
                 return@setOnLongClickListener true
             }
-            imageviewPenGreen.setOnLongClickListener {
-                cardviewPenWidth.visibility = View.VISIBLE
+            imageviewFragmentDrawingPenGreen.setOnLongClickListener {
+                cardviewFragmentDrawingPenWidth.visibility = View.VISIBLE
                 penWidthClickListener()
                 return@setOnLongClickListener true
             }
-            imageviewPenBlue.setOnLongClickListener {
-                cardviewPenWidth.visibility = View.VISIBLE
+            imageviewFragmentDrawingPenBlue.setOnLongClickListener {
+                cardviewFragmentDrawingPenWidth.visibility = View.VISIBLE
                 penWidthClickListener()
                 return@setOnLongClickListener true
             }
-            imageviewPenBlack.setOnLongClickListener {
-                cardviewPenWidth.visibility = View.VISIBLE
+            imageviewFragmentDrawingPenBlack.setOnLongClickListener {
+                cardviewFragmentDrawingPenWidth.visibility = View.VISIBLE
                 penWidthClickListener()
                 return@setOnLongClickListener true
             }
@@ -209,16 +228,16 @@ class DrawingFragment: Fragment() {
     // pen shape 클릭 이벤트
     private fun penWidthClickListener(){
         binding.apply {
-            imageviewPenWidth1.setOnClickListener {
-                cardviewPenWidth.visibility = View.GONE
+            imageviewFragmentDrawingPenWidth1.setOnClickListener {
+                cardviewFragmentDrawingPenWidth.visibility = View.GONE
                 setStrokeWidth(1)
             }
-            imageviewPenWidth2.setOnClickListener {
-                cardviewPenWidth.visibility = View.GONE
+            imageviewFragmentDrawingPenWidth2.setOnClickListener {
+                cardviewFragmentDrawingPenWidth.visibility = View.GONE
                 setStrokeWidth(2)
             }
-            imageviewPenWidth3.setOnClickListener {
-                cardviewPenWidth.visibility = View.GONE
+            imageviewFragmentDrawingPenWidth3.setOnClickListener {
+                cardviewFragmentDrawingPenWidth.visibility = View.GONE
                 setStrokeWidth(3)
             }
         }
@@ -243,12 +262,12 @@ class DrawingFragment: Fragment() {
 
         // toolList 초기화
         toolList = arrayListOf(
-            binding.imageviewPalette,
-            binding.imageviewPenRed,
-            binding.imageviewPenYellow,
-            binding.imageviewPenGreen,
-            binding.imageviewPenBlue,
-            binding.imageviewPenBlack
+            binding.imageviewFragmentDrawingPalette,
+            binding.imageviewFragmentDrawingPenRed,
+            binding.imageviewFragmentDrawingPenYellow,
+            binding.imageviewFragmentDrawingPenGreen,
+            binding.imageviewFragmentDrawingPenBlue,
+            binding.imageviewFragmentDrawingPenBlack
         )
     }
 }
