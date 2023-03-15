@@ -20,10 +20,7 @@ import com.navercorp.nid.oauth.NidOAuthLogin
 import com.navercorp.nid.oauth.OAuthLoginCallback
 import com.navercorp.nid.profile.NidProfileCallback
 import com.navercorp.nid.profile.data.NidProfileResponse
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,6 +30,7 @@ private const val TAG = "LoginFragment"
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private lateinit var mainActivity: MainActivity
+    private var flag = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,66 +45,26 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         CoroutineScope(Dispatchers.IO).launch {
-            while (true){
+            while (flag){
                 delay(3000)
-                requireActivity().runOnUiThread {
-                    ObjectAnimator.ofFloat(binding.textLoginKorean, "alpha", 1f, 0f).apply {
-                        duration = 500
-                        start()
-                    }
-                }
+                fadeOut(binding.textLoginKorean)
                 delay(500)
-                requireActivity().runOnUiThread {
-                    ObjectAnimator.ofFloat(binding.textLoginEnglish, "alpha", 0f, 1f).apply {
-                        duration = 500
-                        start()
-                    }
-                }
+                fadeIn(binding.textLoginEnglish)
                 delay(500)
                 delay(3000)
-                requireActivity().runOnUiThread {
-                    ObjectAnimator.ofFloat(binding.textLoginEnglish, "alpha", 1f, 0f).apply {
-                        duration = 500
-                        start()
-                    }
-                }
+                fadeOut(binding.textLoginEnglish)
                 delay(500)
-                requireActivity().runOnUiThread {
-                    ObjectAnimator.ofFloat(binding.textLoginChinese, "alpha", 0f, 1f).apply {
-                        duration = 500
-                        start()
-                    }
-                }
+                fadeIn(binding.textLoginChinese)
                 delay(500)
                 delay(3000)
-                requireActivity().runOnUiThread {
-                    ObjectAnimator.ofFloat(binding.textLoginChinese, "alpha", 1f, 0f).apply {
-                        duration = 500
-                        start()
-                    }
-                }
+                fadeOut(binding.textLoginChinese)
                 delay(500)
-                requireActivity().runOnUiThread {
-                    ObjectAnimator.ofFloat(binding.textLoginVietnamese, "alpha", 0f, 1f).apply {
-                        duration = 500
-                        start()
-                    }
-                }
+                fadeIn(binding.textLoginVietnamese)
                 delay(500)
                 delay(3000)
-                requireActivity().runOnUiThread {
-                    ObjectAnimator.ofFloat(binding.textLoginVietnamese, "alpha", 1f, 0f).apply {
-                        duration = 500
-                        start()
-                    }
-                }
+                fadeOut(binding.textLoginVietnamese)
                 delay(500)
-                requireActivity().runOnUiThread {
-                    ObjectAnimator.ofFloat(binding.textLoginKorean, "alpha", 0f, 1f).apply {
-                        duration = 500
-                        start()
-                    }
-                }
+                fadeIn(binding.textLoginKorean)
                 delay(500)
             }
         }
@@ -165,25 +123,9 @@ class LoginFragment : Fragment() {
     }
 
     fun login(id: String, type: String){
-//        mainActivity.loginService.login(id, type).enqueue(object : Callback<User>{
-//            override fun onResponse(call: Call<User>, response: Response<User>) {
-//                if(response.code() == 200){
-//                    val user = response.body()!!
-//                    if(user.uid != null){
-//                        mainActivity.changeFragment(MainFragment())
-//                    } else {
-//                        mainActivity.addFragment(LanguageFragment())
-//                    }
-//                }
-//            }
-//
-//            override fun onFailure(call: Call<User>, t: Throwable) {
-//                Log.d(TAG, "onFailure: ${t.message}")
-//            }
-//
-//        })
         CoroutineScope(Dispatchers.IO).launch {
             val response = mainActivity.loginService.login(id, type)
+            flag = false
             if(response.isSuccessful){
                 mainActivity.user = mainActivity.loginService.login(id, type).body()
                 if(mainActivity.user!!.uid != null){
@@ -196,6 +138,28 @@ class LoginFragment : Fragment() {
                 }
             } else {
                 Log.d(TAG, "login: ${response.code()}")
+            }
+        }
+    }
+
+    fun fadeIn(view: View){
+        if(flag){
+            requireActivity().runOnUiThread {
+                ObjectAnimator.ofFloat(view, "alpha", 0f, 1f).apply {
+                    duration = 500
+                    start()
+                }
+            }
+        }
+    }
+
+    fun fadeOut(view: View){
+        if(flag){
+            requireActivity().runOnUiThread {
+                ObjectAnimator.ofFloat(view, "alpha", 1f, 0f).apply {
+                    duration = 500
+                    start()
+                }
             }
         }
     }
