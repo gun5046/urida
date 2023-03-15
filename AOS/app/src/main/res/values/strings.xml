@@ -36,7 +36,8 @@
     <string name="fragment_drawing_dialog_complete">완료</string>
 
     <!--    fragment_drawing_result_list-->
-    <string name="fragment_drawing_button_drawing_guess">중 하나인 것 같아요.</string>
+    <string name="fragment_drawing_result_imageview">pictures_$d_$d</string>
+    <string name="fragment_drawing_result_button_drawing_guess">중 하나인 것 같아요.</string>
 
     <!--    fragment_picture-->
     <string name="fragment_picture_cardview_camera">촬영하기</string>

@@ -54,10 +54,10 @@ class MainActivity : AppCompatActivity() {
             changeLocale(user!!.language)
             changeFragment(MainFragment())
         } else {
-            changeFragment(LoginFragment())
+            //changeFragment(LoginFragment())
+            changeFragment(MainFragment())
         }
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
-//        changeFragment(MainFragment())
     }
 
     fun changeFragment(fragment: Fragment){
