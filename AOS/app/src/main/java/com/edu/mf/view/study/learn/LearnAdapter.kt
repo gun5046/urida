@@ -17,13 +17,18 @@ class LearnAdapter(
 ) : RecyclerView.Adapter<LearnAdapter.LearnViewHolder>(){
     private val datas = ArrayList<String>()
     private lateinit var categoryClickListener : CategoryClickListener
-
+    private var flag = -1
     inner class LearnViewHolder(val binding:ItemFragmentLearnBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(data:String){
             binding.textviewItemLearnTitle.text = data
             binding.buttonItemLearnStart.setOnClickListener {view->
                 categoryClickListener.onClick(view,layoutPosition)
+            }
+            if(flag==1){
+                binding.buttonItemLearnStart.text = "학습하기"
+            }else{
+                binding.buttonItemLearnStart.text = "문제풀기"
             }
         }
     }
@@ -52,5 +57,8 @@ class LearnAdapter(
     }
     fun setOnCategoryClickListener(categoryClickListener: CategoryClickListener){
         this.categoryClickListener = categoryClickListener
+    }
+    fun setFlag(flag:Int){
+        this.flag = flag
     }
 }

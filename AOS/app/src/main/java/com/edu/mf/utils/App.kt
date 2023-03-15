@@ -14,6 +14,7 @@ class App : Application(){
     companion object{
         const val TAG = "App_지훈"
         var PICTURES : ArrayList<ArrayList<String>> = arrayListOf()
+        var categories : ArrayList<String> = arrayListOf()
         lateinit var sharedPreferencesUtil:SharedPreferencesUtil
         lateinit var userRetrofit: Retrofit
     }
@@ -23,15 +24,13 @@ class App : Application(){
         sharedPreferencesUtil = SharedPreferencesUtil(applicationContext)
         KakaoSdk.init(this, BuildConfig.Kakao_API_KEY)
         NaverIdLoginSDK.initialize(this, BuildConfig.OAUTH_CLIENT_ID, BuildConfig.OAUTH_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_NAME)
-
-
-
+        
         userRetrofit = Retrofit.Builder()
             .baseUrl("http://j8d202.p.ssafy.io:8081/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         setImageData()
-        
+        Log.i(TAG, "onCreate: ${categories.size}")
 
 
     }
@@ -47,11 +46,24 @@ class App : Application(){
         setObjectImage()
         setPlaceImage()
         setActionImage()
+        setCategoryData()
     }
 
     private fun setPictures(){
         for(i in 0..5)
             PICTURES.add(arrayListOf())
+    }
+    /**
+     * category 데이터 입력
+     */
+    private fun setCategoryData(){
+        categories.clear()
+        categories.add("과일/채소")
+        categories.add("직업")
+        categories.add("동물")
+        categories.add("물체")
+        categories.add("장소")
+        categories.add("행동")
     }
     private fun setFruitsImage(){
 
