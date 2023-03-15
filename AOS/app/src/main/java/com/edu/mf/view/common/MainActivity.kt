@@ -49,15 +49,16 @@ class MainActivity : AppCompatActivity() {
         KakaoSdk.init(this, BuildConfig.Kakao_API_KEY)
         NaverIdLoginSDK.initialize(this, BuildConfig.OAUTH_CLIENT_ID, BuildConfig.OAUTH_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_NAME)
 
-        user = App.sharedPreferencesUtil.getUser()
+        /*user = App.sharedPreferencesUtil.getUser()
         if(user != null) {
             changeLocale(user!!.language)
             changeFragment(MainFragment())
         } else {
-            //changeFragment(LoginFragment())
-            changeFragment(MainFragment())
-        }
+            changeFragment(LoginFragment())
+        }*/
+        
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        changeFragment(MainFragment())
     }
 
     fun changeFragment(fragment: Fragment){
