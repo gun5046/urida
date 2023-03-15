@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,8 +31,24 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Board> getArticles() {
-        return boardJpqlRepo.findAll();
+    public List<BoardDto> getArticles() {
+        List<Board> allArticles = boardJpqlRepo.findAll();
+        List<BoardDto> articleDtoList = new ArrayList<>();
+
+        for(Board article : allArticles) {
+            BoardDto dto = BoardDto.builder()
+                    .board_id(article.getBoard_id())
+                    .title(article.getTitle())
+                    .content(article.getContent())
+                    .view(article.getView())
+                    .dateTime(article.getTime())
+                    .assessment(article.getAssessment())
+                    .uid(article.getUser().getUid())
+                    .build();
+            articleDtoList.add(dto);
+        }
+
+        return articleDtoList;
     }
 
     @Override

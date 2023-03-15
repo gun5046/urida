@@ -10,7 +10,7 @@ import java.util.List;
 public interface BoardService {
 
     // 전체 게시글 목록
-    List<Board> getArticles();
+    List<BoardDto> getArticles();
 
     // 개별 게시글 조회
     BoardDto getArticle(Long id);

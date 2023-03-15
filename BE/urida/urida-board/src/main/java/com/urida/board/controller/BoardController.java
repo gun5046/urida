@@ -25,8 +25,8 @@ public class BoardController {
     // 전체 게시글 조회
     @GetMapping("/list")
 
-    public List<Board> boardList() {
-        List<Board> list = boardService.getArticles();
+    public List<BoardDto> boardList() {
+        List<BoardDto> list = boardService.getArticles();
         int listSize = list.size();
         return list;
     }

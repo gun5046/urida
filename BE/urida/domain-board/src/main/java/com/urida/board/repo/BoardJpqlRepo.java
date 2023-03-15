@@ -69,8 +69,8 @@ public class BoardJpqlRepo {
     //게시글 전체조회
     public List<Board> findAll() {
         return em.createQuery(
-                        "select b from Board b", Board.class)
-                .getResultList();
+                    "select b from Board b", Board.class)
+                    .getResultList();
     }
 
     //게시글 제목 검색
