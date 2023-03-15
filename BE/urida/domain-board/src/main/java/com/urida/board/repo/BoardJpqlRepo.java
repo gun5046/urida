@@ -2,6 +2,7 @@ package com.urida.board.repo;
 
 
 import com.urida.board.entity.Board;
+import com.urida.comment.entity.Comment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -82,6 +83,11 @@ public class BoardJpqlRepo {
             return null;
         }
     }
+
+    // 댓글 조회
+/*    public List<Comment> allComments(Long board_id) {
+
+    }*/
 
     // 게시글 좋아요
     public int likeArticle(Long id) {

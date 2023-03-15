@@ -24,12 +24,12 @@ public class CommentJpqlRepo {
         }
     }
 
-   /* // 해당 게시글 댓글 리스트 출력
+    // 해당 게시글 댓글 리스트 출력
     public List<Comment> getComments(Long board_id) {
         return em.createQuery("select c from Comment c where c.board.board_id = :boardId", Comment.class)
                 .setParameter("boardId", board_id)
                 .getResultList();
-    } */
+    }
 
     // 특정 댓글 검색
     public Comment findById(Long commentId) {

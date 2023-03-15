@@ -6,6 +6,7 @@ import com.urida.board.dto.response.BoardDetailDto;
 import com.urida.board.dto.response.BoardListDto;
 import com.urida.board.service.BoardService;
 import com.urida.board.entity.Board;
+import com.urida.comment.repo.CommentJpqlRepo;
 import com.urida.exception.NoDataException;
 import com.urida.exception.SaveException;
 import com.urida.board.repo.BoardJpqlRepo;
@@ -27,6 +28,7 @@ public class BoardServiceImpl implements BoardService {
 
     private final BoardJpqlRepo boardJpqlRepo;
     private final UserJpqlRepo userJpqlRepo;
+    private final CommentJpqlRepo commentJpqlRepo;
 
 
     @Override
@@ -64,7 +66,7 @@ public class BoardServiceImpl implements BoardService {
                 .dateTime(article.getTime())
                 .assessment(article.getAssessment())
                 .uid(uid)
-                .comment(article.getComment())
+                .comment(commentJpqlRepo.getComments(id))
                 .build();
         /*return boardJpqlRepo.findById(id);*/
     }

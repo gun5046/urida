@@ -21,7 +21,7 @@ public class Comment {
     private Long comment_id;
 
     private String content;
-
+    @Column(name = "time")
     private String dateTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
