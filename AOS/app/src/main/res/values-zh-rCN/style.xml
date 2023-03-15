@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="KakaoRegular">
+        <item name="android:fontFamily">@font/kakao_regular</item>
+    </style>
+
+    <style name="KakaoBold" parent="@android:style/Widget.DeviceDefault.Button.Borderless">
+        <item name="android:fontFamily">@font/kakao_bold</item>
+        <item name="android:textColor">@color/grey_03</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:padding">14dp</item>
+    </style>
+
+    <style name="KakaoOtfRegular">
+        <item name="android:fontFamily">@font/kakao_otf_regular</item>
+    </style>
+
+    <style name="KakaoOtfBold">
+        <item name="android:fontFamily">@font/kakao_otf_bold</item>
+    </style>
+
+    <style name="NexonGothicLight">
+        <item name="android:fontFamily">@font/nexon_gothic_light</item>
+    </style>
+
+    <style name="NexonGothicMedium">
+        <item name="android:fontFamily">@font/nexon_gothic_medium</item>
+    </style>
+
+    <style name="NexonGothicBold" parent="@android:style/Widget.DeviceDefault.TextView">
+        <item name="android:fontFamily">@font/nexon_gothic_bold</item>
+    </style>
+</resources>
