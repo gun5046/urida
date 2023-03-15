@@ -57,7 +57,7 @@ public class UserController {
         return userService.getUserInfo(uid);
     }
 
-    @PostMapping("")
+    @PutMapping("")
     @ApiOperation(value = "언어 변경", notes = "유저 Language 변경/ Input 값 오류 -> 403 error/error메시지 확인할 것 ")
     public void changeLanguage(@Validated @ModelAttribute LanguageDto languageDto, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
