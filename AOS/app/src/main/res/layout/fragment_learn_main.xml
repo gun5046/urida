@@ -6,6 +6,7 @@
 
     <data>
         <import type="android.view.View"/>
+        <variable name="handlers" type="com.edu.mf.view.study.learn.LearnMainFragment" />
         <variable name="list" type="java.util.ArrayList" />
         <variable name="vm" type="com.edu.mf.viewmodel.MainViewModel" />
     </data>
@@ -73,6 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
+                android:onClick="@{()->vm.startTTS()}"
                 android:text="@{vm.answer}"
                 android:textColor="@color/black"
                 android:textSize="40sp"
