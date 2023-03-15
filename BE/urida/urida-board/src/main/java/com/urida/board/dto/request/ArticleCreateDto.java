@@ -1,4 +1,4 @@
-package com.urida.board.dto;
+package com.urida.board.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,13 +6,12 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ArticleRequestDto {
+public class ArticleCreateDto {
 
     @NotEmpty
     private String title;

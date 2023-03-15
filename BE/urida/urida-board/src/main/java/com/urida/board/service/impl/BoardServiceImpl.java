@@ -1,8 +1,9 @@
 package com.urida.board.service.impl;
 
-import com.urida.board.dto.ArticleRequestDto;
-import com.urida.board.dto.ArticleUpdateDto;
-import com.urida.board.dto.BoardDto;
+import com.urida.board.dto.request.ArticleCreateDto;
+import com.urida.board.dto.request.ArticleUpdateDto;
+import com.urida.board.dto.response.BoardDetailDto;
+import com.urida.board.dto.response.BoardListDto;
 import com.urida.board.service.BoardService;
 import com.urida.board.entity.Board;
 import com.urida.exception.NoDataException;
@@ -15,7 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -31,12 +31,12 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<BoardDto> getArticles() {
+    public List<BoardListDto> getArticles() {
         List<Board> allArticles = boardJpqlRepo.findAll();
-        List<BoardDto> articleDtoList = new ArrayList<>();
+        List<BoardListDto> articleDtoList = new ArrayList<>();
 
         for(Board article : allArticles) {
-            BoardDto dto = BoardDto.builder()
+            BoardListDto dto = BoardListDto.builder()
                     .board_id(article.getBoard_id())
                     .title(article.getTitle())
                     .content(article.getContent())
@@ -52,35 +52,30 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public BoardDto getArticle(Long id) {
-        return boardJpqlRepo.findById(id);
-    }
+    public BoardDetailDto getArticle(Long id) {
+        Board article = boardJpqlRepo.findById(id);
+        Long uid = article.getUser().getUid();
 
-   /* @Override
-    public void increaseView(Long id) {
-        BoardDto targetArticle = getArticle(id);
-        Optional<User> currUser = userJpqlRepo.findByUid(targetArticle.getUid());
-        int newCount = targetArticle.getView() + 1;
-
-        Board article = Board.builder()
-                .board_id(targetArticle.getBoard_id())
-                .title(targetArticle.getTitle())
-                .content(targetArticle.getContent())
-                .view(newCount)
-                .time(targetArticle.getDateTime())
-                .user(currUser.get())
+        return BoardDetailDto.builder()
+                .board_id(article.getBoard_id())
+                .title(article.getTitle())
+                .content(article.getContent())
+                .view(article.getView())
+                .dateTime(article.getTime())
+                .assessment(article.getAssessment())
+                .uid(uid)
+                .comment(article.getComment())
                 .build();
-        boardJpqlRepo.saveArticle(article);
+        /*return boardJpqlRepo.findById(id);*/
     }
-*/
 
     @Override
-    public Board createArticle(ArticleRequestDto articleRequestDto) {
-        Optional<User> user = userJpqlRepo.findByUid(articleRequestDto.getUid());
+    public Board createArticle(ArticleCreateDto articleCreateDto) {
+        Optional<User> user = userJpqlRepo.findByUid(articleCreateDto.getUid());
         if(user.isPresent()) {
             Board article = Board.builder()
-                    .title(articleRequestDto.getTitle())
-                    .content(articleRequestDto.getContent())
+                    .title(articleCreateDto.getTitle())
+                    .content(articleCreateDto.getContent())
                     .time(LocalDateTime.now().toString())
                     .user(user.get())
                     .build();
@@ -99,8 +94,8 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public Board updateArticle(ArticleUpdateDto articleUpdateDto, Long id) {
-        BoardDto targetArticle = boardJpqlRepo.findById(id);
-        Optional<User> currUser = userJpqlRepo.findByUid(targetArticle.getUid());
+        Board targetArticle = boardJpqlRepo.findById(id);
+        Optional<User> currUser = userJpqlRepo.findByUid(targetArticle.getUser().getUid());
         String newContent = articleUpdateDto.getContent();
 
         if(currUser.isPresent()) {
@@ -110,6 +105,7 @@ public class BoardServiceImpl implements BoardService {
                     .content(newContent)
                     .time(LocalDateTime.now().toString())
                     .user(currUser.get())
+                    .comment(targetArticle.getComment())
                     .build();
 
             try {

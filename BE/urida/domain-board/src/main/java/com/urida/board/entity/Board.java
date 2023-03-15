@@ -1,5 +1,6 @@
 package com.urida.board.entity;
 
+import com.urida.comment.entity.Comment;
 import com.urida.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +10,8 @@ import org.hibernate.annotations.ColumnDefault;
 
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -38,6 +40,9 @@ public class Board {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uid")
     private User user;
+
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+    private List<Comment> comment = new ArrayList<>();
 
     // == 비지니스 로직 == //
     

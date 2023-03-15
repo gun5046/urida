@@ -1,8 +1,9 @@
 package com.urida.board.controller;
 
-import com.urida.board.dto.ArticleRequestDto;
-import com.urida.board.dto.ArticleUpdateDto;
-import com.urida.board.dto.BoardDto;
+import com.urida.board.dto.request.ArticleCreateDto;
+import com.urida.board.dto.request.ArticleUpdateDto;
+import com.urida.board.dto.response.BoardDetailDto;
+import com.urida.board.dto.response.BoardListDto;
 import com.urida.board.service.BoardService;
 import com.urida.board.entity.Board;
 import com.urida.exception.InputException;
@@ -25,16 +26,15 @@ public class BoardController {
     // 전체 게시글 조회
     @GetMapping("/list")
 
-    public List<BoardDto> boardList() {
-        List<BoardDto> list = boardService.getArticles();
+    public List<BoardListDto> boardList() {
+        List<BoardListDto> list = boardService.getArticles();
         int listSize = list.size();
         return list;
     }
 
     // 개별 게시글 조회
     @GetMapping("/{id}")
-    public BoardDto getArticle(@PathVariable Long id) {
-//        boardService.increaseView(id);
+    public BoardDetailDto getArticle(@PathVariable Long id) {
         return boardService.getArticle(id);
     }
 
@@ -46,16 +46,16 @@ public class BoardController {
             @ApiResponse(responseCode = "404", description = "사용자 없음"),
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    public Board createArticle(@Validated @RequestBody ArticleRequestDto articleRequestDto, BindingResult bindingResult) {
+    public Board createArticle(@Validated @RequestBody ArticleCreateDto articleCreateDto, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new InputException("RequestData(ArticleDto)invalid");
         }
-        return boardService.createArticle(articleRequestDto);
+        return boardService.createArticle(articleCreateDto);
     }
 
     // 게시글 수정
     @PutMapping("/{id}")
-    public BoardDto updateArticle(@PathVariable Long id, @RequestBody ArticleUpdateDto articleUpdateDto) {
+    public BoardDetailDto updateArticle(@PathVariable Long id, @RequestBody ArticleUpdateDto articleUpdateDto) {
         Board article = boardService.updateArticle(articleUpdateDto, id);
         return boardService.getArticle(id);
     }
@@ -63,7 +63,7 @@ public class BoardController {
     // 게시글 삭제
     @DeleteMapping("/{id}")
     public void deleteArticle(@PathVariable Long id) {
-        Long targetId = boardService.getArticle(id).getBoard_id();
+//        Long targetId = boardService.getArticle(id).getBoard_id();
         boardService.deleteArticle(id);
     }
 

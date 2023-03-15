@@ -1,8 +1,9 @@
 package com.urida.board.service;
 
-import com.urida.board.dto.ArticleRequestDto;
-import com.urida.board.dto.ArticleUpdateDto;
-import com.urida.board.dto.BoardDto;
+import com.urida.board.dto.request.ArticleCreateDto;
+import com.urida.board.dto.request.ArticleUpdateDto;
+import com.urida.board.dto.response.BoardDetailDto;
+import com.urida.board.dto.response.BoardListDto;
 import com.urida.board.entity.Board;
 
 import java.util.List;
@@ -10,16 +11,16 @@ import java.util.List;
 public interface BoardService {
 
     // 전체 게시글 목록
-    List<BoardDto> getArticles();
+    List<BoardListDto> getArticles();
 
     // 개별 게시글 조회
-    BoardDto getArticle(Long id);
+    BoardDetailDto getArticle(Long id);
 
     // 게시글 조회 수 증가
    /* void increaseView(Long id);*/
 
     // 게시글 작성
-    Board createArticle(ArticleRequestDto articleRequestDto);
+    Board createArticle(ArticleCreateDto articleCreateDto);
 
     // 게시글 수정
     Board updateArticle(ArticleUpdateDto articleUpdateDto, Long id);

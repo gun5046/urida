@@ -1,7 +1,6 @@
 package com.urida.board.repo;
 
 
-import com.urida.board.dto.BoardDto;
 import com.urida.board.entity.Board;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -21,15 +20,12 @@ public class BoardJpqlRepo {
     }
 
     // 특정 게시물
-    public BoardDto findById(Long boardId) {
-//        List<Board> article = em.createQuery(
-//                        "select b from Board b where id = :board_id", Board.class)
-//                .setParameter("board_id", board_id)
-//                .getResultList();
-//        return article.stream().findAny();
+    public Board findById(Long boardId) {
         Board board = em.find(Board.class, boardId);
         board.addView();
-        Long uid = board.getUser().getUid();
+        return board;
+
+      /*  Long uid = board.getUser().getUid();
 
         return BoardDto.builder()
                 .board_id(board.getBoard_id())
@@ -38,7 +34,7 @@ public class BoardJpqlRepo {
                 .title(board.getTitle())
                 .dateTime(board.getTime())
                 .content(board.getContent())
-                .build();
+                .build();*/
     }
 
     // 게시글 저장
@@ -63,7 +59,8 @@ public class BoardJpqlRepo {
 
     // 게시글 삭제
     public void removeArticle(Long boardId) {
-        em.remove(getArticle(boardId));
+        Board article = em.find(Board.class, boardId);
+        em.remove(article);
     }
 
     //게시글 전체조회

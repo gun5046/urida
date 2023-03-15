@@ -1,17 +1,14 @@
-package com.urida.board.dto;
+package com.urida.board.dto.response;
 
-import com.urida.user.entity.User;
+import com.urida.comment.entity.Comment;
 import lombok.Builder;
 import lombok.Data;
-import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import java.util.List;
 
 @Data
 @Builder
-public class BoardDto {
+public class BoardDetailDto {
     private Long board_id;
 
     private String title;
@@ -25,4 +22,6 @@ public class BoardDto {
     private int assessment;
 
     private Long uid;
+
+    private List<Comment> comment;
 }

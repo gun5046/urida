@@ -1,9 +1,6 @@
 package com.urida.comment.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Required;
 
 import javax.validation.constraints.NotEmpty;
@@ -11,6 +8,7 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Getter
 public class CommentRequestDto {
 
     @NotEmpty
@@ -18,6 +16,7 @@ public class CommentRequestDto {
 
     private String dateTime;
 
+    @NotEmpty
     private Long board_id;
 
     private Long uid;

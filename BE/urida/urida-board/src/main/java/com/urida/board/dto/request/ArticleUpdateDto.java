@@ -1,4 +1,4 @@
-package com.urida.board.dto;
+package com.urida.board.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
