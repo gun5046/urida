@@ -77,7 +77,6 @@ project(':domain-board') {
         implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
         runtimeOnly 'com.mysql:mysql-connector-j'
     }
-
 }
 project(':domain-problem') {
     bootJar {
@@ -124,8 +123,10 @@ project(':urida-user') {
 }
 project(':urida-problem') {
     dependencies {
+        implementation project(':domain-user')
         implementation project(':core-web')
         implementation project(':domain-problem')
+        implementation project(':error')
 
     }
 }
