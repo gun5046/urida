@@ -98,6 +98,12 @@ dependencies {
     //Drawing_ColorPicker
     implementation 'com.jaredrummler:colorpicker:1.1.0'
 
+    //MLKit object_detection
+    implementation 'com.google.mlkit:object-detection-custom:17.0.0'
+
+    //MLKit translation
+    implementation 'com.google.mlkit:translate:17.0.1'
+
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.8.0'

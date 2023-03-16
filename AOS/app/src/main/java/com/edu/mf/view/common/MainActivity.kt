@@ -19,6 +19,7 @@ import com.kakao.sdk.common.KakaoSdk
 import com.navercorp.nid.NaverIdLoginSDK
 import java.util.*
 import com.edu.mf.viewmodel.MainViewModel
+import com.edu.mf.viewmodel.PictureViewModel
 
 
 private const val TAG = "MainActivity"
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     var user: User? = null
 
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var pictureViewModel: PictureViewModel
     init {
         instance = this
     }
@@ -57,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             changeFragment(LoginFragment())
         }
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        pictureViewModel = ViewModelProvider(this)[PictureViewModel::class.java]
 //        changeFragment(MainFragment())
     }
 
