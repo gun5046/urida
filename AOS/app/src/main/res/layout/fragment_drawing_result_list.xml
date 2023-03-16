@@ -34,21 +34,20 @@
                     android:layout_height="0dp"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
-                    app:imgSrc="@{DrawingViewModel.firstImgName}"
+                    app:imgSrc="@{@string/fragment_drawing_result_imageview(DrawingViewModel.imgInfoList.get(0).categoryIdx, DrawingViewModel.imgInfoList.get(0).pictureIdx)}"
                     app:layout_constraintHorizontal_weight="0.3"
                     app:layout_constraintDimensionRatio="H, 1:1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@+id/textview_fragment_drawing_result_list_cardview_first"
                     app:layout_constraintBottom_toBottomOf="parent"/>
-                <!--                imgSrc="@{DrawingViewModel.firstImgName}"-->
-                <!--                @string/fragment_drawing_result_imageview(DrawingViewModel.imgInfoList.get(0).categoryIdx, DrawingViewModel.imgInfoList.get(0).pictureIdx)-->
+
                 <TextView
                     android:id="@+id/textview_fragment_drawing_result_list_cardview_first"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@{DrawingViewModel.firstImgName}"
+                    android:text="@{DrawingViewModel.drawingResponse.firstPrediction}"
                     android:textSize="26sp"
                     android:textColor="@color/grey_02"
                     app:layout_constraintHorizontal_weight="0.7"
@@ -81,9 +80,9 @@
                     android:id="@+id/imageview_fragment_drawing_result_list_cardview_second"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:src="@drawable/pictures_5_30"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
+                    app:imgSrc="@{@string/fragment_drawing_result_imageview(DrawingViewModel.imgInfoList.get(1).categoryIdx, DrawingViewModel.imgInfoList.get(1).pictureIdx)}"
                     app:layout_constraintHorizontal_weight="0.3"
                     app:layout_constraintDimensionRatio="H, 1:1"
                     app:layout_constraintTop_toTopOf="parent"

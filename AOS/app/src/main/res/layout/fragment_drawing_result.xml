@@ -16,9 +16,8 @@
             android:id="@+id/d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{@string/fragment_drawing_result_imageview(DrawingViewModel.imgInfoList.get(0).categoryIdx, DrawingViewModel.imgInfoList.get(0).pictureIdx)}"
+            android:text="@{DrawingViewModel.drawingResponse.firstPrediction}"
             android:textSize="30sp"
-            android:background="@color/teal_200"
             app:layout_constraintTop_toTopOf="parent"/>
 
         <ImageView

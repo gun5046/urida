@@ -22,16 +22,13 @@ object BindingAdapters {
 
     @JvmStatic
     @BindingAdapter("imgSrc")
-    fun loadImg(view: ImageView, imgSrc: String?){
-        var imgSrc = imgSrc
-        if (imgSrc == null){
-            imgSrc = "pictures_5_0"
-        }
-        val imgDrawable = view.context.resources.getIdentifier(imgSrc, "drawable", view.context.packageName)
+    fun loadImg(view: ImageView, imgSrc: String){
+        val imgDrawable = view.context.resources.getIdentifier(
+            imgSrc, "drawable", view.context.packageName
+        )
 
         Glide.with(view)
             .load(imgDrawable)
             .into(view)
     }
-
 }
