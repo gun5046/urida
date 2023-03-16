@@ -37,8 +37,7 @@
             android:layout_height="0dp"
             android:layout_margin="20dp"
             android:background="@drawable/learn_list_light_10"
-            app:layout_constraintTop_toBottomOf="@id/textview_fragment_quiz_word_title"
-            app:layout_constraintBottom_toTopOf="@id/radiogroup_fragment_quiz_word_answers">
+            app:layout_constraintTop_toBottomOf="@id/textview_fragment_quiz_word_title">
 
             <ImageView
                 android:id="@+id/imageview_fragment_quiz_word_image"
