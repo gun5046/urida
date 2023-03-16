@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="20dp"
     android:layout_marginStart="20dp"
     android:layout_marginEnd="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -146,19 +145,30 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintlayout_fragment_drawing_canvas"
+        android:id="@+id/constraintlayout_fragment_drawing_canvas_sketchbook"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/drawing_sketchbook"
         app:layout_constraintTop_toBottomOf="@+id/constraintlayout_fragment_drawing_draw_tools"
         app:layout_constraintBottom_toTopOf="@+id/constraintlayout_fragment_drawing_bottomBtn"
-        app:layout_constraintVertical_bias="1"/>
+        app:layout_constraintVertical_bias="1">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintlayout_fragment_drawing_canvas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintlayout_fragment_drawing_bottomBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_fragment_drawing_canvas"
+        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_fragment_drawing_canvas_sketchbook"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <ImageView
@@ -180,6 +190,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="20dp"
+            android:elevation="4dp"
             android:text="@string/fragment_drawing_button_drawing_result"
             android:textSize="16sp"
             android:background="@drawable/drawing_button_result"

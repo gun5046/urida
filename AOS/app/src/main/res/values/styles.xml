@@ -30,4 +30,10 @@
     <style name="NexonGothicBold" parent="@android:style/Widget.DeviceDefault.TextView">
         <item name="android:fontFamily">@font/nexon_gothic_bold</item>
     </style>
+
+    <!--  Dialog Size  -->
+    <style name="WrapContentDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowMinWidthMajor">0%</item>
+        <item name="windowMinWidthMinor">0%</item>
+    </style>
 </resources>
