@@ -40,7 +40,7 @@ class DrawingResultFragment(
     fun getImgIdx(_drawingViewModel: DrawingViewModel){
         val imgInfoList = arrayListOf<ImgInfo>()
         val pictures = App.PICTURES
-        val categorySize = 6
+        val categorySize = 7
 
         val existImg = BooleanArray(2)
         for (i in 0 until categorySize){
