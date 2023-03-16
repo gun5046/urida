@@ -9,6 +9,8 @@ import javax.validation.constraints.NotEmpty;
 @Builder
 public class CommentResponseDto {
 
+    private Long comment_id;
+
     @NotEmpty
     private String content;
 

@@ -31,4 +31,16 @@ public class CommentController {
     // 댓글 삭제
 
     // 댓글 수정
+    @PutMapping("/{id}")
+    public CommentResponseDto updateComment(@PathVariable Long id, @RequestBody CommentRequestDto commentRequestDto) {
+        Comment updatedComment = commentService.updateComment(id, commentRequestDto);
+        return CommentResponseDto.builder()
+                .comment_id(updatedComment.getComment_id())
+                .content(updatedComment.getContent())
+                .dateTime(updatedComment.getDateTime())
+                .board_id(updatedComment.getBoard().getBoard_id())
+                .uid(updatedComment.getUser().getUid())
+                .build();
+    }
+
 }

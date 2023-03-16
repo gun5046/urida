@@ -3,6 +3,7 @@ package com.urida.comment.service.impl;
 import com.urida.board.entity.Board;
 import com.urida.board.repo.BoardJpqlRepo;
 import com.urida.comment.dto.CommentRequestDto;
+import com.urida.comment.dto.CommentResponseDto;
 import com.urida.comment.entity.Comment;
 import com.urida.comment.repo.CommentJpqlRepo;
 import com.urida.comment.service.CommentService;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,9 +51,42 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    // 특정 게시물 댓글 불러오기
     @Override
-    public Comment updateComment(CommentRequestDto commentRequestDto) {
-        return null;
+    public List<CommentResponseDto> getComments (Long board_id) {
+        List<Comment> comments = commentJpqlRepo.getComments(board_id);
+        List<CommentResponseDto> commentDto = new ArrayList<>();
+        for( Comment comment : comments){
+            CommentResponseDto dto = CommentResponseDto.builder()
+                    .comment_id(comment.getComment_id())
+                    .content(comment.getContent())
+                    .dateTime(comment.getDateTime())
+                    .board_id(board_id)
+                    .uid(comment.getUser().getUid())
+                    .build();
+
+            commentDto.add(dto);
+        }
+        return commentDto;
+    }
+
+    // 특정 댓글 수정하기
+    @Override
+    public Comment updateComment(Long comment_id, CommentRequestDto commentRequestDto) {
+        Comment targetComment = commentJpqlRepo.findById(comment_id);
+        String newContent = commentRequestDto.getContent();
+
+        Comment updatedComment = Comment.builder()
+                .comment_id(targetComment.getComment_id())
+                .content(newContent)
+                .dateTime(LocalDateTime.now().toString())
+                .board(targetComment.getBoard())
+                .user(targetComment.getUser())
+                .build();
+
+        commentJpqlRepo.saveComment(updatedComment);
+
+        return updatedComment;
     }
 
     @Override
