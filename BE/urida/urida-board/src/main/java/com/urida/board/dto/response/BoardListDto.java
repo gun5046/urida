@@ -19,5 +19,5 @@ public class BoardListDto {
 
     private int assessment;
 
-    private Long uid;
+    private String nickname;
 }

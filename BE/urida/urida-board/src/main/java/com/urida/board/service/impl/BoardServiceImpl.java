@@ -6,7 +6,9 @@ import com.urida.board.dto.response.BoardDetailDto;
 import com.urida.board.dto.response.BoardListDto;
 import com.urida.board.service.BoardService;
 import com.urida.board.entity.Board;
+import com.urida.comment.dto.CommentResponseDto;
 import com.urida.comment.repo.CommentJpqlRepo;
+import com.urida.comment.service.CommentService;
 import com.urida.exception.NoDataException;
 import com.urida.exception.SaveException;
 import com.urida.board.repo.BoardJpqlRepo;
@@ -29,6 +31,7 @@ public class BoardServiceImpl implements BoardService {
     private final BoardJpqlRepo boardJpqlRepo;
     private final UserJpqlRepo userJpqlRepo;
     private final CommentJpqlRepo commentJpqlRepo;
+    private final CommentService commentService;
 
 
     @Override
@@ -45,7 +48,7 @@ public class BoardServiceImpl implements BoardService {
                     .view(article.getView())
                     .dateTime(article.getTime())
                     .assessment(article.getAssessment())
-                    .uid(article.getUser().getUid())
+                    .nickname(article.getUser().getNickname())
                     .build();
             articleDtoList.add(dto);
         }
@@ -56,7 +59,8 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public BoardDetailDto getArticle(Long id) {
         Board article = boardJpqlRepo.findById(id);
-        Long uid = article.getUser().getUid();
+        String nickname = article.getUser().getNickname();
+        List<CommentResponseDto> comments = commentService.getComments(id);
 
         return BoardDetailDto.builder()
                 .board_id(article.getBoard_id())
@@ -65,8 +69,8 @@ public class BoardServiceImpl implements BoardService {
                 .view(article.getView())
                 .dateTime(article.getTime())
                 .assessment(article.getAssessment())
-                .uid(uid)
-                .comment(commentJpqlRepo.getComments(id))
+                .nickname(nickname)
+                .comment(comments)
                 .build();
         /*return boardJpqlRepo.findById(id);*/
     }

@@ -1,5 +1,6 @@
 package com.urida.board.dto.response;
 
+import com.urida.comment.dto.CommentResponseDto;
 import com.urida.comment.entity.Comment;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class BoardDetailDto {
 
     private int assessment;
 
-    private Long uid;
+    private String nickname;
 
-    private List<Comment> comment;
+    private List<CommentResponseDto> comment;
 }
