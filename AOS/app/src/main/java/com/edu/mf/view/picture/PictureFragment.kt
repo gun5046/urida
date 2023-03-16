@@ -3,6 +3,7 @@ package com.edu.mf.view.picture
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -14,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.databinding.FragmentPictureBinding
+import com.edu.mf.repository.model.picture.DetectedPicture
 import com.edu.mf.utils.BitmapUtil
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.PictureViewModel
@@ -60,12 +62,9 @@ class PictureFragment: Fragment() {
                     uri = it!!.data!!.data
                     pictureViewModel.setUri(uri)
                     detect(objectDetector)
-//                    mainActivity.addFragment(PictureResultFragment())
-                    Log.d(TAG, "onViewCreated: $uri")
                 } else if(uri != null){
                     pictureViewModel.setUri(uri)
                     detect(objectDetector)
-//                    mainActivity.addFragment(PictureResultFragment())
                 }
             }
         }
@@ -90,16 +89,31 @@ class PictureFragment: Fragment() {
     }
 
     fun detect(detector: ObjectDetector){
+        pictureViewModel.clearPicture()
         val bitmap = BitmapUtil.getBitmapFromContentUri(requireActivity().contentResolver, pictureViewModel.uri!!)
         val image = InputImage.fromBitmap(bitmap!!, 0)
         detector.process(image)
             .addOnSuccessListener {
                 for(detected in it){
-                    Log.d(TAG, "detect: ${bitmap.height}")
-                    Log.d(TAG, "detect: ${bitmap.width}")
-                    Log.d(TAG, "detect: ${detected.labels[0].text}")
-                    Log.d(TAG, "detect: ${detected.boundingBox.toShortString()}")
+                    if (detected.labels.isNotEmpty()){
+                        Log.d(TAG, "detect: ${bitmap.height}")
+                        Log.d(TAG, "detect: ${bitmap.width}")
+                        Log.d(TAG, "detect: ${detected.labels[0].text}")
+                        Log.d(TAG, "detect: ${detected.boundingBox.toShortString()}")
+                        val detectedPicture = DetectedPicture(
+                            Bitmap.createBitmap(
+                                bitmap,
+                                detected.boundingBox.left,
+                                detected.boundingBox.top,
+                                detected.boundingBox.width(),
+                                detected.boundingBox.height()
+                            ),
+                            detected.labels[0].text
+                        )
+                        pictureViewModel.addPicture(detectedPicture)
+                    }
                 }
+                mainActivity.addFragment(PictureResultFragment())
             }
     }
 }

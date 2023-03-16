@@ -2,6 +2,7 @@ package com.edu.mf.viewmodel
 
 import android.net.Uri
 import androidx.lifecycle.ViewModel
+import com.edu.mf.repository.model.picture.DetectedPicture
 
 class PictureViewModel : ViewModel() {
 
@@ -11,4 +12,16 @@ class PictureViewModel : ViewModel() {
     fun setUri(uri: Uri?){
         _uri = uri
     }
+
+    private var _detectedPictureList : MutableList<DetectedPicture> = mutableListOf()
+    val detectedPictureList get() = _detectedPictureList
+
+    fun addPicture(detectedPicture: DetectedPicture){
+        _detectedPictureList.add(detectedPicture)
+    }
+
+    fun clearPicture(){
+        _detectedPictureList.clear()
+    }
+
 }

@@ -39,7 +39,8 @@ class PictureResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bitmap = BitmapUtil.getBitmapFromContentUri(requireActivity().contentResolver, pictureViewModel.uri!!)
-        binding.imageView.setImageBitmap(bitmap)
+        if(pictureViewModel.detectedPictureList.size > 0){
+            binding.imageView.setImageBitmap(pictureViewModel.detectedPictureList.get(0).bitmap)
+        }
     }
 }
