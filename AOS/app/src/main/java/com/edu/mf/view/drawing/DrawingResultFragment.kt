@@ -33,12 +33,10 @@ class DrawingResultFragment(
         binding.drawingViewModel = drawingViewModel
 
         drawingViewModel.setDrawingResponse(drawingResponse)
-        getImgIdx()
+        getImgIdx(drawingViewModel)
     }
 
-    fun getImgIdx(){
-        drawingViewModel = DrawingViewModel()
-
+    fun getImgIdx(_drawingViewModel: DrawingViewModel){
         val imgInfoList = arrayListOf<ImgInfo>()
         val pictures = App.PICTURES
         val categorySize = 6
@@ -55,12 +53,12 @@ class DrawingResultFragment(
                 }
 
                 if (imgInfoList.size == 2) {
-                    drawingViewModel.setImgInfoList(imgInfoList)
+                    _drawingViewModel.setImgInfoList(imgInfoList)
                     return
                 }
             }
         }
-        drawingViewModel.setImgInfoList(imgInfoList)
+        _drawingViewModel.setImgInfoList(imgInfoList)
     }
 
     data class ImgInfo(
