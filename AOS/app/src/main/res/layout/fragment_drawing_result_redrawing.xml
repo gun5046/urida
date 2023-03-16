@@ -2,28 +2,69 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="54dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="18dp"
+    android:background="@drawable/drawing_dialog"
+    android:backgroundTint="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
         android:id="@+id/textview_fragment_drawing_result_redrawing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sorry"
+        android:gravity="center"
+        android:text="@string/fragment_drawing_result_redrawing_textview"
+        android:textColor="@color/grey_02"
+        android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/button_fragment_drawing_result_redrawing"/>
+        app:layout_constraintBottom_toTopOf="@+id/constraintlayout_fragment_drawing_result_redrawing"/>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_fragment_drawing_result_redrawing"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_fragment_drawing_result_redrawing"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="다시 그리기"
-        android:background="@drawable/drawing_button_result"
-        android:backgroundTint="@color/primary_teal_100"
+        android:layout_marginTop="28dp"
         app:layout_constraintTop_toBottomOf="@+id/textview_fragment_drawing_result_redrawing"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_fragment_drawing_result_redrawing_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:layout_margin="10dp"
+            android:elevation="4dp"
+            android:text="@string/fragment_drawing_result_redrawing_main_button"
+            android:textSize="16sp"
+            android:background="@drawable/drawing_dialog_button_border"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/button_fragment_drawing_result_redrawing"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_fragment_drawing_result_redrawing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:layout_margin="10dp"
+            android:elevation="4dp"
+            android:text="@string/fragment_drawing_result_redrawing_button"
+            android:textSize="16sp"
+            android:background="@drawable/drawing_dialog_button_fill"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/button_fragment_drawing_result_redrawing_main"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

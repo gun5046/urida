@@ -24,8 +24,9 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:imgSrc="@{@string/fragment_drawing_result_imageview(DrawingViewModel.imgInfoList.get(0).categoryIdx, DrawingViewModel.imgInfoList.get(0).pictureIdx)}"
+            app:imgSrc="@{@string/fragment_drawing_result_list_imageview(DrawingViewModel.imgInfoList.get(0).categoryIdx, DrawingViewModel.imgInfoList.get(0).pictureIdx)}"
             app:layout_constraintTop_toBottomOf="@+id/d"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>
