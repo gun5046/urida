@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
-            name="drawingViewModel"
+            name="DrawingViewModel"
             type="com.edu.mf.viewmodel.DrawingViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{DrawingViewModel.drawingResponse.firstPrediction}"
+            android:textSize="30sp"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:imgSrc="@{@string/fragment_drawing_result_imageview(DrawingViewModel.imgInfoList.get(0).categoryIdx, DrawingViewModel.imgInfoList.get(0).pictureIdx)}"
+            app:layout_constraintTop_toBottomOf="@+id/d"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

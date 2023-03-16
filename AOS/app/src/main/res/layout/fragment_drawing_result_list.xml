@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-    
+
     <data>
         <variable
             name="DrawingViewModel"
             type="com.edu.mf.viewmodel.DrawingViewModel" />
     </data>
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,9 +32,9 @@
                     android:id="@+id/imageview_fragment_drawing_result_list_cardview_first"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:src="@{@string/fragment_drawing_result_imageview(DrawingViewModel.imgInfoList.get(0).categoryIdx, DrawingViewModel.imgInfoList.get(0).pictureIdx)}"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
+                    app:imgSrc="@{@string/fragment_drawing_result_imageview(DrawingViewModel.imgInfoList.get(0).categoryIdx, DrawingViewModel.imgInfoList.get(0).pictureIdx)}"
                     app:layout_constraintHorizontal_weight="0.3"
                     app:layout_constraintDimensionRatio="H, 1:1"
                     app:layout_constraintTop_toTopOf="parent"
@@ -80,9 +80,9 @@
                     android:id="@+id/imageview_fragment_drawing_result_list_cardview_second"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:src="@drawable/pictures_5_30"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
+                    app:imgSrc="@{@string/fragment_drawing_result_imageview(DrawingViewModel.imgInfoList.get(1).categoryIdx, DrawingViewModel.imgInfoList.get(1).pictureIdx)}"
                     app:layout_constraintHorizontal_weight="0.3"
                     app:layout_constraintDimensionRatio="H, 1:1"
                     app:layout_constraintTop_toTopOf="parent"

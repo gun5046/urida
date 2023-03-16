@@ -23,7 +23,6 @@ class DrawingViewModel: ViewModel() {
 
     fun setImgInfoList(imgInfoList: ArrayList<ImgInfo>){
         viewModelScope.launch {
-            println("### ${imgInfoList.toString()}")
             _imgInfoList.value = imgInfoList
         }
     }

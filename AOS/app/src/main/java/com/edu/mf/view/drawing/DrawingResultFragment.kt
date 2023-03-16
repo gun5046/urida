@@ -33,6 +33,7 @@ class DrawingResultFragment(
         binding.drawingViewModel = drawingViewModel
 
         drawingViewModel.setDrawingResponse(drawingResponse)
+        getImgIdx()
     }
 
     fun getImgIdx(){
