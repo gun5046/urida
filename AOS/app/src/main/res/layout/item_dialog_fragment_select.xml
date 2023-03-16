@@ -15,9 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="그림보고 낱말 맞추기"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:textColor="@color/black"
-        android:fontFamily="@font/kakao_otf_bold"
+        android:fontFamily="@font/jalnan"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 

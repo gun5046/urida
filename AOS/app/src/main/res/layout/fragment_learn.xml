@@ -4,7 +4,8 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#f7e1d7">
 
 
     <TextView
@@ -13,9 +14,8 @@
         android:layout_height="wrap_content"
         android:text="낱말 익히기"
         android:textSize="36sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/kakao_bold"
-        android:layout_marginTop="20dp"
+        android:fontFamily="@font/jalnan"
+        android:layout_marginTop="80dp"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:background="@drawable/learn_list_black_10"
+        android:background="@drawable/learn_list_pink_10"
         app:layout_constraintTop_toBottomOf="@id/textview_fragment_learn_title"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

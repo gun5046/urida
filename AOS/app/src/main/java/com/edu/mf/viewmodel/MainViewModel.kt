@@ -79,4 +79,5 @@ class MainViewModel : ViewModel(){
     fun startTTS(){
         textToSpeech?.speak(App.PICTURES[selectedCategory][currentIndex.value!!],TextToSpeech.QUEUE_FLUSH,null,null)
     }
+
 }
