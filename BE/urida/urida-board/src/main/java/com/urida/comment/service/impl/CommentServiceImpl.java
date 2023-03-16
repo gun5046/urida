@@ -89,8 +89,10 @@ public class CommentServiceImpl implements CommentService {
         return updatedComment;
     }
 
+    // 댓글 삭제
     @Override
-    public int removeComment(Long comment_id) {
-        return 0;
+    public Long removeComment(Long comment_id) {
+        commentJpqlRepo.deleteComment(comment_id);
+        return comment_id;
     }
 }
