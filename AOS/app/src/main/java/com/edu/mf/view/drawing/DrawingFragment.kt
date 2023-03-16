@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -78,7 +79,12 @@ class DrawingFragment: Fragment() {
 
         binding.buttonFragmentDrawingDrawingResult.setOnClickListener {
             makeMatrix()
-            sendMatrix()
+
+            if (matrix.size != 0) {
+                sendMatrix()
+            } else{
+                Toast.makeText(requireContext(), "그림을 그려주세요", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -111,8 +117,10 @@ class DrawingFragment: Fragment() {
             xList.add(pointList[i].x)
             yList.add(pointList[i].y)
         }
-        matrix.add(arrayListOf(xList, yList))
 
+        if (xList.size != 0){
+            matrix.add(arrayListOf(xList, yList))
+        }
         pointList.clear()
     }
 

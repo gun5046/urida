@@ -32,6 +32,6 @@ class DrawingResultListFragment(
         binding.drawingViewModel = drawingViewModel
 
         drawingViewModel.setDrawingResponse(drawingResponse)
-        DrawingResultFragment(drawingResponse).getImgIdx()
+        DrawingResultFragment(drawingResponse).getImgIdx(drawingViewModel)
     }
 }
