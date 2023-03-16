@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-    
+
     <data>
         <variable
             name="DrawingViewModel"
             type="com.edu.mf.viewmodel.DrawingViewModel" />
     </data>
-    
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -32,22 +32,23 @@
                     android:id="@+id/imageview_fragment_drawing_result_list_cardview_first"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:src="@{@string/fragment_drawing_result_imageview(DrawingViewModel.imgInfoList.get(0).categoryIdx, DrawingViewModel.imgInfoList.get(0).pictureIdx)}"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
+                    app:imgSrc="@{DrawingViewModel.firstImgName}"
                     app:layout_constraintHorizontal_weight="0.3"
                     app:layout_constraintDimensionRatio="H, 1:1"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@+id/textview_fragment_drawing_result_list_cardview_first"
                     app:layout_constraintBottom_toBottomOf="parent"/>
-
+                <!--                imgSrc="@{DrawingViewModel.firstImgName}"-->
+                <!--                @string/fragment_drawing_result_imageview(DrawingViewModel.imgInfoList.get(0).categoryIdx, DrawingViewModel.imgInfoList.get(0).pictureIdx)-->
                 <TextView
                     android:id="@+id/textview_fragment_drawing_result_list_cardview_first"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@{DrawingViewModel.drawingResponse.firstPrediction}"
+                    android:text="@{DrawingViewModel.firstImgName}"
                     android:textSize="26sp"
                     android:textColor="@color/grey_02"
                     app:layout_constraintHorizontal_weight="0.7"
