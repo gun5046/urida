@@ -12,7 +12,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentDrawingBinding
 import com.edu.mf.repository.model.drawing.DrawingRequest
@@ -94,7 +93,10 @@ class DrawingFragment: Fragment() {
             when(it.predictionType){
                 0 -> mainActivity.changeFragment(DrawingResultFragment(it))
                 1 -> mainActivity.changeFragment(DrawingResultListFragment(it))
-                2 -> mainActivity.changeFragment(DrawingResultRedrawingFragment())
+                2 -> {
+                    val dialog = DrawingResultRedrawingDialog()
+                    dialog.show(childFragmentManager, "DrawingResultDialog")
+                }
             }
         })
     }

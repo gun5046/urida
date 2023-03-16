@@ -36,20 +36,23 @@ class DrawingResultFragment(
         getImgIdx(drawingViewModel)
     }
 
+    // 결과로 받은 단어와 drawable의 이미지 매칭 위한 인덱스 찾기
     fun getImgIdx(_drawingViewModel: DrawingViewModel){
         val imgInfoList = arrayListOf<ImgInfo>()
         val pictures = App.PICTURES
         val categorySize = 6
 
+        val existImg = BooleanArray(2)
         for (i in 0 until categorySize){
             val imageSize = pictures[i].size
 
             for (j in 0 until imageSize){
-                if (
-                    pictures[i][j] == drawingResponse.firstPrediction
-                    || pictures[i][j] == drawingResponse.secondPrediction
-                ){
+                if (pictures[i][j] == drawingResponse.firstPrediction){
                     imgInfoList.add(ImgInfo(i, j))
+                    existImg[0] = true
+                } else if (pictures[i][j] == drawingResponse.secondPrediction){
+                    imgInfoList.add(ImgInfo(i, j))
+                    existImg[1] = true
                 }
 
                 if (imgInfoList.size == 2) {
@@ -58,6 +61,20 @@ class DrawingResultFragment(
                 }
             }
         }
+
+        // 이미지 없을 시 대체 이미지 띄우기
+        if(
+            drawingResponse.predictionType == 1
+            && imgInfoList.size < 2
+        ){
+            if (!existImg[0]){
+                imgInfoList.add(0, ImgInfo(9, 9))
+            }
+            if (!existImg[1]){
+                imgInfoList.add(1, ImgInfo(9, 9))
+            }
+        }
+
         _drawingViewModel.setImgInfoList(imgInfoList)
     }
 
