@@ -1,5 +1,6 @@
 package com.edu.mf.view.picture
 
+import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.net.Uri
@@ -13,8 +14,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.databinding.FragmentPictureBinding
+import com.edu.mf.utils.BitmapUtil
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.PictureViewModel
+import com.google.mlkit.common.model.LocalModel
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.objects.ObjectDetection
+import com.google.mlkit.vision.objects.ObjectDetector
+import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions
 
 private const val TAG = "PictureFragment"
 
@@ -37,15 +44,29 @@ class PictureFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val localModel = LocalModel.Builder()
+            .setAssetFilePath("object_labeler.tflite")
+            .build()
+        val customObjectDetectorOptions =
+            CustomObjectDetectorOptions.Builder(localModel)
+                .setDetectorMode(CustomObjectDetectorOptions.SINGLE_IMAGE_MODE)
+                .enableClassification()
+                .enableMultipleObjects()
+                .build()
+        val objectDetector = ObjectDetection.getClient(customObjectDetectorOptions)
         val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            if(it.data != null){
-                uri = it!!.data!!.data
-                pictureViewModel.setUri(uri)
-                mainActivity.addFragment(PictureResultFragment())
-                Log.d(TAG, "onViewCreated: $uri")
-            } else if(uri != null){
-                pictureViewModel.setUri(uri)
-                mainActivity.addFragment(PictureResultFragment())
+            if(it.resultCode == Activity.RESULT_OK){
+                if(it.data != null){
+                    uri = it!!.data!!.data
+                    pictureViewModel.setUri(uri)
+                    detect(objectDetector)
+//                    mainActivity.addFragment(PictureResultFragment())
+                    Log.d(TAG, "onViewCreated: $uri")
+                } else if(uri != null){
+                    pictureViewModel.setUri(uri)
+                    detect(objectDetector)
+//                    mainActivity.addFragment(PictureResultFragment())
+                }
             }
         }
         binding.cardviewCamera.setOnClickListener {
@@ -66,5 +87,19 @@ class PictureFragment: Fragment() {
             intent.action = Intent.ACTION_GET_CONTENT
             launcher.launch(Intent.createChooser(intent, ""))
         }
+    }
+
+    fun detect(detector: ObjectDetector){
+        val bitmap = BitmapUtil.getBitmapFromContentUri(requireActivity().contentResolver, pictureViewModel.uri!!)
+        val image = InputImage.fromBitmap(bitmap!!, 0)
+        detector.process(image)
+            .addOnSuccessListener {
+                for(detected in it){
+                    Log.d(TAG, "detect: ${bitmap.height}")
+                    Log.d(TAG, "detect: ${bitmap.width}")
+                    Log.d(TAG, "detect: ${detected.labels[0].text}")
+                    Log.d(TAG, "detect: ${detected.boundingBox.toShortString()}")
+                }
+            }
     }
 }
