@@ -2,19 +2,17 @@ package com.urida.likeboard.entity;
 
 import com.urida.board.entity.Board;
 import com.urida.user.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LikeBoard {
+public class likeboard {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long like_id;
