@@ -6,12 +6,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
 import com.edu.mf.databinding.DialogFragmentLearnSelectProblemBinding
 import com.edu.mf.repository.model.study.PCategory
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.study.quiz.QuizBlankFragment
+import com.edu.mf.view.study.quiz.QuizPictureFragment
+import com.edu.mf.view.study.quiz.QuizRelateFragment
+import com.edu.mf.view.study.quiz.QuizWordFragment
 import com.edu.mf.viewmodel.MainViewModel
 
 class LearnSelectCategoryDialog(
@@ -33,26 +38,39 @@ class LearnSelectCategoryDialog(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = DialogFragmentLearnSelectProblemBinding.inflate(inflater,container,false)
+        _binding = DataBindingUtil.inflate<DialogFragmentLearnSelectProblemBinding>(
+            inflater,R.layout.dialog_fragment_learn_select_problem,container,false)
         val view = binding.root
         init()
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         mainActivity = MainActivity.getInstance()!!
-        binding.buttonDialogLearnCancle.setOnClickListener {
-            dismiss()
+        binding.apply {
+            handlers = this@LearnSelectCategoryDialog
+            lifecycleOwner = this@LearnSelectCategoryDialog
+            vm = viewModel
         }
-        binding.buttonDialogLearnOk.setOnClickListener {
-            Log.i("TAG지훈", "onCreateView: ")
-            createSelectProblemDialog?.onOkButtonClick()
-            dismiss()
-            mainActivity.addFragment(LearnMainFragment())
-        }
+
         return view
     }
     private fun init(){
         setFullScreen()
         setCategories()
         setAdapter()
+    }
+    fun noListener(){
+        dismiss()
+    }
+    fun okListener(){
+        createSelectProblemDialog?.onOkButtonClick()
+        dismiss()
+        mainActivity.addFragment(
+            when(viewModel.selectedPCategory){
+                0-> QuizWordFragment()
+                1-> QuizPictureFragment()
+                2-> QuizBlankFragment()
+                else -> QuizRelateFragment()
+            }
+        )
     }
 
     private fun setAdapter(){
