@@ -21,6 +21,7 @@ public class CommentController {
     public CommentResponseDto createComment(@RequestBody CommentRequestDto CommentRequestDto) {
         Comment comment = commentService.createComment(CommentRequestDto);
         return CommentResponseDto.builder()
+                .comment_id(comment.getComment_id())
                 .content(comment.getContent())
                 .dateTime(comment.getDateTime())
                 .board_id(comment.getBoard().getBoard_id())
