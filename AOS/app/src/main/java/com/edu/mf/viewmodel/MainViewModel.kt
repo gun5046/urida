@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.edu.mf.repository.model.study.Quiz
 import com.edu.mf.utils.App
 import com.navercorp.nid.NaverIdLoginSDK
 import java.util.*
@@ -18,6 +19,10 @@ class MainViewModel : ViewModel(){
      */
     private var _mode : MutableLiveData<Int> = MutableLiveData()
     val mode : LiveData<Int> get() = _mode
+
+    private var _quiz : MutableLiveData<Quiz> = MutableLiveData()
+    val quiz : LiveData<Quiz> get() = _quiz
+
 
     private var textToSpeech: TextToSpeech? = null
     private var _answer : MutableLiveData<String> = MutableLiveData()
@@ -34,6 +39,27 @@ class MainViewModel : ViewModel(){
 
     private var _bookMark : MutableLiveData<String> = MutableLiveData()
     val bookMark get() = _bookMark
+
+
+    fun setWordQuiz(){
+
+        var problems = ArrayList<Int>()
+        val selectedIndex = Random().nextInt(App.PICTURES[selectedCategory][selectedPCategory].length)
+        problems.add(selectedIndex)
+        val set = mutableSetOf<Int>()
+
+        while(set.size<4){
+            set.add(Random().nextInt(App.PICTURES[selectedCategory][selectedPCategory].length))
+        }
+        var temps = set.toList()
+        problems.addAll(temps)
+        problems.shuffle()
+        var datas = ArrayList<String>()
+        /*for()
+
+        var quiz:Quiz = Quiz(App.PICTURES[selectedCategory][selectedIndex],)*/
+
+    }
 
     fun setMode(mode:Int){
         _mode.value = mode
@@ -62,6 +88,7 @@ class MainViewModel : ViewModel(){
     fun decreaseIndex(){
         _currentIndex.value = _currentIndex.value?.minus(1)
     }
+
     fun setTTS(){
         textToSpeech = TextToSpeech(NaverIdLoginSDK.applicationContext,TextToSpeech.OnInitListener {
             if(it==TextToSpeech.SUCCESS){
