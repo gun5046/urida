@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.edu.mf.databinding.FragmentPictureResultBinding
 import com.edu.mf.utils.BitmapUtil
 import com.edu.mf.view.common.MainActivity
@@ -40,7 +41,8 @@ class PictureResultFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if(pictureViewModel.detectedPictureList.size > 0){
-            binding.imageView.setImageBitmap(pictureViewModel.detectedPictureList.get(0).bitmap)
+            binding.recyclerview.adapter = PictureResultAdapter(pictureViewModel.detectedPictureList)
+            binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
         }
     }
 }

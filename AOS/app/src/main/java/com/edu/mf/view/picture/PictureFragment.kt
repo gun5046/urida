@@ -99,6 +99,8 @@ class PictureFragment: Fragment() {
                         Log.d(TAG, "detect: ${bitmap.height}")
                         Log.d(TAG, "detect: ${bitmap.width}")
                         Log.d(TAG, "detect: ${detected.labels[0].text}")
+                        Log.d(TAG, "detect: ${detected.labels[0].index}")
+                        //index of Mouse is 144
                         Log.d(TAG, "detect: ${detected.boundingBox.toShortString()}")
                         val detectedPicture = DetectedPicture(
                             Bitmap.createBitmap(
