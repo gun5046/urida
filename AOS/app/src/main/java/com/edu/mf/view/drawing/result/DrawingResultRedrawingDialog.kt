@@ -1,4 +1,4 @@
-package com.edu.mf.view.drawing
+package com.edu.mf.view.drawing.result
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import com.edu.mf.databinding.FragmentDrawingResultRedrawingBinding
 import com.edu.mf.view.MainFragment
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.drawing.DrawingFragment
 
 class DrawingResultRedrawingDialog: DialogFragment() {
     private lateinit var binding: FragmentDrawingResultRedrawingBinding

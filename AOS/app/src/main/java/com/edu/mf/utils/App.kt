@@ -429,7 +429,7 @@ class App : Application(){
         PICTURES[6].add("식기세척기")
         PICTURES[6].add("돌고래")
         PICTURES[6].add("도넛")
-        PICTURES[6].add("문2")
+        PICTURES[6].add("발가락")
         PICTURES[6].add("용")
         PICTURES[6].add("시계")
         PICTURES[6].add("왕관")

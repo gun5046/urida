@@ -17,6 +17,9 @@ import com.edu.mf.databinding.FragmentDrawingBinding
 import com.edu.mf.repository.model.drawing.DrawingRequest
 import com.edu.mf.repository.model.drawing.DrawingResponse
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.drawing.result.DrawingResultFragment
+import com.edu.mf.view.drawing.result.DrawingResultRedrawingDialog
+import com.edu.mf.view.drawing.result.DrawingResultViewPagerFragment
 import com.edu.mf.viewmodel.DrawingViewModel
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
 import kotlinx.coroutines.CoroutineScope
@@ -31,9 +34,12 @@ private const val TAG = "DrawingFragment"
 class DrawingFragment: Fragment() {
     private lateinit var binding: FragmentDrawingBinding
     private lateinit var mainActivity: MainActivity
+    private lateinit var drawingViewModel:DrawingViewModel
+
+    private lateinit var pointList: ArrayList<Point>
     private lateinit var toolList: ArrayList<ImageView>
     private lateinit var matrix: MutableList<ArrayList<ArrayList<Int>>>
-    private lateinit var drawingViewModel:DrawingViewModel
+
 
     companion object{
         lateinit var graphicView:GraphicView
@@ -48,8 +54,9 @@ class DrawingFragment: Fragment() {
     ): View? {
         binding = FragmentDrawingBinding.inflate(inflater, container, false)
         mainActivity = MainActivity.getInstance()!!
-        graphicView = GraphicView(this.requireContext())
         drawingViewModel = DrawingViewModel()
+        graphicView = GraphicView(this.requireContext())
+        pointList = GraphicView.pointList
 
         return binding.root
     }
@@ -102,7 +109,7 @@ class DrawingFragment: Fragment() {
 
     // 3차원 행렬 만들기
     private fun makeMatrix(){
-        val pointList = GraphicView.pointList
+        //val pointList = GraphicView.pointList
         var xList = ArrayList<Int>()
         var yList = ArrayList<Int>()
 
@@ -278,5 +285,10 @@ class DrawingFragment: Fragment() {
             binding.imageviewFragmentDrawingPenBlue,
             binding.imageviewFragmentDrawingPenBlack
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        pointList.clear()
     }
 }
