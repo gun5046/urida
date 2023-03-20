@@ -26,6 +26,7 @@ class PictureResultFragment : Fragment() {
     private lateinit var binding: FragmentPictureResultBinding
     private lateinit var mainActivity: MainActivity
     private lateinit var pictureViewModel: PictureViewModel
+    private lateinit var pictureResultAdapter: PictureResultAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,9 +41,14 @@ class PictureResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(pictureViewModel.detectedPictureList.size > 0){
-            binding.recyclerview.adapter = PictureResultAdapter(pictureViewModel.detectedPictureList)
-            binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        pictureResultAdapter = PictureResultAdapter(pictureViewModel.detectedPictureList.value!!)
+        Log.d(TAG, "onViewCreated: ${pictureViewModel.detectedPictureList.value!!.size}")
+        binding.recyclerview.adapter = pictureResultAdapter
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        pictureViewModel.detectedPictureList.observe(viewLifecycleOwner){
+            Log.d(TAG, "onViewCreated: observed ${it.size}")
+            pictureResultAdapter.PictureList = it
+            pictureResultAdapter.notifyDataSetChanged()
         }
     }
 }

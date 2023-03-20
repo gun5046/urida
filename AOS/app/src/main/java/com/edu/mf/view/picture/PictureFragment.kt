@@ -20,6 +20,10 @@ import com.edu.mf.utils.BitmapUtil
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.PictureViewModel
 import com.google.mlkit.common.model.LocalModel
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.Translator
+import com.google.mlkit.nl.translate.TranslatorOptions
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.objects.ObjectDetection
 import com.google.mlkit.vision.objects.ObjectDetector
@@ -32,6 +36,7 @@ class PictureFragment: Fragment() {
     private lateinit var mainActivity: MainActivity
     private lateinit var pictureViewModel: PictureViewModel
     private var uri: Uri? = null
+    private var translator: Translator? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -86,12 +91,20 @@ class PictureFragment: Fragment() {
             intent.action = Intent.ACTION_GET_CONTENT
             launcher.launch(Intent.createChooser(intent, ""))
         }
+        val translateOptions = TranslatorOptions.Builder()
+            .setSourceLanguage(TranslateLanguage.ENGLISH)
+            .setTargetLanguage(TranslateLanguage.KOREAN)
+            .build()
+        translator = Translation.getClient(translateOptions)
+        translator!!.downloadModelIfNeeded()
+        lifecycle.addObserver(translator!!)
     }
 
     fun detect(detector: ObjectDetector){
         pictureViewModel.clearPicture()
         val bitmap = BitmapUtil.getBitmapFromContentUri(requireActivity().contentResolver, pictureViewModel.uri!!)
         val image = InputImage.fromBitmap(bitmap!!, 0)
+        mainActivity.addFragment(PictureResultFragment())
         detector.process(image)
             .addOnSuccessListener {
                 for(detected in it){
@@ -102,20 +115,23 @@ class PictureFragment: Fragment() {
                         Log.d(TAG, "detect: ${detected.labels[0].index}")
                         //index of Mouse is 144
                         Log.d(TAG, "detect: ${detected.boundingBox.toShortString()}")
-                        val detectedPicture = DetectedPicture(
-                            Bitmap.createBitmap(
-                                bitmap,
-                                detected.boundingBox.left,
-                                detected.boundingBox.top,
-                                detected.boundingBox.width(),
-                                detected.boundingBox.height()
-                            ),
-                            detected.labels[0].text
-                        )
-                        pictureViewModel.addPicture(detectedPicture)
+                        translator!!.translate(detected.labels[0].text)
+                            .addOnSuccessListener { text ->
+                                val detectedPicture = DetectedPicture(
+                                    Bitmap.createBitmap(
+                                        bitmap,
+                                        detected.boundingBox.left,
+                                        detected.boundingBox.top,
+                                        detected.boundingBox.width(),
+                                        detected.boundingBox.height()
+                                    ),
+                                    if(text.equals("쥐")) "마우스" else text
+                                )
+                                Log.d(TAG, "detect: $text")
+                                pictureViewModel.addPicture(detectedPicture)
+                            }
                     }
                 }
-                mainActivity.addFragment(PictureResultFragment())
             }
     }
 }
