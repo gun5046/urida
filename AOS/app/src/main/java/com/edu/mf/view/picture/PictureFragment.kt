@@ -15,7 +15,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -78,7 +77,7 @@ class PictureFragment: Fragment() {
                 }
             }
         }
-        val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
+        val cameraPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it){
                 val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                 if (intent.resolveActivity(requireActivity().packageManager) != null) {
@@ -91,6 +90,16 @@ class PictureFragment: Fragment() {
                 }
             } else {
                 Toast.makeText(requireContext(), "카메라 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
+            }
+        }
+        val storagePermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
+            if(it){
+                val intent = Intent()
+                intent.type = "image/*"
+                intent.action = Intent.ACTION_GET_CONTENT
+                launcher.launch(Intent.createChooser(intent, ""))
+            } else {
+                Toast.makeText(requireContext(), "저장장치 접근 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
             }
         }
         binding.cardviewCamera.setOnClickListener {
@@ -106,14 +115,18 @@ class PictureFragment: Fragment() {
                     launcher.launch(intent)
                 }
             } else {
-                permissionLauncher.launch(Manifest.permission.CAMERA)
+                cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
             }
         }
         binding.cardviewGallery.setOnClickListener {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            launcher.launch(Intent.createChooser(intent, ""))
+            if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+                val intent = Intent()
+                intent.type = "image/*"
+                intent.action = Intent.ACTION_GET_CONTENT
+                launcher.launch(Intent.createChooser(intent, ""))
+            } else {
+                storagePermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
         }
         val translateOptions = TranslatorOptions.Builder()
             .setSourceLanguage(TranslateLanguage.ENGLISH)
