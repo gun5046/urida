@@ -9,11 +9,13 @@ import com.edu.mf.databinding.FragmentDrawingResultBinding
 import com.edu.mf.repository.model.drawing.DrawingResponse
 import com.edu.mf.utils.App
 import com.edu.mf.viewmodel.DrawingViewModel
+import com.edu.mf.viewmodel.MainViewModel
 
 class DrawingResultFragment(
     private val drawingResponse: DrawingResponse
 ): Fragment() {
     private lateinit var binding: FragmentDrawingResultBinding
+    private lateinit var mainViewModel: MainViewModel
     private lateinit var drawingViewModel: DrawingViewModel
 
     override fun onCreateView(
@@ -22,6 +24,7 @@ class DrawingResultFragment(
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDrawingResultBinding.inflate(inflater, container, false)
+        mainViewModel = MainViewModel()
         drawingViewModel = DrawingViewModel()
 
         return binding.root
@@ -30,10 +33,26 @@ class DrawingResultFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.mainViewModel = mainViewModel
         binding.drawingViewModel = drawingViewModel
 
         drawingViewModel.setDrawingResponse(drawingResponse)
         getImgIdx(drawingViewModel)
+
+        setMainViewModel(0, mainViewModel, drawingViewModel)
+    }
+
+    // mainViewModel TTS 설정
+    fun setMainViewModel(
+        idx: Int
+        , mainViewModel: MainViewModel
+        , drawingViewModel: DrawingViewModel
+    ){
+        mainViewModel.setTTS()
+
+        val imgInfo = drawingViewModel.imgInfoList.value?.get(idx)!!
+        mainViewModel.changeCategory(imgInfo.categoryIdx)
+        mainViewModel.setCurrentIndex(imgInfo.pictureIdx)
     }
 
     // 결과로 받은 단어와 drawable의 이미지 매칭 위한 인덱스 찾기
@@ -48,7 +67,7 @@ class DrawingResultFragment(
 
             for (j in 0 until imageSize){
                 if (pictures[i][j] == drawingResponse.firstPrediction){
-                    imgInfoList.add(ImgInfo(i, j))
+                    imgInfoList.add(0, ImgInfo(i, j))
                     existImg[0] = true
                 } else if (pictures[i][j] == drawingResponse.secondPrediction){
                     imgInfoList.add(ImgInfo(i, j))
@@ -64,6 +83,8 @@ class DrawingResultFragment(
 
         // 이미지 없을 시 대체 이미지 띄우기
         if(
+            drawingResponse.predictionType == 0
+            && imgInfoList.size < 1 ||
             drawingResponse.predictionType == 1
             && imgInfoList.size < 2
         ){

@@ -98,6 +98,9 @@ dependencies {
     //Drawing_ColorPicker
     implementation 'com.jaredrummler:colorpicker:1.1.0'
 
+    // ViewPager indicator
+    implementation 'me.relex:circleindicator:2.1.6'
+
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.8.0'
