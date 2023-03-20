@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edu.mf.repository.model.drawing.DrawingResponse
-import com.edu.mf.view.drawing.DrawingResultFragment.ImgInfo
+import com.edu.mf.view.drawing.result.DrawingResultFragment.ImgInfo
 import kotlinx.coroutines.launch
 
 class DrawingViewModel: ViewModel() {
