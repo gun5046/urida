@@ -10,7 +10,7 @@ import com.edu.mf.utils.App
 import com.navercorp.nid.NaverIdLoginSDK
 import java.util.*
 
-private const val TAG = "MainViewModel"
+private const val TAG = "MainViewModel_지훈"
 class MainViewModel : ViewModel(){
 
     /**
@@ -25,6 +25,7 @@ class MainViewModel : ViewModel(){
 
 
     private var textToSpeech: TextToSpeech? = null
+
     private var _answer : MutableLiveData<String> = MutableLiveData()
     val answer get() = _answer
 
@@ -40,25 +41,27 @@ class MainViewModel : ViewModel(){
     private var _bookMark : MutableLiveData<String> = MutableLiveData()
     val bookMark get() = _bookMark
 
-
     fun setWordQuiz(){
-
         var problems = ArrayList<Int>()
-        val selectedIndex = Random().nextInt(App.PICTURES[selectedCategory][selectedPCategory].length)
-        problems.add(selectedIndex)
-        val set = mutableSetOf<Int>()
-
+        val selectedIndex = Random().nextInt(App.PICTURES[selectedCategory].size)
+        var current_answer  = -1
+        var set = mutableSetOf<Int>()
+        set.add(selectedIndex)
         while(set.size<4){
-            set.add(Random().nextInt(App.PICTURES[selectedCategory][selectedPCategory].length))
+            set.add(Random().nextInt(App.PICTURES[selectedCategory].size))
         }
         var temps = set.toList()
         problems.addAll(temps)
         problems.shuffle()
+        Log.i(TAG, "setWordQuiz: ${problems}")
         var datas = ArrayList<String>()
-        /*for()
-
-        var quiz:Quiz = Quiz(App.PICTURES[selectedCategory][selectedIndex],)*/
-
+        for(i in 0..3) {
+            datas.add(App.PICTURES[selectedCategory][problems[i]])
+            if(problems[i]==selectedIndex)
+                current_answer = i
+        }
+        var quiz:Quiz = Quiz(current_answer,selectedIndex,App.PICTURES[selectedCategory][selectedIndex],datas)
+        _quiz.value = quiz
     }
 
     fun setMode(mode:Int){
