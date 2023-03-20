@@ -1,4 +1,4 @@
-package com.edu.mf.view.drawing
+package com.edu.mf.view.drawing.result
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import com.edu.mf.databinding.FragmentDrawingResultViewpagerItemBinding
 import com.edu.mf.repository.model.drawing.DrawingResponse
+import com.edu.mf.view.drawing.result.DrawingResultFragment
 import com.edu.mf.viewmodel.DrawingViewModel
 import com.edu.mf.viewmodel.MainViewModel
 

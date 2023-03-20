@@ -1,4 +1,4 @@
-package com.edu.mf.view.drawing
+package com.edu.mf.view.drawing.result
 
 import android.os.Bundle
 import android.view.LayoutInflater
