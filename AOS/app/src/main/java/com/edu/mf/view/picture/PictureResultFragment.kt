@@ -43,12 +43,29 @@ class PictureResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         pictureResultAdapter = PictureResultAdapter(pictureViewModel.detectedPictureList.value!!)
         Log.d(TAG, "onViewCreated: ${pictureViewModel.detectedPictureList.value!!.size}")
+        if(pictureViewModel.detectedPictureList.value!!.size == 0){
+            binding.recyclerview.visibility = View.GONE
+            binding.layoutEmpty.visibility = View.VISIBLE
+        } else {
+            binding.recyclerview.visibility = View.VISIBLE
+            binding.layoutEmpty.visibility = View.GONE
+        }
         binding.recyclerview.adapter = pictureResultAdapter
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
         pictureViewModel.detectedPictureList.observe(viewLifecycleOwner){
             Log.d(TAG, "onViewCreated: observed ${it.size}")
+            if(it.size == 0){
+                binding.recyclerview.visibility = View.GONE
+                binding.layoutEmpty.visibility = View.VISIBLE
+            } else {
+                binding.recyclerview.visibility = View.VISIBLE
+                binding.layoutEmpty.visibility = View.GONE
+            }
             pictureResultAdapter.PictureList = it
             pictureResultAdapter.notifyDataSetChanged()
+        }
+        binding.buttonEmpty.setOnClickListener {
+            mainActivity.popFragment()
         }
     }
 }
