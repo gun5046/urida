@@ -20,6 +20,9 @@ import com.navercorp.nid.NaverIdLoginSDK
 import java.util.*
 import com.edu.mf.viewmodel.MainViewModel
 import com.edu.mf.viewmodel.PictureViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 private const val TAG = "MainActivity"
@@ -53,8 +56,15 @@ class MainActivity : AppCompatActivity() {
 
         user = App.sharedPreferencesUtil.getUser()
         if(user != null) {
-            changeLocale(user!!.language)
-            changeFragment(MainFragment())
+            CoroutineScope(Dispatchers.IO).launch {
+                user = loginService.login(user!!.social_id!!, user!!.type!!).body()
+                if(user!!.uid != null){
+                    changeLocale(user!!.language)
+                    changeFragment(MainFragment())
+                } else {
+                    changeFragment(LoginFragment())
+                }
+            }
         } else {
             changeFragment(LoginFragment())
         }
