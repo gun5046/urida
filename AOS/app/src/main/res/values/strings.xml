@@ -37,7 +37,6 @@
 
     <!--    fragment_drawing_result_list-->
     <string name="fragment_drawing_result_list_imageview">pictures_%1$d_%2$d</string>
-    <string name="fragment_drawing_result_list_button_drawing_guess">중 하나인 것 같아요.</string>
 
     <!--    fragment_drawing_result_redrawing-->
     <string name="fragment_drawing_result_redrawing_textview">잘 모르겠어요.\n\n다시 한번 그려주실래요?</string>
