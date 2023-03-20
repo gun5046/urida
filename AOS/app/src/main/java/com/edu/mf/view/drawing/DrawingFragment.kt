@@ -16,7 +16,6 @@ import com.edu.mf.R
 import com.edu.mf.databinding.FragmentDrawingBinding
 import com.edu.mf.repository.model.drawing.DrawingRequest
 import com.edu.mf.repository.model.drawing.DrawingResponse
-import com.edu.mf.view.common.EventObserver
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.DrawingViewModel
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
@@ -92,7 +91,7 @@ class DrawingFragment: Fragment() {
         drawingViewModel.drawingResponse.observe(viewLifecycleOwner, Observer{
             when(it.predictionType){
                 0 -> mainActivity.changeFragment(DrawingResultFragment(it))
-                1 -> mainActivity.changeFragment(DrawingResultListFragment(it))
+                1 -> mainActivity.changeFragment(DrawingResultViewPagerFragment(it))
                 2 -> {
                     val dialog = DrawingResultRedrawingDialog()
                     dialog.show(childFragmentManager, "DrawingResultDialog")
