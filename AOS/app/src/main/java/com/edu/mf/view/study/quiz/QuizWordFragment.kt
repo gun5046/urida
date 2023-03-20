@@ -34,10 +34,7 @@ class QuizWordFragment : Fragment() {
             lifecycleOwner = this@QuizWordFragment
         }
         viewModel.setWordQuiz()
-
-
-
-
+        viewModel.setTTS()
         return binding.root
     }
 

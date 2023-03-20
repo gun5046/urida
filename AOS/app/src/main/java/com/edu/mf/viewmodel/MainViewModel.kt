@@ -53,7 +53,6 @@ class MainViewModel : ViewModel(){
         var temps = set.toList()
         problems.addAll(temps)
         problems.shuffle()
-        Log.i(TAG, "setWordQuiz: ${problems}")
         var datas = ArrayList<String>()
         for(i in 0..3) {
             datas.add(App.PICTURES[selectedCategory][problems[i]])
@@ -62,6 +61,15 @@ class MainViewModel : ViewModel(){
         }
         var quiz:Quiz = Quiz(current_answer,selectedIndex,App.PICTURES[selectedCategory][selectedIndex],datas)
         _quiz.value = quiz
+    }
+    fun startTitleTTS(){
+        Log.i(TAG, "startTitleTTS: ")
+        textToSpeech?.speak(
+            when(selectedPCategory){
+                0->"다음 그림은 무었일까요"
+                else -> "else"
+            }
+            ,TextToSpeech.QUEUE_FLUSH,null,null)
     }
 
     fun setMode(mode:Int){
