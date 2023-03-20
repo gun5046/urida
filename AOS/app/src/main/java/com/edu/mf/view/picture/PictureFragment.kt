@@ -1,8 +1,10 @@
 package com.edu.mf.view.picture
 
+import android.Manifest
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -11,7 +13,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.databinding.FragmentPictureBinding
@@ -73,16 +78,35 @@ class PictureFragment: Fragment() {
                 }
             }
         }
+        val permissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
+            if(it){
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                    val values = ContentValues()
+                    values.put(MediaStore.Images.Media.TITLE, "New Picture")
+                    values.put(MediaStore.Images.Media.DESCRIPTION, "From Camera")
+                    uri = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+                    launcher.launch(intent)
+                }
+            } else {
+                Toast.makeText(requireContext(), "카메라 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
+            }
+        }
         binding.cardviewCamera.setOnClickListener {
-            uri = null
-            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            if (intent.resolveActivity(requireActivity().packageManager) != null) {
-                val values = ContentValues()
-                values.put(MediaStore.Images.Media.TITLE, "New Picture")
-                values.put(MediaStore.Images.Media.DESCRIPTION, "From Camera")
-                uri = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-                launcher.launch(intent)
+            if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+                uri = null
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                    val values = ContentValues()
+                    values.put(MediaStore.Images.Media.TITLE, "New Picture")
+                    values.put(MediaStore.Images.Media.DESCRIPTION, "From Camera")
+                    uri = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+                    launcher.launch(intent)
+                }
+            } else {
+                permissionLauncher.launch(Manifest.permission.CAMERA)
             }
         }
         binding.cardviewGallery.setOnClickListener {
@@ -98,6 +122,14 @@ class PictureFragment: Fragment() {
         translator = Translation.getClient(translateOptions)
         translator!!.downloadModelIfNeeded()
         lifecycle.addObserver(translator!!)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     fun detect(detector: ObjectDetector){
