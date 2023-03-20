@@ -78,8 +78,6 @@ class App : Application(){
         categories.add("행동")
     }
     private fun setFruitsImage(){
-
-
         PICTURES[0].add("사과")
         PICTURES[0].add("아보카도")
         PICTURES[0].add("바나나")
@@ -123,7 +121,6 @@ class App : Application(){
         PICTURES[0].add("고구마")
         PICTURES[0].add("토마토")
         PICTURES[0].add("수박")
-
     }
     private fun setJobImage(){
         PICTURES[1].add("배우")
@@ -281,8 +278,6 @@ class App : Application(){
         PICTURES[3].add("전선줄")
         PICTURES[3].add("청소기")
         PICTURES[3].add("창문")
-
-
     }
     private fun setPlaceImage(){
         PICTURES[4].add("미용실")
@@ -399,7 +394,6 @@ class App : Application(){
         PICTURES[6].add("하프")
         PICTURES[6].add("혁대")
         PICTURES[6].add("빵")
-        PICTURES[6].add("브로콜리")
         PICTURES[6].add("양동이")
         PICTURES[6].add("새")
         PICTURES[6].add("버스")
@@ -477,14 +471,11 @@ class App : Application(){
         PICTURES[6].add("달")
         PICTURES[6].add("모기")
         PICTURES[6].add("기차")
-        PICTURES[6].add("나무")
         PICTURES[6].add("삼각형")
         PICTURES[6].add("우산")
-        PICTURES[6].add("쥐")
         PICTURES[6].add("입")
         PICTURES[6].add("립스틱")
         PICTURES[6].add("손톱")
-        PICTURES[6].add("목걸이")
         PICTURES[6].add("코")
         PICTURES[6].add("테이블")
         PICTURES[6].add("팔각형")
@@ -516,7 +507,6 @@ class App : Application(){
         PICTURES[6].add("전갈")
         PICTURES[6].add("드라이버")
         PICTURES[6].add("와인잔")
-        PICTURES[6].add("양")
         PICTURES[6].add("얼룩말")
         PICTURES[6].add("별")
         PICTURES[6].add("스테이크")
