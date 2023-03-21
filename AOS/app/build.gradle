@@ -44,6 +44,9 @@ android {
     viewBinding {
         enabled = true
     }
+    aaptOptions {
+        noCompress "tflite"
+    }
 }
 
 dependencies {
@@ -97,6 +100,12 @@ dependencies {
 
     //Drawing_ColorPicker
     implementation 'com.jaredrummler:colorpicker:1.1.0'
+
+    //MLKit object_detection
+    implementation 'com.google.mlkit:object-detection-custom:17.0.0'
+
+    //MLKit translation
+    implementation 'com.google.mlkit:translate:17.0.1'
 
     // ViewPager indicator
     implementation 'me.relex:circleindicator:2.1.6'
