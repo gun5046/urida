@@ -77,6 +77,7 @@ class MainViewModel : ViewModel(){
             ,TextToSpeech.QUEUE_FLUSH,null,null)
     }
 
+
     fun setMode(mode:Int){
         _mode.value = mode
     }
@@ -121,6 +122,12 @@ class MainViewModel : ViewModel(){
     }
     fun startTTS(){
         textToSpeech?.speak(App.PICTURES[selectedCategory][currentIndex.value!!],TextToSpeech.QUEUE_FLUSH,null,null)
+    }
+    fun startCateOneTTS(){
+        for(index in 0 until 4){
+            Log.i(TAG, "startCateOneTTS: ${index+1}")
+            textToSpeech?.speak("${index+1}번 "+_quiz.value!!.problems[index],TextToSpeech.QUEUE_ADD,null,null)
+        }
     }
 
 }

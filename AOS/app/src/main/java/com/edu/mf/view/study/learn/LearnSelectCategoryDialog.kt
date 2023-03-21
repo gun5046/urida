@@ -1,11 +1,13 @@
 package com.edu.mf.view.study.learn
 
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
@@ -49,6 +51,7 @@ class LearnSelectCategoryDialog(
             lifecycleOwner = this@LearnSelectCategoryDialog
             vm = viewModel
         }
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         return view
     }
