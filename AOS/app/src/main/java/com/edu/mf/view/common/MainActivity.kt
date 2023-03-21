@@ -19,6 +19,10 @@ import com.kakao.sdk.common.KakaoSdk
 import com.navercorp.nid.NaverIdLoginSDK
 import java.util.*
 import com.edu.mf.viewmodel.MainViewModel
+import com.edu.mf.viewmodel.PictureViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 private const val TAG = "MainActivity"
@@ -29,6 +33,7 @@ class MainActivity : AppCompatActivity() {
     var user: User? = null
 
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var pictureViewModel: PictureViewModel
     init {
         instance = this
     }
@@ -49,16 +54,24 @@ class MainActivity : AppCompatActivity() {
         KakaoSdk.init(this, BuildConfig.Kakao_API_KEY)
         NaverIdLoginSDK.initialize(this, BuildConfig.OAUTH_CLIENT_ID, BuildConfig.OAUTH_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_NAME)
 
-        /*user = App.sharedPreferencesUtil.getUser()
+        user = App.sharedPreferencesUtil.getUser()
         if(user != null) {
-            changeLocale(user!!.language)
-            changeFragment(MainFragment())
+            CoroutineScope(Dispatchers.IO).launch {
+                user = loginService.login(user!!.social_id!!, user!!.type!!).body()
+                if(user!!.uid != null){
+                    changeLocale(user!!.language)
+                    changeFragment(MainFragment())
+                } else {
+                    changeFragment(LoginFragment())
+                }
+            }
         } else {
             changeFragment(LoginFragment())
-        }*/
+        }
         
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
-        changeFragment(MainFragment())
+        pictureViewModel = ViewModelProvider(this)[PictureViewModel::class.java]
+//        changeFragment(MainFragment())
     }
 
     fun changeFragment(fragment: Fragment){
