@@ -41,6 +41,11 @@ class MainViewModel : ViewModel(){
     private var _bookMark : MutableLiveData<String> = MutableLiveData()
     val bookMark get() = _bookMark
 
+    /**
+     * 문제풀기 0번 카테고리 문제 삽입
+     * 문제 4개 랜덤 생성후 인데스 셔플
+     */
+
     fun setWordQuiz(){
         var problems = ArrayList<Int>()
         val selectedIndex = Random().nextInt(App.PICTURES[selectedCategory].size)

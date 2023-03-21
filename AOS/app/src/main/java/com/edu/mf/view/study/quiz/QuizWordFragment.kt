@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -35,11 +36,14 @@ class QuizWordFragment : Fragment() {
         }
         viewModel.setWordQuiz()
         viewModel.setTTS()
+        disableBackPress()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         viewModel.quiz.observe(viewLifecycleOwner, Observer {
             binding.problems = it.problems
             Log.i(TAG, "onCreateView: ${it}")
@@ -49,8 +53,20 @@ class QuizWordFragment : Fragment() {
 
     }
     fun nextQuiz(){
-        mainActivity.addFragment(QuizWordFragment())
+        mainActivity.addQuizFragment(QuizWordFragment())
     }
-
+    fun onBackPressed(){
+        mainActivity.popQuizFragment()
+        mainActivity.popFragment()
+    }
+    /**
+     * onBackPressed 막기
+     */
+    private fun disableBackPress(){
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+            }
+        })
+    }
 
 }
