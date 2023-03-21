@@ -9,7 +9,7 @@
             type="com.edu.mf.viewmodel.MainViewModel" />
         <variable
             name="handlers"
-            type="com.edu.mf.view.study.learn.LearnSelectCategoryDialog" />
+            type="com.edu.mf.view.study.quiz.QuizSelectCategoryDialog" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout

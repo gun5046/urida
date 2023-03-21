@@ -13,10 +13,9 @@ import com.edu.mf.databinding.FragmentQuizBinding
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.study.learn.LearnAdapter
-import com.edu.mf.view.study.learn.LearnSelectCategoryDialog
 import com.edu.mf.viewmodel.MainViewModel
 
-class QuizFragment: Fragment(),LearnSelectCategoryDialog.CreateSelectProblemDialogListener{
+class QuizFragment: Fragment(), QuizSelectCategoryDialog.CreateSelectProblemDialogListener{
     private lateinit var learnAdapter: LearnAdapter
     private lateinit var binding: FragmentQuizBinding
     private lateinit var viewModel : MainViewModel
@@ -54,7 +53,7 @@ class QuizFragment: Fragment(),LearnSelectCategoryDialog.CreateSelectProblemDial
         learnAdapter.setOnCategoryClickListener(object : LearnAdapter.CategoryClickListener{
             override fun onClick(view: View, position: Int) {
                 viewModel.changeCategory(position)
-                val dialog = LearnSelectCategoryDialog(this@QuizFragment)
+                val dialog = QuizSelectCategoryDialog(this@QuizFragment)
                 dialog.isCancelable = false
                 dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
             }

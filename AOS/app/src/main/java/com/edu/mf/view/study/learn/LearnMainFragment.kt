@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +16,7 @@ import com.edu.mf.R
 import com.edu.mf.databinding.FragmentLearnMainBinding
 import com.edu.mf.utils.App
 import com.edu.mf.utils.SharedPreferencesUtil
+import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.MainViewModel
 import com.navercorp.nid.NaverIdLoginSDK.applicationContext
 import java.util.*
@@ -25,20 +27,23 @@ class LearnMainFragment : Fragment() {
     private var textToSpeech: TextToSpeech? = null
     private lateinit var binding : FragmentLearnMainBinding
     private lateinit var viewmodel : MainViewModel
+    private lateinit var mainActivity: MainActivity
     private val TAG = "LearnMainFragment_지훈"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_learn_main,container,false)
+        mainActivity = MainActivity.getInstance()!!
         viewmodel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-
         binding.apply {
             binding.list = App.PICTURES[viewmodel.selectedCategory]
             binding.vm = viewmodel
-            handlers = LearnMainFragment()
+            handlers = this@LearnMainFragment
         }
+
         binding.lifecycleOwner = this
+        disableBackPress()
         return binding.root
     }
     
@@ -85,4 +90,18 @@ class LearnMainFragment : Fragment() {
         super.onPause()
         setBookMark()
     }
+    fun backPressed(){
+        mainActivity.popFragment()
+    }
+
+    /**
+     * onBackPressed 막기
+     */
+    private fun disableBackPress(){
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+            }
+        })
+    }
+
 }
