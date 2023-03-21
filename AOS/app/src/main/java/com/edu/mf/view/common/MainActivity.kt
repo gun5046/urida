@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             changeFragment(LoginFragment())
         }
+        
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         pictureViewModel = ViewModelProvider(this)[PictureViewModel::class.java]
 //        changeFragment(MainFragment())

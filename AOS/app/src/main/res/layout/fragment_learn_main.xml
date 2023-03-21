@@ -6,6 +6,7 @@
 
     <data>
         <import type="android.view.View"/>
+        <variable name="handlers" type="com.edu.mf.view.study.learn.LearnMainFragment" />
         <variable name="list" type="java.util.ArrayList" />
         <variable name="vm" type="com.edu.mf.viewmodel.MainViewModel" />
     </data>
@@ -17,7 +18,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#f7e1d7">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintlayout_fragment_learn_main_word"
@@ -27,7 +29,7 @@
             android:layout_marginTop="120dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="80dp"
-            android:background="@drawable/learn_list_black_10"
+            android:background="@drawable/learn_list_light_10"
             app:layout_constraintBottom_toTopOf="@id/textview_fragment_learn_progress"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -73,8 +75,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
+                android:fontFamily="@font/jalnan"
+                android:onClick="@{()->vm.startTTS()}"
                 android:text="@{vm.answer}"
-                android:textColor="@color/black"
+                android:textColor="#4a5759"
                 android:textSize="40sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -88,10 +92,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:fontFamily="@font/kakao_regular"
+            android:fontFamily="@font/baemin"
             android:text="@{vm.bookMark}"
             android:textColor="@color/grey_icon"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/progressbar_fragment_learn_main_progress"
             app:layout_constraintRight_toRightOf="parent" />
 

@@ -24,7 +24,10 @@
     <color name="transparent_grey_500">#9e9e9ebb</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFF</color>
-
+    <color name="background_light_green">#6AEDB6</color>
+    <color name="background_purple">#A995FF</color>
+    <color name="background_yellow">#FDF6B9</color>
+    <color name="radio_button_clicked">#fb6f92</color>
     <array name="drawing_palette">
         <item>@color/drawing_red_500</item>
         <item>@color/drawing_pink_500</item>

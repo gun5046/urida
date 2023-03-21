@@ -11,12 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentLearnBinding
+import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.MainViewModel
 
 
-class LearnFragment: Fragment(),LearnSelectCategoryDialog.CreateSelectProblemDialogListener{
-    private var categories = arrayListOf<String>()
+class LearnFragment: Fragment(){
     private val TAG = "LearnFragment_지훈"
     private lateinit var viewModel: MainViewModel
     private lateinit var learnAdapter: LearnAdapter
@@ -30,6 +30,7 @@ class LearnFragment: Fragment(),LearnSelectCategoryDialog.CreateSelectProblemDia
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_learn,container,false)
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         mainActivity = MainActivity.getInstance()!!
+        Log.i(TAG, "onCreateView: ${viewModel.mode}")
         return binding.root
     }
 
@@ -42,28 +43,17 @@ class LearnFragment: Fragment(),LearnSelectCategoryDialog.CreateSelectProblemDia
      * 초기화 데이터
      */
     private fun init(){
-        setCategoryData()
         setAdapter()
     }
-    /**
-     * category 데이터 입력
-     */
-    private fun setCategoryData(){
-        categories.clear()
-        categories.add("과일/채소")
-        categories.add("직업")
-        categories.add("동물")
-        categories.add("물체")
-        categories.add("장소")
-        categories.add("행동")
-    }
+
 
     /**
      * adapter 초기화
      */
     private fun setAdapter(){
         learnAdapter = LearnAdapter()
-        learnAdapter.setList(categories)
+        learnAdapter.setFlag(1)
+        learnAdapter.setList(App.categories)
         binding.recyclerviewFragmentLearnList.apply{
             layoutManager = LinearLayoutManager(context)
             adapter = learnAdapter
@@ -72,16 +62,11 @@ class LearnFragment: Fragment(),LearnSelectCategoryDialog.CreateSelectProblemDia
             override fun onClick(view: View, position: Int) {
                 viewModel.changeCategory(position)
                 mainActivity.addFragment(LearnMainFragment())
-                /*val dialog = LearnSelectCategoryDialog(this@LearnFragment)
-                dialog.isCancelable = false
-                dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")*/
             }
         })
     }
 
-    override fun onOkButtonClick() {
 
-    }
 
 
 }
