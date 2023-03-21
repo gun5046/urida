@@ -52,9 +52,7 @@ class QuizWordFragment : Fragment() {
         })
 
     }
-    fun nextQuiz(){
-        mainActivity.addQuizFragment(QuizWordFragment())
-    }
+
     fun onBackPressed(){
         mainActivity.popQuizFragment()
         mainActivity.popFragment()
@@ -68,5 +66,24 @@ class QuizWordFragment : Fragment() {
             }
         })
     }
-
+    fun onOneClick(){
+        val dialog = QuizResultDialog(binding.textviewFragmentQuizOne.text.toString())
+        dialog.isCancelable = false
+        dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
+    }
+    fun onTwoClick(){
+        val dialog = QuizResultDialog(binding.textviewFragmentQuizTwo.text.toString())
+        dialog.isCancelable = false
+        dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
+    }
+    fun onThreeClick(){
+        val dialog = QuizResultDialog(binding.textviewFragmentQuizThree.text.toString())
+        dialog.isCancelable = false
+        dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
+    }
+    fun onFourClick(){
+        val dialog = QuizResultDialog(binding.textviewFragmentQuizFour.text.toString())
+        dialog.isCancelable = false
+        dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
+    }
 }

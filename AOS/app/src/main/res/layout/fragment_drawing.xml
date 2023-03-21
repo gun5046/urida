@@ -182,7 +182,7 @@
             android:layout_marginBottom="20dp"
             android:text="@string/fragment_drawing_button_drawing_result"
             android:textSize="16sp"
-            android:background="@drawable/drawing_button_result"
+            android:background="@drawable/drawing_button_result_next"
             app:layout_constraintHorizontal_weight="0.9"
             app:layout_constraintLeft_toRightOf="@+id/imageview_fragment_drawing_guide"
             app:layout_constraintRight_toRightOf="parent"
