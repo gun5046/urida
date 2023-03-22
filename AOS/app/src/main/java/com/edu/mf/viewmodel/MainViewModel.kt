@@ -20,6 +20,9 @@ class MainViewModel : ViewModel(){
     private var _mode : MutableLiveData<Int> = MutableLiveData()
     val mode : LiveData<Int> get() = _mode
 
+    private var _selectedIndex : MutableLiveData<Int> = MutableLiveData()
+    val selectedIndex : LiveData<Int> get() = _selectedIndex
+
     private var _quiz : MutableLiveData<Quiz> = MutableLiveData()
     val quiz : LiveData<Quiz> get() = _quiz
 
@@ -51,27 +54,36 @@ class MainViewModel : ViewModel(){
 
     fun setWordQuiz(){
         var problems = ArrayList<Int>()
-        val selectedIndex = Random().nextInt(App.PICTURES[selectedCategory].size)
+        _selectedIndex.value = Random().nextInt(App.PICTURES[selectedCategory].size)
+        var currentSelectedIndex = _selectedIndex.value!!
         var current_answer  = -1
         var set = mutableSetOf<Int>()
-        set.add(selectedIndex)
+        set.add(currentSelectedIndex)
         while(set.size<4){
             set.add(Random().nextInt(App.PICTURES[selectedCategory].size))
         }
         var temps = set.toList()
         problems.addAll(temps)
         problems.shuffle()
-
         var datas = ArrayList<String>()
         for(i in 0..3) {
             datas.add(App.PICTURES[selectedCategory][problems[i]])
-            if(problems[i]==selectedIndex)
+            if(problems[i]==currentSelectedIndex)
                 current_answer = i
         }
         _quizIndex.value = problems
-        var quiz:Quiz = Quiz(current_answer,selectedIndex,App.PICTURES[selectedCategory][selectedIndex],datas)
-        _quiz.value = quiz
+
+        var q:Quiz = Quiz(-1,-1)
+        when(selectedPCategory){
+            0-> q = Quiz(current_answer,currentSelectedIndex,App.PICTURES[selectedCategory][currentSelectedIndex],datas)
+            1-> q = Quiz(current_answer,currentSelectedIndex,problems)
+            else->{
+
+            }
+        }
+        _quiz.value = q
     }
+
     fun startTitleTTS(){
         Log.i(TAG, "startTitleTTS: ")
         textToSpeech?.speak(

@@ -3,6 +3,7 @@ package com.edu.mf.view.common
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.edu.mf.BuildConfig
@@ -88,21 +89,21 @@ class MainActivity : AppCompatActivity(){
     /**
      * 퀴즈 문제 출제시 backstack을 한번에 지우기 위해 name설정
      */
-    fun addQuizFragment(fragment: Fragment){
+    fun addQuizFragment(fragment: Fragment,fragmentName:String){
         supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(R.anim.slide_in_right,R.anim.slide_out_left,R.anim.slide_in_left,R.anim.slide_out_right)
             .replace(R.id.framelayout_main, fragment)
-            .addToBackStack("quiz")
+            .addToBackStack(fragmentName)
             .commit()
     }
 
     /**
      * 퀴즈 문제 출제시 backstack을 한번에 지움
      */
-    fun popQuizFragment(){
+    fun popQuizFragment(fragmentName:String){
         supportFragmentManager
-            .popBackStack("quiz",FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            .popBackStack(fragmentName,FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
     fun addFragment(fragment: Fragment){
@@ -139,4 +140,18 @@ class MainActivity : AppCompatActivity(){
         configuration.setLocale(locale)
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
+
+
+    /**
+     * onBackPressed 막기
+     */
+     fun disableBackPress(){
+        onBackPressedDispatcher.addCallback(this,object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+
+            }
+
+        })
+    }
+
 }

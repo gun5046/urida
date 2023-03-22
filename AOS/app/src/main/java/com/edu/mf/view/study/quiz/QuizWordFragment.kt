@@ -36,7 +36,7 @@ class QuizWordFragment : Fragment() {
         }
         viewModel.setWordQuiz()
         viewModel.setTTS()
-        disableBackPress()
+        //mainActivity.disableBackPress()
         return binding.root
     }
 
@@ -54,35 +54,27 @@ class QuizWordFragment : Fragment() {
     }
 
     fun onBackPressed(){
-        mainActivity.popQuizFragment()
+        mainActivity.popQuizFragment("word")
         mainActivity.popFragment()
     }
-    /**
-     * onBackPressed 막기
-     */
-    private fun disableBackPress(){
-        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-            }
-        })
-    }
+
     fun onOneClick(){
-        val dialog = QuizResultDialog(binding.textviewFragmentQuizOne.text.toString())
+        val dialog = QuizResultDialog(binding.textviewFragmentQuizWordOne.text.toString())
         dialog.isCancelable = false
         dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
     }
     fun onTwoClick(){
-        val dialog = QuizResultDialog(binding.textviewFragmentQuizTwo.text.toString())
+        val dialog = QuizResultDialog(binding.textviewFragmentQuizWordTwo.text.toString())
         dialog.isCancelable = false
         dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
     }
     fun onThreeClick(){
-        val dialog = QuizResultDialog(binding.textviewFragmentQuizThree.text.toString())
+        val dialog = QuizResultDialog(binding.textviewFragmentQuizWordThree.text.toString())
         dialog.isCancelable = false
         dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
     }
     fun onFourClick(){
-        val dialog = QuizResultDialog(binding.textviewFragmentQuizFour.text.toString())
+        val dialog = QuizResultDialog(binding.textviewFragmentQuizWordFour.text.toString())
         dialog.isCancelable = false
         dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
     }

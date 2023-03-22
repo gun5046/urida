@@ -94,12 +94,12 @@ class QuizResultDialog(
 
     fun onCancleClick(){
         dismiss()
-        mainActivity.popQuizFragment()
+        mainActivity.popQuizFragment("word")
         mainActivity.popFragment()
     }
     fun onOkClick(){
         dismiss()
-        mainActivity.addQuizFragment(QuizWordFragment())
+        mainActivity.addQuizFragment(QuizWordFragment(),"word")
     }
 
     @SuppressLint("ServiceCast")
