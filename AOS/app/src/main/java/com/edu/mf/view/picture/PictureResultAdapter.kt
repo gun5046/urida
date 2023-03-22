@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.edu.mf.databinding.ItemPictureResultBinding
 import com.edu.mf.repository.model.picture.DetectedPicture
+import com.edu.mf.viewmodel.MainViewModel
 
 class PictureResultAdapter(var PictureList: MutableList<DetectedPicture>): RecyclerView.Adapter<PictureResultAdapter.PictureResult>() {
     inner class PictureResult(val binding: ItemPictureResultBinding): RecyclerView.ViewHolder(binding.root) {
