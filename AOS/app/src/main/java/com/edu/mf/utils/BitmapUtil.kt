@@ -1,13 +1,15 @@
 package com.edu.mf.utils
 
 import android.content.ContentResolver
-import android.graphics.Bitmap
-import android.graphics.Matrix
+import android.graphics.*
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
 import androidx.exifinterface.media.ExifInterface
+import com.edu.mf.view.picture.FrameMetadata
+import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.nio.ByteBuffer
 
 private const val TAG = "BitmapUtil"
 
@@ -93,6 +95,30 @@ class BitmapUtil {
                 bitmap.recycle()
             }
             return rotatedBitmap
+        }
+
+        fun getBitmap(data: ByteBuffer, metadata: FrameMetadata): Bitmap? {
+            data.rewind()
+            val imageInBuffer = ByteArray(data.limit())
+            data[imageInBuffer, 0, imageInBuffer.size]
+            try {
+                val image = YuvImage(
+                    imageInBuffer, ImageFormat.NV21, metadata.getWidth(), metadata.getHeight(), null
+                )
+                val stream = ByteArrayOutputStream()
+                image.compressToJpeg(Rect(0, 0, metadata.getWidth(), metadata.getHeight()), 80, stream)
+                val bmp = BitmapFactory.decodeByteArray(stream.toByteArray(), 0, stream.size())
+                stream.close()
+                return rotateBitmap(
+                    bmp,
+                    metadata.getRotation(),
+                    false,
+                    false
+                )
+            } catch (e: Exception) {
+                Log.e("VisionProcessorBase", "Error: " + e.message)
+            }
+            return null
         }
     }
 }
