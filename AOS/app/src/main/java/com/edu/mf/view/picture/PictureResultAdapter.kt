@@ -7,11 +7,15 @@ import com.edu.mf.databinding.ItemPictureResultBinding
 import com.edu.mf.repository.model.picture.DetectedPicture
 import com.edu.mf.viewmodel.MainViewModel
 
-class PictureResultAdapter(var PictureList: MutableList<DetectedPicture>): RecyclerView.Adapter<PictureResultAdapter.PictureResult>() {
+class PictureResultAdapter(var PictureList: MutableList<DetectedPicture>, val mainViewModel: MainViewModel): RecyclerView.Adapter<PictureResultAdapter.PictureResult>() {
     inner class PictureResult(val binding: ItemPictureResultBinding): RecyclerView.ViewHolder(binding.root) {
         fun onBind(position: Int){
+            val resultText = PictureList.get(position).label
+            binding.layoutPictureResult.setOnClickListener {
+                mainViewModel.startTTSWithParameter(resultText)
+            }
             binding.imagePictureResult.setImageBitmap(PictureList.get(position).bitmap)
-            binding.textPictureResult.text = PictureList.get(position).label
+            binding.textPictureResult.text = resultText
         }
     }
 
