@@ -97,6 +97,7 @@
                 android:background="@drawable/quiz_button_translate_blue"
                 android:fontFamily="@font/jalnan"
                 android:textSize="14sp"
+                android:onClick="@{()->vm.startTitleTTS()}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/button_fragment_quiz_picture_translate_category"/>
@@ -109,6 +110,7 @@
                 android:layout_marginTop="4dp"
                 android:background="@drawable/quiz_button_translate_blue"
                 android:fontFamily="@font/jalnan"
+                android:onClick="@{()->vm.startCategoryTTS()}"
                 android:text="문제 듣기 \t"
                 android:textSize="14sp"
                 app:layout_constraintLeft_toRightOf="@id/button_fragment_quiz_picture_translate_title"
@@ -149,12 +151,12 @@
                     android:id="@+id/imageview_fragment_quiz_picture_image1"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:padding="30dp"
+                    app:imgSrc="@{@string/fragment_drawing_result_list_imageview(vm.selectedCategory,vm.quiz.problems_i[0])}"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"/>
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -173,6 +175,8 @@
                     android:id="@+id/imageview_fragment_quiz_picture_image2"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:padding="30dp"
+                    app:imgSrc="@{@string/fragment_drawing_result_list_imageview(vm.selectedCategory,vm.quiz.problems_i[1])}"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -195,6 +199,8 @@
                     android:id="@+id/imageview_fragment_quiz_picture_image3"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:padding="30dp"
+                    app:imgSrc="@{@string/fragment_drawing_result_list_imageview(vm.selectedCategory,vm.quiz.problems_i[2])}"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -213,17 +219,21 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent">
 
+                <ImageView
+                    android:id="@+id/imageview_fragment_quiz_picture_image4"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:padding="30dp"
+                    app:imgSrc="@{@string/fragment_drawing_result_list_imageview(vm.selectedCategory,vm.quiz.problems_i[3])}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <ImageView
-                android:id="@+id/imageview_fragment_quiz_picture_image4"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

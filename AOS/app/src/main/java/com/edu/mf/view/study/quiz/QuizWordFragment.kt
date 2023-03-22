@@ -36,7 +36,7 @@ class QuizWordFragment : Fragment() {
         }
         viewModel.setWordQuiz()
         viewModel.setTTS()
-        //mainActivity.disableBackPress()
+        mainActivity.disableBackPress()
         return binding.root
     }
 
@@ -46,9 +46,6 @@ class QuizWordFragment : Fragment() {
 
         viewModel.quiz.observe(viewLifecycleOwner, Observer {
             binding.problems = it.problems
-            Log.i(TAG, "onCreateView: ${it}")
-            binding.imageviewFragmentQuizWordImage.setImageResource(resources.getIdentifier(
-                "pictures_${viewModel.selectedCategory}_${it.answer_i}","drawable",requireActivity().packageName))
         })
 
     }

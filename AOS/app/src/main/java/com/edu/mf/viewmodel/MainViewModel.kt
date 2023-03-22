@@ -89,6 +89,7 @@ class MainViewModel : ViewModel(){
         textToSpeech?.speak(
             when(selectedPCategory){
                 0->"다음 그림은 무었일까요"
+                1->"다음 단어에 해당하는 그림은 무었일까요?"
                 else -> "else"
             }
             ,TextToSpeech.QUEUE_FLUSH,null,null)
@@ -141,11 +142,21 @@ class MainViewModel : ViewModel(){
         println("###   ${selectedCategory}  ${currentIndex.value!!}    ${App.PICTURES[selectedCategory][currentIndex.value!!]}")
         textToSpeech?.speak(App.PICTURES[selectedCategory][currentIndex.value!!],TextToSpeech.QUEUE_FLUSH,null,null)
     }
-    fun startCateOneTTS(){
-        for(index in 0 until 4){
-            Log.i(TAG, "startCateOneTTS: ${index+1}")
-            textToSpeech?.speak("${index+1}번 "+_quiz.value!!.problems[index],TextToSpeech.QUEUE_ADD,null,null)
+    fun startCategoryTTS(){
+        when(_selectedPCategory){
+            0->{
+                for(index in 0 until 4){
+                    textToSpeech?.speak("${index+1}번 "+_quiz.value!!.problems[index],TextToSpeech.QUEUE_ADD,null,null)
+                }
+            }
+            1->{
+                textToSpeech?.speak(App.PICTURES[selectedCategory][selectedIndex.value!!],TextToSpeech.QUEUE_ADD,null,null)
+            }
+            else->{
+
+            }
         }
     }
+
 
 }

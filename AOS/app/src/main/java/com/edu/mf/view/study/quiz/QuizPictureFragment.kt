@@ -34,9 +34,6 @@ class QuizPictureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.quiz.observe(viewLifecycleOwner, Observer {
-
-        })
     }
 
     private fun init(){
@@ -44,7 +41,7 @@ class QuizPictureFragment : Fragment() {
         mainActivity = MainActivity.getInstance()!!
         viewModel.setWordQuiz()
         viewModel.setTTS()
-        mainActivity.disableBackPress()
+        //mainActivity.disableBackPress()
 
         binding.apply{
             datas = App.PICTURES
