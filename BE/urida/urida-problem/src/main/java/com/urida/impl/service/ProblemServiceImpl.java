@@ -1,6 +1,8 @@
 package com.urida.impl.service;
 
 import com.urida.dto.ProblemSaveDto;
+import com.urida.entity.Choice;
+import com.urida.entity.Example;
 import com.urida.exception.SaveException;
 import com.urida.impl.ProblemService;
 import com.urida.entity.Problem;
@@ -11,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,7 +37,7 @@ public class ProblemServiceImpl implements ProblemService {
     @Transactional
     public void saveProblem(ProblemSaveDto problemSaveDto) {
         Optional<User> user = userJpqlRepo.findByUid(problemSaveDto.getUid());
-        System.out.println(user);
+
         if (user.isPresent()){
             Problem problem = Problem.builder()
                     .sentence_id(problemSaveDto.getSentence_id())
@@ -42,8 +45,18 @@ public class ProblemServiceImpl implements ProblemService {
                     .type(problemSaveDto.getType())
                     .category_id(problemSaveDto.getCategory_id())
                     .wrong_cnt(problemSaveDto.getWrong_cnt())
+                    .choices(new ArrayList<>())
+                    .examples(new ArrayList<>())
                     .user(user.get())
                     .build();
+
+            problemSaveDto.getChoices().forEach(
+                    choice -> problem.addChoice(choice)
+            );
+            problemSaveDto.getExamples().forEach(
+                    example -> problem.addExample(example)
+            );
+
             try {
                 problemJpqlRepo.saveProblem(problem);
             }catch(Exception e){

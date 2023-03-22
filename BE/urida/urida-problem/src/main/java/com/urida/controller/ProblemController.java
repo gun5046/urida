@@ -35,7 +35,6 @@ public class ProblemController {
             throw new InputException("RequestData(RegisterDto))invalid");
         }
 
-        System.out.println(problemSaveDto);
         problemService.saveProblem(problemSaveDto);
         return true;
     }

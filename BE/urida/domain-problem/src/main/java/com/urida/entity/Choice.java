@@ -1,9 +1,6 @@
 package com.urida.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,12 +9,20 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
+@Setter
 public class Choice {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long wordId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private int wordId;
 
     @ManyToOne
-    @JoinColumn(name = "problem_proId")
+    @JoinColumn(name = "pro_id")
     private Problem problem;
+
+    public Choice(int wordId, Problem problem){
+        this.problem = problem;
+        this.wordId = wordId;
+    }
 }
