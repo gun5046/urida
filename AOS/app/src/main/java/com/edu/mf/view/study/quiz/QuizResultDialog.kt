@@ -7,6 +7,7 @@ import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +17,18 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
 import com.edu.mf.databinding.DialogFragmentQuizResultBinding
+import com.edu.mf.repository.api.ResolveService
+import com.edu.mf.repository.model.resolve.ResolveRequest
+import com.edu.mf.repository.model.resolve.ResolveResponse
+import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.MainViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
+private const val TAG = "QuizResultDialog_지훈"
 class QuizResultDialog(
     answers : String
 ) : DialogFragment(){
@@ -27,6 +37,7 @@ class QuizResultDialog(
     private var _binding: DialogFragmentQuizResultBinding? = null
     private val binding get() = _binding!!
     private var answers : String?= null
+    private var job: Job? = null
     init{
         this.answers = answers
     }
@@ -44,6 +55,11 @@ class QuizResultDialog(
         if(answers!!.substring(3,answers!!.length).equals(viewModel.quiz.value!!.answer_s)){
             binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
         }else{
+            val resolveRequest = ResolveRequest(
+                viewModel.quiz.value!!.answer_i,viewModel.selectedCategory,-1,
+                viewModel.selectedPCategory,1, App.sharedPreferencesUtil.getUser()?.uid.toString(),
+                emptyList<Int>(),viewModel.quizIndex.value!!)
+            insertResolveRequest(resolveRequest)
             binding.textviewDialogFragmentQuizTitle.text = "정답은 ${viewModel.quiz.value!!.answer_s} 입니다"
             binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
         }
@@ -62,6 +78,18 @@ class QuizResultDialog(
     override fun onResume() {
         super.onResume()
         context?.dialogFragmentResize(this@QuizResultDialog,0.9f,0.15f)
+    }
+
+    private fun insertResolveRequest(resolveRequest: ResolveRequest){
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val response = App.resolveRetrofit.create(ResolveService::class.java).insertResolve(resolveRequest)
+            val body = response.body()
+            if(body!=null){
+                Log.i(TAG, "insertResolveRequest 성공")
+            }else{
+                Log.i(TAG, "insertResolveRequest 실패")
+            }
+        }
     }
 
     fun onCancleClick(){

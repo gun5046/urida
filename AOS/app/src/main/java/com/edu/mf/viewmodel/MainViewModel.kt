@@ -23,6 +23,9 @@ class MainViewModel : ViewModel(){
     private var _quiz : MutableLiveData<Quiz> = MutableLiveData()
     val quiz : LiveData<Quiz> get() = _quiz
 
+    private var _quizIndex : MutableLiveData<ArrayList<Int>> = MutableLiveData()
+    val quizIndex : LiveData<ArrayList<Int>> get() = _quizIndex
+
 
     private var textToSpeech: TextToSpeech? = null
 
@@ -58,12 +61,14 @@ class MainViewModel : ViewModel(){
         var temps = set.toList()
         problems.addAll(temps)
         problems.shuffle()
+
         var datas = ArrayList<String>()
         for(i in 0..3) {
             datas.add(App.PICTURES[selectedCategory][problems[i]])
             if(problems[i]==selectedIndex)
                 current_answer = i
         }
+        _quizIndex.value = problems
         var quiz:Quiz = Quiz(current_answer,selectedIndex,App.PICTURES[selectedCategory][selectedIndex],datas)
         _quiz.value = quiz
     }
