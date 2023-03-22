@@ -71,8 +71,9 @@ class SpectrogramDataset(Dataset, SpectrogramParser):
     
     def get_item(self, idx):
         """ get feature vector & transcript """
-        feature = self.parse_audio(os.path.join(self.dataset_path, self.audio_paths[idx]), self.augment_methods[idx])
-        
+        feature = self.parse_audio(self.dataset_path+'/'+ self.audio_paths[idx], self.augment_methods[idx])
+        # logger.info(os.getcwd())
+        # logger.info(os.path.join(self.dataset_path, self.audio_paths[idx]))
         if feature is None:
             return None, None
         

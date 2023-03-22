@@ -21,7 +21,7 @@ import torchaudio
 from torch import Tensor
 import os
 from tools import revise
-
+from kospeech.utils import logger
 from kospeech.vocabs.ksponspeech import KsponSpeechVocabulary
 from kospeech.data.audio.core import load_audio
 from kospeech.models import (
@@ -57,6 +57,7 @@ parser.add_argument('--device', type=str, required=False, default='cpu')
 opt = parser.parse_args()
 
 # 음성 하나에 대해 inference 하는 경우
+logger.info(opt.audio_path)
 feature = parse_audio(opt.audio_path, del_silence=True)
 input_length = torch.LongTensor([len(feature)])
 vocab = KsponSpeechVocabulary('./data/vocab/jong_character_vocabs.csv')

@@ -14,7 +14,7 @@ def stringParser() :
         if not line : break
         # print(string[1])
         # dict[string[0]]=string[1]
-        audio_path.append(string[0].replace('/','\\'))
+        audio_path.append(string[0])
 
         for idx in range(5) :
             string[2] = string[2].replace(change[idx],'')
