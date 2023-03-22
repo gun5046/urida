@@ -26,7 +26,6 @@ class DrawingResultFragment(
         binding = FragmentDrawingResultBinding.inflate(inflater, container, false)
         mainViewModel = MainViewModel()
         drawingViewModel = DrawingViewModel()
-
         return binding.root
     }
 
