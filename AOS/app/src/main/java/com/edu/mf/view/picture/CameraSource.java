@@ -678,6 +678,7 @@ public class CameraSource {
 
         try {
           synchronized (processorLock) {
+            sleep(400);
             frameProcessor.processByteBuffer(
                 data,
                 new FrameMetadata.Builder()

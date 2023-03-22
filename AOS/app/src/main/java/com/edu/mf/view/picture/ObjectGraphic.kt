@@ -72,28 +72,27 @@ class ObjectGraphic constructor(
     val colorID =
       if (detectedObject.trackingId == null) 0
       else abs(detectedObject.trackingId!! % NUM_COLORS)
-    var textWidth =
-      textPaints[colorID].measureText("Tracking ID: " + detectedObject.trackingId)
+    var textWidth = textPaints[colorID].measureText(translatedText)
     val lineHeight = TEXT_SIZE + STROKE_WIDTH
-    var yLabelOffset = -lineHeight
+    var yLabelOffset = lineHeight
 
     // Calculate width and height of label box
-    for (label in detectedObject.labels) {
-      textWidth =
-        max(textWidth, textPaints[colorID].measureText(translatedText))
-      textWidth = max(
-        textWidth,
-        textPaints[colorID].measureText(
-          String.format(
-            Locale.KOREA,
-            LABEL_FORMAT,
-            label.confidence * 100,
-            label.index
-          )
-        )
-      )
-      yLabelOffset -= 2 * lineHeight
-    }
+//    for (label in detectedObject.labels) {
+//      textWidth =
+//        max(textWidth, textPaints[colorID].measureText(translatedText))
+//      textWidth = max(
+//        textWidth,
+//        textPaints[colorID].measureText(
+//          String.format(
+//            Locale.KOREA,
+//            LABEL_FORMAT,
+//            label.confidence * 100,
+//            label.index
+//          )
+//        )
+//      )
+//      yLabelOffset += 2 * lineHeight
+//    }
 
     // Draws the bounding box.
     val rect = RectF(detectedObject.boundingBox)
@@ -107,46 +106,45 @@ class ObjectGraphic constructor(
 
     // Draws other object info.
     canvas.drawRect(
-      rect.left - STROKE_WIDTH,
+      rect.left,
       rect.top + yLabelOffset,
-      rect.left + textWidth + 2 * STROKE_WIDTH,
+      rect.left + textWidth + STROKE_WIDTH,
       rect.top,
       labelPaints[colorID]
     )
     yLabelOffset += TEXT_SIZE
-    canvas.drawText(
-      "Tracking ID: " + detectedObject.trackingId,
-      rect.left,
-      rect.top + yLabelOffset,
-      textPaints[colorID]
-    )
-    yLabelOffset += lineHeight
+//    canvas.drawText(
+//      "Tracking ID: " + detectedObject.trackingId,
+//      rect.left,
+//      rect.top + yLabelOffset,
+//      textPaints[colorID]
+//    )
+    yLabelOffset -= lineHeight
     for (label in detectedObject.labels) {
       canvas.drawText(
-        translatedText + " (index: " + label.index + ")",
+        translatedText,
         rect.left,
-        rect.top + yLabelOffset,
+        rect.top + yLabelOffset - STROKE_WIDTH,
         textPaints[colorID]
       )
-      yLabelOffset += lineHeight
-      canvas.drawText(
-        String.format(
-          Locale.KOREA,
-          LABEL_FORMAT,
-          label.confidence * 100,
-          label.index
-        ),
-        rect.left,
-        rect.top + yLabelOffset,
-        textPaints[colorID]
-      )
-      yLabelOffset += lineHeight
+//      canvas.drawText(
+//        String.format(
+//          Locale.KOREA,
+//          LABEL_FORMAT,
+//          label.confidence * 100,
+//          label.index
+//        ),
+//        rect.left,
+//        rect.top + yLabelOffset,
+//        textPaints[colorID]
+//      )
+//      yLabelOffset += lineHeight
     }
   }
 
   companion object {
-    private const val TEXT_SIZE = 54.0f
-    private const val STROKE_WIDTH = 4.0f
+    private const val TEXT_SIZE = 100.0f
+    private const val STROKE_WIDTH = 10.0f
     private const val NUM_COLORS = 10
     private val COLORS =
       arrayOf(

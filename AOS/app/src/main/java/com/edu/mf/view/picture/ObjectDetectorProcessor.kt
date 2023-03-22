@@ -64,10 +64,10 @@ class ObjectDetectorProcessor(context: Context, options: ObjectDetectorOptionsBa
       if(result.labels.isNotEmpty()){
         translator.translate(result.labels[0].text).addOnSuccessListener {
           Log.d(TAG, "onSuccess: ${result.labels[0].text}, ${it}")
-          graphicOverlay.add(ObjectGraphic(graphicOverlay, result, it))
+          val str = if(it.equals("쥐")) "마우스" else it
+          graphicOverlay.add(ObjectGraphic(graphicOverlay, result, str))
+          graphicOverlay.postInvalidate()
         }
-      } else {
-        graphicOverlay.add(ObjectGraphic(graphicOverlay, result, ""))
       }
     }
   }
