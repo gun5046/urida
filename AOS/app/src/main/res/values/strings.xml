@@ -44,6 +44,7 @@
     <string name="fragment_drawing_result_redrawing_button">다시 그리기</string>
 
     <!--    fragment_picture-->
+    <string name="fragment_picture_cardview_preview">실시간으로 확인하기</string>
     <string name="fragment_picture_cardview_camera">촬영하기</string>
     <string name="fragment_picture_cardview_gallery">갤러리에서 불러오기</string>
 
