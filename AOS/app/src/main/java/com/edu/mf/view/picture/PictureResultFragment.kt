@@ -44,7 +44,8 @@ class PictureResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pictureResultAdapter = PictureResultAdapter(pictureViewModel.detectedPictureList.value!!)
+        mainViewModel.setTTS()
+        pictureResultAdapter = PictureResultAdapter(pictureViewModel.detectedPictureList.value!!, mainViewModel)
         Log.d(TAG, "onViewCreated: ${pictureViewModel.detectedPictureList.value!!.size}")
         if(pictureViewModel.detectedPictureList.value!!.size == 0){
             binding.recyclerview.visibility = View.GONE
