@@ -38,10 +38,10 @@
     <!--    fragment_drawing_result_list-->
     <string name="fragment_drawing_result_list_imageview">pictures_%1$d_%2$d</string>
 
-    <!--    fragment_drawing_result_redrawing-->
-    <string name="fragment_drawing_result_redrawing_textview">잘 모르겠어요.\n\n다시 한번 그려주실래요?</string>
-    <string name="fragment_drawing_result_redrawing_main_button">첫 화면으로</string>
-    <string name="fragment_drawing_result_redrawing_button">다시 그리기</string>
+    <!--    dialog_fragment_drawing_result_redrawing-->
+    <string name="dialog_fragment_drawing_result_redrawing_textview">잘 모르겠어요.\n\n다시 한번 그려주실래요?</string>
+    <string name="dialog_fragment_drawing_result_redrawing_main_button">첫 화면으로</string>
+    <string name="dialog_fragment_drawing_result_redrawing_button">다시 그리기</string>
 
     <!--    fragment_picture-->
     <string name="fragment_picture_cardview_preview">실시간으로 확인하기</string>

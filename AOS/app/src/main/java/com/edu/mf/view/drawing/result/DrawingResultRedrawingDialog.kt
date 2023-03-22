@@ -29,11 +29,11 @@ class DrawingResultRedrawingDialog: DialogFragment() {
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         isCancelable = false
 
-        binding.buttonFragmentDrawingResultRedrawingMain.setOnClickListener {
+        binding.buttonDialogFragmentDrawingResultRedrawingMain.setOnClickListener {
             mainActivity.changeFragment(MainFragment())
         }
 
-        binding.buttonFragmentDrawingResultRedrawing.setOnClickListener {
+        binding.buttonDialogFragmentDrawingResultRedrawing.setOnClickListener {
             mainActivity.changeFragment(DrawingFragment())
         }
 

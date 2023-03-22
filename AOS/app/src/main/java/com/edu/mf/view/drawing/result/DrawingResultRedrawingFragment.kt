@@ -27,7 +27,7 @@ class DrawingResultRedrawingFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFragmentDrawingResultRedrawing.setOnClickListener{
+        binding.buttonDialogFragmentDrawingResultRedrawing.setOnClickListener{
             mainActivity.changeFragment(DrawingFragment())
         }
     }

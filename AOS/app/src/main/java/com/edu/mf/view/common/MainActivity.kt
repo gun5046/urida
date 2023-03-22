@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.edu.mf.BuildConfig
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
@@ -26,7 +27,7 @@ import kotlinx.coroutines.launch
 
 
 private const val TAG = "MainActivity"
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
     val loginService = App.userRetrofit.create(UserService::class.java)
     val drawingService = App.drawingRetrofit.create(DrawingService::class.java)
@@ -44,6 +45,7 @@ class MainActivity : AppCompatActivity() {
             return instance
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,6 +81,28 @@ class MainActivity : AppCompatActivity() {
             .beginTransaction()
             .replace(R.id.framelayout_main, fragment)
             .commit()
+    }
+
+
+
+    /**
+     * 퀴즈 문제 출제시 backstack을 한번에 지우기 위해 name설정
+     */
+    fun addQuizFragment(fragment: Fragment){
+        supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.slide_in_right,R.anim.slide_out_left,R.anim.slide_in_left,R.anim.slide_out_right)
+            .replace(R.id.framelayout_main, fragment)
+            .addToBackStack("quiz")
+            .commit()
+    }
+
+    /**
+     * 퀴즈 문제 출제시 backstack을 한번에 지움
+     */
+    fun popQuizFragment(){
+        supportFragmentManager
+            .popBackStack("quiz",FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
     fun addFragment(fragment: Fragment){
