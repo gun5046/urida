@@ -39,7 +39,7 @@ public class ProblemController {
         return true;
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     @ApiOperation(value = "문제갱신", notes = "틀린횟수 +1")
     public void updateProblem(@RequestParam Long proId){
         problemService.updateProblem(proId);
