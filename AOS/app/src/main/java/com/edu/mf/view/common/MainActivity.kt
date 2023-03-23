@@ -17,6 +17,7 @@ import com.edu.mf.utils.App
 import com.edu.mf.view.LanguageFragment
 import com.edu.mf.view.LoginFragment
 import com.edu.mf.view.MainFragment
+import com.edu.mf.view.study.quiz.QuizResultDialog
 import com.kakao.sdk.common.KakaoSdk
 import com.navercorp.nid.NaverIdLoginSDK
 import java.util.*
@@ -142,16 +143,7 @@ class MainActivity : AppCompatActivity(){
     }
 
 
-    /**
-     * onBackPressed 막기
-     */
-     fun disableBackPress(){
-        onBackPressedDispatcher.addCallback(this,object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
 
-            }
 
-        })
-    }
 
 }

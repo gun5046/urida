@@ -68,24 +68,10 @@ class QuizWordFragment : Fragment() {
         mainActivity.popFragment()
     }
 
-    fun onOneClick(){
-        val dialog = QuizResultDialog(binding.textviewFragmentQuizWordOne.text.toString())
+    fun onProblemClick(index:Int){
+        val dialog = QuizResultDialog(index,0)
         dialog.isCancelable = false
-        dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
+        dialog.show(activity?.supportFragmentManager!!,"QuizResultDialog")
     }
-    fun onTwoClick(){
-        val dialog = QuizResultDialog(binding.textviewFragmentQuizWordTwo.text.toString())
-        dialog.isCancelable = false
-        dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
-    }
-    fun onThreeClick(){
-        val dialog = QuizResultDialog(binding.textviewFragmentQuizWordThree.text.toString())
-        dialog.isCancelable = false
-        dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
-    }
-    fun onFourClick(){
-        val dialog = QuizResultDialog(binding.textviewFragmentQuizWordFour.text.toString())
-        dialog.isCancelable = false
-        dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
-    }
+
 }
