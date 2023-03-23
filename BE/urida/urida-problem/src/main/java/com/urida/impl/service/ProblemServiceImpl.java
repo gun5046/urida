@@ -2,8 +2,6 @@ package com.urida.impl.service;
 
 import com.urida.dto.ProblemOutDto;
 import com.urida.dto.ProblemSaveDto;
-import com.urida.entity.Choice;
-import com.urida.entity.Example;
 import com.urida.exception.SaveException;
 import com.urida.impl.ProblemService;
 import com.urida.entity.Problem;
@@ -27,9 +25,8 @@ public class ProblemServiceImpl implements ProblemService {
     private final UserJpqlRepo userJpqlRepo;
     @Override
     public ProblemOutDto problemInfo(Long proId) {
-        Optional<Problem> problem = problemJpqlRepo.findByProId(proId);
-        if(problem.isPresent()){
-            return new ProblemOutDto(problem.get());
+        if(problemJpqlRepo.findByProId(proId).isPresent()){
+            return new ProblemOutDto(problemJpqlRepo.findByProId(proId).get());
         }else{
             return new ProblemOutDto();
         }
@@ -76,16 +73,13 @@ public class ProblemServiceImpl implements ProblemService {
     @Override
     public List<ProblemOutDto> getListProblem(Long userId) {
         List<Problem> problems = problemJpqlRepo.findByUserId(userId);
-        List<ProblemOutDto> problemOutDtos = problems.stream().map(problem -> {
-            return new ProblemOutDto(problem);
-        }).collect(Collectors.toList());
-
-        return problemOutDtos;
+        return problems.stream().map(problem -> new ProblemOutDto(problem)
+        ).collect(Collectors.toList());
     }
 
     @Transactional
     @Override
-    public void deleteProblem(Long userId, Long proId) {
-        problemJpqlRepo.deleteProInList(userId, proId);
+    public void deleteProblem(Long proId) {
+        problemJpqlRepo.deleteProInList(proId);
     }
 }
