@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
-import com.edu.mf.databinding.FragmentDrawingResultRedrawingBinding
+import com.edu.mf.databinding.DialogFragmentDrawingResultRedrawingBinding
 import com.edu.mf.view.MainFragment
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.drawing.DrawingFragment
 
 class DrawingResultRedrawingDialog: DialogFragment() {
-    private lateinit var binding: FragmentDrawingResultRedrawingBinding
+    private lateinit var binding: DialogFragmentDrawingResultRedrawingBinding
     private lateinit var mainActivity: MainActivity
 
     override fun onCreateView(
@@ -22,7 +22,7 @@ class DrawingResultRedrawingDialog: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDrawingResultRedrawingBinding.inflate(layoutInflater)
+        binding = DialogFragmentDrawingResultRedrawingBinding.inflate(layoutInflater)
         mainActivity = MainActivity.getInstance()!!
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

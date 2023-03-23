@@ -109,7 +109,6 @@ class DrawingFragment: Fragment() {
 
     // 3차원 행렬 만들기
     private fun makeMatrix(){
-        //val pointList = GraphicView.pointList
         var xList = ArrayList<Int>()
         var yList = ArrayList<Int>()
 

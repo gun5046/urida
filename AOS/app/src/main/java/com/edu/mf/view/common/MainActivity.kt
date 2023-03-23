@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar!!.hide()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -64,16 +65,16 @@ class MainActivity : AppCompatActivity(){
                     changeLocale(user!!.language)
                     changeFragment(MainFragment())
                 } else {
-                    changeFragment(LoginFragment())
+                    //changeFragment(LoginFragment())
                 }
             }
         } else {
-            changeFragment(LoginFragment())
+            //changeFragment(LoginFragment())
         }
         
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         pictureViewModel = ViewModelProvider(this)[PictureViewModel::class.java]
-//        changeFragment(MainFragment())
+        changeFragment(MainFragment())
     }
 
     fun changeFragment(fragment: Fragment){
@@ -109,6 +110,15 @@ class MainActivity : AppCompatActivity(){
         supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(R.anim.slide_in_right,R.anim.slide_out_left,R.anim.slide_in_left,R.anim.slide_out_right)
+            .replace(R.id.framelayout_main, fragment)
+            .addToBackStack(null)
+            .commit()
+    }
+
+    fun addFragmentNoAnim(fragment: Fragment){
+        supportFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.slide_in_right,R.anim.slide_out_left)
             .replace(R.id.framelayout_main, fragment)
             .addToBackStack(null)
             .commit()

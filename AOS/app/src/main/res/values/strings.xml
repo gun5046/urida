@@ -48,4 +48,21 @@
     <string name="fragment_picture_cardview_camera">촬영하기</string>
     <string name="fragment_picture_cardview_gallery">갤러리에서 불러오기</string>
 
+    <!--    fragment_community-->
+    <string name="fragment_community_tablayout_title_free">자유 게시판</string>
+    <string name="fragment_community_tablayout_title_drawing">그림 게시판</string>
+
+    <!--    fragment_community_detail-->
+    <string name="fragment_community_detail_comment_dialog_edit">삭제</string>
+    <string name="fragment_community_detail_comment_dialog_delete">수정</string>
+    <string name="fragment_community_detail_comment_edittext">댓글을 입력해주세요.</string>
+    <string name="fragment_community_detail_comment_button">등록</string>
+
+    <!--    fragment_community_register-->
+    <string name="fragment_community_register_edittext_title">제목</string>
+    <string name="fragment_community_register_edittext_content">내용</string>
+
+    <!--    actionbar_menu-->
+    <string name="actionbar_menu_register">완료</string>
+
 </resources>
