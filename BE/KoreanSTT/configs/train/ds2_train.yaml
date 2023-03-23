@@ -5,7 +5,7 @@ transcripts_path: '../../../transcripts.txt'
 output_unit: 'character'
 
 # trainer
-num_epochs: 8
+num_epochs: 2
 batch_size: 32
 save_result_every: 100
 checkpoint_every: 100

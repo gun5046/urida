@@ -1,0 +1,330 @@
+[2023-03-22 17:46:04,415][kospeech.utils][INFO] - audio:
+  audio_extension: wav
+  sample_rate: 16000
+  frame_length: 20
+  frame_shift: 10
+  normalize: true
+  del_silence: true
+  feature_extract_by: kaldi
+  time_mask_num: 4
+  freq_mask_num: 2
+  spec_augment: true
+  input_reverse: false
+  transform_method: fbank
+  n_mels: 80
+  freq_mask_para: 18
+model:
+  architecture: deepspeech2
+  teacher_forcing_ratio: 1.0
+  teacher_forcing_step: 0.0
+  min_teacher_forcing_ratio: 1.0
+  dropout: 0.3
+  bidirectional: false
+  joint_ctc_attention: false
+  max_len: 400
+  use_bidirectional: true
+  rnn_type: gru
+  hidden_dim: 1024
+  activation: hardtanh
+  num_encoder_layers: 3
+train:
+  dataset: kspon
+  dataset_path: ./dataset/kspon/data/kss
+  transcripts_path: ../../../transcripts.txt
+  output_unit: character
+  batch_size: 32
+  save_result_every: 100
+  checkpoint_every: 100
+  print_every: 10
+  mode: train
+  num_workers: 8
+  use_cuda: true
+  num_threads: 2
+  init_lr_scale: 0.01
+  final_lr_scale: 0.05
+  max_grad_norm: 400
+  weight_decay: 1.0e-05
+  total_steps: 200000
+  seed: 777
+  resume: false
+  optimizer: adam
+  init_lr: 1.0e-06
+  final_lr: 1.0e-06
+  peak_lr: 0.0001
+  warmup_steps: 400
+  num_epochs: 8
+  reduction: mean
+  lr_scheduler: tri_stage_lr_scheduler
+
+[2023-03-22 17:46:04,470][kospeech.utils][INFO] - Operating System : Windows 10
+[2023-03-22 17:46:04,471][kospeech.utils][INFO] - Processor : Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+[2023-03-22 17:46:04,472][kospeech.utils][INFO] - device : NVIDIA GeForce RTX 2060
+[2023-03-22 17:46:04,473][kospeech.utils][INFO] - CUDA is available : True
+[2023-03-22 17:46:04,473][kospeech.utils][INFO] - CUDA version : 11.8
+[2023-03-22 17:46:04,473][kospeech.utils][INFO] - PyTorch version : 2.0.0+cu118
+[2023-03-22 17:46:04,511][kospeech.utils][INFO] - split dataset start !!
+[2023-03-22 17:46:04,758][kospeech.utils][INFO] - Applying Spec Augmentation...
+[2023-03-22 17:46:04,763][kospeech.utils][INFO] - split dataset complete !!
+[2023-03-22 17:46:07,281][kospeech.utils][INFO] - start
+[2023-03-22 17:46:07,281][kospeech.utils][INFO] - Epoch 0 start
+[2023-03-22 17:46:07,358][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2040.wav
+[2023-03-22 17:46:07,359][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3090.wav
+[2023-03-22 17:46:07,362][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0807.wav
+[2023-03-22 17:46:07,363][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1664.wav
+[2023-03-22 17:46:07,370][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4707.wav
+[2023-03-22 17:46:07,371][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0729.wav
+[2023-03-22 17:46:07,374][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3697.wav
+[2023-03-22 17:46:07,375][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1496.wav
+[2023-03-22 17:46:07,391][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3051.wav
+[2023-03-22 17:46:07,393][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0317.wav
+[2023-03-22 17:46:07,397][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4310.wav
+[2023-03-22 17:46:07,399][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3016.wav
+[2023-03-22 17:46:07,405][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4367.wav
+[2023-03-22 17:46:07,411][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0061.wav
+[2023-03-22 17:46:07,412][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0233.wav
+[2023-03-22 17:46:07,416][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1401.wav
+[2023-03-22 17:46:07,420][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4314.wav
+[2023-03-22 17:46:07,425][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4298.wav
+[2023-03-22 17:46:07,431][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1825.wav
+[2023-03-22 17:46:07,435][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3364.wav
+[2023-03-22 17:46:07,437][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1803.wav
+[2023-03-22 17:46:07,443][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0025.wav
+[2023-03-22 17:46:07,445][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4492.wav
+[2023-03-22 17:46:07,454][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3566.wav
+[2023-03-22 17:46:07,454][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1755.wav
+[2023-03-22 17:46:07,459][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1280.wav
+[2023-03-22 17:46:07,461][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2113.wav
+[2023-03-22 17:46:07,469][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0693.wav
+[2023-03-22 17:46:07,471][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3107.wav
+[2023-03-22 17:46:07,478][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2351.wav
+[2023-03-22 17:46:07,480][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1677.wav
+[2023-03-22 17:46:07,488][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4776.wav
+[2023-03-22 17:46:07,491][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3502.wav
+[2023-03-22 17:46:07,495][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0443.wav
+[2023-03-22 17:46:07,499][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0369.wav
+[2023-03-22 17:46:07,504][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2386.wav
+[2023-03-22 17:46:07,506][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0319.wav
+[2023-03-22 17:46:07,511][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0704.wav
+[2023-03-22 17:46:07,514][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0534.wav
+[2023-03-22 17:46:07,520][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0650.wav
+[2023-03-22 17:46:07,527][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2984.wav
+[2023-03-22 17:46:07,531][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0931.wav
+[2023-03-22 17:46:07,532][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0065.wav
+[2023-03-22 17:46:07,536][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3968.wav
+[2023-03-22 17:46:07,541][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0390.wav
+[2023-03-22 17:46:07,544][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3847.wav
+[2023-03-22 17:46:07,547][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2237.wav
+[2023-03-22 17:46:07,552][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4362.wav
+[2023-03-22 17:46:07,557][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1691.wav
+[2023-03-22 17:46:07,566][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1270.wav
+[2023-03-22 17:46:07,567][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4602.wav
+[2023-03-22 17:46:07,572][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0713.wav
+[2023-03-22 17:46:07,576][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0084.wav
+[2023-03-22 17:46:07,579][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2461.wav
+[2023-03-22 17:46:07,581][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2698.wav
+[2023-03-22 17:46:07,585][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2451.wav
+[2023-03-22 17:46:07,586][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0315.wav
+[2023-03-22 17:46:07,595][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4356.wav
+[2023-03-22 17:46:07,597][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3377.wav
+[2023-03-22 17:46:07,603][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1809.wav
+[2023-03-22 17:46:07,607][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1938.wav
+[2023-03-22 17:46:07,613][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0340.wav
+[2023-03-22 17:46:07,616][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0202.wav
+[2023-03-22 17:46:07,620][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4565.wav
+[2023-03-22 17:46:07,625][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1497.wav
+[2023-03-22 17:46:07,632][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4201.wav
+[2023-03-22 17:46:07,634][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0618.wav
+[2023-03-22 17:46:07,637][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3291.wav
+[2023-03-22 17:46:07,643][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0445.wav
+[2023-03-22 17:46:07,649][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0466.wav
+[2023-03-22 17:46:07,651][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0655.wav
+[2023-03-22 17:46:07,657][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2524.wav
+[2023-03-22 17:46:07,660][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0809.wav
+[2023-03-22 17:46:07,668][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2135.wav
+[2023-03-22 17:46:07,671][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4302.wav
+[2023-03-22 17:46:07,677][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2203.wav
+[2023-03-22 17:46:07,682][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1177.wav
+[2023-03-22 17:46:07,687][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1631.wav
+[2023-03-22 17:46:07,692][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3333.wav
+[2023-03-22 17:46:07,698][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1122.wav
+[2023-03-22 17:46:07,698][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0751.wav
+[2023-03-22 17:46:07,704][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0417.wav
+[2023-03-22 17:46:07,707][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4294.wav
+[2023-03-22 17:46:07,712][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0262.wav
+[2023-03-22 17:46:07,717][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0068.wav
+[2023-03-22 17:46:07,723][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4450.wav
+[2023-03-22 17:46:07,725][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0151.wav
+[2023-03-22 17:46:07,731][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2551.wav
+[2023-03-22 17:46:07,735][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0115.wav
+[2023-03-22 17:46:07,739][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0108.wav
+[2023-03-22 17:46:07,749][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2484.wav
+[2023-03-22 17:46:07,752][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3303.wav
+[2023-03-22 17:46:07,755][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0873.wav
+[2023-03-22 17:46:07,764][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2647.wav
+[2023-03-22 17:46:07,766][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4021.wav
+[2023-03-22 17:46:07,773][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4447.wav
+[2023-03-22 17:46:07,782][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2746.wav
+[2023-03-22 17:46:07,789][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3663.wav
+[2023-03-22 17:46:07,793][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0855.wav
+[2023-03-22 17:46:07,795][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0482.wav
+[2023-03-22 17:46:07,796][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1082.wav
+[2023-03-22 17:46:07,802][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0413.wav
+[2023-03-22 17:46:07,805][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3117.wav
+[2023-03-22 17:46:07,813][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2616.wav
+[2023-03-22 17:46:07,827][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3160.wav
+[2023-03-22 17:46:07,829][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1253.wav
+[2023-03-22 17:46:07,836][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0227.wav
+[2023-03-22 17:46:07,842][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2387.wav
+[2023-03-22 17:46:07,847][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0728.wav
+[2023-03-22 17:46:07,851][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4163.wav
+[2023-03-22 17:46:07,857][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1649.wav
+[2023-03-22 17:46:07,865][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0528.wav
+[2023-03-22 17:46:07,866][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0460.wav
+[2023-03-22 17:46:07,871][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0976.wav
+[2023-03-22 17:46:07,880][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0971.wav
+[2023-03-22 17:46:07,887][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0696.wav
+[2023-03-22 17:46:07,893][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1380.wav
+[2023-03-22 17:46:07,899][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1354.wav
+[2023-03-22 17:46:07,903][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3053.wav
+[2023-03-22 17:46:07,910][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4650.wav
+[2023-03-22 17:46:07,913][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3600.wav
+[2023-03-22 17:46:07,917][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4029.wav
+[2023-03-22 17:46:07,923][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1297.wav
+[2023-03-22 17:46:07,924][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0356.wav
+[2023-03-22 17:46:07,932][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0032.wav
+[2023-03-22 17:46:07,938][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3233.wav
+[2023-03-22 17:46:07,943][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0965.wav
+[2023-03-22 17:46:07,952][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3917.wav
+[2023-03-22 17:46:07,954][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0196.wav
+[2023-03-22 17:46:07,957][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0914.wav
+[2023-03-22 17:46:07,962][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0325.wav
+[2023-03-22 17:46:07,965][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3919.wav
+[2023-03-22 17:46:07,967][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1849.wav
+[2023-03-22 17:46:07,973][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0594.wav
+[2023-03-22 17:46:07,974][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0038.wav
+[2023-03-22 17:46:07,982][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3084.wav
+[2023-03-22 17:46:07,988][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2321.wav
+[2023-03-22 17:46:07,990][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4201.wav
+[2023-03-22 17:46:07,997][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0005.wav
+[2023-03-22 17:46:07,999][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1299.wav
+[2023-03-22 17:46:08,004][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0464.wav
+[2023-03-22 17:46:08,010][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0423.wav
+[2023-03-22 17:46:08,016][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4067.wav
+[2023-03-22 17:46:08,019][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4463.wav
+[2023-03-22 17:46:08,022][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3068.wav
+[2023-03-22 17:46:08,023][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3134.wav
+[2023-03-22 17:46:08,032][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0272.wav
+[2023-03-22 17:46:08,034][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3507.wav
+[2023-03-22 17:46:08,037][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1308.wav
+[2023-03-22 17:46:08,042][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0929.wav
+[2023-03-22 17:46:08,048][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0063.wav
+[2023-03-22 17:46:08,053][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1036.wav
+[2023-03-22 17:46:08,058][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4074.wav
+[2023-03-22 17:46:08,061][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0222.wav
+[2023-03-22 17:46:08,064][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3522.wav
+[2023-03-22 17:46:08,070][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4499.wav
+[2023-03-22 17:46:08,074][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4134.wav
+[2023-03-22 17:46:08,079][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0447.wav
+[2023-03-22 17:46:08,083][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0047.wav
+[2023-03-22 17:46:08,085][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1513.wav
+[2023-03-22 17:46:08,091][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0587.wav
+[2023-03-22 17:46:08,098][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0426.wav
+[2023-03-22 17:46:08,102][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2034.wav
+[2023-03-22 17:46:08,106][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_1050.wav
+[2023-03-22 17:46:08,109][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1488.wav
+[2023-03-22 17:46:08,117][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0372.wav
+[2023-03-22 17:46:08,120][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3302.wav
+[2023-03-22 17:46:08,124][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1796.wav
+[2023-03-22 17:46:08,125][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4175.wav
+[2023-03-22 17:46:08,133][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3161.wav
+[2023-03-22 17:46:08,136][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3958.wav
+[2023-03-22 17:46:08,141][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0643.wav
+[2023-03-22 17:46:08,144][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0324.wav
+[2023-03-22 17:46:08,145][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3568.wav
+[2023-03-22 17:46:08,151][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0507.wav
+[2023-03-22 17:46:08,156][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2067.wav
+[2023-03-22 17:46:08,159][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2432.wav
+[2023-03-22 17:46:08,162][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2441.wav
+[2023-03-22 17:46:08,165][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2833.wav
+[2023-03-22 17:46:08,172][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3417.wav
+[2023-03-22 17:46:08,179][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0949.wav
+[2023-03-22 17:46:08,180][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3528.wav
+[2023-03-22 17:46:08,184][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3127.wav
+[2023-03-22 17:46:08,190][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2360.wav
+[2023-03-22 17:46:08,194][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1178.wav
+[2023-03-22 17:46:08,198][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3823.wav
+[2023-03-22 17:46:08,200][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2887.wav
+[2023-03-22 17:46:08,204][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1386.wav
+[2023-03-22 17:46:08,209][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0527.wav
+[2023-03-22 17:46:08,211][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0544.wav
+[2023-03-22 17:46:08,217][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3519.wav
+[2023-03-22 17:46:08,224][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0376.wav
+[2023-03-22 17:46:08,227][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4341.wav
+[2023-03-22 17:46:08,232][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0900.wav
+[2023-03-22 17:46:08,235][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4788.wav
+[2023-03-22 17:46:08,239][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0405.wav
+[2023-03-22 17:46:08,245][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1660.wav
+[2023-03-22 17:46:08,249][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2614.wav
+[2023-03-22 17:46:08,253][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2258.wav
+[2023-03-22 17:46:08,254][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3973.wav
+[2023-03-22 17:46:08,258][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1081.wav
+[2023-03-22 17:46:08,262][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4084.wav
+[2023-03-22 17:46:08,267][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3425.wav
+[2023-03-22 17:46:08,272][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0674.wav
+[2023-03-22 17:46:08,280][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3171.wav
+[2023-03-22 17:46:08,285][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1495.wav
+[2023-03-22 17:46:08,287][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0919.wav
+[2023-03-22 17:46:08,290][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0635.wav
+[2023-03-22 17:46:08,296][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_1062.wav
+[2023-03-22 17:46:08,302][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3125.wav
+[2023-03-22 17:46:08,304][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3526.wav
+[2023-03-22 17:46:08,306][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0353.wav
+[2023-03-22 17:46:08,308][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4415.wav
+[2023-03-22 17:46:08,317][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3099.wav
+[2023-03-22 17:46:08,323][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4804.wav
+[2023-03-22 17:46:08,324][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0305.wav
+[2023-03-22 17:46:08,329][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2418.wav
+[2023-03-22 17:46:08,335][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1064.wav
+[2023-03-22 17:46:08,339][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2554.wav
+[2023-03-22 17:46:08,344][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3444.wav
+[2023-03-22 17:46:08,345][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4817.wav
+[2023-03-22 17:46:08,350][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3255.wav
+[2023-03-22 17:46:08,352][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3695.wav
+[2023-03-22 17:46:08,357][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4875.wav
+[2023-03-22 17:46:08,362][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2718.wav
+[2023-03-22 17:46:08,368][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0043.wav
+[2023-03-22 17:46:08,372][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0110.wav
+[2023-03-22 17:46:08,377][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1745.wav
+[2023-03-22 17:46:08,378][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2005.wav
+[2023-03-22 17:46:08,385][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0432.wav
+[2023-03-22 17:46:08,389][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_1008.wav
+[2023-03-22 17:46:08,395][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_0244.wav
+[2023-03-22 17:46:08,399][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0273.wav
+[2023-03-22 17:46:08,401][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_4281.wav
+[2023-03-22 17:46:08,402][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0585.wav
+[2023-03-22 17:46:08,408][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0264.wav
+[2023-03-22 17:46:08,412][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4123.wav
+[2023-03-22 17:46:08,418][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1509.wav
+[2023-03-22 17:46:08,421][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1657.wav
+[2023-03-22 17:46:08,429][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3313.wav
+[2023-03-22 17:46:08,434][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/2/2_1081.wav
+[2023-03-22 17:46:08,437][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3286.wav
+[2023-03-22 17:46:08,439][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_2310.wav
+[2023-03-22 17:46:08,445][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_3985.wav
+[2023-03-22 17:46:08,449][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_3409.wav
+[2023-03-22 17:46:08,453][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0085.wav
+[2023-03-22 17:46:08,455][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0240.wav
+[2023-03-22 17:46:08,457][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_4339.wav
+[2023-03-22 17:46:08,463][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_1038.wav
+[2023-03-22 17:46:08,469][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_1591.wav
+[2023-03-22 17:46:08,471][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_0821.wav
+[2023-03-22 17:46:08,474][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/1/1_0851.wav
+[2023-03-22 17:46:08,476][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2701.wav
+[2023-03-22 17:46:08,479][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/3/3_0330.wav
+[2023-03-22 17:46:08,480][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_1721.wav
+[2023-03-22 17:46:08,484][kospeech.utils][INFO] - Audio is None : ./dataset/kspon/data/kss/4/4_2356.wav
+[2023-03-22 17:46:09,102][kospeech.utils][INFO] - save checkpoints
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-22\17-46-04\2023_03_22_17_46_08-trainer_states.pt
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-22\17-46-04\2023_03_22_17_46_08-model.pt
+[2023-03-22 17:46:09,103][kospeech.utils][INFO] - train() completed
+[2023-03-22 17:46:09,103][kospeech.utils][INFO] - 0

@@ -1,0 +1,191 @@
+[2023-03-23 09:19:34,666][kospeech.utils][INFO] - audio:
+  audio_extension: wav
+  sample_rate: 16000
+  frame_length: 20
+  frame_shift: 10
+  normalize: true
+  del_silence: true
+  feature_extract_by: kaldi
+  time_mask_num: 4
+  freq_mask_num: 2
+  spec_augment: true
+  input_reverse: false
+  transform_method: fbank
+  n_mels: 80
+  freq_mask_para: 18
+model:
+  architecture: deepspeech2
+  teacher_forcing_ratio: 1.0
+  teacher_forcing_step: 0.0
+  min_teacher_forcing_ratio: 1.0
+  dropout: 0.3
+  bidirectional: false
+  joint_ctc_attention: false
+  max_len: 400
+  use_bidirectional: true
+  rnn_type: gru
+  hidden_dim: 1024
+  activation: hardtanh
+  num_encoder_layers: 3
+train:
+  dataset: kspon
+  dataset_path: C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\dataset\kspon\data\kss\kss
+  transcripts_path: ../../../transcripts.txt
+  output_unit: character
+  batch_size: 32
+  save_result_every: 100
+  checkpoint_every: 100
+  print_every: 10
+  mode: train
+  num_workers: 8
+  use_cuda: true
+  num_threads: 2
+  init_lr_scale: 0.01
+  final_lr_scale: 0.05
+  max_grad_norm: 400
+  weight_decay: 1.0e-05
+  total_steps: 200000
+  seed: 777
+  resume: false
+  optimizer: adam
+  init_lr: 1.0e-06
+  final_lr: 1.0e-06
+  peak_lr: 0.0001
+  warmup_steps: 400
+  num_epochs: 2
+  reduction: mean
+  lr_scheduler: tri_stage_lr_scheduler
+
+[2023-03-23 09:19:34,721][kospeech.utils][INFO] - Operating System : Windows 10
+[2023-03-23 09:19:34,721][kospeech.utils][INFO] - Processor : Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+[2023-03-23 09:19:34,723][kospeech.utils][INFO] - device : NVIDIA GeForce RTX 2060
+[2023-03-23 09:19:34,724][kospeech.utils][INFO] - CUDA is available : True
+[2023-03-23 09:19:34,724][kospeech.utils][INFO] - CUDA version : 11.8
+[2023-03-23 09:19:34,724][kospeech.utils][INFO] - PyTorch version : 2.0.0+cu118
+[2023-03-23 09:19:34,765][kospeech.utils][INFO] - split dataset start !!
+[2023-03-23 09:19:35,173][kospeech.utils][INFO] - Applying Spec Augmentation...
+[2023-03-23 09:19:35,178][kospeech.utils][INFO] - split dataset complete !!
+[2023-03-23 09:19:37,707][kospeech.utils][INFO] - start
+[2023-03-23 09:19:37,708][kospeech.utils][INFO] - Epoch 0 start
+[2023-03-23 09:20:17,889][kospeech.utils][INFO] - step:   10/ 776, loss: 59.486263, cer: 14.88, elapsed: 40.14s 0.67m 0.01h, lr: 0.000002
+[2023-03-23 09:20:37,457][kospeech.utils][INFO] - step:   20/ 776, loss: 27.954929, cer: 9.52, elapsed: 19.57s 1.00m 0.02h, lr: 0.000005
+[2023-03-23 09:20:57,602][kospeech.utils][INFO] - step:   30/ 776, loss: 7.136559, cer: 6.63, elapsed: 20.14s 1.33m 0.02h, lr: 0.000007
+[2023-03-23 09:21:22,364][kospeech.utils][INFO] - step:   40/ 776, loss: 6.671887, cer: 5.19, elapsed: 24.76s 1.74m 0.03h, lr: 0.000010
+[2023-03-23 09:21:46,366][kospeech.utils][INFO] - step:   50/ 776, loss: 6.536092, cer: 4.35, elapsed: 24.00s 2.14m 0.04h, lr: 0.000012
+[2023-03-23 09:22:12,437][kospeech.utils][INFO] - step:   60/ 776, loss: 10.393505, cer: 3.77, elapsed: 26.07s 2.58m 0.04h, lr: 0.000015
+[2023-03-23 09:22:36,672][kospeech.utils][INFO] - step:   70/ 776, loss: 9.327569, cer: 3.38, elapsed: 24.23s 2.98m 0.05h, lr: 0.000017
+[2023-03-23 09:23:00,294][kospeech.utils][INFO] - step:   80/ 776, loss: 8.586679, cer: 3.06, elapsed: 23.62s 3.38m 0.06h, lr: 0.000020
+[2023-03-23 09:23:23,387][kospeech.utils][INFO] - step:   90/ 776, loss: 8.364192, cer: 2.83, elapsed: 23.09s 3.76m 0.06h, lr: 0.000022
+[2023-03-23 09:23:46,242][kospeech.utils][INFO] - step:  100/ 776, loss: 6.433146, cer: 2.65, elapsed: 22.85s 4.14m 0.07h, lr: 0.000025
+[2023-03-23 09:23:47,494][kospeech.utils][INFO] - save checkpoints
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_23_46-trainer_states.pt
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_23_46-model.pt
+[2023-03-23 09:24:11,610][kospeech.utils][INFO] - step:  110/ 776, loss: 4.688935, cer: 2.49, elapsed: 25.37s 4.56m 0.08h, lr: 0.000027
+[2023-03-23 09:24:35,034][kospeech.utils][INFO] - step:  120/ 776, loss: 4.806345, cer: 2.37, elapsed: 23.42s 4.95m 0.08h, lr: 0.000030
+[2023-03-23 09:24:58,951][kospeech.utils][INFO] - step:  130/ 776, loss: 4.596609, cer: 2.26, elapsed: 23.92s 5.35m 0.09h, lr: 0.000032
+[2023-03-23 09:25:22,063][kospeech.utils][INFO] - step:  140/ 776, loss: 4.655241, cer: 2.16, elapsed: 23.11s 5.74m 0.10h, lr: 0.000035
+[2023-03-23 09:25:46,290][kospeech.utils][INFO] - step:  150/ 776, loss: 6.257164, cer: 2.08, elapsed: 24.23s 6.14m 0.10h, lr: 0.000037
+[2023-03-23 09:26:10,591][kospeech.utils][INFO] - step:  160/ 776, loss: 4.662289, cer: 2.01, elapsed: 24.30s 6.55m 0.11h, lr: 0.000040
+[2023-03-23 09:26:33,292][kospeech.utils][INFO] - step:  170/ 776, loss: 4.678313, cer: 1.95, elapsed: 22.70s 6.93m 0.12h, lr: 0.000042
+[2023-03-23 09:26:56,934][kospeech.utils][INFO] - step:  180/ 776, loss: 4.729530, cer: 1.89, elapsed: 23.64s 7.32m 0.12h, lr: 0.000045
+[2023-03-23 09:27:21,283][kospeech.utils][INFO] - step:  190/ 776, loss: 6.992722, cer: 1.84, elapsed: 24.35s 7.73m 0.13h, lr: 0.000047
+[2023-03-23 09:27:44,613][kospeech.utils][INFO] - step:  200/ 776, loss: 5.059047, cer: 1.80, elapsed: 23.33s 8.11m 0.14h, lr: 0.000050
+[2023-03-23 09:27:45,979][kospeech.utils][INFO] - save checkpoints
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_27_44-trainer_states.pt
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_27_44-model.pt
+[2023-03-23 09:28:10,179][kospeech.utils][INFO] - step:  210/ 776, loss: 4.342516, cer: 1.76, elapsed: 25.56s 8.54m 0.14h, lr: 0.000052
+[2023-03-23 09:28:34,284][kospeech.utils][INFO] - step:  220/ 776, loss: 4.591632, cer: 1.72, elapsed: 24.10s 8.94m 0.15h, lr: 0.000055
+[2023-03-23 09:28:58,254][kospeech.utils][INFO] - step:  230/ 776, loss: 4.436505, cer: 1.68, elapsed: 23.97s 9.34m 0.16h, lr: 0.000057
+[2023-03-23 09:29:23,061][kospeech.utils][INFO] - step:  240/ 776, loss: 4.480154, cer: 1.65, elapsed: 24.80s 9.76m 0.16h, lr: 0.000060
+[2023-03-23 09:29:46,158][kospeech.utils][INFO] - step:  250/ 776, loss: 4.323773, cer: 1.62, elapsed: 23.10s 10.14m 0.17h, lr: 0.000062
+[2023-03-23 09:30:09,293][kospeech.utils][INFO] - step:  260/ 776, loss: 4.394769, cer: 1.60, elapsed: 23.13s 10.53m 0.18h, lr: 0.000065
+[2023-03-23 09:30:32,746][kospeech.utils][INFO] - step:  270/ 776, loss: 4.244815, cer: 1.57, elapsed: 23.45s 10.92m 0.18h, lr: 0.000067
+[2023-03-23 09:30:57,163][kospeech.utils][INFO] - step:  280/ 776, loss: 4.404507, cer: 1.55, elapsed: 24.41s 11.32m 0.19h, lr: 0.000070
+[2023-03-23 09:31:21,002][kospeech.utils][INFO] - step:  290/ 776, loss: 4.528107, cer: 1.53, elapsed: 23.84s 11.72m 0.20h, lr: 0.000072
+[2023-03-23 09:31:44,682][kospeech.utils][INFO] - step:  300/ 776, loss: 4.394873, cer: 1.51, elapsed: 23.68s 12.12m 0.20h, lr: 0.000075
+[2023-03-23 09:31:45,979][kospeech.utils][INFO] - save checkpoints
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_31_44-trainer_states.pt
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_31_44-model.pt
+[2023-03-23 09:32:09,641][kospeech.utils][INFO] - step:  310/ 776, loss: 4.452379, cer: 1.49, elapsed: 24.96s 12.53m 0.21h, lr: 0.000077
+[2023-03-23 09:32:33,246][kospeech.utils][INFO] - step:  320/ 776, loss: 4.341662, cer: 1.47, elapsed: 23.60s 12.92m 0.22h, lr: 0.000080
+[2023-03-23 09:32:56,219][kospeech.utils][INFO] - step:  330/ 776, loss: 4.718542, cer: 1.46, elapsed: 22.97s 13.31m 0.22h, lr: 0.000082
+[2023-03-23 09:33:19,837][kospeech.utils][INFO] - step:  340/ 776, loss: 4.548100, cer: 1.44, elapsed: 23.62s 13.70m 0.23h, lr: 0.000085
+[2023-03-23 09:33:43,191][kospeech.utils][INFO] - step:  350/ 776, loss: 4.390281, cer: 1.43, elapsed: 23.35s 14.09m 0.23h, lr: 0.000087
+[2023-03-23 09:34:03,519][kospeech.utils][INFO] - step:  360/ 776, loss: 4.473351, cer: 1.41, elapsed: 20.33s 14.43m 0.24h, lr: 0.000090
+[2023-03-23 09:34:21,592][kospeech.utils][INFO] - step:  370/ 776, loss: 4.296776, cer: 1.40, elapsed: 18.07s 14.73m 0.25h, lr: 0.000092
+[2023-03-23 09:34:33,115][kospeech.utils][INFO] - save checkpoints
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_34_31-trainer_states.pt
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_34_31-model.pt
+[2023-03-23 09:34:33,116][kospeech.utils][INFO] - train() completed
+[2023-03-23 09:34:33,117][kospeech.utils][INFO] - 4292114
+[2023-03-23 09:34:34,305][kospeech.utils][INFO] - save checkpoints
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_34_33-trainer_states.pt
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_34_33-model.pt
+[2023-03-23 09:34:34,307][kospeech.utils][INFO] - Epoch 0 (Training) Loss 0.0007 CER 1.3921
+[2023-03-23 09:34:34,309][kospeech.utils][INFO] - validate() start
+[2023-03-23 09:38:35,778][kospeech.utils][INFO] - validate() completed
+[2023-03-23 09:38:35,779][kospeech.utils][INFO] - Epoch 0 CER 1.3410
+[2023-03-23 09:38:35,783][kospeech.utils][INFO] - Epoch 0 Training result saved as a csv file complete !!
+[2023-03-23 09:38:35,798][kospeech.utils][INFO] - Epoch 1 start
+[2023-03-23 09:39:09,460][kospeech.utils][INFO] - step:   10/ 776, loss: 4.362636, cer: 1.33, elapsed: 33.62s 0.56m 0.33h, lr: 0.000096
+[2023-03-23 09:39:34,121][kospeech.utils][INFO] - step:   20/ 776, loss: 4.172942, cer: 1.32, elapsed: 24.66s 0.97m 0.33h, lr: 0.000099
+[2023-03-23 09:39:59,408][kospeech.utils][INFO] - step:   30/ 776, loss: 4.482198, cer: 1.31, elapsed: 25.28s 1.39m 0.34h, lr: 0.000100
+[2023-03-23 09:40:23,974][kospeech.utils][INFO] - step:   40/ 776, loss: 4.707093, cer: 1.30, elapsed: 24.56s 1.80m 0.35h, lr: 0.000100
+[2023-03-23 09:40:47,426][kospeech.utils][INFO] - step:   50/ 776, loss: 4.597971, cer: 1.30, elapsed: 23.45s 2.19m 0.35h, lr: 0.000100
+[2023-03-23 09:41:11,479][kospeech.utils][INFO] - step:   60/ 776, loss: 7.862819, cer: 1.29, elapsed: 24.05s 2.59m 0.36h, lr: 0.000100
+[2023-03-23 09:41:35,089][kospeech.utils][INFO] - step:   70/ 776, loss: 4.423031, cer: 1.28, elapsed: 23.61s 2.99m 0.37h, lr: 0.000100
+[2023-03-23 09:41:58,647][kospeech.utils][INFO] - step:   80/ 776, loss: 4.930998, cer: 1.27, elapsed: 23.56s 3.38m 0.37h, lr: 0.000100
+[2023-03-23 09:42:23,515][kospeech.utils][INFO] - step:   90/ 776, loss: 4.363677, cer: 1.27, elapsed: 24.87s 3.79m 0.38h, lr: 0.000100
+[2023-03-23 09:42:46,867][kospeech.utils][INFO] - step:  100/ 776, loss: 4.424824, cer: 1.26, elapsed: 23.35s 4.18m 0.39h, lr: 0.000100
+[2023-03-23 09:42:48,197][kospeech.utils][INFO] - save checkpoints
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_42_46-trainer_states.pt
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_42_46-model.pt
+[2023-03-23 09:43:11,476][kospeech.utils][INFO] - step:  110/ 776, loss: 4.600183, cer: 1.25, elapsed: 24.61s 4.59m 0.39h, lr: 0.000100
+[2023-03-23 09:43:34,498][kospeech.utils][INFO] - step:  120/ 776, loss: 4.443979, cer: 1.25, elapsed: 23.02s 4.98m 0.40h, lr: 0.000100
+[2023-03-23 09:43:58,998][kospeech.utils][INFO] - step:  130/ 776, loss: 4.465031, cer: 1.24, elapsed: 24.50s 5.39m 0.41h, lr: 0.000100
+[2023-03-23 09:44:22,345][kospeech.utils][INFO] - step:  140/ 776, loss: 4.279684, cer: 1.24, elapsed: 23.35s 5.78m 0.41h, lr: 0.000100
+[2023-03-23 09:44:46,029][kospeech.utils][INFO] - step:  150/ 776, loss: 4.267005, cer: 1.23, elapsed: 23.68s 6.17m 0.42h, lr: 0.000100
+[2023-03-23 09:45:09,500][kospeech.utils][INFO] - step:  160/ 776, loss: 4.640045, cer: 1.23, elapsed: 23.47s 6.56m 0.43h, lr: 0.000100
+[2023-03-23 09:45:33,392][kospeech.utils][INFO] - step:  170/ 776, loss: 4.253241, cer: 1.22, elapsed: 23.89s 6.96m 0.43h, lr: 0.000100
+[2023-03-23 09:45:57,847][kospeech.utils][INFO] - step:  180/ 776, loss: 4.296387, cer: 1.22, elapsed: 24.45s 7.37m 0.44h, lr: 0.000100
+[2023-03-23 09:46:21,159][kospeech.utils][INFO] - step:  190/ 776, loss: 4.110362, cer: 1.21, elapsed: 23.31s 7.76m 0.45h, lr: 0.000100
+[2023-03-23 09:46:44,967][kospeech.utils][INFO] - step:  200/ 776, loss: 4.217959, cer: 1.21, elapsed: 23.81s 8.15m 0.45h, lr: 0.000100
+[2023-03-23 09:46:46,327][kospeech.utils][INFO] - save checkpoints
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_46_44-trainer_states.pt
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_46_44-model.pt
+[2023-03-23 09:47:10,200][kospeech.utils][INFO] - step:  210/ 776, loss: 4.000439, cer: 1.20, elapsed: 25.23s 8.57m 0.46h, lr: 0.000100
+[2023-03-23 09:47:35,510][kospeech.utils][INFO] - step:  220/ 776, loss: 4.197979, cer: 1.20, elapsed: 25.31s 8.99m 0.47h, lr: 0.000100
+[2023-03-23 09:48:01,939][kospeech.utils][INFO] - step:  230/ 776, loss: 4.260151, cer: 1.19, elapsed: 26.43s 9.43m 0.47h, lr: 0.000100
+[2023-03-23 09:48:26,870][kospeech.utils][INFO] - step:  240/ 776, loss: 4.292406, cer: 1.19, elapsed: 24.93s 9.85m 0.48h, lr: 0.000100
+[2023-03-23 09:48:50,971][kospeech.utils][INFO] - step:  250/ 776, loss: 4.066257, cer: 1.18, elapsed: 24.10s 10.25m 0.49h, lr: 0.000100
+[2023-03-23 09:49:16,585][kospeech.utils][INFO] - step:  260/ 776, loss: 4.169425, cer: 1.18, elapsed: 25.61s 10.68m 0.49h, lr: 0.000100
+[2023-03-23 09:49:43,028][kospeech.utils][INFO] - step:  270/ 776, loss: 4.123219, cer: 1.18, elapsed: 26.44s 11.12m 0.50h, lr: 0.000100
+[2023-03-23 09:50:09,000][kospeech.utils][INFO] - step:  280/ 776, loss: 4.280344, cer: 1.17, elapsed: 25.97s 11.55m 0.51h, lr: 0.000100
+[2023-03-23 09:50:35,438][kospeech.utils][INFO] - step:  290/ 776, loss: 4.491859, cer: 1.17, elapsed: 26.44s 11.99m 0.52h, lr: 0.000100
+[2023-03-23 09:51:02,494][kospeech.utils][INFO] - step:  300/ 776, loss: 4.277956, cer: 1.16, elapsed: 27.05s 12.44m 0.52h, lr: 0.000100
+[2023-03-23 09:51:03,825][kospeech.utils][INFO] - save checkpoints
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_51_02-trainer_states.pt
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_51_02-model.pt
+[2023-03-23 09:51:29,688][kospeech.utils][INFO] - step:  310/ 776, loss: 4.109353, cer: 1.16, elapsed: 27.19s 12.90m 0.53h, lr: 0.000100
+[2023-03-23 09:51:54,945][kospeech.utils][INFO] - step:  320/ 776, loss: 4.288944, cer: 1.16, elapsed: 25.25s 13.32m 0.54h, lr: 0.000100
+[2023-03-23 09:52:21,312][kospeech.utils][INFO] - step:  330/ 776, loss: 4.162248, cer: 1.15, elapsed: 26.37s 13.76m 0.55h, lr: 0.000100
+[2023-03-23 09:52:46,025][kospeech.utils][INFO] - step:  340/ 776, loss: 3.965591, cer: 1.15, elapsed: 24.71s 14.17m 0.55h, lr: 0.000100
+[2023-03-23 09:53:10,425][kospeech.utils][INFO] - step:  350/ 776, loss: 4.013735, cer: 1.15, elapsed: 24.40s 14.58m 0.56h, lr: 0.000100
+[2023-03-23 09:53:30,764][kospeech.utils][INFO] - step:  360/ 776, loss: 4.127061, cer: 1.15, elapsed: 20.34s 14.92m 0.56h, lr: 0.000100
+[2023-03-23 09:53:49,168][kospeech.utils][INFO] - step:  370/ 776, loss: 4.350378, cer: 1.14, elapsed: 18.40s 15.22m 0.57h, lr: 0.000100
+[2023-03-23 09:54:02,479][kospeech.utils][INFO] - save checkpoints
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_54_01-trainer_states.pt
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_54_01-model.pt
+[2023-03-23 09:54:02,480][kospeech.utils][INFO] - train() completed
+[2023-03-23 09:54:02,480][kospeech.utils][INFO] - 4292114
+[2023-03-23 09:54:03,715][kospeech.utils][INFO] - save checkpoints
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_54_02-trainer_states.pt
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_54_02-model.pt
+[2023-03-23 09:54:03,716][kospeech.utils][INFO] - Epoch 1 (Training) Loss 0.0004 CER 1.1405
+[2023-03-23 09:54:03,717][kospeech.utils][INFO] - validate() start
+[2023-03-23 09:57:58,191][kospeech.utils][INFO] - validate() completed
+[2023-03-23 09:57:58,193][kospeech.utils][INFO] - Epoch 1 CER 1.1289
+[2023-03-23 09:57:58,197][kospeech.utils][INFO] - Epoch 1 Training result saved as a csv file complete !!
+[2023-03-23 09:57:59,391][kospeech.utils][INFO] - save checkpoints
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_57_58-trainer_states.pt
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-23\09-19-34\2023_03_23_09_57_58-model.pt

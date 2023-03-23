@@ -1,0 +1,76 @@
+[2023-03-22 17:48:52,287][kospeech.utils][INFO] - audio:
+  audio_extension: wav
+  sample_rate: 16000
+  frame_length: 20
+  frame_shift: 10
+  normalize: true
+  del_silence: true
+  feature_extract_by: kaldi
+  time_mask_num: 4
+  freq_mask_num: 2
+  spec_augment: true
+  input_reverse: false
+  transform_method: fbank
+  n_mels: 80
+  freq_mask_para: 18
+model:
+  architecture: deepspeech2
+  teacher_forcing_ratio: 1.0
+  teacher_forcing_step: 0.0
+  min_teacher_forcing_ratio: 1.0
+  dropout: 0.3
+  bidirectional: false
+  joint_ctc_attention: false
+  max_len: 400
+  use_bidirectional: true
+  rnn_type: gru
+  hidden_dim: 1024
+  activation: hardtanh
+  num_encoder_layers: 3
+train:
+  dataset: kspon
+  dataset_path: C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/kss
+  transcripts_path: ../../../transcripts.txt
+  output_unit: character
+  batch_size: 32
+  save_result_every: 100
+  checkpoint_every: 100
+  print_every: 10
+  mode: train
+  num_workers: 8
+  use_cuda: true
+  num_threads: 2
+  init_lr_scale: 0.01
+  final_lr_scale: 0.05
+  max_grad_norm: 400
+  weight_decay: 1.0e-05
+  total_steps: 200000
+  seed: 777
+  resume: false
+  optimizer: adam
+  init_lr: 1.0e-06
+  final_lr: 1.0e-06
+  peak_lr: 0.0001
+  warmup_steps: 400
+  num_epochs: 1
+  reduction: mean
+  lr_scheduler: tri_stage_lr_scheduler
+
+[2023-03-22 17:48:52,329][kospeech.utils][INFO] - Operating System : Windows 10
+[2023-03-22 17:48:52,330][kospeech.utils][INFO] - Processor : Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+[2023-03-22 17:48:52,331][kospeech.utils][INFO] - device : NVIDIA GeForce RTX 2060
+[2023-03-22 17:48:52,331][kospeech.utils][INFO] - CUDA is available : True
+[2023-03-22 17:48:52,332][kospeech.utils][INFO] - CUDA version : 11.8
+[2023-03-22 17:48:52,332][kospeech.utils][INFO] - PyTorch version : 2.0.0+cu118
+[2023-03-22 17:48:52,371][kospeech.utils][INFO] - split dataset start !!
+[2023-03-22 17:48:52,579][kospeech.utils][INFO] - Applying Spec Augmentation...
+[2023-03-22 17:48:52,584][kospeech.utils][INFO] - split dataset complete !!
+[2023-03-22 17:48:54,921][kospeech.utils][INFO] - start
+[2023-03-22 17:48:54,922][kospeech.utils][INFO] - Epoch 0 start
+[2023-03-22 17:49:39,598][kospeech.utils][INFO] - step:   10/ 776, loss: 59.429386, cer: 17.30, elapsed: 44.64s 0.74m 0.01h, lr: 0.000002
+[2023-03-22 17:49:59,656][kospeech.utils][INFO] - step:   20/ 776, loss: 27.353008, cer: 10.58, elapsed: 20.06s 1.08m 0.02h, lr: 0.000005
+[2023-03-22 17:50:20,190][kospeech.utils][INFO] - step:   30/ 776, loss: 10.288601, cer: 7.37, elapsed: 20.53s 1.42m 0.02h, lr: 0.000007
+[2023-03-22 17:50:46,167][kospeech.utils][INFO] - step:   40/ 776, loss: 6.752819, cer: 5.73, elapsed: 25.97s 1.85m 0.03h, lr: 0.000010
+[2023-03-22 17:51:10,534][kospeech.utils][INFO] - step:   50/ 776, loss: 6.409207, cer: 4.79, elapsed: 24.37s 2.26m 0.04h, lr: 0.000012
+[2023-03-22 17:51:36,867][kospeech.utils][INFO] - step:   60/ 776, loss: 5.599888, cer: 4.14, elapsed: 26.33s 2.70m 0.04h, lr: 0.000015
+[2023-03-22 17:52:02,446][kospeech.utils][INFO] - step:   70/ 776, loss: 5.416957, cer: 3.69, elapsed: 25.58s 3.12m 0.05h, lr: 0.000017

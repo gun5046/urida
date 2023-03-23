@@ -18,6 +18,8 @@ import warnings
 import torch
 import torch.nn as nn
 import hydra
+import tracemalloc
+
 from hydra.core.config_store import ConfigStore
 from omegaconf import OmegaConf, DictConfig
 
@@ -79,7 +81,7 @@ def train(config: DictConfig) -> nn.DataParallel:
     device = check_envirionment(config.train.use_cuda)
     if hasattr(config.train, "num_threads") and int(config.train.num_threads) > 0:
         torch.set_num_threads(config.train.num_threads)
-  
+    
     vocab = KsponSpeechVocabulary(
         f'../../../data/vocab/jong_{config.train.output_unit}_vocabs.csv',
         output_unit=config.train.output_unit,
@@ -155,12 +157,22 @@ cs.store(group="model", name="conformer-large", node=ConformerLargeConfig, packa
 cs.store(group="model", name="rnnt", node=RNNTransducerConfig, package="model")
 
 
+
+
+
 @hydra.main(config_path=os.path.join('..', "configs"), config_name="train")
 def main(config: DictConfig) -> None:
+    tracemalloc.start()
     warnings.filterwarnings('ignore')
     logger.info(OmegaConf.to_yaml(config))
     last_model_checkpoint = train(config)
     torch.save(last_model_checkpoint, os.path.join(os.getcwd(), "last_model_checkpoint.pt"))
+
+    snapshot = tracemalloc.take_snapshot()
+    top_stats = snapshot.statistics('lineno')
+
+    for stat in top_stats[:10]:
+        print(stat)
 
 
 if __name__ == '__main__':

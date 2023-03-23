@@ -1,0 +1,330 @@
+[2023-03-22 17:48:22,474][kospeech.utils][INFO] - audio:
+  audio_extension: wav
+  sample_rate: 16000
+  frame_length: 20
+  frame_shift: 10
+  normalize: true
+  del_silence: true
+  feature_extract_by: kaldi
+  time_mask_num: 4
+  freq_mask_num: 2
+  spec_augment: true
+  input_reverse: false
+  transform_method: fbank
+  n_mels: 80
+  freq_mask_para: 18
+model:
+  architecture: deepspeech2
+  teacher_forcing_ratio: 1.0
+  teacher_forcing_step: 0.0
+  min_teacher_forcing_ratio: 1.0
+  dropout: 0.3
+  bidirectional: false
+  joint_ctc_attention: false
+  max_len: 400
+  use_bidirectional: true
+  rnn_type: gru
+  hidden_dim: 1024
+  activation: hardtanh
+  num_encoder_layers: 3
+train:
+  dataset: kspon
+  dataset_path: C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss
+  transcripts_path: ../../../transcripts.txt
+  output_unit: character
+  batch_size: 32
+  save_result_every: 100
+  checkpoint_every: 100
+  print_every: 10
+  mode: train
+  num_workers: 8
+  use_cuda: true
+  num_threads: 2
+  init_lr_scale: 0.01
+  final_lr_scale: 0.05
+  max_grad_norm: 400
+  weight_decay: 1.0e-05
+  total_steps: 200000
+  seed: 777
+  resume: false
+  optimizer: adam
+  init_lr: 1.0e-06
+  final_lr: 1.0e-06
+  peak_lr: 0.0001
+  warmup_steps: 400
+  num_epochs: 1
+  reduction: mean
+  lr_scheduler: tri_stage_lr_scheduler
+
+[2023-03-22 17:48:22,519][kospeech.utils][INFO] - Operating System : Windows 10
+[2023-03-22 17:48:22,519][kospeech.utils][INFO] - Processor : Intel64 Family 6 Model 158 Stepping 10, GenuineIntel
+[2023-03-22 17:48:22,521][kospeech.utils][INFO] - device : NVIDIA GeForce RTX 2060
+[2023-03-22 17:48:22,521][kospeech.utils][INFO] - CUDA is available : True
+[2023-03-22 17:48:22,522][kospeech.utils][INFO] - CUDA version : 11.8
+[2023-03-22 17:48:22,522][kospeech.utils][INFO] - PyTorch version : 2.0.0+cu118
+[2023-03-22 17:48:22,562][kospeech.utils][INFO] - split dataset start !!
+[2023-03-22 17:48:22,776][kospeech.utils][INFO] - Applying Spec Augmentation...
+[2023-03-22 17:48:22,780][kospeech.utils][INFO] - split dataset complete !!
+[2023-03-22 17:48:25,198][kospeech.utils][INFO] - start
+[2023-03-22 17:48:25,198][kospeech.utils][INFO] - Epoch 0 start
+[2023-03-22 17:48:25,257][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2040.wav
+[2023-03-22 17:48:25,258][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0729.wav
+[2023-03-22 17:48:25,263][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3090.wav
+[2023-03-22 17:48:25,265][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4707.wav
+[2023-03-22 17:48:25,268][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3697.wav
+[2023-03-22 17:48:25,272][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0807.wav
+[2023-03-22 17:48:25,272][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1496.wav
+[2023-03-22 17:48:25,278][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1664.wav
+[2023-03-22 17:48:25,287][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3051.wav
+[2023-03-22 17:48:25,290][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0061.wav
+[2023-03-22 17:48:25,295][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0317.wav
+[2023-03-22 17:48:25,312][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0233.wav
+[2023-03-22 17:48:25,318][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4367.wav
+[2023-03-22 17:48:25,320][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3016.wav
+[2023-03-22 17:48:25,322][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1401.wav
+[2023-03-22 17:48:25,327][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4314.wav
+[2023-03-22 17:48:25,333][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4310.wav
+[2023-03-22 17:48:25,340][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0025.wav
+[2023-03-22 17:48:25,346][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4298.wav
+[2023-03-22 17:48:25,350][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4492.wav
+[2023-03-22 17:48:25,354][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1825.wav
+[2023-03-22 17:48:25,361][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1803.wav
+[2023-03-22 17:48:25,365][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3566.wav
+[2023-03-22 17:48:25,367][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1755.wav
+[2023-03-22 17:48:25,369][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3364.wav
+[2023-03-22 17:48:25,378][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2351.wav
+[2023-03-22 17:48:25,380][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1280.wav
+[2023-03-22 17:48:25,386][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1677.wav
+[2023-03-22 17:48:25,388][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2113.wav
+[2023-03-22 17:48:25,397][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3107.wav
+[2023-03-22 17:48:25,400][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3502.wav
+[2023-03-22 17:48:25,403][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4776.wav
+[2023-03-22 17:48:25,407][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0693.wav
+[2023-03-22 17:48:25,414][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0369.wav
+[2023-03-22 17:48:25,416][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0704.wav
+[2023-03-22 17:48:25,422][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0534.wav
+[2023-03-22 17:48:25,425][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0443.wav
+[2023-03-22 17:48:25,430][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2386.wav
+[2023-03-22 17:48:25,435][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2984.wav
+[2023-03-22 17:48:25,439][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0650.wav
+[2023-03-22 17:48:25,442][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0319.wav
+[2023-03-22 17:48:25,448][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0065.wav
+[2023-03-22 17:48:25,452][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3847.wav
+[2023-03-22 17:48:25,456][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2237.wav
+[2023-03-22 17:48:25,462][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0931.wav
+[2023-03-22 17:48:25,464][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0390.wav
+[2023-03-22 17:48:25,469][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1691.wav
+[2023-03-22 17:48:25,472][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4362.wav
+[2023-03-22 17:48:25,479][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3968.wav
+[2023-03-22 17:48:25,481][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4602.wav
+[2023-03-22 17:48:25,487][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2461.wav
+[2023-03-22 17:48:25,493][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2451.wav
+[2023-03-22 17:48:25,502][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1270.wav
+[2023-03-22 17:48:25,508][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0084.wav
+[2023-03-22 17:48:25,512][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0315.wav
+[2023-03-22 17:48:25,519][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2698.wav
+[2023-03-22 17:48:25,521][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0713.wav
+[2023-03-22 17:48:25,527][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3377.wav
+[2023-03-22 17:48:25,529][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0340.wav
+[2023-03-22 17:48:25,533][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1497.wav
+[2023-03-22 17:48:25,537][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4356.wav
+[2023-03-22 17:48:25,542][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1938.wav
+[2023-03-22 17:48:25,543][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4565.wav
+[2023-03-22 17:48:25,548][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0202.wav
+[2023-03-22 17:48:25,550][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1809.wav
+[2023-03-22 17:48:25,561][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0618.wav
+[2023-03-22 17:48:25,563][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0466.wav
+[2023-03-22 17:48:25,566][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0809.wav
+[2023-03-22 17:48:25,570][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4201.wav
+[2023-03-22 17:48:25,573][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0445.wav
+[2023-03-22 17:48:25,578][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2524.wav
+[2023-03-22 17:48:25,583][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0655.wav
+[2023-03-22 17:48:25,583][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3291.wav
+[2023-03-22 17:48:25,592][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4302.wav
+[2023-03-22 17:48:25,596][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3333.wav
+[2023-03-22 17:48:25,598][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1122.wav
+[2023-03-22 17:48:25,603][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2135.wav
+[2023-03-22 17:48:25,605][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1177.wav
+[2023-03-22 17:48:25,612][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0751.wav
+[2023-03-22 17:48:25,621][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2203.wav
+[2023-03-22 17:48:25,624][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1631.wav
+[2023-03-22 17:48:25,628][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4294.wav
+[2023-03-22 17:48:25,634][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4450.wav
+[2023-03-22 17:48:25,634][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0417.wav
+[2023-03-22 17:48:25,642][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2551.wav
+[2023-03-22 17:48:25,644][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0115.wav
+[2023-03-22 17:48:25,645][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0068.wav
+[2023-03-22 17:48:25,651][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0262.wav
+[2023-03-22 17:48:25,656][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0151.wav
+[2023-03-22 17:48:25,659][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2484.wav
+[2023-03-22 17:48:25,664][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2647.wav
+[2023-03-22 17:48:25,669][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0108.wav
+[2023-03-22 17:48:25,677][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4447.wav
+[2023-03-22 17:48:25,678][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2746.wav
+[2023-03-22 17:48:25,682][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0873.wav
+[2023-03-22 17:48:25,685][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3303.wav
+[2023-03-22 17:48:25,691][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4021.wav
+[2023-03-22 17:48:25,693][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0855.wav
+[2023-03-22 17:48:25,698][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0413.wav
+[2023-03-22 17:48:25,700][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3663.wav
+[2023-03-22 17:48:25,707][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3160.wav
+[2023-03-22 17:48:25,712][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0482.wav
+[2023-03-22 17:48:25,712][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2616.wav
+[2023-03-22 17:48:25,717][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1082.wav
+[2023-03-22 17:48:25,726][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3117.wav
+[2023-03-22 17:48:25,729][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0728.wav
+[2023-03-22 17:48:25,733][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0227.wav
+[2023-03-22 17:48:25,735][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1253.wav
+[2023-03-22 17:48:25,739][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0528.wav
+[2023-03-22 17:48:25,743][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2387.wav
+[2023-03-22 17:48:25,748][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1649.wav
+[2023-03-22 17:48:25,750][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4163.wav
+[2023-03-22 17:48:25,759][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0460.wav
+[2023-03-22 17:48:25,767][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1380.wav
+[2023-03-22 17:48:25,773][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0971.wav
+[2023-03-22 17:48:25,774][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0976.wav
+[2023-03-22 17:48:25,775][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0696.wav
+[2023-03-22 17:48:25,782][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4029.wav
+[2023-03-22 17:48:25,783][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1354.wav
+[2023-03-22 17:48:25,785][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3053.wav
+[2023-03-22 17:48:25,789][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4650.wav
+[2023-03-22 17:48:25,795][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0032.wav
+[2023-03-22 17:48:25,804][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3600.wav
+[2023-03-22 17:48:25,807][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1297.wav
+[2023-03-22 17:48:25,810][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0965.wav
+[2023-03-22 17:48:25,811][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0356.wav
+[2023-03-22 17:48:25,816][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0914.wav
+[2023-03-22 17:48:25,819][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3233.wav
+[2023-03-22 17:48:25,823][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3917.wav
+[2023-03-22 17:48:25,825][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1849.wav
+[2023-03-22 17:48:25,834][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0196.wav
+[2023-03-22 17:48:25,836][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0325.wav
+[2023-03-22 17:48:25,842][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0038.wav
+[2023-03-22 17:48:25,846][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3919.wav
+[2023-03-22 17:48:25,850][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4201.wav
+[2023-03-22 17:48:25,854][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0594.wav
+[2023-03-22 17:48:25,856][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2321.wav
+[2023-03-22 17:48:25,857][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0464.wav
+[2023-03-22 17:48:25,865][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3084.wav
+[2023-03-22 17:48:25,868][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0005.wav
+[2023-03-22 17:48:25,870][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4067.wav
+[2023-03-22 17:48:25,876][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1299.wav
+[2023-03-22 17:48:25,884][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3134.wav
+[2023-03-22 17:48:25,891][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0423.wav
+[2023-03-22 17:48:25,893][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3068.wav
+[2023-03-22 17:48:25,897][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1308.wav
+[2023-03-22 17:48:25,900][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4463.wav
+[2023-03-22 17:48:25,904][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0063.wav
+[2023-03-22 17:48:25,908][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3507.wav
+[2023-03-22 17:48:25,910][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0272.wav
+[2023-03-22 17:48:25,912][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1036.wav
+[2023-03-22 17:48:25,921][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0929.wav
+[2023-03-22 17:48:25,923][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0222.wav
+[2023-03-22 17:48:25,928][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4134.wav
+[2023-03-22 17:48:25,933][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4074.wav
+[2023-03-22 17:48:25,934][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0047.wav
+[2023-03-22 17:48:25,940][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4499.wav
+[2023-03-22 17:48:25,948][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1513.wav
+[2023-03-22 17:48:25,948][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3522.wav
+[2023-03-22 17:48:25,954][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0447.wav
+[2023-03-22 17:48:25,956][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0426.wav
+[2023-03-22 17:48:25,960][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1488.wav
+[2023-03-22 17:48:25,965][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3302.wav
+[2023-03-22 17:48:25,968][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0587.wav
+[2023-03-22 17:48:25,970][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_1050.wav
+[2023-03-22 17:48:25,980][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1796.wav
+[2023-03-22 17:48:25,984][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2034.wav
+[2023-03-22 17:48:25,986][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0372.wav
+[2023-03-22 17:48:25,990][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3161.wav
+[2023-03-22 17:48:25,993][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0324.wav
+[2023-03-22 17:48:25,997][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0507.wav
+[2023-03-22 17:48:26,000][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4175.wav
+[2023-03-22 17:48:26,001][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0643.wav
+[2023-03-22 17:48:26,011][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2067.wav
+[2023-03-22 17:48:26,016][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3958.wav
+[2023-03-22 17:48:26,021][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3568.wav
+[2023-03-22 17:48:26,025][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2441.wav
+[2023-03-22 17:48:26,026][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0949.wav
+[2023-03-22 17:48:26,031][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3127.wav
+[2023-03-22 17:48:26,035][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2432.wav
+[2023-03-22 17:48:26,037][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3417.wav
+[2023-03-22 17:48:26,042][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2360.wav
+[2023-03-22 17:48:26,045][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2833.wav
+[2023-03-22 17:48:26,055][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3528.wav
+[2023-03-22 17:48:26,061][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0544.wav
+[2023-03-22 17:48:26,063][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2887.wav
+[2023-03-22 17:48:26,068][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3519.wav
+[2023-03-22 17:48:26,073][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1178.wav
+[2023-03-22 17:48:26,075][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3823.wav
+[2023-03-22 17:48:26,077][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0376.wav
+[2023-03-22 17:48:26,079][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1386.wav
+[2023-03-22 17:48:26,084][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0527.wav
+[2023-03-22 17:48:26,089][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2614.wav
+[2023-03-22 17:48:26,095][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4788.wav
+[2023-03-22 17:48:26,099][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2258.wav
+[2023-03-22 17:48:26,108][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0900.wav
+[2023-03-22 17:48:26,110][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4341.wav
+[2023-03-22 17:48:26,113][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3973.wav
+[2023-03-22 17:48:26,115][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0405.wav
+[2023-03-22 17:48:26,119][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1660.wav
+[2023-03-22 17:48:26,124][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1495.wav
+[2023-03-22 17:48:26,130][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3425.wav
+[2023-03-22 17:48:26,131][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0919.wav
+[2023-03-22 17:48:26,136][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4084.wav
+[2023-03-22 17:48:26,137][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1081.wav
+[2023-03-22 17:48:26,148][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0635.wav
+[2023-03-22 17:48:26,150][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0674.wav
+[2023-03-22 17:48:26,150][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3171.wav
+[2023-03-22 17:48:26,156][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3099.wav
+[2023-03-22 17:48:26,157][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0353.wav
+[2023-03-22 17:48:26,162][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4804.wav
+[2023-03-22 17:48:26,166][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3125.wav
+[2023-03-22 17:48:26,170][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_1062.wav
+[2023-03-22 17:48:26,177][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0305.wav
+[2023-03-22 17:48:26,182][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4415.wav
+[2023-03-22 17:48:26,184][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3526.wav
+[2023-03-22 17:48:26,189][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3255.wav
+[2023-03-22 17:48:26,192][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2554.wav
+[2023-03-22 17:48:26,197][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1064.wav
+[2023-03-22 17:48:26,199][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4875.wav
+[2023-03-22 17:48:26,204][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2418.wav
+[2023-03-22 17:48:26,205][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3695.wav
+[2023-03-22 17:48:26,214][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4817.wav
+[2023-03-22 17:48:26,216][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3444.wav
+[2023-03-22 17:48:26,222][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_1008.wav
+[2023-03-22 17:48:26,227][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0110.wav
+[2023-03-22 17:48:26,231][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0043.wav
+[2023-03-22 17:48:26,237][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_0244.wav
+[2023-03-22 17:48:26,238][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0432.wav
+[2023-03-22 17:48:26,239][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2718.wav
+[2023-03-22 17:48:26,250][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2005.wav
+[2023-03-22 17:48:26,254][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1745.wav
+[2023-03-22 17:48:26,255][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1657.wav
+[2023-03-22 17:48:26,262][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_4281.wav
+[2023-03-22 17:48:26,264][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0585.wav
+[2023-03-22 17:48:26,269][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3313.wav
+[2023-03-22 17:48:26,275][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1509.wav
+[2023-03-22 17:48:26,277][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0273.wav
+[2023-03-22 17:48:26,281][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4123.wav
+[2023-03-22 17:48:26,286][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0085.wav
+[2023-03-22 17:48:26,289][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0264.wav
+[2023-03-22 17:48:26,293][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_2310.wav
+[2023-03-22 17:48:26,296][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3286.wav
+[2023-03-22 17:48:26,301][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_4339.wav
+[2023-03-22 17:48:26,302][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0240.wav
+[2023-03-22 17:48:26,309][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/2/2_1081.wav
+[2023-03-22 17:48:26,313][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_3409.wav
+[2023-03-22 17:48:26,318][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_3985.wav
+[2023-03-22 17:48:26,322][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_0330.wav
+[2023-03-22 17:48:26,324][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/3/3_1591.wav
+[2023-03-22 17:48:26,330][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_0821.wav
+[2023-03-22 17:48:26,331][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_1721.wav
+[2023-03-22 17:48:26,334][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_1038.wav
+[2023-03-22 17:48:26,336][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2701.wav
+[2023-03-22 17:48:26,341][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/1/1_0851.wav
+[2023-03-22 17:48:26,344][kospeech.utils][INFO] - Audio is None : C:/Users/SSAFY/Desktop/Speech/gitstt/BE/KoreanSTT/dataset/kspon/data/kss/4/4_2356.wav
+[2023-03-22 17:48:26,932][kospeech.utils][INFO] - save checkpoints
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-22\17-48-22\2023_03_22_17_48_26-trainer_states.pt
+C:\Users\SSAFY\Desktop\Speech\gitstt\BE\KoreanSTT\outputs\2023-03-22\17-48-22\2023_03_22_17_48_26-model.pt
+[2023-03-22 17:48:26,932][kospeech.utils][INFO] - train() completed
+[2023-03-22 17:48:26,933][kospeech.utils][INFO] - 0

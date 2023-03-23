@@ -16,6 +16,7 @@ import torch
 import torch.nn as nn
 import logging
 import platform
+import os
 from omegaconf import DictConfig
 
 from kospeech.optim.lr_scheduler.lr_scheduler import LearningRateScheduler
@@ -47,11 +48,10 @@ def check_envirionment(use_cuda: bool) -> torch.device:
     """
     
     cuda = use_cuda and torch.cuda.is_available()
-    
-    device = torch.device('cuda' if cuda else 'cpu')
+    GPU_NUM = os.environ['GPU_NUM']
+    device = torch.device(f'cuda:{GPU_NUM}' if cuda else 'cpu')
     logger.info(f"Operating System : {platform.system()} {platform.release()}")
     logger.info(f"Processor : {platform.processor()}")
-
     if str(device) == 'cuda':
         for idx in range(torch.cuda.device_count()):
             logger.info(f"device : {torch.cuda.get_device_name(idx)}")
