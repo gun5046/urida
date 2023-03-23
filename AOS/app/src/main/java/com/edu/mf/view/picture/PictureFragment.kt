@@ -77,6 +77,13 @@ class PictureFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val previewPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
+            if(it){
+                mainActivity.addFragment(PicturePreviewFragment())
+            } else {
+                Toast.makeText(requireContext(), "카메라 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
+            }
+        }
         val cameraPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it){
                 launchCamera()
@@ -95,7 +102,7 @@ class PictureFragment: Fragment() {
             if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
                 mainActivity.addFragment(PicturePreviewFragment())
             } else {
-                cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+                previewPermissionLauncher.launch(Manifest.permission.CAMERA)
             }
         }
         binding.cardviewCamera.setOnClickListener {
