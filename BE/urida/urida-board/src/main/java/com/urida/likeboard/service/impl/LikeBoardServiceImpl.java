@@ -28,9 +28,9 @@ public class LikeBoardServiceImpl implements LikeBoardService {
         Board targetArticle = boardJpqlRepo.getArticle(board_id);
 
         if (currUser.isPresent()) {
-            Optional<likeboard> exixstingLikeBoard = likeBoardJpqlRepo.findByUserAndBoard(uid, board_id);
-            if (exixstingLikeBoard.isPresent()) {
-                likeBoardJpqlRepo.deleteLikeBoard(exixstingLikeBoard.get());
+            Optional<likeboard> existingLikeBoard = likeBoardJpqlRepo.findByUserAndBoard(uid, board_id);
+            if (existingLikeBoard.isPresent()) {
+                likeBoardJpqlRepo.deleteLikeBoard(existingLikeBoard.get());
                 targetArticle.dislike();
                 return false;
             } else {
