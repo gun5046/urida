@@ -10,6 +10,8 @@ public interface ProblemService {
 
     void saveProblem(ProblemSaveDto problemSaveDto);
 
+    void updateProblem(Long proId);
+
     List<Problem> getListProblem(Long userId);
 
     void deleteProblem(Long userId, Long proId);
