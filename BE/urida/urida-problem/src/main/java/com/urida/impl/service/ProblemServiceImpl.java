@@ -1,5 +1,6 @@
 package com.urida.impl.service;
 
+import com.urida.dto.ProblemOutDto;
 import com.urida.dto.ProblemSaveDto;
 import com.urida.entity.Choice;
 import com.urida.entity.Example;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,12 +26,12 @@ public class ProblemServiceImpl implements ProblemService {
     private final ProblemJpqlRepo problemJpqlRepo ;
     private final UserJpqlRepo userJpqlRepo;
     @Override
-    public Problem problemInfo(Long proId) {
+    public ProblemOutDto problemInfo(Long proId) {
         Optional<Problem> problem = problemJpqlRepo.findByProId(proId);
         if(problem.isPresent()){
-            return problem.get();
+            return new ProblemOutDto(problem.get());
         }else{
-            return new Problem();
+            return new ProblemOutDto();
         }
     }
 
@@ -72,10 +74,13 @@ public class ProblemServiceImpl implements ProblemService {
     }
 
     @Override
-    public List<Problem> getListProblem(Long userId) {
+    public List<ProblemOutDto> getListProblem(Long userId) {
         List<Problem> problems = problemJpqlRepo.findByUserId(userId);
+        List<ProblemOutDto> problemOutDtos = problems.stream().map(problem -> {
+            return new ProblemOutDto(problem);
+        }).collect(Collectors.toList());
 
-        return problems;
+        return problemOutDtos;
     }
 
     @Transactional
