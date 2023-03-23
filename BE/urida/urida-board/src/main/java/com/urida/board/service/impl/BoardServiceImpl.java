@@ -12,6 +12,8 @@ import com.urida.comment.service.CommentService;
 import com.urida.exception.NoDataException;
 import com.urida.exception.SaveException;
 import com.urida.board.repo.BoardJpqlRepo;
+import com.urida.likeboard.entity.Likeboard;
+import com.urida.likeboard.repo.LikeBoardJpqlRepo;
 import com.urida.user.entity.User;
 import com.urida.user.repo.UserJpqlRepo;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +31,7 @@ import java.util.Optional;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardJpqlRepo boardJpqlRepo;
+    private final LikeBoardJpqlRepo likeBoardJpqlRepo;
     private final UserJpqlRepo userJpqlRepo;
     private final CommentJpqlRepo commentJpqlRepo;
     private final CommentService commentService;
@@ -40,14 +43,14 @@ public class BoardServiceImpl implements BoardService {
         List<Board> allArticles = boardJpqlRepo.findAll();
         List<BoardListDto> articleDtoList = new ArrayList<>();
 
-        for(Board article : allArticles) {
+        for (Board article : allArticles) {
             BoardListDto dto = BoardListDto.builder()
                     .board_id(article.getBoard_id())
                     .title(article.getTitle())
                     .content(article.getContent())
                     .view(article.getView())
                     .dateTime(article.getTime())
-                    .assessment(article.getAssessment())
+//                    .assessment(article.getAssessment())
                     .nickname(article.getUser().getNickname())
                     .build();
             articleDtoList.add(dto);
@@ -68,7 +71,7 @@ public class BoardServiceImpl implements BoardService {
                 .content(article.getContent())
                 .view(article.getView())
                 .dateTime(article.getTime())
-                .assessment(article.getAssessment())
+//                .assessment(article.getAssessment())
                 .nickname(nickname)
                 .comment(comments)
                 .build();
@@ -78,7 +81,7 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Board createArticle(ArticleCreateDto articleCreateDto) {
         Optional<User> user = userJpqlRepo.findByUid(articleCreateDto.getUid());
-        if(user.isPresent()) {
+        if (user.isPresent()) {
             Board article = Board.builder()
                     .title(articleCreateDto.getTitle())
                     .content(articleCreateDto.getContent())
@@ -86,14 +89,21 @@ public class BoardServiceImpl implements BoardService {
                     .user(user.get())
                     .build();
 
+            Likeboard likeboard = Likeboard.builder()
+                    .user(user.get())
+                    .status(false)
+                    .board(article)
+                    .build();
+
             try {
                 boardJpqlRepo.saveArticle(article);
+                likeBoardJpqlRepo.saveInitialLikeBoard(likeboard);
                 return article;
             } catch (Exception e) {
                 System.out.println(e.toString());
                 throw new SaveException("Value invalid");
             }
-        } else{
+        } else {
             throw new NoDataException("Value invalid");
         }
     }
@@ -104,7 +114,7 @@ public class BoardServiceImpl implements BoardService {
         Optional<User> currUser = userJpqlRepo.findByUid(targetArticle.getUser().getUid());
         String newContent = articleUpdateDto.getContent();
 
-        if(currUser.isPresent()) {
+        if (currUser.isPresent()) {
             Board updatedArticle = Board.builder()
                     .board_id(targetArticle.getBoard_id())
                     .title(targetArticle.getTitle())
@@ -125,18 +135,36 @@ public class BoardServiceImpl implements BoardService {
         }
     }
 
-   @Override
+    @Override
     public void deleteArticle(Long id) {
-       boardJpqlRepo.removeArticle(id);
+        boardJpqlRepo.removeArticle(id);
     }
 
     @Override
-    public int likeArticle(Long id) {
-        return boardJpqlRepo.likeArticle(id);
+    public Boolean clickLikeArticle(Long board_id, Long uid, Boolean status) {
+        Optional<Likeboard> targetArticle = likeBoardJpqlRepo.findByUserAndBoard(uid, board_id);
+        if (targetArticle.isPresent()) {
+            likeBoardJpqlRepo.updateLikeBoard(board_id, uid, !status);
+        } else {
+            likeBoardJpqlRepo.saveLikeBoard(uid, board_id);
+        }
+
+        return likeBoardJpqlRepo.findByUserAndBoard(uid, board_id).get().isStatus();
     }
 
     @Override
+    public int likeCnt(Long board_id) {
+        likeBoardJpqlRepo.
+    }
+
+
+//    @Override
+//    public int likeArticle(Long id) {
+//        return likeBoardJpqlRepo.saveLikeBoard(id);
+//    }
+
+    /*@Override
     public int dislikeArticle(Long id) {
         return boardJpqlRepo.dislikeArticle(id);
-    }
+    }*/
 }

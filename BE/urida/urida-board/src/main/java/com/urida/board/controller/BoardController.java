@@ -67,15 +67,18 @@ public class BoardController {
         boardService.deleteArticle(id);
     }
 
-    // 게시글 좋아요
-    @PutMapping("/like/{id}")
-    public int likeArticle(@PathVariable Long id) {
-        return boardService.likeArticle(id);
+// 게시글 좋아요
+    @PutMapping("/like/{board_id}/{uid}/{status}")
+    public Boolean clickLikeArticle(@PathVariable Long board_id, @PathVariable Long uid, @PathVariable Boolean status) {
+        return boardService.clickLikeArticle(board_id,uid,status);
     }
 
-    // 게시글 좋아요 취소
-    @PutMapping("/dislike/{id}")
-    public int dislikeArticle(@PathVariable Long id) {
-        return boardService.dislikeArticle(id);
+// 게시글 좋아요 개수
+    @GetMapping("/like/count/{board_id}")
+    public int likeCnt(@PathVariable Long board_id) {
+
     }
+
+    }
+
 }

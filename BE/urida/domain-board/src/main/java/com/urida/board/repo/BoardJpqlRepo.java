@@ -89,7 +89,7 @@ public class BoardJpqlRepo {
 
     }*/
 
-    // 게시글 좋아요
+   /* // 게시글 좋아요
     public int likeArticle(Long id) {
         getArticle(id).like();
         return getArticle(id).getAssessment();
@@ -101,5 +101,5 @@ public class BoardJpqlRepo {
 //        board.dislike();
         getArticle(id).dislike();
         return getArticle(id).getAssessment();
-    }
+    }*/
 }

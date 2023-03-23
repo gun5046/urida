@@ -29,9 +29,15 @@ public interface BoardService {
     void deleteArticle(Long id);
 
     // 좋아요 누르기
-    int likeArticle(Long id);
+    Boolean clickLikeArticle(Long board_id,Long uid, Boolean status);
+
+    // 좋아요 개수
+    int likeCnt(Long board_id);
+
+    // 좋아요 누르기
+//    int likeArticle(Long id);
 
     // 좋아요 취소하기
-    int dislikeArticle(Long id);
+//    int dislikeArticle(Long id);
 
 }

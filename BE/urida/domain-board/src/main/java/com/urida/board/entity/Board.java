@@ -34,8 +34,8 @@ public class Board {
 
     private String time;
 
-    @ColumnDefault("0")
-    private int assessment;
+//    @ColumnDefault("0")
+//    private int assessment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uid")
@@ -51,16 +51,16 @@ public class Board {
         this.view++;
     }
 
-    /* 좋아요 추가*/
-    public void like(){
-        this.assessment++;
-    }
-
-    /* 좋아요 취소*/
-    public void dislike(){
-        if(this.assessment > 0) {
-            this.assessment--;
-        }
-    }
+//    /* 좋아요 추가*/
+//    public void like(){
+//        this.assessment++;
+//    }
+//
+//    /* 좋아요 취소*/
+//    public void dislike(){
+//        if(this.assessment > 0) {
+//            this.assessment--;
+//        }
+//    }
 
 }

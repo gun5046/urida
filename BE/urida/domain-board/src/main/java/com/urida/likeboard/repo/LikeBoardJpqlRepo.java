@@ -1,6 +1,6 @@
 package com.urida.likeboard.repo;
 
-import com.urida.likeboard.entity.likeboard;
+import com.urida.likeboard.entity.Likeboard;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -14,9 +14,9 @@ public class LikeBoardJpqlRepo {
     private final EntityManager em;
 
     // 유저 및 게시글로 좋아요 검색
-    public Optional<likeboard> findByUserAndBoard(Long uid, Long board_id) {
-        List<likeboard> likeBoard = em.createQuery(
-                        "select l from likeboard l where l.board.board_id = :board_id and l.user.uid = :uid", likeboard.class
+    public Optional<Likeboard> findByUserAndBoard(Long uid, Long board_id) {
+        List<Likeboard> likeBoard = em.createQuery(
+                        "select l from Likeboard l where l.board.board_id = :board_id and l.user.uid = :uid", Likeboard.class
                 ).setParameter("board_id", board_id)
                 .setParameter("uid", uid)
                 .getResultList();
@@ -24,12 +24,39 @@ public class LikeBoardJpqlRepo {
         return likeBoard.stream().findAny();
     }
 
-    public void saveLikeBoard(likeboard likeBoard) {
-       em.persist(likeBoard);
+    public void saveInitialLikeBoard(Likeboard likeboard) {
+        em.persist(likeboard);
+    }
+    public void saveLikeBoard(Long uid, Long board_id) {
+        em.createNativeQuery("insert into likeboard(uid, board_id, status)" +
+                        "values (:uid, :board_id, false)")
+                .setParameter("uid", uid)
+                .setParameter("board_id", board_id)
+                .executeUpdate();
     }
 
-    public void deleteLikeBoard(likeboard likeBoard) {
+    public Boolean updateLikeBoard(Long board_id, Long uid, boolean status) {
+        em.createNativeQuery("update Likeboard set status = :status where board_id=:board_id and uid =:uid")
+                .setParameter("board_id",board_id)
+                .setParameter("status",status)
+                .setParameter("uid", uid)
+                .executeUpdate();
+
+        return status;
+    }
+
+    public int likeCnt(Long board_id) {
+        List<Likeboard> likeboard = em.createQuery(
+                        "select l from Likeboard l where l.board.board_id = :board_id", Likeboard.class
+                )
+                .setParameter("board_id", board_id)
+                .getResultList();
+        Optional<Likeboard> targetArticle = likeboard.stream().findAny();
+    }
+/*
+    public void deleteLikeBoard(Likeboard likeBoard) {
         em.remove(likeBoard);
     }
+*/
 
 }
