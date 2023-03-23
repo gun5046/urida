@@ -350,7 +350,7 @@ class App : Application(){
         PICTURES[5].add("등산하기")
         PICTURES[5].add("포옹하기")
         PICTURES[5].add("뛰기")
-        PICTURES[5].add("눞기")
+        PICTURES[5].add("눕기")
         PICTURES[5].add("명상하기")
         PICTURES[5].add("줍기")
         PICTURES[5].add("놀이")
