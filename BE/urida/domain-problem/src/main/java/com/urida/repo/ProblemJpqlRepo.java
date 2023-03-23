@@ -1,19 +1,12 @@
 package com.urida.repo;
 
 import com.urida.entity.Problem;
-import com.urida.user.entity.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
 @Repository
 @RequiredArgsConstructor
@@ -49,19 +42,19 @@ public class ProblemJpqlRepo{
 
 
     public List<Problem> findByUserId(Long userId) {
-        List<Problem> problems = em.createQuery(
+        return em.createQuery(
                         "SELECT p FROM Problem  p Inner Join p.user u WHERE u.id = :userId", Problem.class)
                 .setParameter("userId", userId)
                 .getResultList();
-
-        return problems;
     }
 
-    public void deleteProInList(Long userId, Long proId) {
-        Problem deleteProblem = findByProId(proId).get();
+    public void deleteProInList(Long proId) {
 
-        em.remove(deleteProblem);
-        em.flush();
+        if(findByProId(proId).isPresent()){
+            Problem deleteProblem = findByProId(proId).get();
+            em.remove(deleteProblem);
+            em.flush();
+        }
 
 //        em.createQuery("DELETE FROM Problem p where p.user.id=:userId and p.pro_id=:proId")
 //                .setParameter("userId",userId)
