@@ -63,4 +63,11 @@ public class ProblemJpqlRepo{
                 .setParameter("proId",proId)
                 .executeUpdate();
     }
+
+    public void updateProblem(Long proId) {
+        em.createQuery("update Problem p set p.wrong_cnt = p.wrong_cnt + 1 where p.id = :proId")
+                .setParameter("proId", proId)
+                .executeUpdate();
+        em.clear();
+    }
 }

@@ -39,6 +39,12 @@ public class ProblemController {
         return true;
     }
 
+    @PostMapping("/update")
+    @ApiOperation(value = "문제갱신", notes = "틀린횟수 +1")
+    public void updateProblem(@RequestParam Long proId){
+        problemService.updateProblem(proId);
+    }
+
     @GetMapping("/list")
     @ApiOperation(value = "해당유저의 틀린 문제 리스트", notes = "UserId 필요")
     public List<Problem> getListProblem(@RequestParam Long userId){

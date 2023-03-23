@@ -66,6 +66,12 @@ public class ProblemServiceImpl implements ProblemService {
     }
 
     @Override
+    @Transactional
+    public void updateProblem(Long proId) {
+        problemJpqlRepo.updateProblem(proId);
+    }
+
+    @Override
     public List<Problem> getListProblem(Long userId) {
         List<Problem> problems = problemJpqlRepo.findByUserId(userId);
 
