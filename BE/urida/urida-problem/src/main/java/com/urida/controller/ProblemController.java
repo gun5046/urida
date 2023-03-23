@@ -35,9 +35,14 @@ public class ProblemController {
             throw new InputException("RequestData(RegisterDto))invalid");
         }
 
-        System.out.println(problemSaveDto);
         problemService.saveProblem(problemSaveDto);
         return true;
+    }
+
+    @PutMapping("/update")
+    @ApiOperation(value = "문제갱신", notes = "틀린횟수 +1")
+    public void updateProblem(@RequestParam Long proId){
+        problemService.updateProblem(proId);
     }
 
     @GetMapping("/list")
