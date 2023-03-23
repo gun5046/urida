@@ -1,5 +1,6 @@
 package com.urida.controller;
 
+import com.urida.dto.ProblemOutDto;
 import com.urida.dto.ProblemSaveDto;
 import com.urida.impl.ProblemService;
 import com.urida.entity.Problem;
@@ -24,7 +25,7 @@ public class ProblemController {
 
     @GetMapping("/info")
     @ApiOperation(value = "문제정보", notes = "문제 Id / 해당 문제 없음 -> 빈 Problem 객체 리턴/ Input 값오류->403 error")
-    public Problem getProblemInfo(@RequestParam Long proId){
+    public ProblemOutDto getProblemInfo(@RequestParam Long proId){
         return problemService.problemInfo(proId);
     }
 
@@ -47,7 +48,7 @@ public class ProblemController {
 
     @GetMapping("/list")
     @ApiOperation(value = "해당유저의 틀린 문제 리스트", notes = "UserId 필요")
-    public List<Problem> getListProblem(@RequestParam Long userId){
+    public List<ProblemOutDto> getListProblem(@RequestParam Long userId){
         return problemService.getListProblem(userId);
     }
 

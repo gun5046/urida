@@ -19,7 +19,7 @@ public class Example {
 
     private int wordId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pro_id")
     private Problem problem;
 

@@ -58,10 +58,15 @@ public class ProblemJpqlRepo{
     }
 
     public void deleteProInList(Long userId, Long proId) {
-        em.createQuery("DELETE FROM Problem p where p.user.id=:userId and p.pro_id=:proId")
-                .setParameter("userId",userId)
-                .setParameter("proId",proId)
-                .executeUpdate();
+        Problem deleteProblem = findByProId(proId).get();
+
+        em.remove(deleteProblem);
+        em.flush();
+
+//        em.createQuery("DELETE FROM Problem p where p.user.id=:userId and p.pro_id=:proId")
+//                .setParameter("userId",userId)
+//                .setParameter("proId",proId)
+//                .executeUpdate();
     }
 
     public void updateProblem(Long proId) {
