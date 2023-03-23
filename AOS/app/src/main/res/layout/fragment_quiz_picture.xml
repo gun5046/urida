@@ -11,6 +11,9 @@
         <variable
             name="vm"
             type="com.edu.mf.viewmodel.MainViewModel" />
+        <variable
+            name="handlers"
+            type="com.edu.mf.view.study.quiz.QuizPictureFragment" />
 
     </data>
 
@@ -30,6 +33,7 @@
             android:layout_height="40dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="6dp"
+            android:onClick="@{()->handlers.onBackPressed()}"
             android:src="@drawable/ic_backward_gray"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
@@ -141,6 +145,7 @@
                 android:layout_height="0dp"
                 android:background="@drawable/quiz_problem_white_10"
                 android:layout_margin="5dp"
+                android:onClick="@{()->handlers.onProblemClick(0)}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/constraintlayout_fragment_quiz_picture_parent2"
@@ -165,6 +170,7 @@
                 android:layout_height="0dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/quiz_problem_white_10"
+                android:onClick="@{()->handlers.onProblemClick(1)}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/constraintlayout_fragment_quiz_picture_parent1"
                 app:layout_constraintRight_toRightOf="parent"
@@ -188,6 +194,7 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_margin="5dp"
+                android:onClick="@{()->handlers.onProblemClick(2)}"
                 android:background="@drawable/quiz_problem_white_10"
                 app:layout_constraintTop_toBottomOf="@id/constraintlayout_fragment_quiz_picture_parent1"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -214,6 +221,7 @@
                 android:layout_height="0dp"
                 android:layout_margin="5dp"
                 android:background="@drawable/quiz_problem_white_10"
+                android:onClick="@{()->handlers.onProblemClick(3)}"
                 app:layout_constraintTop_toBottomOf="@id/constraintlayout_fragment_quiz_picture_parent2"
                 app:layout_constraintLeft_toRightOf="@id/constraintlayout_fragment_quiz_picture_parent3"
                 app:layout_constraintRight_toRightOf="parent"

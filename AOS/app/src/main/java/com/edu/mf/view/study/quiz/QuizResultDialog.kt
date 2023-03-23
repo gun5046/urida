@@ -90,17 +90,32 @@ class QuizResultDialog(
                     binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
                 }
             }
-            1->{
-                if(answers==viewModel.answerIndex){
+            1-> {
+                if (answers == viewModel.answerIndex) {
                     binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
+                } else {
+                    val resolveRequest = ResolveRequest(
+                        viewModel.quiz.value!!.answer_i,
+                        viewModel.selectedCategory,
+                        -1,
+                        viewModel.selectedPCategory,
+                        1,
+                        App.sharedPreferencesUtil.getUser()?.uid.toString(),
+                        emptyList<Int>(),
+                        viewModel.quizIndex.value!!
+                    )
+                    insertResolveRequest(resolveRequest)
+                    binding.textviewDialogFragmentQuizTitle.text =
+                        "정답은 ${viewModel.answerIndex + 1}번 입니다"
+                    binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
                 }
-                val resolveRequest = ResolveRequest(
-                    viewModel.quiz.value!!.answer_i,viewModel.selectedCategory,-1,
-                    viewModel.selectedPCategory,1, App.sharedPreferencesUtil.getUser()?.uid.toString(),
-                    emptyList<Int>(),viewModel.quizIndex.value!!)
-                insertResolveRequest(resolveRequest)
-                binding.textviewDialogFragmentQuizTitle.text = "정답은 ${viewModel.answerIndex}번 입니다"
-                binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
+
+            }
+            2->{
+
+            }
+            3->{
+
             }
             else->{
 
@@ -123,13 +138,24 @@ class QuizResultDialog(
 
     fun onCancleClick(){
         dismiss()
-        mainActivity.popQuizFragment("word")
+        mainActivity.popQuizFragment(when(viewModel.selectedPCategory){
+            0->"word"
+            1-> "picture"
+            2->"blank"
+            else-> "relate"
+        })
         mainActivity.popFragment()
     }
     fun onOkClick(){
         dismiss()
-        mainActivity.addQuizFragment(QuizWordFragment(),"word")
+        when(viewModel.selectedPCategory){
+            0-> mainActivity.addQuizFragment(QuizWordFragment(),"word")
+            1->mainActivity.addQuizFragment(QuizPictureFragment(),"picture")
+            2->mainActivity.addQuizFragment(QuizBlankFragment(),"blank")
+            else->mainActivity.addQuizFragment(QuizRelateFragment(),"relate")
+        }
     }
+
 
     @SuppressLint("ServiceCast")
     fun Context.dialogFragmentResize(dialogFragment: DialogFragment, width:Float, height:Float){

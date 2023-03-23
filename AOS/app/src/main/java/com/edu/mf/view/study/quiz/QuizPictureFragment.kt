@@ -41,18 +41,34 @@ class QuizPictureFragment : Fragment() {
         mainActivity = MainActivity.getInstance()!!
         viewModel.setWordQuiz()
         viewModel.setTTS()
-        //mainActivity.disableBackPress()
 
         binding.apply{
             datas = App.PICTURES
+            handlers = this@QuizPictureFragment
             vm = viewModel
             lifecycleOwner = this@QuizPictureFragment
         }
+        disableBackPress()
     }
     fun onBackPressed(){
         mainActivity.popQuizFragment("picture")
         mainActivity.popFragment()
     }
+    fun onProblemClick(index:Int){
+        val dialog = QuizResultDialog(index,1)
+        dialog.isCancelable = false
+        dialog.show(activity?.supportFragmentManager!!,"QuizResultDialog")
+    }
+    /**
+     * onBackPressed 막기
+     */
+    fun disableBackPress(){
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
 
+            }
+
+        })
+    }
 
 }
