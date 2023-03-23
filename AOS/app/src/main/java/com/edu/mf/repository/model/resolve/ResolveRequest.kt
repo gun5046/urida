@@ -20,7 +20,7 @@ data class ResolveRequest(
     var wrong_cnt : Int,
 
     @Expose @SerializedName("uid")
-    var uid : String,
+    var uid : Int,
 
     @Expose @SerializedName("examples")
     var examples : List<Int>,

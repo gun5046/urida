@@ -83,7 +83,7 @@ class QuizResultDialog(
                 }else{
                     val resolveRequest = ResolveRequest(
                         viewModel.quiz.value!!.answer_i,viewModel.selectedCategory,-1,
-                        viewModel.selectedPCategory,1, App.sharedPreferencesUtil.getUser()?.uid.toString(),
+                        viewModel.selectedPCategory,1, App.sharedPreferencesUtil.getUser()?.uid!!,
                         emptyList<Int>(),viewModel.quizIndex.value!!)
                     insertResolveRequest(resolveRequest)
                     binding.textviewDialogFragmentQuizTitle.text = "정답은 ${viewModel.quiz.value!!.answer_s} 입니다"
@@ -100,7 +100,7 @@ class QuizResultDialog(
                         -1,
                         viewModel.selectedPCategory,
                         1,
-                        App.sharedPreferencesUtil.getUser()?.uid.toString(),
+                        App.sharedPreferencesUtil.getUser()?.uid!!,
                         emptyList<Int>(),
                         viewModel.quizIndex.value!!
                     )
@@ -131,8 +131,9 @@ class QuizResultDialog(
             if(body!=null){
                 Log.i(TAG, "insertResolveRequest 성공")
             }else{
-                Log.i(TAG, "insertResolveRequest 실패")
+                Log.i(TAG, response.message())
             }
+            Log.i(TAG, "${resolveRequest}")
         }
     }
 

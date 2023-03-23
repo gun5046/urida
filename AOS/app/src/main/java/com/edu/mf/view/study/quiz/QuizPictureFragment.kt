@@ -13,6 +13,7 @@ import com.edu.mf.R
 import com.edu.mf.databinding.FragmentQuizPictureBinding
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.study.StudyFragment
 import com.edu.mf.viewmodel.MainViewModel
 
 
