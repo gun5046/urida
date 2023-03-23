@@ -36,7 +36,8 @@ class QuizWordFragment : Fragment() {
         }
         viewModel.setWordQuiz()
         viewModel.setTTS()
-        mainActivity.disableBackPress()
+        //mainActivity.disableBackPress()
+        disableBackPress()
         return binding.root
     }
 
@@ -48,6 +49,18 @@ class QuizWordFragment : Fragment() {
             binding.problems = it.problems
         })
 
+    }
+
+    /**
+     * onBackPressed 막기
+     */
+    fun disableBackPress(){
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+
+            }
+
+        })
     }
 
     fun onBackPressed(){
