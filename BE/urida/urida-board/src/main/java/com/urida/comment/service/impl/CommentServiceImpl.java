@@ -89,6 +89,12 @@ public class CommentServiceImpl implements CommentService {
         return updatedComment;
     }
 
+    // 댓글 개수
+    @Override
+    public int commentCnt(Long board_id) {
+        return commentJpqlRepo.getComments(board_id).size();
+    }
+
     // 댓글 삭제
     @Override
     public Long removeComment(Long comment_id) {

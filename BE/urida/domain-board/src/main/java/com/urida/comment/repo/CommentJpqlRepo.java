@@ -40,4 +40,5 @@ public class CommentJpqlRepo {
     public void deleteComment(Long commentId) {
         em.remove(findById(commentId));
     }
+
 }

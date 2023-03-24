@@ -15,6 +15,8 @@ public interface CommentService {
 
     Comment updateComment(Long comment_id, CommentRequestDto commentRequestDto);
 
+    int commentCnt(Long board_id);
+
     Long removeComment(Long comment_id);
 
 }
