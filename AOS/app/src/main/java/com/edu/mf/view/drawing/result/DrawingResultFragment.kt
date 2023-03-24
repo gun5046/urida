@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.edu.mf.databinding.FragmentDrawingResultBinding
 import com.edu.mf.repository.model.drawing.DrawingResponse
 import com.edu.mf.utils.App
+import com.edu.mf.view.MainFragment
+import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.DrawingViewModel
 import com.edu.mf.viewmodel.MainViewModel
 
@@ -15,6 +18,7 @@ class DrawingResultFragment(
     private val drawingResponse: DrawingResponse
 ): Fragment() {
     private lateinit var binding: FragmentDrawingResultBinding
+    private lateinit var mainActivity: MainActivity
     private lateinit var mainViewModel: MainViewModel
     private lateinit var drawingViewModel: DrawingViewModel
 
@@ -24,6 +28,7 @@ class DrawingResultFragment(
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDrawingResultBinding.inflate(inflater, container, false)
+        mainActivity = MainActivity.getInstance()!!
         mainViewModel = MainViewModel()
         drawingViewModel = DrawingViewModel()
 
@@ -33,8 +38,11 @@ class DrawingResultFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.drawingResult = this@DrawingResultFragment
         binding.mainViewModel = mainViewModel
         binding.drawingViewModel = drawingViewModel
+
+        disableBackPress()
 
         drawingViewModel.setDrawingResponse(drawingResponse)
         getImgIdx(drawingViewModel)
@@ -97,6 +105,20 @@ class DrawingResultFragment(
         }
 
         _drawingViewModel.setImgInfoList(imgInfoList)
+    }
+
+    // 뒤로가기 아이콘 클릭 시
+    fun backPressed(){
+        mainActivity.popFragment()
+    }
+
+    // onBackPressed 막기
+    private fun disableBackPress(){
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner, object : OnBackPressedCallback(true){
+                override fun handleOnBackPressed() {
+                }
+        })
     }
 
     data class ImgInfo(

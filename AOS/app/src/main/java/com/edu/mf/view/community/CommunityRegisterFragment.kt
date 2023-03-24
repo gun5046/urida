@@ -1,8 +1,17 @@
 package com.edu.mf.view.community
 
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.ActionBar
 import android.os.Bundle
+import android.provider.MediaStore.Images
+import android.provider.Settings
 import android.view.*
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -32,6 +41,56 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
         super.onViewCreated(view, savedInstanceState)
 
         setActionBar()
+        permissionChk()
+    }
+
+    // cardview 클릭 시 permission 체크
+    private fun permissionChk(){
+        val reqPermission = requestPermission()
+        binding.cardviewFragmentCommunityRegister.setOnClickListener {
+            reqPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+    }
+
+    // 미디어 접근권한
+    private fun requestPermission(): ActivityResultLauncher<String> {
+        return registerForActivityResult(ActivityResultContracts.RequestPermission()){
+            if (it){
+                openGallery()
+            } else{
+                Toast.makeText(
+                    requireContext(), "저장장치 접근 권한을 확인해주세요", Toast.LENGTH_SHORT
+                ).show()
+
+                val settingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                    .setData(Uri.parse("package:" + requireContext().packageName))
+                requireContext().startActivity(settingsIntent)
+            }
+        }
+    }
+
+    // 갤러리 띄우기
+    private fun openGallery(){
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.setDataAndType(Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+        result.launch(intent)
+    }
+
+    val result = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){
+        if (it.resultCode == Activity.RESULT_OK){
+            val uri = it.data!!.data
+
+            if (uri != null){
+                setImg(uri)
+            }
+        }
+    }
+
+    private fun setImg(uri: Uri){
+        binding.imageviewFragmentCommunityRegister.setImageURI(uri)
+        binding.imageviewFragmentCommunityRegisterPlus.visibility = View.GONE
     }
 
     // 액션바 설정
@@ -44,7 +103,11 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
         )
         actionBar.show()
 
-        requireActivity().addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        requireActivity().addMenuProvider(
+            this
+            , viewLifecycleOwner
+            , Lifecycle.State.RESUMED
+        )
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
