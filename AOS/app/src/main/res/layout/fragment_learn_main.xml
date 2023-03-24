@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
-                android:fontFamily="@font/jalnan"
+                android:fontFamily="@font/maple"
                 android:onClick="@{()->vm.startTTS()}"
                 android:text="@{vm.answer}"
                 android:textColor="#4a5759"

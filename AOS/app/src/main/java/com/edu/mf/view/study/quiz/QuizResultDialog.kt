@@ -114,11 +114,26 @@ class QuizResultDialog(
             2->{
 
             }
-            3->{
-
-            }
             else->{
-
+                Log.i(TAG, "checkAnswer: ${answers} , ${viewModel.answerIndex}")
+               /* if (answers == viewModel.answerIndex) {
+                    binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
+                } else {
+                    val resolveRequest = ResolveRequest(
+                        viewModel.quiz.value!!.answer_i,
+                        viewModel.selectedCategory,
+                        -1,
+                        viewModel.selectedPCategory,
+                        1,
+                        App.sharedPreferencesUtil.getUser()?.uid!!,
+                        emptyList<Int>(),
+                        viewModel.quizIndex.value!!
+                    )
+                    insertResolveRequest(resolveRequest)
+                    binding.textviewDialogFragmentQuizTitle.text =
+                        "정답은 ${App.PICTURES[viewModel.selectedCategory][viewModel.quiz.value!!.answer_i]}번 입니다"
+                    binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
+                }*/
             }
         }
     }
@@ -157,6 +172,10 @@ class QuizResultDialog(
         }
     }
 
+
+    /**
+     * Dialog Size 설정
+     */
 
     @SuppressLint("ServiceCast")
     fun Context.dialogFragmentResize(dialogFragment: DialogFragment, width:Float, height:Float){

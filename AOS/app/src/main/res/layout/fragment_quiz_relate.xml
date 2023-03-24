@@ -8,16 +8,12 @@
         <variable
             name="datas"
             type="ArrayList&lt;ArrayList&lt;String&gt;&gt;" />
-
-        <variable
-            name="backEvent"
-            type="com.edu.mf.view.study.StudyFragment" />
         <variable
             name="vm"
             type="com.edu.mf.viewmodel.MainViewModel" />
         <variable
             name="handlers"
-            type="com.edu.mf.view.study.quiz.QuizPictureFragment" />
+            type="com.edu.mf.view.study.quiz.QuizRelateFragment" />
 
     </data>
 
@@ -37,7 +33,6 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="6dp"
-                android:onClick="@{()->handlers.onBackPressed()}"
                 android:src="@drawable/ic_backward_gray"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
@@ -74,9 +69,11 @@
                     android:id="@+id/textview_fragment_quiz_picture_word"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="32sp"
-                    android:text="@{datas[vm.selectedCategory][vm.selectedIndex]}"
-                    android:fontFamily="@font/jalnan"
+                    android:textSize="28sp"
+                    android:text="@{datas[vm.selectedCategory][vm.relateProblem[0]]+` , `+datas[vm.selectedCategory][vm.relateProblem[1]]+` , `+datas[vm.selectedCategory][vm.relateProblem[2]]}"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/maple"
+                    android:textStyle="bold"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
@@ -155,17 +152,18 @@
                     app:layout_constraintRight_toLeftOf="@id/constraintlayout_fragment_quiz_relate_parent2"
                     app:layout_constraintBottom_toTopOf="@id/constraintlayout_fragment_quiz_relate_parent3">
 
-
-                    <ImageView
-                        android:id="@+id/imageview_fragment_quiz_relate_image1"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:padding="30dp"
-                        app:imgSrc="@{@string/fragment_drawing_result_list_imageview(vm.selectedCategory,vm.quiz.problems_i[0])}"
+                    <TextView
+                        android:id="@+id/textview_fragment_quiz_relate_category1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/maple"
+                        android:textSize="24sp"
+                        android:text="@{datas[vm.quiz.relate_categories[0]][vm.quiz.problems_i[0]]}"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -173,23 +171,24 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_margin="5dp"
-                    android:background="@drawable/quiz_problem_white_10"
                     android:onClick="@{()->handlers.onProblemClick(1)}"
+                    android:background="@drawable/quiz_problem_white_10"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintLeft_toRightOf="@id/constraintlayout_fragment_quiz_relate_parent1"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintBottom_toTopOf="@id/constraintlayout_fragment_quiz_relate_parent4">
 
 
-                    <ImageView
-                        android:id="@+id/imageview_fragment_quiz_relate_image2"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:padding="30dp"
-                        app:imgSrc="@{@string/fragment_drawing_result_list_imageview(vm.selectedCategory,vm.quiz.problems_i[1])}"
+                    <TextView
+                        android:id="@+id/textview_fragment_quiz_relate_category2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/maple"
+                        android:textSize="24sp"
+                        android:text="@{datas[vm.quiz.relate_categories[1]][vm.quiz.problems_i[1]]}"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -198,25 +197,24 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_margin="5dp"
-                    android:onClick="@{()->handlers.onProblemClick(2)}"
                     android:background="@drawable/quiz_problem_white_10"
+                    android:onClick="@{()->handlers.onProblemClick(2)}"
                     app:layout_constraintTop_toBottomOf="@id/constraintlayout_fragment_quiz_relate_parent1"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/constraintlayout_fragment_quiz_relate_parent4">
 
-
-                    <ImageView
-                        android:id="@+id/imageview_fragment_quiz_picture_image3"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:padding="30dp"
-                        app:imgSrc="@{@string/fragment_drawing_result_list_imageview(vm.selectedCategory,vm.quiz.problems_i[2])}"
+                    <TextView
+                        android:id="@+id/textview_fragment_quiz_relate_category3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/maple"
+                        android:textSize="24sp"
+                        android:text="@{datas[vm.quiz.relate_categories[2]][vm.quiz.problems_i[2]]}"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
-
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -231,16 +229,20 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent">
 
-                    <ImageView
-                        android:id="@+id/imageview_fragment_quiz_picture_image4"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:padding="30dp"
-                        app:imgSrc="@{@string/fragment_drawing_result_list_imageview(vm.selectedCategory,vm.quiz.problems_i[3])}"
+                    <TextView
+                        android:id="@+id/textview_fragment_quiz_relate_category4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/maple"
+                        android:textSize="24sp"
+                        android:text="@{datas[vm.quiz.relate_categories[3]][vm.quiz.problems_i[3]]}"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

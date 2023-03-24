@@ -7,13 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentQuizPictureBinding
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
-import com.edu.mf.view.study.StudyFragment
 import com.edu.mf.viewmodel.MainViewModel
 
 
@@ -40,7 +38,7 @@ class QuizPictureFragment : Fragment() {
     private fun init(){
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         mainActivity = MainActivity.getInstance()!!
-        viewModel.setWordQuiz()
+        viewModel.setQuiz()
         viewModel.setTTS()
 
         binding.apply{

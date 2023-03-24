@@ -20,18 +20,25 @@ class MainViewModel : ViewModel(){
     private var _mode : MutableLiveData<Int> = MutableLiveData()
     val mode : LiveData<Int> get() = _mode
 
+    //정답으로 뽑힌 index 번호
     private var _selectedIndex : MutableLiveData<Int> = MutableLiveData()
     val selectedIndex : LiveData<Int> get() = _selectedIndex
 
+    //해당 문제의 quiz
     private var _quiz : MutableLiveData<Quiz> = MutableLiveData()
     val quiz : LiveData<Quiz> get() = _quiz
 
-    private var _quizIndex : MutableLiveData<ArrayList<Int>> = MutableLiveData()
+    //quiz index 번호
+   private var _quizIndex : MutableLiveData<ArrayList<Int>> = MutableLiveData()
     val quizIndex : LiveData<ArrayList<Int>> get() = _quizIndex
+
 
     private var _answerIndex : Int = -1
     val answerIndex get() = _answerIndex
 
+
+    private var _relateProblem : MutableLiveData<ArrayList<Int>> = MutableLiveData()
+    val relateProblem : LiveData<ArrayList<Int>> get() = _relateProblem
 
     private var textToSpeech: TextToSpeech? = null
 
@@ -54,20 +61,21 @@ class MainViewModel : ViewModel(){
      * 문제풀기 0번 카테고리 문제 삽입
      * 문제 4개 랜덤 생성후 인데스 셔플
      */
-
-    fun setWordQuiz(){
+    fun setQuiz(){
         var problems = ArrayList<Int>()
         _selectedIndex.value = Random().nextInt(App.PICTURES[selectedCategory].size)
         var currentSelectedIndex = _selectedIndex.value!!
         var current_answer  = -1
-        var set = mutableSetOf<Int>()
-        set.add(currentSelectedIndex)
-        while(set.size<4){
-            set.add(Random().nextInt(App.PICTURES[selectedCategory].size))
+        var indexSet = mutableSetOf<Int>()
+        indexSet.add(currentSelectedIndex)
+
+        while(indexSet.size<4){
+            indexSet.add(Random().nextInt(App.PICTURES[selectedCategory].size))
         }
-        var temps = set.toList()
-        problems.addAll(temps)
+        var indexTemps = indexSet.toList()
+        problems.addAll(indexTemps)
         problems.shuffle()
+
         var datas = ArrayList<String>()
         for(i in 0..3) {
             datas.add(App.PICTURES[selectedCategory][problems[i]])
@@ -76,26 +84,52 @@ class MainViewModel : ViewModel(){
                 current_answer = i
             }
         }
-
         _quizIndex.value = problems
+
         var q:Quiz = Quiz(-1,-1)
         when(selectedPCategory){
             0-> q = Quiz(current_answer,currentSelectedIndex,App.PICTURES[selectedCategory][currentSelectedIndex],datas)
             1-> q = Quiz(current_answer,currentSelectedIndex,problems)
-            else->{
+            2->{
 
             }
+            else->{
+                var categorySet = mutableSetOf<Int>()
+                categorySet.add(selectedCategory)
+                var titleSet = mutableSetOf<Int>()
+                //relate 문제에 들어갈 3가지 단어
+                while(titleSet.size<4) {
+                    var rand = Random().nextInt(App.PICTURES[selectedCategory].size)
+                    if(rand!=currentSelectedIndex){
+                        titleSet.add(rand)
+                    }
+                }
+                //relate 보기에 들어갈 정답을 제외한 3가지 카테고리
+                while(categorySet.size<4){
+                    categorySet.add(Random().nextInt(6))
+                }
+
+                var titles = arrayListOf<Int>()
+                titles.addAll(titleSet.toList())
+                _relateProblem.value = titles
+
+                var categoryTemps = categorySet.toList()
+                val temps = arrayListOf<Int>()
+                temps.addAll(categoryTemps)
+                //temps.shuffle()
+                q = Quiz(current_answer,currentSelectedIndex,quizIndex.value!!,temps)
+            }
         }
+        Log.i(TAG, "setQuiz: ${q}")
         _quiz.value = q
     }
 
     fun startTitleTTS(){
-        Log.i(TAG, "startTitleTTS: ")
         textToSpeech?.speak(
             when(selectedPCategory){
-                0->"다음 그림은 무었일까요"
-                1->"다음 단어에 해당하는 그림은 무었일까요?"
-                else -> "else"
+                0->"다음 그림은 무엇일까요"
+                1->"다음 단어에 해당하는 그림은 무엇일까요?"
+                else -> "다음 단어들과 연관된 단어는 무엇일까요?"
             }
             ,TextToSpeech.QUEUE_FLUSH,null,null)
     }
@@ -156,6 +190,9 @@ class MainViewModel : ViewModel(){
             }
             1->{
                 textToSpeech?.speak(App.PICTURES[selectedCategory][selectedIndex.value!!],TextToSpeech.QUEUE_ADD,null,null)
+            }
+            2->{
+
             }
             else->{
 
