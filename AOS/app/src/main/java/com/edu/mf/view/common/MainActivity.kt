@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         supportActionBar!!.hide()
@@ -83,7 +82,6 @@ class MainActivity : AppCompatActivity(){
             .replace(R.id.framelayout_main, fragment)
             .commit()
     }
-
 
 
     /**
