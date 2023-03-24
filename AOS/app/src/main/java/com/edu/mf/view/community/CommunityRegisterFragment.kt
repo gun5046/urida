@@ -41,11 +41,11 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
         super.onViewCreated(view, savedInstanceState)
 
         setActionBar()
-        permissionChk()
+        chkPermissionGallery()
     }
 
     // cardview 클릭 시 permission 체크
-    private fun permissionChk(){
+    private fun chkPermissionGallery(){
         val reqPermission = requestPermission()
         binding.cardviewFragmentCommunityRegister.setOnClickListener {
             reqPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
