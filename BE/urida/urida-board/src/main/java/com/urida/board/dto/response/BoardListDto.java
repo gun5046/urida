@@ -17,7 +17,9 @@ public class BoardListDto {
 
     private String dateTime;
 
-    private int assessment;
+    private int likeCnt;
+
+    private int commentCnt;
 
     private String nickname;
 }

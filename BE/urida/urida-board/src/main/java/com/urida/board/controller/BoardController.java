@@ -76,9 +76,7 @@ public class BoardController {
 // 게시글 좋아요 개수
     @GetMapping("/like/count/{board_id}")
     public int likeCnt(@PathVariable Long board_id) {
-
-    }
-
+        return boardService.likeCnt(board_id);
     }
 
 }

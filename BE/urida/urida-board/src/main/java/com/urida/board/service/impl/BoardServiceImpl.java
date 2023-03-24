@@ -50,7 +50,8 @@ public class BoardServiceImpl implements BoardService {
                     .content(article.getContent())
                     .view(article.getView())
                     .dateTime(article.getTime())
-//                    .assessment(article.getAssessment())
+                    .likeCnt(likeBoardJpqlRepo.likeCnt(article.getBoard_id()))
+                    .commentCnt(commentService.commentCnt(article.getBoard_id()))
                     .nickname(article.getUser().getNickname())
                     .build();
             articleDtoList.add(dto);
@@ -71,7 +72,7 @@ public class BoardServiceImpl implements BoardService {
                 .content(article.getContent())
                 .view(article.getView())
                 .dateTime(article.getTime())
-//                .assessment(article.getAssessment())
+                .likeCnt(likeBoardJpqlRepo.likeCnt(article.getBoard_id()))
                 .nickname(nickname)
                 .comment(comments)
                 .build();
@@ -154,7 +155,7 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public int likeCnt(Long board_id) {
-        likeBoardJpqlRepo.
+        return likeBoardJpqlRepo.likeCnt(board_id);
     }
 
 

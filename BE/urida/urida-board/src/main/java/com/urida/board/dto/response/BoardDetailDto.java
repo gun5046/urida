@@ -20,7 +20,7 @@ public class BoardDetailDto {
 
     private String dateTime;
 
-    private int assessment;
+    private int likeCnt;
 
     private String nickname;
 

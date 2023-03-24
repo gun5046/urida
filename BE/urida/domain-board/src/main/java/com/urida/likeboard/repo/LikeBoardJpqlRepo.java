@@ -47,11 +47,12 @@ public class LikeBoardJpqlRepo {
 
     public int likeCnt(Long board_id) {
         List<Likeboard> likeboard = em.createQuery(
-                        "select l from Likeboard l where l.board.board_id = :board_id", Likeboard.class
+                        "select l from Likeboard l where l.board.board_id = :board_id and l.status = true", Likeboard.class
                 )
                 .setParameter("board_id", board_id)
                 .getResultList();
-        Optional<Likeboard> targetArticle = likeboard.stream().findAny();
+
+        return likeboard.size();
     }
 /*
     public void deleteLikeBoard(Likeboard likeBoard) {
