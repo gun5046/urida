@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentCommunityDetailBinding
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.study.learn.LearnMainFragment
 
 class CommunityDetailFragment: Fragment() {
     private lateinit var binding: FragmentCommunityDetailBinding
@@ -26,6 +27,8 @@ class CommunityDetailFragment: Fragment() {
     ): View? {
         binding = FragmentCommunityDetailBinding.inflate(inflater, container, false)
         mainActivity = MainActivity.getInstance()!!
+
+        binding.communityDetail = this
 
         return binding.root
     }
@@ -42,6 +45,7 @@ class CommunityDetailFragment: Fragment() {
         }
 
         setCommentAdapter()
+        binding.imageviewFragmentCommunityDetailBack.bringToFront()
     }
 
     // 좋아요 이미지 변경
@@ -114,5 +118,10 @@ class CommunityDetailFragment: Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(DividerItemDecoration(requireContext(), VERTICAL))
         }
+    }
+
+    // 뒤로가기 아이콘 클릭 시
+    fun backPressed(){
+        mainActivity.popFragment()
     }
 }

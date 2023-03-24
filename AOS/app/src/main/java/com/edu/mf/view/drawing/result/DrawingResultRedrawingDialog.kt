@@ -8,13 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.fragment.app.DialogFragment
-import com.edu.mf.databinding.DialogFragmentDrawingResultRedrawingBinding
+import com.edu.mf.databinding.DialogFragmentDrawingResultShareBinding
 import com.edu.mf.view.MainFragment
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.community.CommunityFragment
+import com.edu.mf.view.community.CommunityRegisterFragment
 import com.edu.mf.view.drawing.DrawingFragment
 
-class DrawingResultRedrawingDialog: DialogFragment() {
-    private lateinit var binding: DialogFragmentDrawingResultRedrawingBinding
+class DrawingResultShareDialog: DialogFragment() {
+    private lateinit var binding: DialogFragmentDrawingResultShareBinding
     private lateinit var mainActivity: MainActivity
 
     override fun onCreateView(
@@ -22,19 +24,22 @@ class DrawingResultRedrawingDialog: DialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DialogFragmentDrawingResultRedrawingBinding.inflate(layoutInflater)
+        binding = DialogFragmentDrawingResultShareBinding.inflate(layoutInflater)
         mainActivity = MainActivity.getInstance()!!
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         isCancelable = false
 
-        binding.buttonDialogFragmentDrawingResultRedrawingMain.setOnClickListener {
-            mainActivity.changeFragment(MainFragment())
+        binding.buttonDialogFragmentDrawingResultShareMain.setOnClickListener {
+            mainActivity.popFragment()
         }
 
-        binding.buttonDialogFragmentDrawingResultRedrawing.setOnClickListener {
-            mainActivity.changeFragment(DrawingFragment())
+        binding.buttonDialogFragmentDrawingResultShare.setOnClickListener {
+            dialog?.dismiss()
+            mainActivity.popFragment()
+            mainActivity.addFragment(CommunityFragment())
+            mainActivity.addFragmentNoAnim(CommunityRegisterFragment())
         }
 
         return binding.root

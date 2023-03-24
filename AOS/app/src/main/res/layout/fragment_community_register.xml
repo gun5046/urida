@@ -24,7 +24,7 @@
             android:padding="14dp">
 
             <ImageView
-                android:id="@+id/iv_coupon_img"
+                android:id="@+id/imageview_fragment_community_register"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -35,7 +35,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <ImageView
-                android:id="@+id/iv_coupon_img_plus"
+                android:id="@+id/imageview_fragment_community_register_plus"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="36dp"
