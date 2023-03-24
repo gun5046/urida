@@ -37,11 +37,15 @@ class DrawingResultViewPagerFragment(
         binding.drawingViewModel = drawingViewModel
         binding.drawingResultViewpager = this@DrawingResultViewPagerFragment
 
+        initView()
         disableBackPress()
 
         drawingViewModel.setDrawingResponse(drawingResponse)
         DrawingResultFragment(drawingResponse).getImgIdx(drawingViewModel)
+    }
 
+    // viewPager 초기화, indicator 연결
+    private fun initView(){
         val viewpager= binding.viewpagerFragmentDrawingResultViewpager
         viewpager.adapter = DrawingResultViewPagerItemFragment(
             requireActivity(), drawingViewModel, makeWordList(), drawingResponse

@@ -57,7 +57,7 @@
             android:paddingEnd="20dp"
             android:layout_margin="10dp"
             android:elevation="4dp"
-            android:text="@string/dialog_fragment_drawing_result_redrawing_button"
+            android:text="@string/dialog_fragment_drawing_result_share_button"
             android:textSize="16sp"
             android:background="@drawable/drawing_dialog_button_fill"
             app:layout_constraintTop_toTopOf="parent"

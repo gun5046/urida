@@ -11,6 +11,8 @@ import androidx.fragment.app.DialogFragment
 import com.edu.mf.databinding.DialogFragmentDrawingResultShareBinding
 import com.edu.mf.view.MainFragment
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.community.CommunityFragment
+import com.edu.mf.view.community.CommunityRegisterFragment
 import com.edu.mf.view.drawing.DrawingFragment
 
 class DrawingResultShareDialog: DialogFragment() {
@@ -30,11 +32,14 @@ class DrawingResultShareDialog: DialogFragment() {
         isCancelable = false
 
         binding.buttonDialogFragmentDrawingResultShareMain.setOnClickListener {
-            mainActivity.changeFragment(MainFragment())
+            mainActivity.popFragment()
         }
 
         binding.buttonDialogFragmentDrawingResultShare.setOnClickListener {
-            mainActivity.changeFragment(DrawingFragment())
+            dialog?.dismiss()
+            mainActivity.popFragment()
+            mainActivity.addFragment(CommunityFragment())
+            mainActivity.addFragmentNoAnim(CommunityRegisterFragment())
         }
 
         return binding.root
