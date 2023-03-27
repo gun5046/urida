@@ -3,6 +3,7 @@ package com.edu.mf.view.community
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.ActionBar
 import android.os.Bundle
@@ -13,18 +14,23 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.loader.content.CursorLoader
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentCommunityRegisterBinding
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.drawing.result.DrawingResultShareDialog
+import java.io.File
 
 class CommunityRegisterFragment: Fragment(), MenuProvider {
     private lateinit var binding: FragmentCommunityRegisterBinding
     private lateinit var mainActivity: MainActivity
 
     private lateinit var actionBar: ActionBar
+    private lateinit var drawingUri: Uri
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +48,16 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
 
         setActionBar()
         chkPermissionGallery()
+        chkDrawingUri()
+    }
+
+    private fun chkDrawingUri(){
+        val drawingUri = DrawingResultShareDialog.savedDrawingUri
+        if (drawingUri != "".toUri()){
+            binding.imageviewFragmentCommunityRegister.background =
+                ContextCompat.getDrawable(requireContext(), R.color.white)
+            setImg(drawingUri)
+        }
     }
 
     // cardview 클릭 시 permission 체크
@@ -93,6 +109,25 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
         binding.imageviewFragmentCommunityRegisterPlus.visibility = View.GONE
     }
 
+    // DrawingFragment에서 생성된 이미지 삭제
+    private fun delSavedImg(delImgUri: Uri){
+        if (drawingUri != "".toUri()){
+            val file = File(getPath(delImgUri))
+            file.delete()
+        }
+    }
+
+    // 이미지 절대경로 가져오기
+    private fun getPath(uri: Uri): String{
+        val data = arrayOf(Images.Media.DATA)
+        val cursorLoader = CursorLoader(requireContext(), uri, data, null, null, null)
+        val cursor = cursorLoader.loadInBackground()!!
+        val idx = cursor.getColumnIndexOrThrow(Images.Media.DATA)
+        cursor.moveToFirst()
+
+        return cursor.getString(idx)
+    }
+
     // 액션바 설정
     private fun setActionBar(){
         actionBar = mainActivity.supportActionBar!!
@@ -117,10 +152,12 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         when(menuItem.itemId){
             R.id.actionbar_register -> {
+                delSavedImg(drawingUri)
                 mainActivity.popFragment()
                 actionBar.hide()
             }
             android.R.id.home->{
+                delSavedImg(drawingUri)
                 mainActivity.popFragment()
                 actionBar.hide()
             }
