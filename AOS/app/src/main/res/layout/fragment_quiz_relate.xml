@@ -72,6 +72,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="28sp"
                     android:text="@{datas[vm.selectedCategory][vm.relateProblem[0]]+` , `+datas[vm.selectedCategory][vm.relateProblem[1]]+` , `+datas[vm.selectedCategory][vm.relateProblem[2]]}"
+                    android:autoSizeTextType="uniform"
                     android:textColor="@color/black"
                     android:fontFamily="@font/maple"
                     android:textStyle="bold"

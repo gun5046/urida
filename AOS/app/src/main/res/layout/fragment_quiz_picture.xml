@@ -76,6 +76,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="32sp"
                 android:text="@{datas[vm.selectedCategory][vm.selectedIndex]}"
+                android:autoSizeTextType="uniform"
                 android:fontFamily="@font/maple"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
