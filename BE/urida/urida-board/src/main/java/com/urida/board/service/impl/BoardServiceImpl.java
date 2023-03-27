@@ -20,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,15 +91,8 @@ public class BoardServiceImpl implements BoardService {
                     .user(user.get())
                     .build();
 
-            Likeboard likeboard = Likeboard.builder()
-                    .user(user.get())
-                    .status(false)
-                    .board(article)
-                    .build();
-
             try {
                 boardJpqlRepo.saveArticle(article);
-                likeBoardJpqlRepo.saveInitialLikeBoard(likeboard);
                 return article;
             } catch (Exception e) {
                 System.out.println(e.toString());
@@ -142,27 +136,22 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Boolean clickLikeArticle(Long board_id, Long uid, Boolean status) {
+    public Boolean clickLikeArticle(Long board_id, Long uid) {
         Optional<Likeboard> targetArticle = likeBoardJpqlRepo.findByUserAndBoard(uid, board_id);
         if (targetArticle.isPresent()) {
-            likeBoardJpqlRepo.updateLikeBoard(board_id, uid, !status);
+            likeBoardJpqlRepo.deleteLikeBoard(targetArticle);
+            return false;
         } else {
-            likeBoardJpqlRepo.saveLikeBoard(uid, board_id);
+            likeBoardJpqlRepo.saveLikeBoard(board_id, uid);
+            return likeBoardJpqlRepo.findByUserAndBoard(uid, board_id).get().isStatus();
         }
 
-        return likeBoardJpqlRepo.findByUserAndBoard(uid, board_id).get().isStatus();
     }
 
     @Override
     public int likeCnt(Long board_id) {
         return likeBoardJpqlRepo.likeCnt(board_id);
     }
-
-
-//    @Override
-//    public int likeArticle(Long id) {
-//        return likeBoardJpqlRepo.saveLikeBoard(id);
-//    }
 
     /*@Override
     public int dislikeArticle(Long id) {

@@ -68,9 +68,9 @@ public class BoardController {
     }
 
 // 게시글 좋아요
-    @PutMapping("/like/{board_id}/{uid}/{status}")
-    public Boolean clickLikeArticle(@PathVariable Long board_id, @PathVariable Long uid, @PathVariable Boolean status) {
-        return boardService.clickLikeArticle(board_id,uid,status);
+    @PutMapping("/like/{board_id}/{uid}")
+    public Boolean clickLikeArticle(@PathVariable Long board_id, @PathVariable Long uid) {
+        return boardService.clickLikeArticle(board_id,uid);
     }
 
 // 게시글 좋아요 개수

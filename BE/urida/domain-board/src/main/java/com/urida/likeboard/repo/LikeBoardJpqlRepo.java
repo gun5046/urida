@@ -24,25 +24,12 @@ public class LikeBoardJpqlRepo {
         return likeBoard.stream().findAny();
     }
 
-    public void saveInitialLikeBoard(Likeboard likeboard) {
-        em.persist(likeboard);
-    }
-    public void saveLikeBoard(Long uid, Long board_id) {
+    public void saveLikeBoard(Long board_id, Long uid) {
         em.createNativeQuery("insert into likeboard(uid, board_id, status)" +
-                        "values (:uid, :board_id, false)")
+                        "values (:uid, :board_id, true)")
                 .setParameter("uid", uid)
                 .setParameter("board_id", board_id)
                 .executeUpdate();
-    }
-
-    public Boolean updateLikeBoard(Long board_id, Long uid, boolean status) {
-        em.createNativeQuery("update Likeboard set status = :status where board_id=:board_id and uid =:uid")
-                .setParameter("board_id",board_id)
-                .setParameter("status",status)
-                .setParameter("uid", uid)
-                .executeUpdate();
-
-        return status;
     }
 
     public int likeCnt(Long board_id) {
@@ -54,10 +41,7 @@ public class LikeBoardJpqlRepo {
 
         return likeboard.size();
     }
-/*
-    public void deleteLikeBoard(Likeboard likeBoard) {
-        em.remove(likeBoard);
+    public void deleteLikeBoard(Optional<Likeboard> likeBoard) {
+        em.remove(likeBoard.get());
     }
-*/
-
 }
