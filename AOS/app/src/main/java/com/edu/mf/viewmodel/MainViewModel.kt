@@ -111,7 +111,7 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
                 var p_lists = arrayListOf<Int>()
                 p_lists.addAll(problem_lists)
                 for(i in 0 until 4){
-                    if(problem_lists[i]==selectedProblem.value!!.order_id)
+                    if(p_lists[i]==selectedProblem.value!!.order_id)
                         three_answer = i
                 }
                 q = Quiz(three_answer,selectedProblem.value!!.category_id,p_lists,selectedProblem.value!!)
@@ -145,7 +145,6 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
                     }
                     if(App.PICTURES[temps[i]].size<=quizIndex.value!![i]){
                         quizIndex.value!![i] = App.PICTURES[temps[i]].size-1
-                        Log.i(TAG, "setQuiz: ${i}번쨰 ${problems[i]}")
                     }
                 }
                 q = Quiz(current_answer,currentSelectedIndex,quizIndex.value!!,temps)

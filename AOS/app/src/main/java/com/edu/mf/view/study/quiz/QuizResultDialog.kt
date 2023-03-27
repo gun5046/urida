@@ -129,7 +129,7 @@ class QuizResultDialog(
                     )
                     insertResolveRequest(resolveRequest)
                     binding.textviewDialogFragmentQuizTitle.text =
-                        "정답은 ${viewModel.quiz.value!!.answer_fi+1}번 ${App.PICTURES[viewModel.selectedCategory][viewModel.quiz.value!!.answer_i]} 입니다"
+                        "정답은 ${viewModel.quiz.value!!.answer_fi+1}번 ${App.PICTURES[viewModel.selectedCategory][viewModel.selectedProblem.value!!.order_id]} 입니다"
                     binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
                 }
             }
