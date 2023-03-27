@@ -1,11 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#f7e1d7"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <TextView
+        android:id="@+id/textview_fragment_resolve_title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="다시 풀어보기"/>
+        android:layout_height="wrap_content"
+        android:text="다시 풀어보기"
+        android:textSize="36sp"
+        android:layout_margin="40dp"
+        android:fontFamily="@font/jalnan"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_fragment_resolve_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/learn_list_pink_10"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/textview_fragment_resolve_title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_fragment_resolve_start"/>
+
+<androidx.appcompat.widget.AppCompatButton
+    android:id="@+id/button_fragment_resolve_start"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="문제풀기"
+    android:textSize="20sp"
+    android:textColor="@color/black"
+    android:fontFamily="@font/jalnan"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    android:background="@drawable/resolve_button_blue_10"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

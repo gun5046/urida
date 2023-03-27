@@ -1,7 +1,6 @@
 package com.edu.mf.view.study.quiz
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
-import com.edu.mf.databinding.FragmentQuizBinding
 import com.edu.mf.databinding.FragmentQuizWordBinding
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.MainViewModel
@@ -34,8 +32,9 @@ class QuizWordFragment : Fragment() {
             handlers = this@QuizWordFragment
             lifecycleOwner = this@QuizWordFragment
         }
-        viewModel.setWordQuiz()
+        viewModel.setQuiz()
         viewModel.setTTS()
+        //mainActivity.disableBackPress()
         disableBackPress()
         return binding.root
     }
@@ -46,44 +45,31 @@ class QuizWordFragment : Fragment() {
 
         viewModel.quiz.observe(viewLifecycleOwner, Observer {
             binding.problems = it.problems
-            Log.i(TAG, "onCreateView: ${it}")
-            binding.imageviewFragmentQuizWordImage.setImageResource(resources.getIdentifier(
-                "pictures_${viewModel.selectedCategory}_${it.answer_i}","drawable",requireActivity().packageName))
         })
 
     }
 
-    fun onBackPressed(){
-        mainActivity.popQuizFragment()
-        mainActivity.popFragment()
-    }
     /**
      * onBackPressed 막기
      */
-    private fun disableBackPress(){
+    fun disableBackPress(){
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
+
             }
+
         })
     }
-    fun onOneClick(){
-        val dialog = QuizResultDialog(binding.textviewFragmentQuizOne.text.toString())
-        dialog.isCancelable = false
-        dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
+
+    fun onBackPressed(){
+        mainActivity.popQuizFragment("word")
+        mainActivity.popFragment()
     }
-    fun onTwoClick(){
-        val dialog = QuizResultDialog(binding.textviewFragmentQuizTwo.text.toString())
+
+    fun onProblemClick(index:Int){
+        val dialog = QuizResultDialog(index,0)
         dialog.isCancelable = false
-        dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
+        dialog.show(activity?.supportFragmentManager!!,"QuizResultDialog")
     }
-    fun onThreeClick(){
-        val dialog = QuizResultDialog(binding.textviewFragmentQuizThree.text.toString())
-        dialog.isCancelable = false
-        dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
-    }
-    fun onFourClick(){
-        val dialog = QuizResultDialog(binding.textviewFragmentQuizFour.text.toString())
-        dialog.isCancelable = false
-        dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
-    }
+
 }

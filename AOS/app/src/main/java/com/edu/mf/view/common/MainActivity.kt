@@ -3,6 +3,7 @@ package com.edu.mf.view.common
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.edu.mf.BuildConfig
@@ -11,15 +12,19 @@ import com.edu.mf.R
 import com.edu.mf.databinding.ActivityMainBinding
 import com.edu.mf.repository.api.DrawingService
 import com.edu.mf.repository.api.UserService
+import com.edu.mf.repository.db.ProblemDatabase
+import com.edu.mf.repository.db.ProblemRepository
 import com.edu.mf.repository.model.User
 import com.edu.mf.utils.App
 import com.edu.mf.view.LanguageFragment
 import com.edu.mf.view.LoginFragment
 import com.edu.mf.view.MainFragment
+import com.edu.mf.view.study.quiz.QuizResultDialog
 import com.kakao.sdk.common.KakaoSdk
 import com.navercorp.nid.NaverIdLoginSDK
 import java.util.*
 import com.edu.mf.viewmodel.MainViewModel
+import com.edu.mf.viewmodel.MainViewModelFactory
 import com.edu.mf.viewmodel.PictureViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,6 +36,7 @@ class MainActivity : AppCompatActivity(){
     private lateinit var binding: ActivityMainBinding
     val loginService = App.userRetrofit.create(UserService::class.java)
     val drawingService = App.drawingRetrofit.create(DrawingService::class.java)
+
     var user: User? = null
 
     private lateinit var mainViewModel: MainViewModel
@@ -53,6 +59,10 @@ class MainActivity : AppCompatActivity(){
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val dao = ProblemDatabase.getInstance(applicationContext).problemDao
+        val repository = ProblemRepository(dao)
+        val factory = MainViewModelFactory(repository)
+
         KakaoSdk.init(this, BuildConfig.Kakao_API_KEY)
         NaverIdLoginSDK.initialize(this, BuildConfig.OAUTH_CLIENT_ID, BuildConfig.OAUTH_CLIENT_SECRET, BuildConfig.OAUTH_CLIENT_NAME)
 
@@ -71,9 +81,10 @@ class MainActivity : AppCompatActivity(){
             //changeFragment(LoginFragment())
         }
         
-        mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        mainViewModel = ViewModelProvider(this,factory)[MainViewModel::class.java]
         pictureViewModel = ViewModelProvider(this)[PictureViewModel::class.java]
-        changeFragment(MainFragment())
+//        changeFragment(MainFragment())
+        mainViewModel.insertData()
     }
 
     fun changeFragment(fragment: Fragment){
@@ -87,21 +98,21 @@ class MainActivity : AppCompatActivity(){
     /**
      * 퀴즈 문제 출제시 backstack을 한번에 지우기 위해 name설정
      */
-    fun addQuizFragment(fragment: Fragment){
+    fun addQuizFragment(fragment: Fragment,fragmentName:String){
         supportFragmentManager
             .beginTransaction()
             .setCustomAnimations(R.anim.slide_in_right,R.anim.slide_out_left,R.anim.slide_in_left,R.anim.slide_out_right)
             .replace(R.id.framelayout_main, fragment)
-            .addToBackStack("quiz")
+            .addToBackStack(fragmentName)
             .commit()
     }
 
     /**
      * 퀴즈 문제 출제시 backstack을 한번에 지움
      */
-    fun popQuizFragment(){
+    fun popQuizFragment(fragmentName:String){
         supportFragmentManager
-            .popBackStack("quiz",FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            .popBackStack(fragmentName,FragmentManager.POP_BACK_STACK_INCLUSIVE)
     }
 
     fun addFragment(fragment: Fragment){
@@ -147,4 +158,9 @@ class MainActivity : AppCompatActivity(){
         configuration.setLocale(locale)
         resources.updateConfiguration(configuration, resources.displayMetrics)
     }
+
+
+
+
+
 }
