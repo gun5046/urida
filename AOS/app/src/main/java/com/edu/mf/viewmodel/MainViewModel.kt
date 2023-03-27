@@ -68,7 +68,6 @@ class MainViewModel : ViewModel(){
         var current_answer  = -1
         var indexSet = mutableSetOf<Int>()
         indexSet.add(currentSelectedIndex)
-
         while(indexSet.size<4){
             indexSet.add(Random().nextInt(App.PICTURES[selectedCategory].size))
         }
@@ -97,27 +96,37 @@ class MainViewModel : ViewModel(){
                 var categorySet = mutableSetOf<Int>()
                 categorySet.add(selectedCategory)
                 var titleSet = mutableSetOf<Int>()
-                //relate 문제에 들어갈 3가지 단어
                 while(titleSet.size<4) {
                     var rand = Random().nextInt(App.PICTURES[selectedCategory].size)
                     if(rand!=currentSelectedIndex){
                         titleSet.add(rand)
                     }
                 }
+                Log.i(TAG, "setQuiz: ${titleSet}")
                 //relate 보기에 들어갈 정답을 제외한 3가지 카테고리
                 while(categorySet.size<4){
                     categorySet.add(Random().nextInt(6))
                 }
-
                 var titles = arrayListOf<Int>()
                 titles.addAll(titleSet.toList())
                 _relateProblem.value = titles
-
                 var categoryTemps = categorySet.toList()
                 val temps = arrayListOf<Int>()
+
                 temps.addAll(categoryTemps)
-                //temps.shuffle()
+                temps.shuffle()
+                for(i in 0..3){
+                    if(temps[i]==_selectedCategory) {
+                        current_answer = i
+                        _answerIndex = i
+                    }
+                    if(App.PICTURES[temps[i]].size<=quizIndex.value!![i]){
+                        quizIndex.value!![i] = App.PICTURES[temps[i]].size-1
+                        Log.i(TAG, "setQuiz: ${i}번쨰 ${problems[i]}")
+                    }
+                }
                 q = Quiz(current_answer,currentSelectedIndex,quizIndex.value!!,temps)
+
             }
         }
         Log.i(TAG, "setQuiz: ${q}")
@@ -195,7 +204,10 @@ class MainViewModel : ViewModel(){
 
             }
             else->{
-
+                for(index in 0 until 4){
+                    textToSpeech?.speak("${index+1}번 "+App.PICTURES[_quiz.value!!.relate_categories[index]][_quiz.value!!.problems_i[index]],
+                        TextToSpeech.QUEUE_ADD,null,null)
+                }
             }
         }
     }

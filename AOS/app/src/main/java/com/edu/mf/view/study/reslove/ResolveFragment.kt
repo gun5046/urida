@@ -61,7 +61,7 @@ class ResolveFragment: Fragment() {
                     resolveAdapter.setData(response.body()!!)
                     resolveAdapter.notifyDataSetChanged()
                 }else{
-                    Log.i(TAG, "fetchResolve: ${response.message()}")
+                    Log.i(TAG, "fetchResolve error: ${response.message()}")
                 }
             }
         }

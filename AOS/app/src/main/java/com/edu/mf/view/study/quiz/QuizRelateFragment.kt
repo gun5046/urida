@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
@@ -37,14 +38,32 @@ class QuizRelateFragment : Fragment() {
             vm = viewModel
             handlers = this@QuizRelateFragment
             datas = App.PICTURES
+            lifecycleOwner = this@QuizRelateFragment
         }
         viewModel.setQuiz()
         viewModel.setTTS()
+        disableBackPress()
     }
     fun onProblemClick(index:Int){
         val dialog = QuizResultDialog(index,3)
         dialog.isCancelable = false
         dialog.show(activity?.supportFragmentManager!!,"QuizResultDialog")
     }
+    fun onBackPressed(){
+        mainActivity.popQuizFragment("relate")
+        mainActivity.popFragment()
+    }
 
+
+    /**
+     * onBackPressed 막기
+     */
+    fun disableBackPress(){
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+
+            }
+
+        })
+    }
 }

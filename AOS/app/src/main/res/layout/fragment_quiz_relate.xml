@@ -33,6 +33,7 @@
                 android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="6dp"
+                android:onClick="@{()->handlers.onBackPressed()}"
                 android:src="@drawable/ic_backward_gray"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"/>
@@ -144,25 +145,25 @@
                     android:id="@+id/constraintlayout_fragment_quiz_relate_parent1"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:background="@drawable/quiz_problem_white_10"
                     android:layout_margin="5dp"
+                    android:background="@drawable/quiz_problem_white_10"
                     android:onClick="@{()->handlers.onProblemClick(0)}"
-                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/constraintlayout_fragment_quiz_relate_parent3"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/constraintlayout_fragment_quiz_relate_parent2"
-                    app:layout_constraintBottom_toTopOf="@id/constraintlayout_fragment_quiz_relate_parent3">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
                         android:id="@+id/textview_fragment_quiz_relate_category1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/maple"
+                        android:text="@{`1. `+datas[vm.quiz.relate_categories[0]][vm.quiz.problems_i[0]]}"
                         android:textSize="24sp"
-                        android:text="@{datas[vm.quiz.relate_categories[0]][vm.quiz.problems_i[0]]}"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"/>
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -185,7 +186,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/maple"
                         android:textSize="24sp"
-                        android:text="@{datas[vm.quiz.relate_categories[1]][vm.quiz.problems_i[1]]}"
+                        android:text="@{`2. `+datas[vm.quiz.relate_categories[1]][vm.quiz.problems_i[1]]}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -210,7 +211,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/maple"
                         android:textSize="24sp"
-                        android:text="@{datas[vm.quiz.relate_categories[2]][vm.quiz.problems_i[2]]}"
+                        android:text="@{`3. `+datas[vm.quiz.relate_categories[2]][vm.quiz.problems_i[2]]}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
@@ -235,7 +236,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/maple"
                         android:textSize="24sp"
-                        android:text="@{datas[vm.quiz.relate_categories[3]][vm.quiz.problems_i[3]]}"
+                        android:text="@{`4. `+datas[vm.quiz.relate_categories[3]][vm.quiz.problems_i[3]]}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"

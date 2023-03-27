@@ -73,6 +73,7 @@ class QuizResultDialog(
         context?.dialogFragmentResize(this@QuizResultDialog,0.9f,0.15f)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun checkAnswer(){
 
         when(flag){
@@ -115,8 +116,7 @@ class QuizResultDialog(
 
             }
             else->{
-                Log.i(TAG, "checkAnswer: ${answers} , ${viewModel.answerIndex}")
-               /* if (answers == viewModel.answerIndex) {
+                if (answers == viewModel.answerIndex) {
                     binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
                 } else {
                     val resolveRequest = ResolveRequest(
@@ -131,9 +131,9 @@ class QuizResultDialog(
                     )
                     insertResolveRequest(resolveRequest)
                     binding.textviewDialogFragmentQuizTitle.text =
-                        "정답은 ${App.PICTURES[viewModel.selectedCategory][viewModel.quiz.value!!.answer_i]}번 입니다"
+                        "정답은 ${viewModel.quiz.value!!.answer_fi+1}번 ${App.PICTURES[viewModel.selectedCategory][viewModel.quiz.value!!.problems_i[viewModel.quiz.value!!.answer_fi]]} 입니다"
                     binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
-                }*/
+                }
             }
         }
     }
