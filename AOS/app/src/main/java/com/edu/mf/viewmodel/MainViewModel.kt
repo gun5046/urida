@@ -5,13 +5,20 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.edu.mf.repository.db.ProblemRepository
+import com.edu.mf.repository.model.study.Problem
 import com.edu.mf.repository.model.study.Quiz
 import com.edu.mf.utils.App
 import com.navercorp.nid.NaverIdLoginSDK
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
+import kotlin.collections.ArrayList
 
 private const val TAG = "MainViewModel_지훈"
-class MainViewModel : ViewModel(){
+class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
 
     /**
      * 단어 학습 모드 선택
@@ -212,7 +219,93 @@ class MainViewModel : ViewModel(){
         }
     }
 
+    fun insertData() = viewModelScope.launch(Dispatchers.IO) {
+        var isStored = repository.selectAll().size
+        val cateThreeProblems = insertLocalData()
+        Log.i(TAG, "insertData: ")
+        withContext(Dispatchers.Main){
+            if(isStored<1){
+                for(i in 0 until 6){
+                    for(j in 0 until 10){
+                        repository.insert(cateThreeProblems[i][j])
+                    }
+                }
+            }
+        }
+    }
 
+    fun insertLocalData() : ArrayList<ArrayList<Problem>>{
+        var datas : ArrayList<ArrayList<Problem>> = arrayListOf()
+        for(i in 0..6)
+            datas.add(arrayListOf())
 
+        datas[0].add(Problem(0,"태국은 ____가 유명하다.",0,21))
+        datas[0].add(Problem(0,"____는 맵다.",0,32))
+        datas[0].add(Problem(0,"____는 쌈 싸먹을때 자주 먹는다.",0,19))
+        datas[0].add(Problem(0,"____는 강원도가 유명하다.",0,35))
+        datas[0].add(Problem(0,"단____은 스프로 자주 해먹는다.",0,36))
+        datas[0].add(Problem(0,"____는 빨갛고 햄버거에 들어간다.",0,41))
+        datas[0].add(Problem(0,"____은 씨가 검고 속이 빨갛다.",0,42))
+        datas[0].add(Problem(0,"____차는 쓰다.",0,16))
+        datas[0].add(Problem(0,"____는 초록색이다.",0,14))
+        datas[0].add(Problem(0,"____은 시다.",0,18))
+
+        datas[1].add(Problem(0,"철수는 ____이 되고싶다.",1,39))
+        datas[1].add(Problem(0,"지훈이는 ____에게 교육을 받고 있다.",1,47))
+        datas[1].add(Problem(0,"관재는 _____인 옥자를 좋아한다",1,45))
+        datas[1].add(Problem(0,"____는 팀을 응원하는 직업이다.",1,11))
+        datas[1].add(Problem(0,"관재는 절에 들어가 ____이 되기로 했다.",1,34))
+        datas[1].add(Problem(0,"지훈이는 세계 최고의 ____다.",1,17))
+        datas[1].add(Problem(0,"지훈이는 ____에게 치료를 받았다.",1,36))
+        datas[1].add(Problem(0,"____는 비행기를 운전하고 있다",1,38))
+        datas[1].add(Problem(0,"전쟁에서 승리하기 위해 많은 ____들이 희생되었다.",1,2))
+        datas[1].add(Problem(0,"____는 우리에게 맛있는 음식을 가져다 주었다.",1,12))
+
+        datas[2].add(Problem(0,"관재는 ____ 를 보고 삐약삐약 소리 내었다.",2,27))
+        datas[2].add(Problem(0,"____ 는 턱 힘이 강력하다.",2,0))
+        datas[2].add(Problem(0,"____ 는 큰 덩치로 쿵쾅쿵쾅 소리내며 걸었다.",2,15))
+        datas[2].add(Problem(0,"이 악당은 ____ 가 처리했으니 안심하라구.",2,33))
+        datas[2].add(Problem(0,"긴 목을 가진 ____ 가 조용히 풀을 뜯어 먹고있다.",2,19))
+        datas[2].add(Problem(0,"수면 위로 나온 ____가 물을 뿜어 낸다.",2,47))
+        datas[2].add(Problem(0,"아름다운 ___가 꽃을 찾아 날고있다.",2,3))
+        datas[2].add(Problem(0,"나는야 ____. 느리지만 꾸준히 기어다니지.",2,10))
+        datas[2].add(Problem(0,"엄마를 잃어버린 ____ 는 비가 오면 서글프게 운다.",2,18))
+        datas[2].add(Problem(0,"고기, 야채, 곡물 안 가리고 잘 먹는 나는 ____.",2,38))
+
+        datas[3].add(Problem(0,"너무 더워서 ____을 켜야겠다.",3,0))
+        datas[3].add(Problem(0,"____로 사진을 찍는다.",3,6))
+        datas[3].add(Problem(0,"다리가 아파서 ____에 앉는다.",3,8))
+        datas[3].add(Problem(0,"____에 담긴 물을 마신다.",3,11))
+        datas[3].add(Problem(0,"____을 끼고 음악을 듣는다.",3,15))
+        datas[3].add(Problem(0,"불이 나면 ____을 통해 나가야한다.",3,18))
+        datas[3].add(Problem(0,"____으로 물건을 산다.",3,28))
+        datas[3].add(Problem(0,"초록불이 켜지면 ____를 건넌다.",3,32))
+        datas[3].add(Problem(0,"____로 손을 씻는다.",3,39))
+        datas[3].add(Problem(0,"____을 열고 밖을 본다.",3,50))
+
+        datas[4].add(Problem(0,"머리카락을 자르기 위해 ____에 갔다.",4,0))
+        datas[4].add(Problem(0,"돈을 저축하기 위해 ____에 갔다.",4,8))
+        datas[4].add(Problem(0,"아플 때는 ____에 가서 치료를 받아야 한다.",4,13))
+        datas[4].add(Problem(0,"____에서는 실험가운을 입어야 한다.",4,15))
+        datas[4].add(Problem(0,"____에서 책을 빌리자.",4,17))
+        datas[4].add(Problem(0,"____에 가면 약을 살 수 있다.",4,23))
+        datas[4].add(Problem(0,"____에 들러서 차에 기름을 넣자.",4,32))
+        datas[4].add(Problem(0,"____에는 많은 행성이 있다.",4,42))
+        datas[4].add(Problem(0,"편지를 보내기 위해 ____에 갈거야.",4,47))
+        datas[4].add(Problem(0,"삼촌이 ____에서 결혼을 한대.",4,48))
+
+        datas[5].add(Problem(0,"친구를 만나 반갑게 ___를 한다.",5,14))
+        datas[5].add(Problem(0,"도서관에서 ___를 한다.",5,25))
+        datas[5].add(Problem(0,"종건이는 깊은 ___에 빠졌다.",5,35))
+        datas[5].add(Problem(0,"콩은 작아서 ______하기 힘들다.",5,3))
+        datas[5].add(Problem(0,"밥을 먹고 그릇을 ____했다.",5,7))
+        datas[5].add(Problem(0,"___는 공을 차는 스포츠다.",5,24))
+        datas[5].add(Problem(0,"산을 올라가는 것을 ___이라고 한다.",5,15))
+        datas[5].add(Problem(0,"방을 깨끗하게 ___했다.",5,4))
+        datas[5].add(Problem(0,"피곤해서 그런지 자꾸 ___이 나온다.",5,24))
+        datas[5].add(Problem(0,"그림 ____를 좋아한다",5,8))
+
+        return datas
+    }
 
 }
