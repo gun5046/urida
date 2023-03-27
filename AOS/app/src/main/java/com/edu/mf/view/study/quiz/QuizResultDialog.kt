@@ -113,7 +113,25 @@ class QuizResultDialog(
 
             }
             2->{
-
+                if (answers == viewModel.quiz.value!!.answer_fi) {
+                    binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
+                }
+                else {
+                    val resolveRequest = ResolveRequest(
+                        viewModel.quiz.value!!.answer_i,
+                        viewModel.selectedCategory,
+                        -1,
+                        viewModel.selectedPCategory,
+                        1,
+                        App.sharedPreferencesUtil.getUser()?.uid!!,
+                        emptyList<Int>(),
+                        viewModel.quizIndex.value!!
+                    )
+                    insertResolveRequest(resolveRequest)
+                    binding.textviewDialogFragmentQuizTitle.text =
+                        "정답은 ${viewModel.quiz.value!!.answer_fi+1}번 ${App.PICTURES[viewModel.selectedCategory][viewModel.quiz.value!!.answer_i]} 입니다"
+                    binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
+                }
             }
             else->{
                 if (answers == viewModel.answerIndex) {

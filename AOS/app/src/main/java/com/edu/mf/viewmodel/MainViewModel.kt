@@ -27,6 +27,10 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
     private var _mode : MutableLiveData<Int> = MutableLiveData()
     val mode : LiveData<Int> get() = _mode
 
+    //3번 카테고리 문제
+    private var _selectedProblem : MutableLiveData<Problem> = MutableLiveData()
+    val selectedProblem : LiveData<Problem> get() = _selectedProblem
+
     //정답으로 뽑힌 index 번호
     private var _selectedIndex : MutableLiveData<Int> = MutableLiveData()
     val selectedIndex : LiveData<Int> get() = _selectedIndex
@@ -69,6 +73,7 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
      * 문제 4개 랜덤 생성후 인데스 셔플
      */
     fun setQuiz(){
+        
         var problems = ArrayList<Int>()
         _selectedIndex.value = Random().nextInt(App.PICTURES[selectedCategory].size)
         var currentSelectedIndex = _selectedIndex.value!!
@@ -97,7 +102,19 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
             0-> q = Quiz(current_answer,currentSelectedIndex,App.PICTURES[selectedCategory][currentSelectedIndex],datas)
             1-> q = Quiz(current_answer,currentSelectedIndex,problems)
             2->{
-
+                var three_answer = -1
+                var indexSet = mutableSetOf<Int>()
+                indexSet.add(selectedProblem.value!!.order_id)
+                while(indexSet.size<4)
+                    indexSet.add(Random().nextInt(App.PICTURES[selectedCategory].size))
+                var problem_lists = indexSet.toList().shuffled()
+                var p_lists = arrayListOf<Int>()
+                p_lists.addAll(problem_lists)
+                for(i in 0 until 4){
+                    if(problem_lists[i]==selectedProblem.value!!.order_id)
+                        three_answer = i
+                }
+                q = Quiz(three_answer,selectedProblem.value!!.category_id,p_lists,selectedProblem.value!!)
             }
             else->{
                 var categorySet = mutableSetOf<Int>()
@@ -109,7 +126,7 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
                         titleSet.add(rand)
                     }
                 }
-                Log.i(TAG, "setQuiz: ${titleSet}")
+
                 //relate 보기에 들어갈 정답을 제외한 3가지 카테고리
                 while(categorySet.size<4){
                     categorySet.add(Random().nextInt(6))
@@ -119,7 +136,6 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
                 _relateProblem.value = titles
                 var categoryTemps = categorySet.toList()
                 val temps = arrayListOf<Int>()
-
                 temps.addAll(categoryTemps)
                 temps.shuffle()
                 for(i in 0..3){
@@ -140,11 +156,24 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
         _quiz.value = q
     }
 
+    fun getProblem() {
+        viewModelScope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main) {
+                val lists = repository.select(selectedCategory)
+                val threeSelectedIndex = Random().nextInt(10)
+                val threeSelectedProblem = lists[threeSelectedIndex]
+                _selectedProblem.value = threeSelectedProblem
+                Log.i(TAG, "getProblem: ${_selectedProblem.value}")
+            }
+        }
+    }
+
     fun startTitleTTS(){
         textToSpeech?.speak(
             when(selectedPCategory){
                 0->"다음 그림은 무엇일까요"
                 1->"다음 단어에 해당하는 그림은 무엇일까요?"
+                2->"다음 빈칸에 들어갈 알맞은 단어를 골라주세요"
                 else -> "다음 단어들과 연관된 단어는 무엇일까요?"
             }
             ,TextToSpeech.QUEUE_FLUSH,null,null)
@@ -208,6 +237,10 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
                 textToSpeech?.speak(App.PICTURES[selectedCategory][selectedIndex.value!!],TextToSpeech.QUEUE_ADD,null,null)
             }
             2->{
+                for(index in 0 until 4){
+                    textToSpeech?.speak("${index+1}번 "+App.PICTURES[selectedCategory][quiz.value!!.problems_i[index]],TextToSpeech.QUEUE_ADD,null,null)
+                }
+
 
             }
             else->{
@@ -222,7 +255,6 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
     fun insertData() = viewModelScope.launch(Dispatchers.IO) {
         var isStored = repository.selectAll().size
         val cateThreeProblems = insertLocalData()
-        Log.i(TAG, "insertData: ")
         withContext(Dispatchers.Main){
             if(isStored<1){
                 for(i in 0 until 6){
