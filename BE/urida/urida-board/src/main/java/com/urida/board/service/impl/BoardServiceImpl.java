@@ -153,6 +153,12 @@ public class BoardServiceImpl implements BoardService {
         return likeBoardJpqlRepo.likeCnt(board_id);
     }
 
+    @Override
+    public Boolean isLiked(Long board_id, Long uid) {
+        Optional<Likeboard> isLiked = likeBoardJpqlRepo.findByUserAndBoard(uid, board_id);
+        return isLiked.isPresent();
+    }
+
     /*@Override
     public int dislikeArticle(Long id) {
         return boardJpqlRepo.dislikeArticle(id);

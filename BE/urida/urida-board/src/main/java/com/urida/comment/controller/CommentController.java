@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Transactional
 @RequestMapping("/board/comment")
@@ -48,4 +50,9 @@ public class CommentController {
                 .build();
     }
 
+    // 특정 게시물 댓글
+    @GetMapping("/{board_id}")
+    public List<CommentResponseDto> commentLists(@PathVariable Long board_id) {
+        return commentService.getComments(board_id);
+    }
 }

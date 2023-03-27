@@ -73,10 +73,9 @@ public class BoardController {
         return boardService.clickLikeArticle(board_id,uid);
     }
 
-// 게시글 좋아요 개수
-    @GetMapping("/like/count/{board_id}")
-    public int likeCnt(@PathVariable Long board_id) {
-        return boardService.likeCnt(board_id);
+    // 유저 게시물 좋아요 여부
+    @GetMapping("/{board_id}/{uid}")
+    public Boolean isLiked(@PathVariable Long board_id, @PathVariable Long uid) {
+        return boardService.isLiked(board_id, uid);
     }
-
 }
