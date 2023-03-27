@@ -10,6 +10,7 @@ import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.drawing.DrawingFragment
 import com.edu.mf.view.picture.PictureFragment
 import com.edu.mf.view.study.StudyFragment
+import com.edu.mf.view.voice.VoiceFragment
 
 class MainFragment: Fragment() {
     private lateinit var binding: FragmentMainBinding
@@ -39,6 +40,10 @@ class MainFragment: Fragment() {
 
             cardviewPicture.setOnClickListener {
                 mainActivity.addFragment(PictureFragment())
+            }
+
+            cardviewVoice.setOnClickListener{
+                mainActivity.addFragment(VoiceFragment())
             }
         }
     }

@@ -7,6 +7,7 @@
     <string name="fragment_main_cardview_study_transfer_study" translatable="false">단어학습</string>
     <string name="fragment_main_cardview_drawing_transfer_drawing" translatable="false">그림으로 찾기</string>
     <string name="fragment_main_cardview_picture_transfer_picture" translatable="false">사진으로 찾기</string>
+    <string name="fragment_main_cardview_voice_transfer_voice">음성으로 찾기</string>
 
     <!--    fragment_study-->
     <string name="fragment_study_cardview_learn" translatable="false">낱말 익히기</string>
@@ -47,5 +48,15 @@
     <string name="fragment_picture_cardview_preview">실시간으로 확인하기</string>
     <string name="fragment_picture_cardview_camera">촬영하기</string>
     <string name="fragment_picture_cardview_gallery">갤러리에서 불러오기</string>
+
+    <!--    fragment_voice-->
+    <string name="fragment_voice_button_record">녹음하기</string>
+    <string name="fragment_voice_button_record_end">끝내기</string>
+    <string name="fragment_voice_text_voice">아래 버튼을 눌러 단어를 녹음해보세요</string>
+
+    <!--    fragment_voice_result-->
+    <string name="dialog_fragment_voice_result_textview">잘 모르겠어요.\n\n다시 한번 말해주실래요?</string>
+    <string name="dialog_fragment_voice_result_main_button">첫 화면으로</string>
+    <string name="dialog_fragment_voice_result_button">다시 말하기</string>
 
 </resources>
