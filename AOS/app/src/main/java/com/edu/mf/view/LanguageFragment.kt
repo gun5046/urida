@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import com.edu.mf.R
 import com.edu.mf.databinding.DialogNicknameBinding
@@ -26,6 +27,7 @@ class LanguageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        disableBackPress()
         binding = FragmentLanguageBinding.inflate(inflater, container, false)
         mainActivity = MainActivity.getInstance()!!
         return binding.root
@@ -97,5 +99,14 @@ class LanguageFragment : Fragment() {
             }
         }
         bottomSheetDialog.show()
+    }
+
+    fun disableBackPress(){
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+
+            }
+
+        })
     }
 }
