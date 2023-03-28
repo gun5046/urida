@@ -11,10 +11,13 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentCommunityDetailBinding
+import com.edu.mf.repository.model.community.BoardListItem
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.study.learn.LearnMainFragment
 
-class CommunityDetailFragment: Fragment() {
+class CommunityDetailFragment(
+    private val boardItem: BoardListItem
+    ): Fragment() {
     private lateinit var binding: FragmentCommunityDetailBinding
     private lateinit var mainActivity: MainActivity
 
@@ -29,6 +32,7 @@ class CommunityDetailFragment: Fragment() {
         mainActivity = MainActivity.getInstance()!!
 
         binding.communityDetail = this
+        binding.boardItem = boardItem
 
         return binding.root
     }

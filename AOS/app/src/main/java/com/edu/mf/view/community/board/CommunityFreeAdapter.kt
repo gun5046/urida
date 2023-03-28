@@ -40,7 +40,7 @@ class CommunityFreeAdapter(
             fun bind(boardItem: BoardListItem){
                 binding.boardItem = boardItem
                 binding.cardviewItemFragmentCommunityFree.setOnClickListener {
-                    mainActivity.addFragment(CommunityDetailFragment())
+                    mainActivity.addFragment(CommunityDetailFragment(boardItem))
                 }
             }
         }

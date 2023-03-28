@@ -40,7 +40,7 @@ class CommunityDrawingAdapter(
             fun bind(boardItem: BoardListItem){
                 binding.boardItem = boardItem
                 binding.cardviewItemFragmentCommunityDrawing.setOnClickListener {
-                    mainActivity.addFragment(CommunityDetailFragment())
+                    mainActivity.addFragment(CommunityDetailFragment(boardItem))
                 }
             }
         }
