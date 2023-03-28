@@ -4,11 +4,16 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.PagerAdapter
 import com.edu.mf.databinding.ItemFragmentDrawingResultViewpagerBinding
+import com.edu.mf.repository.db.ProblemDatabase
+import com.edu.mf.repository.db.ProblemRepository
 import com.edu.mf.repository.model.drawing.DrawingResponse
 import com.edu.mf.viewmodel.DrawingViewModel
 import com.edu.mf.viewmodel.MainViewModel
+import com.edu.mf.viewmodel.MainViewModelFactory
+import com.navercorp.nid.NaverIdLoginSDK.applicationContext
 
 class DrawingResultViewPagerItemFragment(
     private val context:Context
@@ -25,8 +30,9 @@ class DrawingResultViewPagerItemFragment(
             , container
             , false
         )
-
-        mainViewModel = MainViewModel()
+        val dao = ProblemDatabase.getInstance(applicationContext).problemDao
+        val repository = ProblemRepository(dao)
+        mainViewModel = MainViewModel(repository)
         DrawingResultFragment(drawingResponse)
             .setMainViewModel(position, mainViewModel, drawingViewModel)
         binding.mainViewModel = mainViewModel

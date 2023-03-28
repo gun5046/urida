@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.databinding.FragmentDrawingResultBinding
 import com.edu.mf.repository.model.drawing.DrawingResponse
 import com.edu.mf.utils.App
@@ -29,9 +30,8 @@ class DrawingResultFragment(
     ): View? {
         binding = FragmentDrawingResultBinding.inflate(inflater, container, false)
         mainActivity = MainActivity.getInstance()!!
-        mainViewModel = MainViewModel()
+        mainViewModel = ViewModelProvider(requireActivity())[mainViewModel::class.java]
         drawingViewModel = DrawingViewModel()
-
         return binding.root
     }
 

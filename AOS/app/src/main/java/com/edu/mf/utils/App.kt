@@ -23,6 +23,7 @@ class App : Application(){
         lateinit var userRetrofit: Retrofit
         lateinit var drawingRetrofit: Retrofit
         lateinit var communityRetrofit: Retrofit
+        lateinit var resolveRetrofit : Retrofit
     }
 
     override fun onCreate() {
@@ -49,6 +50,10 @@ class App : Application(){
             .baseUrl("http://j8d202.p.ssafy.io:8083/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
+            .build()
+        resolveRetrofit = Retrofit.Builder()
+            .baseUrl("http://j8d202.p.ssafy.io:8082/")
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 

@@ -7,6 +7,7 @@ import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,19 +17,32 @@ import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
 import com.edu.mf.databinding.DialogFragmentQuizResultBinding
+import com.edu.mf.repository.api.ResolveService
+import com.edu.mf.repository.model.resolve.ResolveRequest
+import com.edu.mf.repository.model.resolve.ResolveResponse
+import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.MainViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 
+private const val TAG = "QuizResultDialog_지훈"
 class QuizResultDialog(
-    answers : String
+    answers : Int,
+    flag : Int
 ) : DialogFragment(){
     private lateinit var mainActivity: MainActivity
     private lateinit var viewModel: MainViewModel
     private var _binding: DialogFragmentQuizResultBinding? = null
     private val binding get() = _binding!!
-    private var answers : String?= null
+    private var answers : Int?= null
+    private var job: Job? = null
+    private var flag : Int? = null
     init{
         this.answers = answers
+        this.flag = flag
     }
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,12 +55,7 @@ class QuizResultDialog(
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         mainActivity = MainActivity.getInstance()!!
 
-        if(answers!!.substring(3,answers!!.length).equals(viewModel.quiz.value!!.answer_s)){
-            binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
-        }else{
-            binding.textviewDialogFragmentQuizTitle.text = "정답은 ${viewModel.quiz.value!!.answer_s} 입니다"
-            binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
-        }
+        checkAnswer()
 
         binding.apply {
             handlers = this@QuizResultDialog
@@ -64,15 +73,127 @@ class QuizResultDialog(
         context?.dialogFragmentResize(this@QuizResultDialog,0.9f,0.15f)
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun checkAnswer(){
+
+        when(flag){
+            //그림 보고 낱말 맞추기
+            0->{
+                if(answers==viewModel.answerIndex){
+                    binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
+                }else{
+                    val resolveRequest = ResolveRequest(
+                        viewModel.quiz.value!!.answer_i,viewModel.selectedCategory,-1,
+                        viewModel.selectedPCategory,1, App.sharedPreferencesUtil.getUser()?.uid!!,
+                        emptyList<Int>(),viewModel.quizIndex.value!!)
+                    insertResolveRequest(resolveRequest)
+                    binding.textviewDialogFragmentQuizTitle.text = "정답은 ${viewModel.quiz.value!!.answer_s} 입니다"
+                    binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
+                }
+            }
+            1-> {
+                if (answers == viewModel.answerIndex) {
+                    binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
+                } else {
+                    val resolveRequest = ResolveRequest(
+                        viewModel.quiz.value!!.answer_i,
+                        viewModel.selectedCategory,
+                        -1,
+                        viewModel.selectedPCategory,
+                        1,
+                        App.sharedPreferencesUtil.getUser()?.uid!!,
+                        emptyList<Int>(),
+                        viewModel.quizIndex.value!!
+                    )
+                    insertResolveRequest(resolveRequest)
+                    binding.textviewDialogFragmentQuizTitle.text =
+                        "정답은 ${viewModel.answerIndex + 1}번 입니다"
+                    binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
+                }
+
+            }
+            2->{
+                if (answers == viewModel.quiz.value!!.answer_fi) {
+                    binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
+                }
+                else {
+                    val resolveRequest = ResolveRequest(
+                        viewModel.quiz.value!!.answer_i,
+                        viewModel.selectedCategory,
+                        -1,
+                        viewModel.selectedPCategory,
+                        1,
+                        App.sharedPreferencesUtil.getUser()?.uid!!,
+                        emptyList<Int>(),
+                        viewModel.quizIndex.value!!
+                    )
+                    insertResolveRequest(resolveRequest)
+                    binding.textviewDialogFragmentQuizTitle.text =
+                        "정답은 ${viewModel.quiz.value!!.answer_fi+1}번 ${App.PICTURES[viewModel.selectedCategory][viewModel.selectedProblem.value!!.order_id]} 입니다"
+                    binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
+                }
+            }
+            else->{
+                if (answers == viewModel.answerIndex) {
+                    binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
+                } else {
+                    val resolveRequest = ResolveRequest(
+                        viewModel.quiz.value!!.answer_i,
+                        viewModel.selectedCategory,
+                        -1,
+                        viewModel.selectedPCategory,
+                        1,
+                        App.sharedPreferencesUtil.getUser()?.uid!!,
+                        emptyList<Int>(),
+                        viewModel.quizIndex.value!!
+                    )
+                    insertResolveRequest(resolveRequest)
+                    binding.textviewDialogFragmentQuizTitle.text =
+                        "정답은 ${viewModel.quiz.value!!.answer_fi+1}번 ${App.PICTURES[viewModel.selectedCategory][viewModel.quiz.value!!.problems_i[viewModel.quiz.value!!.answer_fi]]} 입니다"
+                    binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
+                }
+            }
+        }
+    }
+
+
+    private fun insertResolveRequest(resolveRequest: ResolveRequest){
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val response = App.resolveRetrofit.create(ResolveService::class.java).insertResolve(resolveRequest)
+            val body = response.body()
+            if(body!=null){
+                Log.i(TAG, "insertResolveRequest 성공")
+            }else{
+                Log.i(TAG, response.message())
+            }
+            Log.i(TAG, "${resolveRequest}")
+        }
+    }
+
     fun onCancleClick(){
         dismiss()
-        mainActivity.popQuizFragment()
+        mainActivity.popQuizFragment(when(viewModel.selectedPCategory){
+            0->"word"
+            1-> "picture"
+            2->"blank"
+            else-> "relate"
+        })
         mainActivity.popFragment()
     }
     fun onOkClick(){
         dismiss()
-        mainActivity.addQuizFragment(QuizWordFragment())
+        when(viewModel.selectedPCategory){
+            0-> mainActivity.addQuizFragment(QuizWordFragment(),"word")
+            1->mainActivity.addQuizFragment(QuizPictureFragment(),"picture")
+            2->mainActivity.addQuizFragment(QuizBlankFragment(),"blank")
+            else->mainActivity.addQuizFragment(QuizRelateFragment(),"relate")
+        }
     }
+
+
+    /**
+     * Dialog Size 설정
+     */
 
     @SuppressLint("ServiceCast")
     fun Context.dialogFragmentResize(dialogFragment: DialogFragment, width:Float, height:Float){
