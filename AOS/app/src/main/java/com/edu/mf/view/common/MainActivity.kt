@@ -64,16 +64,16 @@ class MainActivity : AppCompatActivity(){
                     changeLocale(user!!.language)
                     changeFragment(MainFragment())
                 } else {
-                    //changeFragment(LoginFragment())
+                    changeFragment(LoginFragment())
                 }
             }
         } else {
-            //changeFragment(LoginFragment())
+            changeFragment(LoginFragment())
         }
         
         mainViewModel = ViewModelProvider(this)[MainViewModel::class.java]
         pictureViewModel = ViewModelProvider(this)[PictureViewModel::class.java]
-        changeFragment(MainFragment())
+//        changeFragment(MainFragment())
     }
 
     fun changeFragment(fragment: Fragment){
