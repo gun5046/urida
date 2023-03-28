@@ -44,6 +44,7 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
 
     private lateinit var actionBar: ActionBar
     private lateinit var drawingUri: Uri
+    private var categoryId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -75,6 +76,7 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
             setImg(drawingUri)
 
             DrawingResultShareDialog.savedDrawingUri = "".toUri()
+            categoryId = 1
         }
     }
 
@@ -161,7 +163,9 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
         val boardData = CreateBoardData(
             binding.edittextFragmentCommunityRegisterTitle.text.toString()
             , binding.edittextFragmentCommunityRegisterContent.text.toString()
-            , user.uid!!)
+            , categoryId
+            , user.uid!!
+        )
         communityService.createBoard(boardData)
             .enqueue(object : Callback<CreateBoardResponse>{
                 override fun onResponse(
