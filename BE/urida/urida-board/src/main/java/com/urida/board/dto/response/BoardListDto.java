@@ -13,6 +13,8 @@ public class BoardListDto {
 
     private String content;
 
+    private int category_id;
+
     private int view;
 
     private String dateTime;

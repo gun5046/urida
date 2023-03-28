@@ -1,12 +1,15 @@
 package com.edu.mf.view.study
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.databinding.FragmentStudyBinding
+import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.study.learn.LearnFragment
 import com.edu.mf.view.study.quiz.QuizFragment
@@ -31,7 +34,6 @@ class StudyFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.apply {
             cardviewLearn.setOnClickListener {
                 viewModel.setMode(1)
@@ -47,5 +49,14 @@ class StudyFragment: Fragment() {
                 mainActivity.addFragment(ResolveFragment())
             }
         }
+    }
+    /**
+     * onBackPressed 막기
+     */
+    fun disableBackPress(){
+        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
+            override fun handleOnBackPressed() {
+            }
+        })
     }
 }

@@ -18,7 +18,6 @@ class LearnDialogAdapter():
     inner class LearnDialogViewHolder(val binding : ItemDialogFragmentSelectBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(data : PCategory){
-
             binding.textviewItemDialogTitle.text = data.title
             binding.textivewItemDialogSubtitle.text = data.sub_title
             if(data.isClicked){
@@ -35,6 +34,7 @@ class LearnDialogAdapter():
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LearnDialogViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = DataBindingUtil.inflate<ItemDialogFragmentSelectBinding>(inflater, R.layout.item_dialog_fragment_select,parent,false)
+
 
         return LearnDialogViewHolder(binding)
     }

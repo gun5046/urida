@@ -53,8 +53,6 @@ class LearnMainFragment : Fragment() {
 
         viewmodel.currentIndex.observe(viewLifecycleOwner, Observer {
             viewmodel.changeBookMark("${it+1}/${App.PICTURES[viewmodel.selectedCategory].size}")
-            binding.imageviewFragmentLearnMainImage.setImageResource(resources.getIdentifier(
-                "pictures_${viewmodel.selectedCategory}_${it}","drawable",requireActivity().packageName))
             viewmodel.setCurrentAnswer(App.PICTURES[viewmodel.selectedCategory][it])
         })
         viewmodel.setTTS()

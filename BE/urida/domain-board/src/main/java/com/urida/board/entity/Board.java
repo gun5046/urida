@@ -34,6 +34,8 @@ public class Board {
 
     private String time;
 
+    private int category_id;
+
 //    @ColumnDefault("0")
 //    private int assessment;
 
