@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.edu.mf.repository.db.ProblemRepository
+import com.edu.mf.repository.model.resolve.ResolveResponse
 import com.edu.mf.repository.model.study.Problem
 import com.edu.mf.repository.model.study.Quiz
 import com.edu.mf.utils.App
@@ -40,13 +41,25 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
     val quiz : LiveData<Quiz> get() = _quiz
 
     //quiz index 번호
-   private var _quizIndex : MutableLiveData<ArrayList<Int>> = MutableLiveData()
-    val quizIndex : LiveData<ArrayList<Int>> get() = _quizIndex
+    private var _quizIndex: MutableLiveData<ArrayList<Int>> = MutableLiveData()
+    val quizIndex: LiveData<ArrayList<Int>> get() = _quizIndex
 
 
+    //다시풀기 cache list
+    private var _resolve : MutableLiveData<List<ResolveResponse>> = MutableLiveData()
+    val resolve : LiveData<List<ResolveResponse>> get() = _resolve
+
+    //다시풀어보기인지 quiz인지 체크
+    private var _resolveMode : Boolean = false
+    val resolveMode : Boolean get() = _resolveMode
+
+    //다시풀어보기 현재 index 번호
+    private var _resolveIndex : Int = -1
+    val resolveIndex : Int get() = _resolveIndex
+
+    //해당 문제의 정답
     private var _answerIndex : Int = -1
     val answerIndex get() = _answerIndex
-
 
     private var _relateProblem : MutableLiveData<ArrayList<Int>> = MutableLiveData()
     val relateProblem : LiveData<ArrayList<Int>> get() = _relateProblem
@@ -68,12 +81,102 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
     private var _bookMark : MutableLiveData<String> = MutableLiveData()
     val bookMark get() = _bookMark
 
+    fun setResolve(resolves:List<ResolveResponse>){
+        _resolve.value = resolves
+    }
+
+    fun changeResolveMode(){
+        _resolveMode = !_resolveMode
+    }
+
+    fun setResolveIndex(index : Int){
+        _resolveIndex = index
+    }
+    fun setNextResolve(){
+        _resolveIndex.plus(1)
+    }
+
+    fun setResolveQuiz(){
+        var current_answer = -1
+        var q = Quiz(-1,-1)
+        var oneList = arrayListOf<String>()
+        _selectedCategory = resolve.value!![resolveIndex].category_id
+        _selectedIndex.value = resolve.value!![resolveIndex].answer_id
+        _selectedPCategory = resolve.value!![resolveIndex].type
+        for(i in 0 until resolve.value!![resolveIndex].choices.size){
+            if(resolve.value!![resolveIndex].choices[i]==resolve.value!![resolveIndex].answer_id) {
+                current_answer = i
+                _answerIndex = i
+            }
+            oneList.add(App.PICTURES[resolve.value!![resolveIndex].category_id][resolve.value!![resolveIndex].choices[i]])
+        }
+        when(resolve.value!![resolveIndex].type){
+            0-> q = Quiz(
+                current_answer,resolve.value!![resolveIndex].answer_id,
+                App.PICTURES[resolve.value!![resolveIndex].category_id][resolve.value!![resolveIndex].answer_id],
+                oneList)
+            /*1-> q = Quiz(current_answer,currentSelectedIndex,problems)
+            2->{
+                var three_answer = -1
+                var indexSet = mutableSetOf<Int>()
+                indexSet.add(selectedProblem.value!!.order_id)
+                while(indexSet.size<4)
+                    indexSet.add(Random().nextInt(App.PICTURES[selectedCategory].size))
+                var problem_lists = indexSet.toList().shuffled()
+                var p_lists = arrayListOf<Int>()
+                p_lists.addAll(problem_lists)
+                _quizIndex.value = p_lists
+                for(i in 0 until 4){
+                    if(p_lists[i]==selectedProblem.value!!.order_id)
+                        three_answer = i
+                }
+                q = Quiz(three_answer,selectedProblem.value!!.category_id,p_lists,selectedProblem.value!!)
+            }*/
+            else->{
+                /*var categorySet = mutableSetOf<Int>()
+                categorySet.add(selectedCategory)
+                var titleSet = mutableSetOf<Int>()
+                while(titleSet.size<4) {
+                    var rand = Random().nextInt(App.PICTURES[selectedCategory].size)
+                    if(rand!=currentSelectedIndex){
+                        titleSet.add(rand)
+                    }
+                }
+
+                //relate 보기에 들어갈 정답을 제외한 3가지 카테고리
+                while(categorySet.size<4){
+                    categorySet.add(Random().nextInt(6))
+                }
+                var titles = arrayListOf<Int>()
+                titles.addAll(titleSet.toList())
+                _relateProblem.value = titles
+                var categoryTemps = categorySet.toList()
+                val temps = arrayListOf<Int>()
+                temps.addAll(categoryTemps)
+                temps.shuffle()
+                _quizIndex.value = temps
+                for(i in 0..3){
+                    if(temps[i]==_selectedCategory) {
+                        current_answer = i
+                        _answerIndex = i
+                    }
+                    if(App.PICTURES[temps[i]].size<=quizIndex.value!![i]){
+                        quizIndex.value!![i] = App.PICTURES[temps[i]].size-1
+                    }
+                }
+                q = Quiz(current_answer,currentSelectedIndex,quizIndex.value!!,temps)*/
+            }
+
+        }
+        Log.i(TAG, "setQuiz: ${q}")
+        _quiz.value = q
+    }
+
     /**
      * 문제풀기 0번 카테고리 문제 삽입
      * 문제 4개 랜덤 생성후 인데스 셔플
      */
     fun setQuiz(){
-        
         var problems = ArrayList<Int>()
         _selectedIndex.value = Random().nextInt(App.PICTURES[selectedCategory].size)
         var currentSelectedIndex = _selectedIndex.value!!
@@ -110,6 +213,7 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
                 var problem_lists = indexSet.toList().shuffled()
                 var p_lists = arrayListOf<Int>()
                 p_lists.addAll(problem_lists)
+                _quizIndex.value = p_lists
                 for(i in 0 until 4){
                     if(p_lists[i]==selectedProblem.value!!.order_id)
                         three_answer = i
@@ -138,6 +242,7 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
                 val temps = arrayListOf<Int>()
                 temps.addAll(categoryTemps)
                 temps.shuffle()
+                _quizIndex.value = temps
                 for(i in 0..3){
                     if(temps[i]==_selectedCategory) {
                         current_answer = i
@@ -239,8 +344,6 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
                 for(index in 0 until 4){
                     textToSpeech?.speak("${index+1}번 "+App.PICTURES[selectedCategory][quiz.value!!.problems_i[index]],TextToSpeech.QUEUE_ADD,null,null)
                 }
-
-
             }
             else->{
                 for(index in 0 until 4){

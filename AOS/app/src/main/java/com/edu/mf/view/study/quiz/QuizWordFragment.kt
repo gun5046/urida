@@ -1,6 +1,7 @@
 package com.edu.mf.view.study.quiz
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -32,21 +33,19 @@ class QuizWordFragment : Fragment() {
             handlers = this@QuizWordFragment
             lifecycleOwner = this@QuizWordFragment
         }
-        viewModel.setQuiz()
+        if(viewModel.resolveMode) viewModel.setResolveQuiz()
+        else viewModel.setQuiz()
         viewModel.setTTS()
-        //mainActivity.disableBackPress()
         disableBackPress()
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
         viewModel.quiz.observe(viewLifecycleOwner, Observer {
             binding.problems = it.problems
         })
-
     }
 
     /**
@@ -55,9 +54,7 @@ class QuizWordFragment : Fragment() {
     fun disableBackPress(){
         activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
             override fun handleOnBackPressed() {
-
             }
-
         })
     }
 

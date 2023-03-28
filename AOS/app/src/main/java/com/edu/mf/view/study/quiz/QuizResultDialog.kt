@@ -55,7 +55,8 @@ class QuizResultDialog(
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         mainActivity = MainActivity.getInstance()!!
 
-        checkAnswer()
+        if(viewModel.resolveMode)checkResolveAnswer()
+        else checkAnswer()
 
         binding.apply {
             handlers = this@QuizResultDialog
@@ -73,9 +74,24 @@ class QuizResultDialog(
         context?.dialogFragmentResize(this@QuizResultDialog,0.9f,0.15f)
     }
 
+
+    private fun checkResolveAnswer(){
+        when(flag){
+            0->{
+                if(answers==viewModel.answerIndex){
+                    binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
+                    deleteResolve(viewModel.resolve.value!![viewModel.resolveIndex].pro_id)
+                    viewModel.setResolveQuiz()
+                }
+            }
+            else->{
+
+            }
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private fun checkAnswer(){
-
         when(flag){
             //그림 보고 낱말 맞추기
             0->{
@@ -120,7 +136,7 @@ class QuizResultDialog(
                     val resolveRequest = ResolveRequest(
                         viewModel.quiz.value!!.answer_i,
                         viewModel.selectedCategory,
-                        -1,
+                        viewModel.selectedProblem.value!!.order_id,
                         viewModel.selectedPCategory,
                         1,
                         App.sharedPreferencesUtil.getUser()?.uid!!,
@@ -144,7 +160,7 @@ class QuizResultDialog(
                         viewModel.selectedPCategory,
                         1,
                         App.sharedPreferencesUtil.getUser()?.uid!!,
-                        emptyList<Int>(),
+                        viewModel.relateProblem.value!!,
                         viewModel.quizIndex.value!!
                     )
                     insertResolveRequest(resolveRequest)
@@ -156,6 +172,11 @@ class QuizResultDialog(
         }
     }
 
+    private fun deleteResolve(id:Int){
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val response = App.resolveRetrofit.create(ResolveService::class.java).deleteResolve(id)
+        }
+    }
 
     private fun insertResolveRequest(resolveRequest: ResolveRequest){
         job = CoroutineScope(Dispatchers.IO).launch {
@@ -166,7 +187,6 @@ class QuizResultDialog(
             }else{
                 Log.i(TAG, response.message())
             }
-            Log.i(TAG, "${resolveRequest}")
         }
     }
 
