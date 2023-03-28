@@ -23,10 +23,10 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    // 전체 게시글 조회
-    @GetMapping("/list")
-    public List<BoardListDto> boardList() {
-        List<BoardListDto> list = boardService.getArticles();
+    // 카테고리 별 게시글 리스트 조회
+    @GetMapping("/{category_id}/list")
+    public List<BoardListDto> boardList(@PathVariable int category_id) {
+        List<BoardListDto> list = boardService.getArticles(category_id);
         int listSize = list.size();
         return list;
     }

@@ -34,14 +34,13 @@ public class BoardServiceImpl implements BoardService {
     private final BoardJpqlRepo boardJpqlRepo;
     private final LikeBoardJpqlRepo likeBoardJpqlRepo;
     private final UserJpqlRepo userJpqlRepo;
-    private final CommentJpqlRepo commentJpqlRepo;
     private final CommentService commentService;
 
 
     @Override
     @Transactional(readOnly = true)
-    public List<BoardListDto> getArticles() {
-        List<Board> allArticles = boardJpqlRepo.findAll();
+    public List<BoardListDto> getArticles(int category_id) {
+        List<Board> allArticles = boardJpqlRepo.findAll(category_id);
         List<BoardListDto> articleDtoList = new ArrayList<>();
 
         for (Board article : allArticles) {
@@ -51,10 +50,12 @@ public class BoardServiceImpl implements BoardService {
                     .content(article.getContent())
                     .view(article.getView())
                     .dateTime(article.getTime())
+                    .category_id(category_id)
                     .likeCnt(likeBoardJpqlRepo.likeCnt(article.getBoard_id()))
                     .commentCnt(commentService.commentCnt(article.getBoard_id()))
                     .nickname(article.getUser().getNickname())
                     .build();
+
             articleDtoList.add(dto);
         }
 
@@ -62,6 +63,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public BoardDetailDto getArticle(Long id) {
         Board article = boardJpqlRepo.findById(id);
         String nickname = article.getUser().getNickname();
@@ -87,6 +89,7 @@ public class BoardServiceImpl implements BoardService {
             Board article = Board.builder()
                     .title(articleCreateDto.getTitle())
                     .content(articleCreateDto.getContent())
+                    .category_id(articleCreateDto.getCategory_id())
                     .time(LocalDateTime.now().toString())
                     .user(user.get())
                     .build();
