@@ -7,4 +7,9 @@
     <string name="dialog_nickname_unallowed">只允许英文小写字母、大写字母和数字</string>
     <string name="dialog_nickname_blank">请输入您的昵称</string>
     <string name="dialog_nickname_duplicate">这是一个重复的昵称</string>
+    <string name="fragment_main_cardview_community_another_friends">其他朋友在做什么？</string>
+    <string name="fragment_main_cardview_community_transfer_community">去社区</string>
+    <string name="fragment_main_cardview_study_transfer_study">单词学习</string>
+    <string name="fragment_main_cardview_drawing_transfer_drawing">按图查找</string>
+    <string name="fragment_main_cardview_picture_transfer_picture">按照片查找</string>
 </resources>
