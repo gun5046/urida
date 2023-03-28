@@ -21,6 +21,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.loader.content.CursorLoader
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentCommunityRegisterBinding
+import com.edu.mf.repository.api.CommunityService
+import com.edu.mf.repository.model.User
+import com.edu.mf.repository.model.community.CreateBoardData
+import com.edu.mf.utils.App
+import com.edu.mf.utils.SharedPreferencesUtil
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.drawing.result.DrawingResultShareDialog
 import java.io.File
@@ -28,6 +33,8 @@ import java.io.File
 class CommunityRegisterFragment: Fragment(), MenuProvider {
     private lateinit var binding: FragmentCommunityRegisterBinding
     private lateinit var mainActivity: MainActivity
+    private lateinit var communityService: CommunityService
+    private lateinit var user: User
 
     private lateinit var actionBar: ActionBar
     private lateinit var drawingUri: Uri
@@ -39,6 +46,8 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
     ): View? {
         binding = FragmentCommunityRegisterBinding.inflate(inflater, container, false)
         mainActivity = MainActivity.getInstance()!!
+        communityService = mainActivity.communityService
+        user = App.sharedPreferencesUtil.getUser()!!
 
         return binding.root
     }
@@ -141,6 +150,15 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
         return true
     }
 
+    // 작성한 게시글 서버로 전송
+    private fun sendBoard(){
+        val boardData = CreateBoardData(
+            binding.edittextFragmentCommunityRegisterTitle.text.toString()
+            , binding.edittextFragmentCommunityRegisterContent.toString()
+            , user.uid!!)
+        communityService.createBoard(boardData)
+    }
+
     // 액션바 설정
     private fun setActionBar(){
         actionBar = mainActivity.supportActionBar!!
@@ -166,6 +184,7 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
         when(menuItem.itemId){
             R.id.actionbar_register -> {
                 if (chkEmpty()){
+                    sendBoard()
                     delSavedImg(drawingUri)
                     mainActivity.popFragment()
                     actionBar.hide()
