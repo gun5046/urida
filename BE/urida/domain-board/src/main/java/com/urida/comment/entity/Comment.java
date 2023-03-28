@@ -35,10 +35,10 @@ public class Comment {
     @JoinColumn(name = "uid")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+/*    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_comment_id")
     private Comment parentComment;
 
     @OneToMany(mappedBy = "parentComment", orphanRemoval = true)
-    private List<Comment> childComments = new ArrayList<>();
+    private List<Comment> childComments = new ArrayList<>();*/
 }

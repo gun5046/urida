@@ -25,7 +25,6 @@ public class BoardController {
 
     // 전체 게시글 조회
     @GetMapping("/list")
-
     public List<BoardListDto> boardList() {
         List<BoardListDto> list = boardService.getArticles();
         int listSize = list.size();
