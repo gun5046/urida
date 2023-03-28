@@ -1,7 +1,9 @@
 package com.edu.mf.view
 
 import android.Manifest
+import android.app.AlertDialog
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
@@ -12,12 +14,16 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.edu.mf.databinding.FragmentLanguageBinding
 import com.edu.mf.databinding.FragmentMainBinding
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.community.CommunityFragment
 import com.edu.mf.view.drawing.DrawingFragment
 import com.edu.mf.view.picture.PictureFragment
 import com.edu.mf.view.study.StudyFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainFragment: Fragment() {
     private lateinit var binding: FragmentMainBinding
@@ -50,6 +56,10 @@ class MainFragment: Fragment() {
             cardviewCommunity.setOnClickListener {
                 mainActivity.addFragment(CommunityFragment())
             }
+
+            imageviewSettings.setOnClickListener {
+                showSettingDialog()
+            }
         }
     }
 
@@ -76,5 +86,39 @@ class MainFragment: Fragment() {
                 requireContext().startActivity(settingsIntent)
             }
         }
+    }
+
+    fun showSettingDialog(){
+        val builder = AlertDialog.Builder(requireContext())
+        val dialogBinding = FragmentLanguageBinding.inflate(layoutInflater)
+        builder.setView(dialogBinding.root)
+        val dialog = builder.create()
+        dialogBinding.apply {
+            layoutKorean.setOnClickListener {
+                changeLocale(0)
+                dialog.dismiss()
+            }
+            layoutChinese.setOnClickListener {
+                changeLocale(1)
+                dialog.dismiss()
+            }
+            layoutVietnam.setOnClickListener {
+                changeLocale(2)
+                dialog.dismiss()
+            }
+            layoutEnglish.setOnClickListener {
+                changeLocale(3)
+                dialog.dismiss()
+            }
+        }
+        dialog.show()
+    }
+
+    fun changeLocale(language: Int){
+        mainActivity.changeLocale(language)
+        CoroutineScope(Dispatchers.IO).launch {
+            mainActivity.loginService.languageSetting(language, mainActivity.user!!.uid!!)
+        }
+        mainActivity.changeFragment(MainFragment())
     }
 }

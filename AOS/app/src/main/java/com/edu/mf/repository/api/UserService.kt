@@ -7,6 +7,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Query
 
 interface UserService {
@@ -20,7 +21,7 @@ interface UserService {
     @GET("user")
     suspend fun duplicateCheck(@Query("nickname") nickname: String): Response<Boolean>
 
-    @POST("user")
+    @PUT("user")
     suspend fun languageSetting(@Query("language") language: Int, @Query("uid") uid: Int)
 
     @POST("user/register")
