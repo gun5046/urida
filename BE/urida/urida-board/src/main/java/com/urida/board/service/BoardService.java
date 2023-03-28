@@ -11,7 +11,7 @@ import java.util.List;
 public interface BoardService {
 
     // 전체 게시글 목록
-    List<BoardListDto> getArticles();
+    List<BoardListDto> getArticles(int category_id);
 
     // 개별 게시글 조회
     BoardDetailDto getArticle(Long id);

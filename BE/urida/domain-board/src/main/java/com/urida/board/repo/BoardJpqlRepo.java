@@ -65,10 +65,11 @@ public class BoardJpqlRepo {
     }
 
     //게시글 전체조회
-    public List<Board> findAll() {
+    public List<Board> findAll(int category_id) {
         return em.createQuery(
-                    "select b from Board b", Board.class)
-                    .getResultList();
+                        "select b from Board b where b.category_id = :category_id", Board.class)
+                .setParameter("category_id", category_id)
+                .getResultList();
     }
 
     //게시글 제목 검색

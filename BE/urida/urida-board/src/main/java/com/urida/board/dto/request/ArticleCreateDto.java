@@ -19,7 +19,7 @@ public class ArticleCreateDto {
     @NotEmpty
     private String content;
 
-    private String dateTime;
+    private int category_id;
 
     private Long uid;
 }
