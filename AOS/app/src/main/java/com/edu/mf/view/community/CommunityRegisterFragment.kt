@@ -131,6 +131,16 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
         return cursor.getString(idx)
     }
 
+    // 빈 칸 유효성 검사
+    private fun chkEmpty(): Boolean{
+        if (binding.edittextFragmentCommunityRegisterTitle.text.toString() == ""
+            || binding.edittextFragmentCommunityRegisterContent.text.toString() == ""){
+            Toast.makeText(requireContext(), "빈 칸을 모두 입력해주세요", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
+    }
+
     // 액션바 설정
     private fun setActionBar(){
         actionBar = mainActivity.supportActionBar!!
@@ -155,9 +165,11 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
     override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
         when(menuItem.itemId){
             R.id.actionbar_register -> {
-                delSavedImg(drawingUri)
-                mainActivity.popFragment()
-                actionBar.hide()
+                if (chkEmpty()){
+                    delSavedImg(drawingUri)
+                    mainActivity.popFragment()
+                    actionBar.hide()
+                }
             }
             android.R.id.home -> {
                 delSavedImg(drawingUri)
