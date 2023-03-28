@@ -26,7 +26,6 @@ object BindingAdapters {
         val imgDrawable = view.context.resources.getIdentifier(
             imgSrc, "drawable", view.context.packageName
         )
-
         Glide.with(view)
             .load(imgDrawable)
             .into(view)

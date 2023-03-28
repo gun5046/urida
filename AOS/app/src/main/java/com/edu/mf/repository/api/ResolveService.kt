@@ -11,7 +11,7 @@ import retrofit2.http.Query
 interface ResolveService {
 
     @GET("problem/list")
-    suspend fun getResolves(@Query("userId") userId : String) : Response<List<ResolveResponse>>
+    suspend fun getResolves(@Query("userId") userId : Int) : Response<List<ResolveResponse>>
 
     @POST("problem/save")
     suspend fun insertResolve(@Body resolveRequest : ResolveRequest) : Response<Boolean>

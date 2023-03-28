@@ -21,18 +21,13 @@ class LearnAdapter(
     inner class LearnViewHolder(val binding:ItemFragmentLearnBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(data:String){
-            binding.textviewItemLearnTitle.text = data
+            binding.data = data
+            binding.flag = flag
             binding.buttonItemLearnStart.setOnClickListener {view->
                 categoryClickListener.onClick(view,layoutPosition)
             }
-            if(flag==1){
-                binding.buttonItemLearnStart.text = "학습하기"
-            }else{
-                binding.buttonItemLearnStart.text = "문제풀기"
-            }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LearnViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = DataBindingUtil.inflate<ItemFragmentLearnBinding>(inflater,R.layout.item_fragment_learn,parent,false)

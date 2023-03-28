@@ -46,7 +46,7 @@ class App : Application(){
             .client(okHttpClient)
             .build()
         resolveRetrofit = Retrofit.Builder()
-            .baseUrl("http://j8d202.p.ssafy.io:8081/")
+            .baseUrl("http://j8d202.p.ssafy.io:8082/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 

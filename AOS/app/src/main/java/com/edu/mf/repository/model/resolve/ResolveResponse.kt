@@ -16,7 +16,12 @@ data class ResolveResponse(
     @SerializedName("type")
     var type : Int,
     @SerializedName("wrong_cnt")
-    var wrong_cnt : Int
+    var wrong_cnt : Int,
+    @SerializedName("choices")
+    var choices : List<Int>,
+    @SerializedName("examples")
+    var examples : List<Int>
+
 ){
 
 }

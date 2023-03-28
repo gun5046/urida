@@ -29,16 +29,19 @@ class ResolveFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_resolve,container,false)
-
         init()
+
 
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
 
+    override fun onResume() {
+        super.onResume()
+        fetchResolve()
+    }
 
     private fun init(){
         setAdapter()
@@ -52,30 +55,16 @@ class ResolveFragment: Fragment() {
     private fun fetchResolve(){
         job = CoroutineScope(Dispatchers.IO).launch{
             withContext(Dispatchers.Main){
-                val response = App.resolveRetrofit.create(ResolveService::class.java).getResolves(App.sharedPreferencesUtil.getUser()?.uid!!.toString())
+                val response = App.resolveRetrofit.create(ResolveService::class.java).getResolves(App.sharedPreferencesUtil.getUser()?.uid!!)
                 if(response.isSuccessful){
+                    Log.i(TAG, "fetchResolve: ${response.body()}")
                     resolveAdapter.setData(response.body()!!)
                     resolveAdapter.notifyDataSetChanged()
                 }else{
-                    Log.i(TAG, "fetchResolve: ${response.message()}")
+                    Log.i(TAG, "fetchResolve error: ${response.message()}")
                 }
             }
         }
-    }
-
-    suspend fun getResolveData() : List<ResolveResponse>{
-        var resolveList : List<ResolveResponse> = emptyList()
-        val response = App.resolveRetrofit.create(ResolveService::class.java).getResolves(App.sharedPreferencesUtil.getUser()?.uid!!.toString())
-        val body = response.body()
-        try{
-            if(body!=null){
-                resolveList = body
-            }
-        }catch(e : Exception){
-            Log.i(TAG, "getResolveData: ${e.message.toString()}")
-        }
-
-        return resolveList
     }
 
     /**
