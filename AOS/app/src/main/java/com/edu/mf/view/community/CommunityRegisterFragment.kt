@@ -51,12 +51,15 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
         chkDrawingUri()
     }
 
+    // 그림 uri가 있는지 체크
     private fun chkDrawingUri(){
-        val drawingUri = DrawingResultShareDialog.savedDrawingUri
+        drawingUri = DrawingResultShareDialog.savedDrawingUri
         if (drawingUri != "".toUri()){
             binding.imageviewFragmentCommunityRegister.background =
                 ContextCompat.getDrawable(requireContext(), R.color.white)
             setImg(drawingUri)
+
+            DrawingResultShareDialog.savedDrawingUri = "".toUri()
         }
     }
 
@@ -156,7 +159,7 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
                 mainActivity.popFragment()
                 actionBar.hide()
             }
-            android.R.id.home->{
+            android.R.id.home -> {
                 delSavedImg(drawingUri)
                 mainActivity.popFragment()
                 actionBar.hide()

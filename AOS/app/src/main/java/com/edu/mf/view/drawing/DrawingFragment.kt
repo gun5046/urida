@@ -97,38 +97,6 @@ class DrawingFragment: Fragment() {
         }
     }
 
-//    // 파일 저장
-//    private fun saveFile(bitmap: Bitmap): Uri?{
-//        val values = ContentValues()
-//        values.put(Images.Media.DISPLAY_NAME, "mf_drawing")
-//        //values.put(Images.Media.MIME_TYPE, "image/jpeg")
-//        values.put(Images.Media.MIME_TYPE, "image/png")
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-//            values.put(Images.Media.IS_PENDING, 1)
-//        }
-//
-//        val uri = requireContext().contentResolver.insert(Images.Media.EXTERNAL_CONTENT_URI, values)
-//        if (uri != null){
-//            val descriptor = requireContext().contentResolver.openFileDescriptor(uri, "w")
-//
-//            if (descriptor != null){
-//                val fos = FileOutputStream(descriptor.fileDescriptor)
-//                //bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
-//                fos.close()
-//                descriptor.close()
-//
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-//                    values.clear()
-//                    values.put(Images.Media.IS_PENDING, 0)
-//                    requireContext().contentResolver.update(uri, values, null, null)
-//                }
-//            }
-//        }
-//        return uri
-//    }
-
     // response 결과에 따라 이동할 Fragment 결정
     private fun changeFragment(){
         drawingViewModel.drawingResponse.observe(viewLifecycleOwner, Observer{
