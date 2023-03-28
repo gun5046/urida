@@ -1,5 +1,6 @@
 package com.urida.impl.service;
 
+import com.urida.dto.ProblemOutDto;
 import com.urida.dto.ProblemSaveDto;
 import com.urida.exception.SaveException;
 import com.urida.impl.ProblemService;
@@ -11,8 +12,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,12 +24,11 @@ public class ProblemServiceImpl implements ProblemService {
     private final ProblemJpqlRepo problemJpqlRepo ;
     private final UserJpqlRepo userJpqlRepo;
     @Override
-    public Problem problemInfo(Long proId) {
-        Optional<Problem> problem = problemJpqlRepo.findByProId(proId);
-        if(problem.isPresent()){
-            return problem.get();
+    public ProblemOutDto problemInfo(Long proId) {
+        if(problemJpqlRepo.findByProId(proId).isPresent()){
+            return new ProblemOutDto(problemJpqlRepo.findByProId(proId).get());
         }else{
-            return new Problem();
+            return new ProblemOutDto();
         }
     }
 
@@ -34,7 +36,7 @@ public class ProblemServiceImpl implements ProblemService {
     @Transactional
     public void saveProblem(ProblemSaveDto problemSaveDto) {
         Optional<User> user = userJpqlRepo.findByUid(problemSaveDto.getUid());
-        System.out.println(user);
+
         if (user.isPresent()){
             Problem problem = Problem.builder()
                     .sentence_id(problemSaveDto.getSentence_id())
@@ -42,8 +44,18 @@ public class ProblemServiceImpl implements ProblemService {
                     .type(problemSaveDto.getType())
                     .category_id(problemSaveDto.getCategory_id())
                     .wrong_cnt(problemSaveDto.getWrong_cnt())
+                    .choices(new ArrayList<>())
+                    .examples(new ArrayList<>())
                     .user(user.get())
                     .build();
+
+            problemSaveDto.getChoices().forEach(
+                    choice -> problem.addChoice(choice)
+            );
+            problemSaveDto.getExamples().forEach(
+                    example -> problem.addExample(example)
+            );
+
             try {
                 problemJpqlRepo.saveProblem(problem);
             }catch(Exception e){
@@ -53,15 +65,21 @@ public class ProblemServiceImpl implements ProblemService {
     }
 
     @Override
-    public List<Problem> getListProblem(Long userId) {
-        List<Problem> problems = problemJpqlRepo.findByUserId(userId);
+    @Transactional
+    public void updateProblem(Long proId) {
+        problemJpqlRepo.updateProblem(proId);
+    }
 
-        return problems;
+    @Override
+    public List<ProblemOutDto> getListProblem(Long userId) {
+        List<Problem> problems = problemJpqlRepo.findByUserId(userId);
+        return problems.stream().map(problem -> new ProblemOutDto(problem)
+        ).collect(Collectors.toList());
     }
 
     @Transactional
     @Override
-    public void deleteProblem(Long userId, Long proId) {
-        problemJpqlRepo.deleteProInList(userId, proId);
+    public void deleteProblem(Long proId) {
+        problemJpqlRepo.deleteProInList(proId);
     }
 }

@@ -135,5 +135,8 @@ class MainViewModel : ViewModel(){
             textToSpeech?.speak("${index+1}번 "+_quiz.value!!.problems[index],TextToSpeech.QUEUE_ADD,null,null)
         }
     }
+    fun startTTSWithParameter(text: String){
+        textToSpeech?.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
+    }
 
 }

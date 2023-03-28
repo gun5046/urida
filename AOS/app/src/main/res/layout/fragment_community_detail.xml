@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="CommunityDetail"
+            type="com.edu.mf.view.community.detail.CommunityDetailFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView_fragment_community_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="56dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/constraintlayout_fragment_community_detail_write_comment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintlayout_fragment_community_detail_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="?attr/actionBarSize"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/imageview_fragment_community_detail_back"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="20dp"
+                        android:onClick="@{()->CommunityDetail.backPressed()}"
+                        android:src="@drawable/ic_backward_gray"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"/>
+
+                    <ImageView
+                        android:id="@+id/imageview_fragment_community_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/pictures_0_0"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardview_fragment_community_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="20dp"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintlayout_fragment_community_detail_image"
+                    app:layout_constraintBottom_toTopOf="@+id/textView_fragment_community_detail_content">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <ImageView
+                            android:id="@+id/imageview_fragment_community_detail_like_empty"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:layout_marginEnd="10dp"
+                            android:visibility="gone"
+                            android:src="@drawable/ic_like_empty"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <ImageView
+                            android:id="@+id/imageview_fragment_community_detail_like_full"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginEnd="-6dp"
+                            android:visibility="gone"
+                            android:src="@drawable/ic_like_color"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/textview_fragment_community_detail_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="글제목제목"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/grey_03"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"/>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/constraintlayout_fragment_community_detail_second"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textview_fragment_community_detail_title"
+                            app:layout_constraintLeft_toLeftOf="parent">
+
+                            <TextView
+                                android:id="@+id/textview_fragment_community_detail_writer"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="0dp"
+                                android:paddingEnd="8dp"
+                                android:text="작성자"
+                                android:textSize="12sp"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"/>
+
+                            <TextView
+                                android:id="@+id/textview_fragment_community_detail_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2023-03-03"
+                                android:textSize="11sp"
+                                android:textColor="@color/grey_05"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toRightOf="@+id/textview_fragment_community_detail_writer"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            app:layout_constraintTop_toBottomOf="@+id/constraintlayout_fragment_community_detail_second"
+                            app:layout_constraintLeft_toLeftOf="parent">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraintlayout_fragment_community_detail_like"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="0dp"
+                                android:paddingEnd="10dp"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                app:layout_constraintRight_toLeftOf="@+id/constraintlayout_fragment_community_detail_comment">
+
+                                <ImageView
+                                    android:id="@+id/imageview_fragment_community_detail_like"
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
+                                    android:layout_marginEnd="4dp"
+                                    android:src="@drawable/ic_like"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"
+                                    app:layout_constraintRight_toLeftOf="@+id/textview_fragment_community_detail_like"/>
+
+                                <TextView
+                                    android:id="@+id/textview_fragment_community_detail_like"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:text="56"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/grey_03"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintLeft_toRightOf="@+id/imageview_fragment_community_detail_like"
+                                    app:layout_constraintRight_toRightOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/constraintlayout_fragment_community_detail_comment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toRightOf="@+id/constraintlayout_fragment_community_detail_like">
+
+                                <ImageView
+                                    android:id="@+id/imageview_fragment_community_detail_comment"
+                                    android:layout_width="18dp"
+                                    android:layout_height="18dp"
+                                    android:src="@drawable/ic_comment"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintLeft_toLeftOf="parent"/>
+
+                                <TextView
+                                    android:id="@+id/textview_fragment_community_detail_comment"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="10"
+                                    android:textSize="12sp"
+                                    android:textColor="@color/grey_03"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintLeft_toRightOf="@+id/imageview_fragment_community_detail_comment"
+                                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/textView_fragment_community_detail_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="14dp"
+                    android:padding="16dp"
+                    android:text="내용 content 내용 content 내용 content 내용 content 내용 content 내용 content"
+                    android:textColor="@color/grey_03"
+                    android:textSize="16sp"
+                    android:lineSpacingExtra="4dp"
+                    android:fontFamily="@font/kakao_otf_regular"
+                    app:layout_constraintTop_toBottomOf="@+id/cardview_fragment_community_detail"
+                    app:layout_constraintBottom_toTopOf="@+id/view_fragment_community_detail_1"/>
+
+                <View
+                    android:id="@+id/view_fragment_community_detail_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey_07"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_fragment_community_detail_content"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintlayout_fragment_community_detail_content"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintlayout_fragment_community_detail_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    app:layout_constraintTop_toBottomOf="@+id/view_fragment_community_detail_1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/view_fragment_community_detail_2">
+
+                    <ImageView
+                        android:id="@+id/imageview_item_fragment_community_free_comment"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginEnd="2dp"
+                        android:src="@drawable/ic_comment"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toLeftOf="@+id/textview_item_fragment_community_free_comment"/>
+
+                    <TextView
+                        android:id="@+id/textview_item_fragment_community_free_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="2dp"
+                        android:text="댓글"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_03"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/imageview_item_fragment_community_free_comment"
+                        app:layout_constraintRight_toLeftOf="@+id/textview_item_fragment_community_free_comment_count"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/textview_item_fragment_community_free_comment_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="10"
+                        android:textSize="14sp"
+                        android:textColor="@color/grey_03"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/textview_item_fragment_community_free_comment"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:id="@+id/view_fragment_community_detail_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/grey_07"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintlayout_fragment_community_detail_content"
+                    app:layout_constraintBottom_toTopOf="@+id/recyclerview_fragment_community_comment"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview_fragment_community_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constrainedHeight="true"
+                    app:layout_constraintTop_toBottomOf="@+id/view_fragment_community_detail_2"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintlayout_fragment_community_detail_write_comment"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:paddingTop="2dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="2dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <EditText
+                android:id="@+id/edittext_fragment_community_detail_write_comment"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:layout_marginEnd="10dp"
+                android:hint="@string/fragment_community_detail_comment_edittext"
+                android:textSize="14sp"
+                android:fontFamily="@font/kakao_otf_regular"
+                android:background="@drawable/drawing_dialog_button_border"
+                android:backgroundTint="@color/grey_08"
+                app:layout_constraintHorizontal_weight="0.8"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/button_fragment_community_detail_write_comment"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_fragment_community_detail_write_comment"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/fragment_community_detail_comment_button"
+                android:fontFamily="@font/kakao_otf_bold"
+                android:stateListAnimator="@null"
+                app:cornerRadius="40dp"
+                app:backgroundTint="@color/background_light_green"
+                app:layout_constraintHorizontal_weight="0.2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/edittext_fragment_community_detail_write_comment"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                style="@style/MaterialButtonStyle"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -36,4 +36,22 @@
         <item name="windowMinWidthMajor">0%</item>
         <item name="windowMinWidthMinor">0%</item>
     </style>
+
+    <!--  Community Custom Dialog  -->
+    <style name="CommunityDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:textAlignment">center</item>
+        <item name="android:fontFamily">@font/kakao_otf_regular</item>
+        <item name="android:windowBackground">@drawable/community_dialog</item>
+    </style>
+
+    <!--  MaterialButton Style  -->
+    <style name="MaterialButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/drawing_dialog_button_fill</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!--  MaterialButton Style  -->
+    <style name="TabText" parent="TextAppearance.Design.Tab">
+        <item name="android:fontFamily">@font/kakao_otf_bold</item>
+    </style>
 </resources>

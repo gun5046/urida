@@ -1,13 +1,13 @@
 package com.urida.controller;
 
+import com.urida.dto.ProblemOutDto;
 import com.urida.dto.ProblemSaveDto;
 import com.urida.impl.ProblemService;
-import com.urida.entity.Problem;
 import com.urida.exception.InputException;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+//import org.slf4j.Logger;
+//import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +20,11 @@ import java.util.List;
 public class ProblemController {
 
     private final ProblemService problemService;
-    Logger logger = LoggerFactory.getLogger(ProblemController.class);
+//    Logger logger = LoggerFactory.getLogger(ProblemController.class);
 
     @GetMapping("/info")
     @ApiOperation(value = "문제정보", notes = "문제 Id / 해당 문제 없음 -> 빈 Problem 객체 리턴/ Input 값오류->403 error")
-    public Problem getProblemInfo(@RequestParam Long proId){
+    public ProblemOutDto getProblemInfo(@RequestParam Long proId){
         return problemService.problemInfo(proId);
     }
 
@@ -35,20 +35,25 @@ public class ProblemController {
             throw new InputException("RequestData(RegisterDto))invalid");
         }
 
-        System.out.println(problemSaveDto);
         problemService.saveProblem(problemSaveDto);
         return true;
     }
 
+    @PutMapping("/update")
+    @ApiOperation(value = "문제갱신", notes = "틀린횟수 +1")
+    public void updateProblem(@RequestParam Long proId){
+        problemService.updateProblem(proId);
+    }
+
     @GetMapping("/list")
     @ApiOperation(value = "해당유저의 틀린 문제 리스트", notes = "UserId 필요")
-    public List<Problem> getListProblem(@RequestParam Long userId){
+    public List<ProblemOutDto> getListProblem(@RequestParam Long userId){
         return problemService.getListProblem(userId);
     }
 
     @DeleteMapping("/delete")
-    @ApiOperation(value = "리스트에서 문제 삭제", notes = "UserId 와 ProId 필요 (특정 유저의 문제 리스트에서 특정 문제 삭제)")
-    public void deleteProblem(@RequestParam Long userId, @RequestParam Long proId){
-        problemService.deleteProblem(userId, proId);
+    @ApiOperation(value = "리스트에서 문제 삭제", notes = "ProId 필요 (문제 리스트에서 특정 문제 삭제)")
+    public void deleteProblem(@RequestParam Long proId){
+        problemService.deleteProblem(proId);
     }
 }

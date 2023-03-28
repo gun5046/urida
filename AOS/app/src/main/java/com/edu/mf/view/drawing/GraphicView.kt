@@ -1,13 +1,20 @@
 package com.edu.mf.view.drawing
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.view.MotionEvent
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 
 class GraphicView(context: Context): View(context){
+    lateinit var canvasLayout: ConstraintLayout
     var paint = Paint()
+
+    constructor(context: Context, layout: ConstraintLayout) : this(context){
+        canvasLayout = layout
+    }
 
     companion object{
         val pointList = ArrayList<Point>()
@@ -33,6 +40,7 @@ class GraphicView(context: Context): View(context){
             }
         }
         performClick()
+        canvasToBitmap()
 
         return true
     }
@@ -78,6 +86,19 @@ class GraphicView(context: Context): View(context){
 
     override fun performClick(): Boolean {
         return super.performClick()
+    }
+
+    // canvas to bitmap
+    private fun canvasToBitmap(){
+        val bitmap = Bitmap.createBitmap(
+            canvasLayout.width
+            , canvasLayout.height
+            , Bitmap.Config.ARGB_8888
+        )
+
+        val canvas = Canvas(bitmap)
+        canvasLayout.draw(canvas)
+        DrawingFragment.drawingBitmap = bitmap
     }
 }
 

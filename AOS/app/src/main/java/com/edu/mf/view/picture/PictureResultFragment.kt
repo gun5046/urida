@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.edu.mf.databinding.FragmentPictureResultBinding
 import com.edu.mf.utils.BitmapUtil
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.viewmodel.MainViewModel
 import com.edu.mf.viewmodel.PictureViewModel
 import java.io.IOException
 
@@ -26,6 +27,7 @@ class PictureResultFragment : Fragment() {
     private lateinit var binding: FragmentPictureResultBinding
     private lateinit var mainActivity: MainActivity
     private lateinit var pictureViewModel: PictureViewModel
+    private lateinit var mainViewModel: MainViewModel
     private lateinit var pictureResultAdapter: PictureResultAdapter
 
     override fun onCreateView(
@@ -36,12 +38,14 @@ class PictureResultFragment : Fragment() {
         binding = FragmentPictureResultBinding.inflate(inflater, container, false)
         mainActivity = MainActivity.getInstance()!!
         pictureViewModel = ViewModelProvider(requireActivity())[PictureViewModel::class.java]
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pictureResultAdapter = PictureResultAdapter(pictureViewModel.detectedPictureList.value!!)
+        mainViewModel.setTTS()
+        pictureResultAdapter = PictureResultAdapter(pictureViewModel.detectedPictureList.value!!, mainViewModel)
         Log.d(TAG, "onViewCreated: ${pictureViewModel.detectedPictureList.value!!.size}")
         if(pictureViewModel.detectedPictureList.value!!.size == 0){
             binding.recyclerview.visibility = View.GONE

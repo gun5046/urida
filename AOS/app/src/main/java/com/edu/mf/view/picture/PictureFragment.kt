@@ -41,6 +41,28 @@ class PictureFragment: Fragment() {
     private lateinit var pictureViewModel: PictureViewModel
     private var uri: Uri? = null
     private var translator: Translator? = null
+    private val localModel = LocalModel.Builder()
+        .setAssetFilePath("object_labeler.tflite")
+        .build()
+    private val customObjectDetectorOptions =
+        CustomObjectDetectorOptions.Builder(localModel)
+            .setDetectorMode(CustomObjectDetectorOptions.SINGLE_IMAGE_MODE)
+            .enableClassification()
+            .enableMultipleObjects().setMaxPerObjectLabelCount(1)
+            .build()
+    private val objectDetector = ObjectDetection.getClient(customObjectDetectorOptions)
+    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        if(it.resultCode == Activity.RESULT_OK){
+            if(it.data != null){
+                uri = it!!.data!!.data
+                pictureViewModel.setUri(uri)
+                detect(objectDetector)
+            } else if(uri != null){
+                pictureViewModel.setUri(uri)
+                detect(objectDetector)
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,75 +77,44 @@ class PictureFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val localModel = LocalModel.Builder()
-            .setAssetFilePath("object_labeler.tflite")
-            .build()
-        val customObjectDetectorOptions =
-            CustomObjectDetectorOptions.Builder(localModel)
-                .setDetectorMode(CustomObjectDetectorOptions.SINGLE_IMAGE_MODE)
-                .enableClassification()
-                .enableMultipleObjects()
-                .build()
-        val objectDetector = ObjectDetection.getClient(customObjectDetectorOptions)
-        val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            if(it.resultCode == Activity.RESULT_OK){
-                if(it.data != null){
-                    uri = it!!.data!!.data
-                    pictureViewModel.setUri(uri)
-                    detect(objectDetector)
-                } else if(uri != null){
-                    pictureViewModel.setUri(uri)
-                    detect(objectDetector)
-                }
+        val previewPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
+            if(it){
+                mainActivity.addFragment(PicturePreviewFragment())
+            } else {
+                Toast.makeText(requireContext(), "카메라 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
             }
         }
         val cameraPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it){
-                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                if (intent.resolveActivity(requireActivity().packageManager) != null) {
-                    val values = ContentValues()
-                    values.put(MediaStore.Images.Media.TITLE, "New Picture")
-                    values.put(MediaStore.Images.Media.DESCRIPTION, "From Camera")
-                    uri = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-                    launcher.launch(intent)
-                }
+                launchCamera()
             } else {
                 Toast.makeText(requireContext(), "카메라 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
             }
         }
         val storagePermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it){
-                val intent = Intent()
-                intent.type = "image/*"
-                intent.action = Intent.ACTION_GET_CONTENT
-                launcher.launch(Intent.createChooser(intent, ""))
+                launchGallery()
             } else {
                 Toast.makeText(requireContext(), "저장장치 접근 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
             }
         }
+        binding.cardviewPreview.setOnClickListener {
+            if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+                mainActivity.addFragment(PicturePreviewFragment())
+            } else {
+                previewPermissionLauncher.launch(Manifest.permission.CAMERA)
+            }
+        }
         binding.cardviewCamera.setOnClickListener {
             if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
-                uri = null
-                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                if (intent.resolveActivity(requireActivity().packageManager) != null) {
-                    val values = ContentValues()
-                    values.put(MediaStore.Images.Media.TITLE, "New Picture")
-                    values.put(MediaStore.Images.Media.DESCRIPTION, "From Camera")
-                    uri = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-                    intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-                    launcher.launch(intent)
-                }
+                launchCamera()
             } else {
                 cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
             }
         }
         binding.cardviewGallery.setOnClickListener {
             if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-                val intent = Intent()
-                intent.type = "image/*"
-                intent.action = Intent.ACTION_GET_CONTENT
-                launcher.launch(Intent.createChooser(intent, ""))
+                launchGallery()
             } else {
                 storagePermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
             }
@@ -154,12 +145,6 @@ class PictureFragment: Fragment() {
             .addOnSuccessListener {
                 for(detected in it){
                     if (detected.labels.isNotEmpty()){
-                        Log.d(TAG, "detect: ${bitmap.height}")
-                        Log.d(TAG, "detect: ${bitmap.width}")
-                        Log.d(TAG, "detect: ${detected.labels[0].text}")
-                        Log.d(TAG, "detect: ${detected.labels[0].index}")
-                        //index of Mouse is 144
-                        Log.d(TAG, "detect: ${detected.boundingBox.toShortString()}")
                         translator!!.translate(detected.labels[0].text)
                             .addOnSuccessListener { text ->
                                 val detectedPicture = DetectedPicture(
@@ -178,5 +163,25 @@ class PictureFragment: Fragment() {
                     }
                 }
             }
+    }
+
+    fun launchCamera(){
+        uri = null
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (intent.resolveActivity(requireActivity().packageManager) != null) {
+            val values = ContentValues()
+            values.put(MediaStore.Images.Media.TITLE, "New Picture")
+            values.put(MediaStore.Images.Media.DESCRIPTION, "From Camera")
+            uri = requireActivity().contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
+            launcher.launch(intent)
+        }
+    }
+
+    fun launchGallery(){
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        launcher.launch(Intent.createChooser(intent, ""))
     }
 }
