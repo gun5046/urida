@@ -1,8 +1,13 @@
 package com.edu.mf.view.drawing
 
+import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore.Images
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +17,7 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.loader.content.CursorLoader
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentDrawingBinding
 import com.edu.mf.repository.model.drawing.DrawingRequest
@@ -22,13 +28,12 @@ import com.edu.mf.view.drawing.result.DrawingResultShareDialog
 import com.edu.mf.view.drawing.result.DrawingResultViewPagerFragment
 import com.edu.mf.viewmodel.DrawingViewModel
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.io.FileOutputStream
 
 private const val TAG = "DrawingFragment"
 class DrawingFragment: Fragment() {
@@ -40,9 +45,9 @@ class DrawingFragment: Fragment() {
     private lateinit var toolList: ArrayList<ImageView>
     private lateinit var matrix: MutableList<ArrayList<ArrayList<Int>>>
 
-
     companion object{
         lateinit var graphicView:GraphicView
+        lateinit var drawingBitmap: Bitmap
         val colorPicker = ColorPickerDialog.newBuilder()!!
         var palette = mutableSetOf<Int>()
     }
@@ -55,7 +60,7 @@ class DrawingFragment: Fragment() {
         binding = FragmentDrawingBinding.inflate(inflater, container, false)
         mainActivity = MainActivity.getInstance()!!
         drawingViewModel = DrawingViewModel()
-        graphicView = GraphicView(this.requireContext())
+        graphicView = GraphicView(this.requireContext(), binding.constraintlayoutFragmentDrawingCanvas)
         pointList = GraphicView.pointList
 
         return binding.root
