@@ -8,11 +8,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_fragment_community_register"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="130dp"
         android:layout_margin="20dp"
         app:cardCornerRadius="12dp"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintVertical_weight="2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/edittext_fragment_community_register_title">
@@ -61,13 +60,12 @@
     <EditText
         android:id="@+id/edittext_fragment_community_register_title"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="46dp"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:hint="@string/fragment_community_register_edittext_title"
         android:maxLength="15"
         android:background="@android:color/transparent"
-        app:layout_constraintVertical_weight="0.7"
         app:layout_constraintTop_toBottomOf="@+id/cardview_fragment_community_register"
         app:layout_constraintBottom_toTopOf="@+id/edittext_fragment_community_register_content"/>
 
@@ -89,7 +87,7 @@
         android:hint="@string/fragment_community_register_edittext_content"
         android:gravity="left|top"
         android:background="@android:color/transparent"
-        app:layout_constraintVertical_weight="7.3"
+        app:layout_constraintVertical_weight="1"
         app:layout_constraintTop_toBottomOf="@+id/edittext_fragment_community_register_title"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
