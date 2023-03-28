@@ -1,13 +1,9 @@
 package com.edu.mf.view.drawing
 
-import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore.Images
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +13,6 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.loader.content.CursorLoader
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentDrawingBinding
 import com.edu.mf.repository.model.drawing.DrawingRequest
@@ -32,8 +27,6 @@ import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
-import java.io.FileOutputStream
 
 private const val TAG = "DrawingFragment"
 class DrawingFragment: Fragment() {
