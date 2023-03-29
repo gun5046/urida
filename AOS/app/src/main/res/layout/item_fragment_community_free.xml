@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="BoardItem"
+            type="com.edu.mf.repository.model.community.BoardListItem" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -47,7 +53,7 @@
                         android:id="@+id/textview_item_fragment_community_free_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="글제목제목"
+                        android:text="@{BoardItem.title}"
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="@color/grey_03"
@@ -70,7 +76,7 @@
                             android:layout_height="wrap_content"
                             android:paddingStart="0dp"
                             android:paddingEnd="8dp"
-                            android:text="작성자"
+                            android:text="@{BoardItem.nickname}"
                             android:textSize="12sp"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintLeft_toLeftOf="parent"/>
@@ -79,14 +85,13 @@
                             android:id="@+id/textview_item_fragment_community_free_date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2023-03-03"
+                            android:text="@{BoardItem.dateTime}"
                             android:textSize="11sp"
                             android:textColor="@color/grey_05"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintLeft_toRightOf="@+id/textview_item_fragment_community_free_writer"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="wrap_content"
@@ -120,7 +125,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
-                                android:text="56"
+                                android:text="@{String.valueOf(BoardItem.likeCnt)}"
                                 android:textSize="12sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/grey_03"
@@ -150,7 +155,7 @@
                                 android:id="@+id/textview_item_fragment_community_free_comment"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="10"
+                                android:text="@{String.valueOf(BoardItem.commentCnt)}"
                                 android:textSize="12sp"
                                 android:textColor="@color/grey_03"
                                 app:layout_constraintTop_toTopOf="parent"

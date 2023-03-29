@@ -6,6 +6,10 @@
         <variable
             name="CommunityDetail"
             type="com.edu.mf.view.community.detail.CommunityDetailFragment" />
+
+        <variable
+            name="BoardItem"
+            type="com.edu.mf.repository.model.community.BoardListItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -93,7 +97,7 @@
                             android:id="@+id/textview_fragment_community_detail_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="글제목제목"
+                            android:text="@{BoardItem.title}"
                             android:textSize="16sp"
                             android:textStyle="bold"
                             android:textColor="@color/grey_03"
@@ -114,7 +118,7 @@
                                 android:layout_height="wrap_content"
                                 android:paddingStart="0dp"
                                 android:paddingEnd="8dp"
-                                android:text="작성자"
+                                android:text="@{BoardItem.nickname}"
                                 android:textSize="12sp"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"/>
@@ -123,7 +127,7 @@
                                 android:id="@+id/textview_fragment_community_detail_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="2023-03-03"
+                                android:text="@{BoardItem.dateTime}"
                                 android:textSize="11sp"
                                 android:textColor="@color/grey_05"
                                 app:layout_constraintTop_toTopOf="parent"
@@ -163,7 +167,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="2dp"
-                                    android:text="56"
+                                    android:text="@{String.valueOf(BoardItem.likeCnt)}"
                                     android:textSize="12sp"
                                     android:textStyle="bold"
                                     android:textColor="@color/grey_03"
@@ -193,7 +197,7 @@
                                     android:id="@+id/textview_fragment_community_detail_comment"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="10"
+                                    android:text="@{String.valueOf(BoardItem.commentCnt)}"
                                     android:textSize="12sp"
                                     android:textColor="@color/grey_03"
                                     app:layout_constraintTop_toTopOf="parent"
@@ -215,7 +219,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="14dp"
                     android:padding="16dp"
-                    android:text="내용 content 내용 content 내용 content 내용 content 내용 content 내용 content"
+                    android:text="@{BoardItem.content}"
                     android:textColor="@color/grey_03"
                     android:textSize="16sp"
                     android:lineSpacingExtra="4dp"
@@ -259,7 +263,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
                         android:layout_marginEnd="2dp"
-                        android:text="댓글"
+                        android:text="@string/fragment_community_detail_comment_textview"
                         android:textSize="14sp"
                         android:textColor="@color/grey_03"
                         app:layout_constraintTop_toTopOf="parent"
@@ -272,7 +276,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:text="10"
+                        android:text="@{String.valueOf(BoardItem.commentCnt)}"
                         android:textSize="14sp"
                         android:textColor="@color/grey_03"
                         app:layout_constraintTop_toTopOf="parent"
