@@ -36,4 +36,6 @@ public class ProblemSaveDto {
     private List<Integer> choices = new ArrayList<>();
 
     private List<Integer> examples = new ArrayList<>();
+
+    private List<Integer> titles = new ArrayList<>();
 }

@@ -36,6 +36,8 @@ public class ProblemOutDto {
 
     private List<Integer> examples = new ArrayList<>();
 
+    private List<Integer> titles = new ArrayList<>();
+
 
     public ProblemOutDto(Problem problem){
         this.pro_id = problem.getPro_id();
@@ -49,6 +51,9 @@ public class ProblemOutDto {
             return example.getWordId();
         }).collect(Collectors.toList());
         this.choices = problem.getChoices().stream().map(example->{
+            return example.getWordId();
+        }).collect(Collectors.toList());
+        this.titles = problem.getTitles().stream().map(example->{
             return example.getWordId();
         }).collect(Collectors.toList());
     }
