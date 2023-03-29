@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -18,6 +19,8 @@ public class ArticleCreateDto {
 
     @NotEmpty
     private String content;
+
+    private MultipartFile image;
 
     private int category_id;
 

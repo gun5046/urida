@@ -1,6 +1,7 @@
 package com.urida.board.entity;
 
 import com.urida.comment.entity.Comment;
+import com.urida.likeboard.entity.Likeboard;
 import com.urida.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -29,6 +30,8 @@ public class Board {
 
     private String content;
 
+    private String image;
+
     @ColumnDefault("0")
     private int view;
 
@@ -45,6 +48,9 @@ public class Board {
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Comment> comment = new ArrayList<>();
+
+//    @OneToMany(mappedBy = "likeboard")
+//    private List<Likeboard> likeboard = new ArrayList<>();
 
     // == 비지니스 로직 == //
     

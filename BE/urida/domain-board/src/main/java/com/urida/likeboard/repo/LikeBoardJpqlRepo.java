@@ -42,6 +42,8 @@ public class LikeBoardJpqlRepo {
         return likeboard.size();
     }
     public void deleteLikeBoard(Optional<Likeboard> likeBoard) {
+
         em.remove(likeBoard.get());
+        em.flush();
     }
 }
