@@ -47,4 +47,11 @@ public class Problem {
     public void addExample(int wordId){
         examples.add(new Example(wordId, this));
     }
+
+    @OneToMany(mappedBy = "problem", cascade = CascadeType.ALL)
+    private List<Title> titles;
+
+    public void addTitle(int wordId){
+        titles.add(new Title(wordId, this));
+    }
 }
