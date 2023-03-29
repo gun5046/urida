@@ -16,6 +16,7 @@ import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.repository.model.User
 import com.edu.mf.repository.model.community.BoardListItem
 import com.edu.mf.repository.model.community.CommentListItem
+import com.edu.mf.repository.model.community.CreateCommentData
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.study.learn.LearnMainFragment
@@ -65,6 +66,10 @@ class CommunityDetailFragment(
         }
 
         getCommentList()
+        binding.buttonFragmentCommunityDetailWriteComment.setOnClickListener {
+            writeComment()
+        }
+
         binding.imageviewFragmentCommunityDetailBack.bringToFront()
     }
 
@@ -194,6 +199,32 @@ class CommunityDetailFragment(
             }
 
             override fun onFailure(call: Call<List<CommentListItem>>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+            }
+        })
+    }
+
+    // 댓글 작성
+    private fun writeComment(){
+        val commentData = CreateCommentData(
+            binding.edittextFragmentCommunityDetailWriteComment.text.toString(),
+            "",
+            boardItem.boardId,
+            user.uid!!
+        )
+        communityService.createComment(commentData)
+            .enqueue(object : Callback<CommentListItem>{
+            override fun onResponse(
+                call: Call<CommentListItem>,
+                response: Response<CommentListItem>
+            ) {
+                if (response.code() == 200){
+                    binding.edittextFragmentCommunityDetailWriteComment.setText("")
+                    getCommentList()
+                }
+            }
+
+            override fun onFailure(call: Call<CommentListItem>, t: Throwable) {
                 Log.d(TAG, "onFailure: ${t.message}")
             }
         })

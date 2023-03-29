@@ -1,9 +1,6 @@
 package com.edu.mf.repository.api
 
-import com.edu.mf.repository.model.community.BoardListItem
-import com.edu.mf.repository.model.community.CommentListItem
-import com.edu.mf.repository.model.community.CreateBoardData
-import com.edu.mf.repository.model.community.CreateBoardResponse
+import com.edu.mf.repository.model.community.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -31,4 +28,7 @@ interface CommunityService {
 
     @GET("board/comment/{board_id}")
     fun getCommentList(@Path("board_id") boardId: Int): Call<List<CommentListItem>>
+
+    @POST("board/comment")
+    fun createComment(@Body createCommentData: CreateCommentData): Call<CommentListItem>
 }
