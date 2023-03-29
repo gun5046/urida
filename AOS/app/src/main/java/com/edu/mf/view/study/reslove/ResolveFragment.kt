@@ -106,7 +106,7 @@ class ResolveFragment: Fragment() {
         val solves = viewModel.resolve.value!!
         if(solves.size!=0) {
             val solve = solves[0]
-            viewModel.changeResolveMode()
+            viewModel.enableResolveMode()
             viewModel.setResolveIndex(0)
             Log.i(TAG, "startSolve:${viewModel.resolveIndex}")
             when (solve.type) {

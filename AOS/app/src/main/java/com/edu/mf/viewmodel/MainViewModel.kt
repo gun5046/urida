@@ -54,8 +54,8 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
     val resolveMode : Boolean get() = _resolveMode
 
     //다시풀어보기 현재 index 번호
-    private var _resolveIndex : Int = -1
-    val resolveIndex : Int get() = _resolveIndex
+    private var _resolveIndex : MutableLiveData<Int> = MutableLiveData()
+    val resolveIndex : LiveData<Int> get() = _resolveIndex
 
     //해당 문제의 정답
     private var _answerIndex : Int = -1
@@ -85,35 +85,38 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
         _resolve.value = resolves
     }
 
-    fun changeResolveMode(){
-        _resolveMode = !_resolveMode
+    fun enableResolveMode(){
+        _resolveMode = true
+    }
+    fun disableResolveMode(){
+        _resolveMode = false
     }
 
     fun setResolveIndex(index : Int){
-        _resolveIndex = index
+        _resolveIndex.value = index
     }
     fun setNextResolve(){
-        _resolveIndex.plus(1)
+        _resolveIndex.value = _resolveIndex.value!!.plus(1)
     }
 
     fun setResolveQuiz(){
         var current_answer = -1
         var q = Quiz(-1,-1)
         var oneList = arrayListOf<String>()
-        _selectedCategory = resolve.value!![resolveIndex].category_id
-        _selectedIndex.value = resolve.value!![resolveIndex].answer_id
-        _selectedPCategory = resolve.value!![resolveIndex].type
-        for(i in 0 until resolve.value!![resolveIndex].choices.size){
-            if(resolve.value!![resolveIndex].choices[i]==resolve.value!![resolveIndex].answer_id) {
+        _selectedCategory = resolve.value!![resolveIndex.value!!].category_id
+        _selectedIndex.value = resolve.value!![resolveIndex.value!!].answer_id
+        _selectedPCategory = resolve.value!![resolveIndex.value!!].type
+        for(i in 0 until resolve.value!![resolveIndex.value!!].choices.size){
+            if(resolve.value!![resolveIndex.value!!].choices[i]==resolve.value!![resolveIndex.value!!].answer_id) {
                 current_answer = i
                 _answerIndex = i
             }
-            oneList.add(App.PICTURES[resolve.value!![resolveIndex].category_id][resolve.value!![resolveIndex].choices[i]])
+            oneList.add(App.PICTURES[resolve.value!![resolveIndex.value!!].category_id][resolve.value!![resolveIndex.value!!].choices[i]])
         }
-        when(resolve.value!![resolveIndex].type){
+        when(resolve.value!![resolveIndex.value!!].type){
             0-> q = Quiz(
-                current_answer,resolve.value!![resolveIndex].answer_id,
-                App.PICTURES[resolve.value!![resolveIndex].category_id][resolve.value!![resolveIndex].answer_id],
+                current_answer,resolve.value!![resolveIndex.value!!].answer_id,
+                App.PICTURES[resolve.value!![resolveIndex.value!!].category_id][resolve.value!![resolveIndex.value!!].answer_id],
                 oneList)
             /*1-> q = Quiz(current_answer,currentSelectedIndex,problems)
             2->{

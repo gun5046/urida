@@ -33,6 +33,7 @@ class QuizWordFragment : Fragment() {
             handlers = this@QuizWordFragment
             lifecycleOwner = this@QuizWordFragment
         }
+
         if(viewModel.resolveMode) viewModel.setResolveQuiz()
         else viewModel.setQuiz()
         viewModel.setTTS()

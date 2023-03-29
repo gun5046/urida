@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
@@ -76,18 +77,26 @@ class QuizResultDialog(
 
 
     private fun checkResolveAnswer(){
+        val current_resolve = viewModel.resolve.value!![viewModel.resolveIndex.value!!]
         when(flag){
             0->{
                 if(answers==viewModel.answerIndex){
                     binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
-                    deleteResolve(viewModel.resolve.value!![viewModel.resolveIndex].pro_id)
-                    viewModel.setResolveQuiz()
+                    deleteResolve(current_resolve.pro_id)
                 }
+                else{
+                    binding.textviewDialogFragmentQuizTitle.text = "오답입니다"
+                    updateResolve(current_resolve.pro_id)
+                }
+            }
+            1->{
+
             }
             else->{
 
             }
         }
+        viewModel.setNextResolve()
     }
 
     @SuppressLint("SetTextI18n")
@@ -171,6 +180,11 @@ class QuizResultDialog(
             }
         }
     }
+    private fun updateResolve(id:Int){
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val response = App.resolveRetrofit.create(ResolveService::class.java).updateResolve(id)
+        }
+    }
 
     private fun deleteResolve(id:Int){
         job = CoroutineScope(Dispatchers.IO).launch {
@@ -192,23 +206,58 @@ class QuizResultDialog(
 
     fun onCancleClick(){
         dismiss()
-        mainActivity.popQuizFragment(when(viewModel.selectedPCategory){
-            0->"word"
-            1-> "picture"
-            2->"blank"
-            else-> "relate"
-        })
+        //오답노트
+        if(viewModel.resolveMode){
+            mainActivity.popQuizFragment("word")
+            mainActivity.popQuizFragment("picture")
+            mainActivity.popQuizFragment("blank")
+            mainActivity.popQuizFragment("relate")
+        }
+        //퀴즈
+        else {
+            mainActivity.popQuizFragment(
+                when (viewModel.selectedPCategory) {
+                    0 -> "word"
+                    1 -> "picture"
+                    2 -> "blank"
+                    else -> "relate"
+                }
+            )
+        }
         mainActivity.popFragment()
     }
     fun onOkClick(){
         dismiss()
-        when(viewModel.selectedPCategory){
-            0-> mainActivity.addQuizFragment(QuizWordFragment(),"word")
-            1->mainActivity.addQuizFragment(QuizPictureFragment(),"picture")
-            2->mainActivity.addQuizFragment(QuizBlankFragment(),"blank")
-            else->mainActivity.addQuizFragment(QuizRelateFragment(),"relate")
+        if(viewModel.resolveMode){
+            if(viewModel.resolveIndex.value!!<viewModel.resolve.value!!.size){
+             when(viewModel.resolve.value!![viewModel.resolveIndex.value!!].category_id){
+                 0-> mainActivity.addQuizFragment(QuizWordFragment(),"word")
+                 1->mainActivity.addQuizFragment(QuizPictureFragment(),"picture")
+                 2->mainActivity.addQuizFragment(QuizBlankFragment(),"blank")
+                 else->mainActivity.addQuizFragment(QuizRelateFragment(),"relate")
+             }
+            }
+            else{
+                Toast.makeText(requireContext(),"문제의 끝입니다. 전페이지로 이동합니다",Toast.LENGTH_SHORT).show()
+                try{
+                    Thread.sleep(1500)
+                }catch(e:InterruptedException){
+                    e.printStackTrace()
+                }
+                onCancleClick()
+            }
         }
+        else{
+            when(viewModel.selectedPCategory){
+                0-> mainActivity.addQuizFragment(QuizWordFragment(),"word")
+                1->mainActivity.addQuizFragment(QuizPictureFragment(),"picture")
+                2->mainActivity.addQuizFragment(QuizBlankFragment(),"blank")
+                else->mainActivity.addQuizFragment(QuizRelateFragment(),"relate")
+            }
+        }
+        
     }
+
 
 
     /**
