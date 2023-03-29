@@ -76,6 +76,7 @@ public class BoardServiceImpl implements BoardService {
                 .view(article.getView())
                 .dateTime(article.getTime())
                 .likeCnt(likeBoardJpqlRepo.likeCnt(article.getBoard_id()))
+                .commentCnt(comments.size())
                 .nickname(nickname)
                 .comment(comments)
                 .build();
