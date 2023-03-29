@@ -94,7 +94,7 @@ public class BoardServiceImpl implements BoardService {
         Optional<User> user = userJpqlRepo.findByUid(articleCreateDto.getUid());
 
         String uuid = UUID.randomUUID().toString(); // GCS에 저장될 파일 이름
-        String type = articleCreateDto.getImage().getContentType(); // 파일 형식
+//        String type = articleCreateDto.getImage().getContentType(); // 파일 형식
 
 //        BlobInfo blobInfo = storage.create()
 
@@ -157,6 +157,7 @@ public class BoardServiceImpl implements BoardService {
         Optional<Likeboard> targetArticle = likeBoardJpqlRepo.findByUserAndBoard(uid, board_id);
         if (targetArticle.isPresent()) {
             likeBoardJpqlRepo.deleteLikeBoard(targetArticle);
+            System.out.println(boardJpqlRepo.findById(board_id));
             return false;
         } else {
             likeBoardJpqlRepo.saveLikeBoard(board_id, uid);

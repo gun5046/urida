@@ -20,7 +20,8 @@ public class ArticleCreateDto {
     @NotEmpty
     private String content;
 
-    private MultipartFile image;
+
+//    private MultipartFile image;
 
     private int category_id;
 
