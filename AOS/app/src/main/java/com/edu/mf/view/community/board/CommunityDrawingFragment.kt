@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.edu.mf.databinding.FragmentCommunityBoardBinding
 import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.repository.model.community.BoardListItem
