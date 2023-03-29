@@ -27,6 +27,7 @@ public class CommentController {
                 .content(comment.getContent())
                 .dateTime(comment.getDateTime())
                 .board_id(comment.getBoard().getBoard_id())
+                .nickname(comment.getUser().getNickname())
                 .uid(comment.getUser().getUid())
                 .build();
     }
