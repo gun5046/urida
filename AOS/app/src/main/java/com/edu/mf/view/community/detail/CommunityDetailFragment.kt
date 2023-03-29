@@ -15,9 +15,11 @@ import com.edu.mf.databinding.FragmentCommunityDetailBinding
 import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.repository.model.User
 import com.edu.mf.repository.model.community.BoardListItem
+import com.edu.mf.repository.model.community.CommentListItem
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.study.learn.LearnMainFragment
+import com.edu.mf.viewmodel.CommunityViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +31,7 @@ class CommunityDetailFragment(
     private lateinit var binding: FragmentCommunityDetailBinding
     private lateinit var mainActivity: MainActivity
     private lateinit var communityService: CommunityService
+    private lateinit var communityViewModel: CommunityViewModel
     private lateinit var user: User
 
     private var clickState = false
@@ -41,6 +44,7 @@ class CommunityDetailFragment(
         binding = FragmentCommunityDetailBinding.inflate(inflater, container, false)
         mainActivity = MainActivity.getInstance()!!
         communityService = mainActivity.communityService
+        communityViewModel = CommunityViewModel()
         user = App.sharedPreferencesUtil.getUser()!!
 
         binding.communityDetail = this
@@ -60,7 +64,7 @@ class CommunityDetailFragment(
             changeLikeState()
         }
 
-        setCommentAdapter()
+        getCommentList()
         binding.imageviewFragmentCommunityDetailBack.bringToFront()
     }
 
@@ -165,13 +169,34 @@ class CommunityDetailFragment(
     }
 
     // 댓글 recyclerview 설정
-    private fun setCommentAdapter(){
-        val commentAdapter = CommunityDetailCommentAdapter()
+    private fun setCommentAdapter(commentList: List<CommentListItem>){
+        val commentAdapter = CommunityDetailCommentAdapter(communityViewModel, commentList)
         binding.recyclerviewFragmentCommunityComment.apply {
             adapter = commentAdapter
             layoutManager = LinearLayoutManager(requireContext())
             addItemDecoration(DividerItemDecoration(requireContext(), VERTICAL))
         }
+    }
+
+    // 댓글 목록 받기
+    private fun getCommentList(){
+        communityService.getCommentList(boardItem.boardId)
+            .enqueue(object : Callback<List<CommentListItem>>{
+            override fun onResponse(
+                call: Call<List<CommentListItem>>,
+                response: Response<List<CommentListItem>>
+            ) {
+                if(response.code() == 200){
+                    val body = response.body()!!
+
+                    setCommentAdapter(body)
+                }
+            }
+
+            override fun onFailure(call: Call<List<CommentListItem>>, t: Throwable) {
+                Log.d(TAG, "onFailure: ${t.message}")
+            }
+        })
     }
 
     // 뒤로가기 아이콘 클릭 시

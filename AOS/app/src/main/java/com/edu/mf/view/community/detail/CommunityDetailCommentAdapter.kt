@@ -9,9 +9,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.edu.mf.R
 import com.edu.mf.databinding.ItemFragmentCommunityDetailCommentBinding
+import com.edu.mf.repository.model.community.CommentListItem
+import com.edu.mf.viewmodel.CommunityViewModel
 
 class CommunityDetailCommentAdapter(
-    //private val viewModel: CommunityViewModel
+    private val communityViewModel: CommunityViewModel,
+    private val commentList: List<CommentListItem>
 ): RecyclerView.Adapter<CommunityDetailCommentAdapter.CommentViewHolder>() {
     private lateinit var binding:ItemFragmentCommunityDetailCommentBinding
 
@@ -21,24 +24,23 @@ class CommunityDetailCommentAdapter(
             , parent
             , false
         )
+        communityViewModel.getCommentList(commentList)
         return CommentViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
-        holder.bind()
+        holder.bind(commentList[position])
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return commentList.size
     }
 
     inner class CommentViewHolder(
         private val binding: ItemFragmentCommunityDetailCommentBinding
         ): RecyclerView.ViewHolder(binding.root){
-            fun bind(){
-                binding.textviewItemFragmentCommunityDetailCommentNickname
-                    .text = "닉네임 ${adapterPosition.toString()}"
-
+            fun bind(commentItem: CommentListItem){
+                binding.commentItem = commentItem
                 binding.imageviewItemFragmentCommunityDetailDots.setOnClickListener {
                     makeDialog()
                 }

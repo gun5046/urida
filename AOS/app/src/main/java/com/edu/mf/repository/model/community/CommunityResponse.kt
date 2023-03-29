@@ -38,3 +38,13 @@ data class BoardListItem(
     val commentCnt: Int,
     val nickname: String
 )
+
+data class CommentListItem(
+    @SerializedName("comment_id")
+    val commentId: Int,
+    val content: String,
+    val dateTime: String,
+    @SerializedName("board_id")
+    val boardId: Int,
+    val uid: Int
+)

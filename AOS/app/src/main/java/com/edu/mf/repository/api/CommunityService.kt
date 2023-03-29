@@ -1,6 +1,7 @@
 package com.edu.mf.repository.api
 
 import com.edu.mf.repository.model.community.BoardListItem
+import com.edu.mf.repository.model.community.CommentListItem
 import com.edu.mf.repository.model.community.CreateBoardData
 import com.edu.mf.repository.model.community.CreateBoardResponse
 import retrofit2.Call
@@ -27,4 +28,7 @@ interface CommunityService {
         @Path("uid") uid: Int,
         @Body clickLike: Boolean
     ): Call<Boolean>
+
+    @GET("board/comment/{board_id}")
+    fun getCommentList(@Path("board_id") boardId: Int): Call<List<CommentListItem>>
 }
