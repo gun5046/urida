@@ -7,15 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.edu.mf.R
 import com.edu.mf.databinding.FragmentCommunityBinding
+import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.community.board.CommunityBoardAdapter
+import com.edu.mf.viewmodel.CommunityViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.google.android.material.tabs.TabLayoutMediator
 
+private const val TAG = "CommunityFragment"
 class CommunityFragment: Fragment() {
     private lateinit var binding: FragmentCommunityBinding
     private lateinit var mainActivity: MainActivity
+    private lateinit var communityService: CommunityService
+    private lateinit var communityViewModel: CommunityViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,6 +29,8 @@ class CommunityFragment: Fragment() {
     ): View? {
         binding = FragmentCommunityBinding.inflate(inflater, container, false)
         mainActivity = MainActivity.getInstance()!!
+        communityService = mainActivity.communityService
+        communityViewModel = CommunityViewModel()
 
         return binding.root
     }

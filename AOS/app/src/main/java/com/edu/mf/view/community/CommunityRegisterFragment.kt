@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBar
 import android.os.Bundle
 import android.provider.MediaStore.Images
 import android.provider.Settings
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -24,12 +25,17 @@ import com.edu.mf.databinding.FragmentCommunityRegisterBinding
 import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.repository.model.User
 import com.edu.mf.repository.model.community.CreateBoardData
+import com.edu.mf.repository.model.community.CreateBoardResponse
 import com.edu.mf.utils.App
 import com.edu.mf.utils.SharedPreferencesUtil
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.drawing.result.DrawingResultShareDialog
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.io.File
 
+private const val TAG = "CommunityRegisterFragme"
 class CommunityRegisterFragment: Fragment(), MenuProvider {
     private lateinit var binding: FragmentCommunityRegisterBinding
     private lateinit var mainActivity: MainActivity
@@ -38,6 +44,7 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
 
     private lateinit var actionBar: ActionBar
     private lateinit var drawingUri: Uri
+    private var categoryId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,6 +76,7 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
             setImg(drawingUri)
 
             DrawingResultShareDialog.savedDrawingUri = "".toUri()
+            categoryId = 1
         }
     }
 
@@ -154,9 +162,27 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
     private fun sendBoard(){
         val boardData = CreateBoardData(
             binding.edittextFragmentCommunityRegisterTitle.text.toString()
-            , binding.edittextFragmentCommunityRegisterContent.toString()
-            , user.uid!!)
+            , binding.edittextFragmentCommunityRegisterContent.text.toString()
+            , categoryId
+            , user.uid!!
+        )
         communityService.createBoard(boardData)
+            .enqueue(object : Callback<CreateBoardResponse>{
+                override fun onResponse(
+                    call: Call<CreateBoardResponse>,
+                    response: Response<CreateBoardResponse>
+                ) {
+                    if (response.code() == 200){
+                        val body = response.body()!!
+
+                    }
+                }
+
+                override fun onFailure(call: Call<CreateBoardResponse>, t: Throwable) {
+                    Log.d(TAG, "onFailure: ${t.message}")
+                }
+            }
+        )
     }
 
     // 액션바 설정

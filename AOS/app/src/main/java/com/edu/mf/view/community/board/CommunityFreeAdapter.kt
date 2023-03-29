@@ -4,11 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.edu.mf.databinding.ItemFragmentCommunityFreeBinding
+import com.edu.mf.repository.model.community.BoardListItem
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.community.detail.CommunityDetailFragment
+import com.edu.mf.viewmodel.CommunityViewModel
 
 class CommunityFreeAdapter(
-    private val mainActivity: MainActivity
+    private val mainActivity: MainActivity,
+    private val communityViewModel: CommunityViewModel,
+    private val boardList: List<BoardListItem>
     ): RecyclerView.Adapter<CommunityFreeAdapter.FreeAdapter>() {
     private lateinit var binding: ItemFragmentCommunityFreeBinding
 
@@ -18,23 +22,25 @@ class CommunityFreeAdapter(
             , parent
             , false
         )
+        communityViewModel.getBoardList(boardList)
         return FreeAdapter(binding)
     }
 
     override fun onBindViewHolder(holder: FreeAdapter, position: Int) {
-        holder.bind()
+        holder.bind(boardList[position])
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return boardList.size
     }
 
     inner class FreeAdapter(
         private val binding: ItemFragmentCommunityFreeBinding
         ): RecyclerView.ViewHolder(binding.root){
-            fun bind(){
+            fun bind(boardItem: BoardListItem){
+                binding.boardItem = boardItem
                 binding.cardviewItemFragmentCommunityFree.setOnClickListener {
-                    mainActivity.addFragment(CommunityDetailFragment())
+                    mainActivity.addFragment(CommunityDetailFragment(boardItem))
                 }
             }
         }
