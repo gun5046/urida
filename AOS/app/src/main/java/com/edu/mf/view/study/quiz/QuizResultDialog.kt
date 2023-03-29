@@ -109,7 +109,13 @@ class QuizResultDialog(
                 }
             }
             else->{
-
+                if (answers == viewModel.answerIndex) {
+                    binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
+                    deleteResolve(current_resolve.pro_id)
+                } else {
+                    binding.textviewDialogFragmentQuizTitle.text = "오답입니다"
+                    updateResolve(current_resolve.pro_id)
+                }
             }
         }
         viewModel.setNextResolve()
@@ -126,7 +132,8 @@ class QuizResultDialog(
                     val resolveRequest = ResolveRequest(
                         viewModel.quiz.value!!.answer_i,viewModel.selectedCategory,-1,
                         viewModel.selectedPCategory,1, App.sharedPreferencesUtil.getUser()?.uid!!,
-                        emptyList<Int>(),viewModel.quizIndex.value!!)
+                        emptyList<Int>(),viewModel.quizIndex.value!!, emptyList<Int>()
+                    )
                     insertResolveRequest(resolveRequest)
                     binding.textviewDialogFragmentQuizTitle.text = "정답은 ${viewModel.quiz.value!!.answer_s} 입니다"
                     binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
@@ -144,7 +151,8 @@ class QuizResultDialog(
                         1,
                         App.sharedPreferencesUtil.getUser()?.uid!!,
                         emptyList<Int>(),
-                        viewModel.quizIndex.value!!
+                        viewModel.quizIndex.value!!,
+                        emptyList<Int>()
                     )
                     insertResolveRequest(resolveRequest)
                     binding.textviewDialogFragmentQuizTitle.text =
@@ -167,7 +175,8 @@ class QuizResultDialog(
                         1,
                         App.sharedPreferencesUtil.getUser()?.uid!!,
                         emptyList<Int>(),
-                        viewModel.quizIndex.value!!
+                        viewModel.quizIndex.value!!,
+                        emptyList<Int>()
                     )
                     insertResolveRequest(resolveRequest)
                     binding.textviewDialogFragmentQuizTitle.text =
@@ -187,9 +196,11 @@ class QuizResultDialog(
                         viewModel.selectedPCategory,
                         1,
                         App.sharedPreferencesUtil.getUser()?.uid!!,
+                        viewModel.quizIndex.value!!,
                         viewModel.relateProblem.value!!,
-                        viewModel.quizIndex.value!!
+                        emptyList()
                     )
+                    Log.i(TAG, "checkAnswer: ${resolveRequest}")
                     insertResolveRequest(resolveRequest)
                     binding.textviewDialogFragmentQuizTitle.text =
                         "정답은 ${viewModel.quiz.value!!.answer_fi+1}번 ${App.PICTURES[viewModel.selectedCategory][viewModel.quiz.value!!.problems_i[viewModel.quiz.value!!.answer_fi]]} 입니다"
