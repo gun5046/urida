@@ -25,4 +25,6 @@ public class BoardDetailDto {
     private String nickname;
 
     private List<CommentResponseDto> comment;
+
+    private int commentCnt;
 }
