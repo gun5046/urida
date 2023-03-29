@@ -37,9 +37,11 @@ class QuizBlankFragment : Fragment() {
         mainActivity = MainActivity.getInstance()!!
 
         viewModel.selectedProblem.observe(viewLifecycleOwner, Observer {
-            viewModel.setQuiz()
+            if(viewModel.resolveMode)viewModel.setResolveQuiz()
+            else viewModel.setQuiz()
         })
-        viewModel.getProblem()
+        if(viewModel.resolveMode) viewModel.getResolveProblem()
+        else viewModel.getProblem()
         viewModel.setTTS()
         disableBackPress()
         binding.apply{

@@ -99,6 +99,15 @@ class QuizResultDialog(
                     updateResolve((current_resolve.pro_id))
                 }
             }
+            2->{
+                if (answers == viewModel.quiz.value!!.answer_fi) {
+                    binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
+                    deleteResolve(current_resolve.pro_id)
+                }else{
+                    binding.textviewDialogFragmentQuizTitle.text = "오답입니다"
+                    updateResolve((current_resolve.pro_id))
+                }
+            }
             else->{
 
             }
@@ -151,9 +160,9 @@ class QuizResultDialog(
                 }
                 else {
                     val resolveRequest = ResolveRequest(
-                        viewModel.quiz.value!!.answer_i,
-                        viewModel.selectedCategory,
                         viewModel.selectedProblem.value!!.order_id,
+                        viewModel.selectedCategory,
+                        viewModel.threeSelectedIndexTo.value!!,
                         viewModel.selectedPCategory,
                         1,
                         App.sharedPreferencesUtil.getUser()?.uid!!,
@@ -164,6 +173,7 @@ class QuizResultDialog(
                     binding.textviewDialogFragmentQuizTitle.text =
                         "정답은 ${viewModel.quiz.value!!.answer_fi+1}번 ${App.PICTURES[viewModel.selectedCategory][viewModel.selectedProblem.value!!.order_id]} 입니다"
                     binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
+                    Log.i(TAG, "checkAnswer: ${resolveRequest}")
                 }
             }
             else->{
@@ -246,9 +256,9 @@ class QuizResultDialog(
              }
             }
             else{
-                Toast.makeText(requireContext(),"문제의 끝입니다. 전페이지로 이동합니다",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(),"문제의 끝입니다. 전 페이지로 이동합니다",Toast.LENGTH_SHORT).show()
                 try{
-                    Thread.sleep(1500)
+                    Thread.sleep(2000)
                 }catch(e:InterruptedException){
                     e.printStackTrace()
                 }

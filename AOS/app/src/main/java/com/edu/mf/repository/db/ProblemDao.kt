@@ -17,4 +17,7 @@ interface ProblemDao {
 
     @Query("SELECT * FROM problem_table WHERE category_id = :ids")
     suspend fun selectProblem(ids:Int) : List<Problem>
+
+    @Query("SELECT * FROM problem_table WHERE id = :id")
+    suspend fun selectProblemById(id:Int) : Problem
 }

@@ -69,6 +69,9 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
     private var _answer : MutableLiveData<String> = MutableLiveData()
     val answer get() = _answer
 
+    private var _threeSelectedIndexTo : MutableLiveData<Int> = MutableLiveData()
+    val threeSelectedIndexTo : LiveData<Int> get() = _threeSelectedIndexTo
+
     private var _selectedCategory : Int = -1
     val selectedCategory get() = _selectedCategory
 
@@ -100,36 +103,36 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
     }
 
     fun setResolveQuiz(){
-        Log.i(TAG, "setResolveQuiz: ${resolve.value!![resolveIndex.value!!]}")
+        val current_resolve =resolve.value!![resolveIndex.value!!]
         var current_answer = -1
         var q = Quiz(-1,-1)
         var oneList = arrayListOf<String>()
-        _selectedCategory = resolve.value!![resolveIndex.value!!].category_id
-        _selectedIndex.value = resolve.value!![resolveIndex.value!!].answer_id
-        _selectedPCategory = resolve.value!![resolveIndex.value!!].type
-        for(i in 0 until resolve.value!![resolveIndex.value!!].choices.size){
-            if(resolve.value!![resolveIndex.value!!].choices[i]==resolve.value!![resolveIndex.value!!].answer_id) {
+        _selectedCategory = current_resolve.category_id
+        _selectedIndex.value = current_resolve.answer_id
+        _selectedPCategory = current_resolve.type
+        for(i in 0 until current_resolve.choices.size){
+            if(current_resolve.choices[i]==current_resolve.answer_id) {
                 current_answer = i
                 _answerIndex = i
             }
-            oneList.add(App.PICTURES[resolve.value!![resolveIndex.value!!].category_id][resolve.value!![resolveIndex.value!!].choices[i]])
+            oneList.add(App.PICTURES[current_resolve.category_id][current_resolve.choices[i]])
         }
-        Log.i(TAG, "list: ${resolve.value!![resolveIndex.value!!]}")
-        when(resolve.value!![resolveIndex.value!!].type){
+
+        when(current_resolve.type){
             0-> q = Quiz(
-                current_answer,resolve.value!![resolveIndex.value!!].answer_id,
-                App.PICTURES[resolve.value!![resolveIndex.value!!].category_id][resolve.value!![resolveIndex.value!!].answer_id],
+                current_answer,current_resolve.answer_id,
+                App.PICTURES[current_resolve.category_id][current_resolve.answer_id],
                 oneList)
             1-> {
                 var twoList = arrayListOf<Int>()
-                twoList.addAll(resolve.value!![resolveIndex.value!!].choices)
+                twoList.addAll(current_resolve.choices)
                 q = Quiz(
                     current_answer,
                     _selectedIndex.value!!,
                     twoList
                 )
             }
-            /*
+
             2->{
                 var three_answer = -1
                 var indexSet = mutableSetOf<Int>()
@@ -141,11 +144,15 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
                 p_lists.addAll(problem_lists)
                 _quizIndex.value = p_lists
                 for(i in 0 until 4){
-                    if(p_lists[i]==selectedProblem.value!!.order_id)
+                    if(current_resolve.answer_id==current_resolve.choices[i]) {
                         three_answer = i
+                        Log.i(TAG, "코코코코코ㅗ: ${i}")
+                    }
                 }
-                q = Quiz(three_answer,selectedProblem.value!!.category_id,p_lists,selectedProblem.value!!)
-            }*/
+                var threeList = arrayListOf<Int>()
+                threeList.addAll(current_resolve.choices)
+                q = Quiz(three_answer,current_resolve.category_id,threeList,selectedProblem.value!!)
+            }
             else->{
                 /*var categorySet = mutableSetOf<Int>()
                 categorySet.add(selectedCategory)
@@ -274,14 +281,23 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
         _quiz.value = q
     }
 
+    fun getResolveProblem(){
+        viewModelScope.launch(Dispatchers.IO){
+            withContext(Dispatchers.Main){
+                _selectedProblem.value = repository.selectProblemById(resolve.value!![resolveIndex.value!!].sentence_id)
+                Log.i(TAG, "getResolveProblem: ${_selectedProblem.value!!}")
+            }
+        }
+    }
+
     fun getProblem() {
         viewModelScope.launch(Dispatchers.IO) {
             withContext(Dispatchers.Main) {
                 val lists = repository.select(selectedCategory)
                 val threeSelectedIndex = Random().nextInt(10)
                 val threeSelectedProblem = lists[threeSelectedIndex]
+                _threeSelectedIndexTo.value = threeSelectedProblem.id
                 _selectedProblem.value = threeSelectedProblem
-
             }
         }
     }
