@@ -1,6 +1,8 @@
 package com.urida.board.service.impl;
 
+import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
 import com.urida.board.dto.request.ArticleCreateDto;
 import com.urida.board.dto.request.ArticleUpdateDto;
 import com.urida.board.dto.response.BoardDetailDto;
@@ -22,6 +24,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +44,10 @@ public class BoardServiceImpl implements BoardService {
     @Value("${spring.cloud.gcp.storage.bucket}")
     private String drawingStorage;
 
+    private final Storage storage;
 
     @Override
     @Transactional(readOnly = true)
-
     public List<BoardListDto> getArticles(int category_id) {
         List<Board> allArticles = boardJpqlRepo.findAll(category_id);
         List<BoardListDto> articleDtoList = new ArrayList<>();
@@ -90,19 +93,25 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board createArticle(ArticleCreateDto articleCreateDto) {
+    public Board createArticle(ArticleCreateDto articleCreateDto) throws IOException {
         Optional<User> user = userJpqlRepo.findByUid(articleCreateDto.getUid());
 
         String uuid = UUID.randomUUID().toString(); // GCS에 저장될 파일 이름
-//        String type = articleCreateDto.getImage().getContentType(); // 파일 형식
+        String type = articleCreateDto.getImage().getContentType(); // 파일 형식
 
-//        BlobInfo blobInfo = storage.create()
+        // cloud 이미지 업로드
+        BlobInfo blobInfo = storage.create(
+                BlobInfo.newBuilder(drawingStorage, uuid)
+                        .setContentType(type)
+                        .build(),
+                articleCreateDto.getImage().getInputStream()
+        );
 
         if (user.isPresent()) {
             Board article = Board.builder()
                     .title(articleCreateDto.getTitle())
                     .content(articleCreateDto.getContent())
-//                    .image("temp")
+                    .image(uuid)
                     .category_id(articleCreateDto.getCategory_id())
                     .time(LocalDateTime.now().toString())
                     .user(user.get())
