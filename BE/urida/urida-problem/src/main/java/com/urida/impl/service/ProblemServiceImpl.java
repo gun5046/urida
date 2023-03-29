@@ -46,6 +46,7 @@ public class ProblemServiceImpl implements ProblemService {
                     .wrong_cnt(problemSaveDto.getWrong_cnt())
                     .choices(new ArrayList<>())
                     .examples(new ArrayList<>())
+                    .titles(new ArrayList<>())
                     .user(user.get())
                     .build();
 
@@ -54,6 +55,9 @@ public class ProblemServiceImpl implements ProblemService {
             );
             problemSaveDto.getExamples().forEach(
                     example -> problem.addExample(example)
+            );
+            problemSaveDto.getTitles().forEach(
+                    example -> problem.addTitle(example)
             );
 
             try {
