@@ -20,4 +20,6 @@ public class CommentResponseDto {
     private Long board_id;
 
     private Long uid;
+
+    private String nickname;
 }

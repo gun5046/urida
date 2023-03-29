@@ -63,6 +63,7 @@ public class CommentServiceImpl implements CommentService {
                     .dateTime(comment.getDateTime())
                     .board_id(board_id)
                     .uid(comment.getUser().getUid())
+                    .nickname(comment.getUser().getNickname())
                     .build();
 
             commentDto.add(dto);
