@@ -18,13 +18,14 @@ public class Likeboard {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long like_id;
 
+    @Column
     private boolean status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "uid")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_id")
     private Board board;
 }

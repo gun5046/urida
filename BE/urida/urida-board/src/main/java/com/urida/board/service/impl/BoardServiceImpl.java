@@ -1,5 +1,6 @@
 package com.urida.board.service.impl;
 
+import com.google.cloud.storage.BlobInfo;
 import com.urida.board.dto.request.ArticleCreateDto;
 import com.urida.board.dto.request.ArticleUpdateDto;
 import com.urida.board.dto.response.BoardDetailDto;
@@ -7,7 +8,6 @@ import com.urida.board.dto.response.BoardListDto;
 import com.urida.board.service.BoardService;
 import com.urida.board.entity.Board;
 import com.urida.comment.dto.CommentResponseDto;
-import com.urida.comment.repo.CommentJpqlRepo;
 import com.urida.comment.service.CommentService;
 import com.urida.exception.NoDataException;
 import com.urida.exception.SaveException;
@@ -16,15 +16,17 @@ import com.urida.likeboard.entity.Likeboard;
 import com.urida.likeboard.repo.LikeBoardJpqlRepo;
 import com.urida.user.entity.User;
 import com.urida.user.repo.UserJpqlRepo;
+import io.grpc.Context;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -36,9 +38,13 @@ public class BoardServiceImpl implements BoardService {
     private final UserJpqlRepo userJpqlRepo;
     private final CommentService commentService;
 
+    @Value("${spring.cloud.gcp.storage.bucket}")
+    private String drawingStorage;
+
 
     @Override
     @Transactional(readOnly = true)
+
     public List<BoardListDto> getArticles(int category_id) {
         List<Board> allArticles = boardJpqlRepo.findAll(category_id);
         List<BoardListDto> articleDtoList = new ArrayList<>();
@@ -86,10 +92,17 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public Board createArticle(ArticleCreateDto articleCreateDto) {
         Optional<User> user = userJpqlRepo.findByUid(articleCreateDto.getUid());
+
+        String uuid = UUID.randomUUID().toString(); // GCS에 저장될 파일 이름
+        String type = articleCreateDto.getImage().getContentType(); // 파일 형식
+
+//        BlobInfo blobInfo = storage.create()
+
         if (user.isPresent()) {
             Board article = Board.builder()
                     .title(articleCreateDto.getTitle())
                     .content(articleCreateDto.getContent())
+                    .image("temp")
                     .category_id(articleCreateDto.getCategory_id())
                     .time(LocalDateTime.now().toString())
                     .user(user.get())
@@ -147,7 +160,9 @@ public class BoardServiceImpl implements BoardService {
             return false;
         } else {
             likeBoardJpqlRepo.saveLikeBoard(board_id, uid);
-            return likeBoardJpqlRepo.findByUserAndBoard(uid, board_id).get().isStatus();
+            System.out.println(likeBoardJpqlRepo.findByUserAndBoard(uid,board_id).get().isStatus());
+            return true;
+
         }
 
     }
