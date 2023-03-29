@@ -22,10 +22,16 @@ public class BoardJpqlRepo {
 
     // 특정 게시물
     public Board findById(Long boardId) {
-        Board board = em.find(Board.class, boardId);
-        board.addView();
-        return board;
+        System.out.println(boardId);
+        try {
+            Board board = em.find(Board.class, boardId);
+            board.addView();
+            return board;
+        }catch(Exception e){
+            System.out.println("not found");
+        }
 
+        return new Board();
       /*  Long uid = board.getUser().getUid();
 
         return BoardDto.builder()
