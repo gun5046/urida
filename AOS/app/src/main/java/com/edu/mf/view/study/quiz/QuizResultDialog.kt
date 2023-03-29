@@ -109,7 +109,7 @@ class QuizResultDialog(
                 }
             }
             else->{
-                if (answers == viewModel.answerIndex) {
+                if (answers == viewModel.quiz.value!!.answer_fi) {
                     binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
                     deleteResolve(current_resolve.pro_id)
                 } else {
@@ -190,15 +190,15 @@ class QuizResultDialog(
                     binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
                 } else {
                     val resolveRequest = ResolveRequest(
-                        viewModel.quiz.value!!.answer_i,
+                        viewModel.quiz.value!!.answer_fi,
                         viewModel.selectedCategory,
                         -1,
                         viewModel.selectedPCategory,
                         1,
                         App.sharedPreferencesUtil.getUser()?.uid!!,
                         viewModel.quizIndex.value!!,
-                        viewModel.relateProblem.value!!,
-                        emptyList()
+                        viewModel.quiz.value!!.relate_categories,
+                        viewModel.relateProblem.value!!
                     )
                     Log.i(TAG, "checkAnswer: ${resolveRequest}")
                     insertResolveRequest(resolveRequest)

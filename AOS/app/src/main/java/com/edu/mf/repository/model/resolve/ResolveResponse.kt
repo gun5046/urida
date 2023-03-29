@@ -22,7 +22,7 @@ data class ResolveResponse(
     @SerializedName("examples")
     var examples : List<Int>,
     @SerializedName("titles")
-    var titles : List<Int>
+    var titles : ArrayList<Int>
 
 ){
 

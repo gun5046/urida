@@ -156,15 +156,10 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
             else->{
                 var cr = arrayListOf<Int>()
                 var ce = arrayListOf<Int>()
-                for(i in 0 until 4) {
-                    if (current_resolve.answer_id == current_resolve.choices[i]) {
-                        current_answer = i
-                        _answerIndex = i
-                    }
-                }
+                _relateProblem.value = current_resolve.titles!!
                 cr.addAll(current_resolve.choices)
                 ce.addAll(current_resolve.examples)
-                q = Quiz(current_answer,current_resolve.answer_id,cr,ce)
+                q = Quiz(current_resolve.answer_id,current_resolve.answer_id,ce,cr)
             }
 
         }
@@ -201,6 +196,7 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
         }
         _quizIndex.value = problems
 
+
         var q:Quiz = Quiz(-1,-1)
         when(selectedPCategory){
             0-> q = Quiz(current_answer,currentSelectedIndex,App.PICTURES[selectedCategory][currentSelectedIndex],datas)
@@ -224,6 +220,7 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
             else->{
                 var categorySet = mutableSetOf<Int>()
                 categorySet.add(selectedCategory)
+
                 var titleSet = mutableSetOf<Int>()
                 while(titleSet.size<4) {
                     var rand = Random().nextInt(App.PICTURES[selectedCategory].size)
@@ -232,18 +229,21 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
                     }
                 }
 
+                var titles = arrayListOf<Int>()
+                titles.addAll(titleSet.toList())
+                _relateProblem.value = titles
+
+
                 //relate 보기에 들어갈 정답을 제외한 3가지 카테고리
                 while(categorySet.size<4){
                     categorySet.add(Random().nextInt(6))
                 }
-                var titles = arrayListOf<Int>()
-                titles.addAll(titleSet.toList())
-                _relateProblem.value = titles
+
                 var categoryTemps = categorySet.toList()
                 val temps = arrayListOf<Int>()
                 temps.addAll(categoryTemps)
                 temps.shuffle()
-                _quizIndex.value = temps
+
 
                 for(i in 0..3){
                     if(temps[i]==_selectedCategory) {
