@@ -30,7 +30,7 @@ public class Board {
 
     private String content;
 
-    private String image;
+//    private String image;
 
     @ColumnDefault("0")
     private int view;

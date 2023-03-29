@@ -102,7 +102,7 @@ public class BoardServiceImpl implements BoardService {
             Board article = Board.builder()
                     .title(articleCreateDto.getTitle())
                     .content(articleCreateDto.getContent())
-                    .image("temp")
+//                    .image("temp")
                     .category_id(articleCreateDto.getCategory_id())
                     .time(LocalDateTime.now().toString())
                     .user(user.get())
