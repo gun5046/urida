@@ -108,7 +108,6 @@ class ResolveFragment: Fragment() {
             val solve = solves[0]
             viewModel.enableResolveMode()
             viewModel.setResolveIndex(0)
-            Log.i(TAG, "startSolve:${viewModel.resolveIndex}")
             when (solve.type) {
                 0 -> mainActivity.addFragment(QuizWordFragment())
                 1 -> mainActivity.addFragment(QuizPictureFragment())

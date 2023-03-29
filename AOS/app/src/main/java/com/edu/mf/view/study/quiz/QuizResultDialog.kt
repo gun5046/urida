@@ -89,8 +89,15 @@ class QuizResultDialog(
                     updateResolve(current_resolve.pro_id)
                 }
             }
-            1->{
-
+            1-> {
+                if (answers == viewModel.answerIndex) {
+                    binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
+                    deleteResolve(current_resolve.pro_id)
+                }
+                else{
+                    binding.textviewDialogFragmentQuizTitle.text = "오답입니다"
+                    updateResolve((current_resolve.pro_id))
+                }
             }
             else->{
 
@@ -134,6 +141,7 @@ class QuizResultDialog(
                     binding.textviewDialogFragmentQuizTitle.text =
                         "정답은 ${viewModel.answerIndex + 1}번 입니다"
                     binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
+                    Log.i(TAG, "checkAnswer: ${resolveRequest}")
                 }
 
             }
@@ -230,7 +238,7 @@ class QuizResultDialog(
         dismiss()
         if(viewModel.resolveMode){
             if(viewModel.resolveIndex.value!!<viewModel.resolve.value!!.size){
-             when(viewModel.resolve.value!![viewModel.resolveIndex.value!!].category_id){
+             when(viewModel.selectedPCategory){
                  0-> mainActivity.addQuizFragment(QuizWordFragment(),"word")
                  1->mainActivity.addQuizFragment(QuizPictureFragment(),"picture")
                  2->mainActivity.addQuizFragment(QuizBlankFragment(),"blank")

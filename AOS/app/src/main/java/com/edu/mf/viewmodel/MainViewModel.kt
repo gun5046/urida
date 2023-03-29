@@ -100,6 +100,7 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
     }
 
     fun setResolveQuiz(){
+        Log.i(TAG, "setResolveQuiz: ${resolve.value!![resolveIndex.value!!]}")
         var current_answer = -1
         var q = Quiz(-1,-1)
         var oneList = arrayListOf<String>()
@@ -113,12 +114,22 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
             }
             oneList.add(App.PICTURES[resolve.value!![resolveIndex.value!!].category_id][resolve.value!![resolveIndex.value!!].choices[i]])
         }
+        Log.i(TAG, "list: ${resolve.value!![resolveIndex.value!!]}")
         when(resolve.value!![resolveIndex.value!!].type){
             0-> q = Quiz(
                 current_answer,resolve.value!![resolveIndex.value!!].answer_id,
                 App.PICTURES[resolve.value!![resolveIndex.value!!].category_id][resolve.value!![resolveIndex.value!!].answer_id],
                 oneList)
-            /*1-> q = Quiz(current_answer,currentSelectedIndex,problems)
+            1-> {
+                var twoList = arrayListOf<Int>()
+                twoList.addAll(resolve.value!![resolveIndex.value!!].choices)
+                q = Quiz(
+                    current_answer,
+                    _selectedIndex.value!!,
+                    twoList
+                )
+            }
+            /*
             2->{
                 var three_answer = -1
                 var indexSet = mutableSetOf<Int>()
@@ -171,7 +182,7 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
             }
 
         }
-        Log.i(TAG, "setQuiz: ${q}")
+        Log.i(TAG, "setResolveQuiz: ${q}")
         _quiz.value = q
     }
 
@@ -270,7 +281,7 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
                 val threeSelectedIndex = Random().nextInt(10)
                 val threeSelectedProblem = lists[threeSelectedIndex]
                 _selectedProblem.value = threeSelectedProblem
-                Log.i(TAG, "getProblem: ${_selectedProblem.value}")
+
             }
         }
     }
