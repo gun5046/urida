@@ -46,20 +46,16 @@ public class BoardServiceImpl implements BoardService {
 
     private final Storage storage;
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<BoardListDto> getArticles(int category_id) {
-        List<Board> allArticles = boardJpqlRepo.findAll(category_id);
+    private List<BoardListDto> getBoardListDtos(List<Board> userArticles) {
         List<BoardListDto> articleDtoList = new ArrayList<>();
-
-        for (Board article : allArticles) {
+        for(Board article : userArticles) {
             BoardListDto dto = BoardListDto.builder()
                     .board_id(article.getBoard_id())
                     .title(article.getTitle())
                     .content(article.getContent())
                     .view(article.getView())
                     .dateTime(article.getTime())
-                    .category_id(category_id)
+                    .category_id(article.getCategory_id())
                     .likeCnt(likeBoardJpqlRepo.likeCnt(article.getBoard_id()))
                     .commentCnt(commentService.commentCnt(article.getBoard_id()))
                     .nickname(article.getUser().getNickname())
@@ -67,8 +63,15 @@ public class BoardServiceImpl implements BoardService {
 
             articleDtoList.add(dto);
         }
-
         return articleDtoList;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<BoardListDto> getArticles(int category_id) {
+        List<Board> allArticles = boardJpqlRepo.findAll(category_id);
+        return getBoardListDtos(allArticles);
+
     }
 
     @Override
@@ -102,24 +105,13 @@ public class BoardServiceImpl implements BoardService {
     @Transactional(readOnly = true)
     public List<BoardListDto> getArticlesByUser(Long uid, int category_id) {
         List<Board> userArticles = boardJpqlRepo.findByUid(uid, category_id);
+        return getBoardListDtos(userArticles);
+    }
 
-        List<BoardListDto> articleDtoList = new ArrayList<>();
-        for(Board article : userArticles) {
-            BoardListDto dto = BoardListDto.builder()
-                    .board_id(article.getBoard_id())
-                    .title(article.getTitle())
-                    .content(article.getContent())
-                    .view(article.getView())
-                    .dateTime(article.getTime())
-                    .category_id(article.getCategory_id())
-                    .likeCnt(likeBoardJpqlRepo.likeCnt(article.getBoard_id()))
-                    .commentCnt(commentService.commentCnt(article.getBoard_id()))
-                    .nickname(article.getUser().getNickname())
-                    .build();
-
-            articleDtoList.add(dto);
-        }
-        return articleDtoList;
+    @Override
+    public List<BoardListDto> getArticleByUserCommentedOn(Long uid, int category_id) {
+        List<Board> userCommentedArticles = boardJpqlRepo.findByUserCommentedOn(uid, category_id);
+        return getBoardListDtos(userCommentedArticles);
     }
 
     @Override
@@ -225,9 +217,7 @@ public class BoardServiceImpl implements BoardService {
             likeBoardJpqlRepo.saveLikeBoard(board_id, uid);
             System.out.println(likeBoardJpqlRepo.findByUserAndBoard(uid,board_id).get().isStatus());
             return true;
-
         }
-
     }
 
     @Override

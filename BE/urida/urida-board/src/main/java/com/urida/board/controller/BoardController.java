@@ -26,7 +26,7 @@ public class BoardController {
     private final BoardService boardService;
 
     // 카테고리 별 게시글 리스트 조회
-    @GetMapping("/{category_id}/list")
+    @GetMapping("/list/{category_id}")
     public List<BoardListDto> boardList(@PathVariable int category_id) {
         List<BoardListDto> list = boardService.getArticles(category_id);
         int listSize = list.size();
@@ -37,6 +37,12 @@ public class BoardController {
     @GetMapping("/list/{category_id}/{uid}")
     public List<BoardListDto> authoredArticles(@PathVariable int category_id, @PathVariable Long uid) {
         return boardService.getArticlesByUser(uid, category_id);
+    }
+
+    // 유저 댓글 작성한 게시글 조회
+    @GetMapping("/list/commented/{category_id}/{uid}")
+    public List<BoardListDto> commentedArticles(@PathVariable int category_id, @PathVariable Long uid) {
+        return boardService.getArticleByUserCommentedOn(uid, category_id);
     }
 
     // 개별 게시글 조회
