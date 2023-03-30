@@ -7,6 +7,7 @@ import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +15,10 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.edu.mf.databinding.DialogFragmentMainFirstUserBinding
 import com.edu.mf.databinding.FragmentLanguageBinding
 import com.edu.mf.databinding.FragmentMainBinding
+import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.community.CommunityFragment
 import com.edu.mf.view.drawing.DrawingFragment
@@ -24,6 +27,8 @@ import com.edu.mf.view.study.StudyFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
+private const val TAG = "MainFragment"
 
 class MainFragment: Fragment() {
     private lateinit var binding: FragmentMainBinding
@@ -43,6 +48,10 @@ class MainFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         chkPermissionDrawingFragment()
+
+        if(App.firstUser){
+            showFirstUserDialog()
+        }
 
         binding.apply {
             cardviewStudy.setOnClickListener {
@@ -120,5 +129,18 @@ class MainFragment: Fragment() {
             mainActivity.loginService.languageSetting(language, mainActivity.user!!.uid!!)
         }
         mainActivity.changeFragment(MainFragment())
+    }
+
+    fun showFirstUserDialog(){
+        val builder = AlertDialog.Builder(requireContext())
+        val dialogBinding = DialogFragmentMainFirstUserBinding.inflate(layoutInflater)
+        builder.setView(dialogBinding.root)
+        val dialog = builder.create()
+        dialogBinding.buttonDialogFirstUser.setOnClickListener {
+            dialog.dismiss()
+            App.firstUser = false
+        }
+        dialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.show()
     }
 }

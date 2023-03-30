@@ -3,6 +3,7 @@ package com.edu.mf.view.picture
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.edu.mf.R
 import com.edu.mf.databinding.ItemPictureResultBinding
 import com.edu.mf.repository.model.picture.DetectedPicture
 import com.edu.mf.viewmodel.MainViewModel
