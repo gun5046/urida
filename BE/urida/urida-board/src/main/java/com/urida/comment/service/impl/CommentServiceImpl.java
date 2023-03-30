@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +39,7 @@ public class CommentServiceImpl implements CommentService {
         if(user.isPresent()) {
             Comment comment = Comment.builder()
                     .content(commentRequestDto.getContent())
-                    .dateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                    .dateTime(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .board(targetArticle)
                     .user(user.get())
                     .build();
@@ -82,7 +84,7 @@ public class CommentServiceImpl implements CommentService {
         Comment updatedComment = Comment.builder()
                 .comment_id(targetComment.getComment_id())
                 .content(newContent)
-                .dateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                .dateTime(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .board(targetComment.getBoard())
                 .user(targetComment.getUser())
                 .build();

@@ -140,9 +140,7 @@ public class BoardServiceImpl implements BoardService {
                         .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                         .user(user.get())
                         .build();
-                System.out.println(ZonedDateTime.now());
-                System.out.println(ZonedDateTime.now(ZoneId.of("Asia/Seoul")));
-                System.out.println(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+
                 try {
                     boardJpqlRepo.saveArticle(article);
                     return article;
@@ -172,7 +170,7 @@ public class BoardServiceImpl implements BoardService {
                     .content(articleCreateDto.getContent())
                     .image("https://storage.cloud.google.com/drawing-storage/" + uuid)
                     .category_id(articleCreateDto.getCategory_id())
-                    .time(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                    .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .user(user.get())
                     .build();
 
@@ -199,7 +197,7 @@ public class BoardServiceImpl implements BoardService {
                     .board_id(targetArticle.getBoard_id())
                     .title(targetArticle.getTitle())
                     .content(newContent)
-                    .time(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                    .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .user(currUser.get())
                     .comment(targetArticle.getComment())
                     .build();
