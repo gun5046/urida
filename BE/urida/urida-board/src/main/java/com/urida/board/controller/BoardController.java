@@ -10,6 +10,7 @@ import com.urida.exception.InputException;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -59,7 +60,7 @@ public class BoardController {
     }
 
     // 게시글 작성
-    @PostMapping("/create")
+    @PostMapping(value="/create", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "401", description = "인증 실패"),
