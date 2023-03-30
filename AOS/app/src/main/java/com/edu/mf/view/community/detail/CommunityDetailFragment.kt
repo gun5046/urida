@@ -24,6 +24,10 @@ import com.edu.mf.repository.model.community.CreateCommentData
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.CommunityViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -330,10 +334,16 @@ class CommunityDetailFragment(
 
     // 댓글 다이얼로그 수정 버튼 클릭 시 키보드 올리기
     fun showKeyboard(){
-        binding.edittextFragmentCommunityDetailWriteComment.requestFocus()
-        val inputManager = requireContext()
-            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.showSoftInput(binding.edittextFragmentCommunityDetailWriteComment, 0)
+        val commentEditText = binding.edittextFragmentCommunityDetailWriteComment
+        commentEditText.requestFocus()
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(100)
+            val inputManager = requireContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputManager.showSoftInput(commentEditText, 0)
+
+            commentEditText.setSelection(commentEditText.text.length)
+        }
     }
 
     // onBackPressed시 수정 상태 변경
