@@ -8,6 +8,7 @@ data class CreateBoardResponse(
     val boardId: Int,
     val title: String,
     val content: String,
+    val image: String,
     val view: Int,
     val time: String,
     @SerializedName("category_id")

@@ -1,18 +1,22 @@
 package com.edu.mf.repository.api
 
 import com.edu.mf.repository.model.community.*
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
-import retrofit2.http.Query
 
 interface CommunityService {
+    @Multipart
     @POST("board/create")
-    fun createBoard(@Body createBoardData: CreateBoardData): Call<CreateBoardResponse>
+    fun createBoard(@Part("file") createBoardData: CreateBoardData): Call<CreateBoardResponse>
+    //fun createBoard(@Part multipart: MultipartBody.Part, @Part("boardData") createBoardData: CreateBoardData): Call<CreateBoardResponse>
 
     @GET("board/list/{category_id}")
     fun getBoardList(@Path("category_id") categoryId: Int): Call<List<BoardListItem>>
