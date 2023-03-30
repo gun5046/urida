@@ -14,6 +14,8 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.edu.mf.R
 import com.edu.mf.databinding.FragmentLanguageBinding
 import com.edu.mf.databinding.FragmentMainBinding
 import com.edu.mf.view.common.MainActivity
@@ -41,6 +43,7 @@ class MainFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Glide.with(this).load(R.raw.charac).into(binding.imageviewChrac)
 
         chkPermissionDrawingFragment()
 
