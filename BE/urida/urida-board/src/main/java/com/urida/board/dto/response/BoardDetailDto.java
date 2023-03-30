@@ -16,6 +16,8 @@ public class BoardDetailDto {
 
     private String content;
 
+    private String image;
+
     private int view;
 
     private String dateTime;

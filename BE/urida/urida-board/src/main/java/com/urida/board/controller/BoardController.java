@@ -47,7 +47,7 @@ public class BoardController {
             @ApiResponse(responseCode = "404", description = "사용자 없음"),
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    public Board createArticle(@Validated @RequestBody ArticleCreateDto articleCreateDto, BindingResult bindingResult) throws IOException {
+    public Board createArticle(@Validated @ModelAttribute ArticleCreateDto articleCreateDto, BindingResult bindingResult) throws IOException {
         if (bindingResult.hasErrors()) {
             throw new InputException("RequestData(ArticleDto)invalid");
         }
