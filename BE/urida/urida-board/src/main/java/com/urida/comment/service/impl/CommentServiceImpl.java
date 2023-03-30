@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -36,7 +37,7 @@ public class CommentServiceImpl implements CommentService {
         if(user.isPresent()) {
             Comment comment = Comment.builder()
                     .content(commentRequestDto.getContent())
-                    .dateTime(LocalDateTime.now().toString())
+                    .dateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss")))
                     .board(targetArticle)
                     .user(user.get())
                     .build();
@@ -53,6 +54,7 @@ public class CommentServiceImpl implements CommentService {
 
     // 특정 게시물 댓글 불러오기
     @Override
+    @Transactional(readOnly = true)
     public List<CommentResponseDto> getComments (Long board_id) {
         List<Comment> comments = commentJpqlRepo.getComments(board_id);
         List<CommentResponseDto> commentDto = new ArrayList<>();
@@ -80,7 +82,7 @@ public class CommentServiceImpl implements CommentService {
         Comment updatedComment = Comment.builder()
                 .comment_id(targetComment.getComment_id())
                 .content(newContent)
-                .dateTime(LocalDateTime.now().toString())
+                .dateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss")))
                 .board(targetComment.getBoard())
                 .user(targetComment.getUser())
                 .build();
@@ -92,6 +94,7 @@ public class CommentServiceImpl implements CommentService {
 
     // 댓글 개수
     @Override
+    @Transactional(readOnly = true)
     public int commentCnt(Long board_id) {
         return commentJpqlRepo.getComments(board_id).size();
     }
