@@ -37,7 +37,7 @@ public class CommentServiceImpl implements CommentService {
         if(user.isPresent()) {
             Comment comment = Comment.builder()
                     .content(commentRequestDto.getContent())
-                    .dateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss")))
+                    .dateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .board(targetArticle)
                     .user(user.get())
                     .build();
@@ -82,7 +82,7 @@ public class CommentServiceImpl implements CommentService {
         Comment updatedComment = Comment.builder()
                 .comment_id(targetComment.getComment_id())
                 .content(newContent)
-                .dateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss")))
+                .dateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                 .board(targetComment.getBoard())
                 .user(targetComment.getUser())
                 .build();
