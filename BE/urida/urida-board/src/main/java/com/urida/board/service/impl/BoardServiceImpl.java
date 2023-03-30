@@ -134,7 +134,7 @@ public class BoardServiceImpl implements BoardService {
                         .content(articleCreateDto.getContent())
                         .image(null)
                         .category_id(articleCreateDto.getCategory_id())
-                        .time(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss")))
+                        .time(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                         .user(user.get())
                         .build();
 
@@ -167,7 +167,7 @@ public class BoardServiceImpl implements BoardService {
                     .content(articleCreateDto.getContent())
                     .image("https://storage.cloud.google.com/drawing-storage/" + uuid)
                     .category_id(articleCreateDto.getCategory_id())
-                    .time(LocalDateTime.now().toString())
+                    .time(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .user(user.get())
                     .build();
 
@@ -194,7 +194,7 @@ public class BoardServiceImpl implements BoardService {
                     .board_id(targetArticle.getBoard_id())
                     .title(targetArticle.getTitle())
                     .content(newContent)
-                    .time(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss")))
+                    .time(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .user(currUser.get())
                     .comment(targetArticle.getComment())
                     .build();
