@@ -128,15 +128,15 @@ public class BoardServiceImpl implements BoardService {
 
     @Override
     public Board createArticle(ArticleCreateDto articleCreateDto) throws IOException {
-        Optional<User> user = userJpqlRepo.findByUid(articleCreateDto.getUid());
+        Optional<User> user = userJpqlRepo.findByUid(articleCreateDto.getArticleRequestDto().getUid());
 
         if(articleCreateDto.getImage() == null) {
             if (user.isPresent()) {
                 Board article = Board.builder()
-                        .title(articleCreateDto.getTitle())
-                        .content(articleCreateDto.getContent())
+                        .title(articleCreateDto.getArticleRequestDto().getTitle())
+                        .content(articleCreateDto.getArticleRequestDto().getContent())
                         .image(null)
-                        .category_id(articleCreateDto.getCategory_id())
+                        .category_id(articleCreateDto.getArticleRequestDto().getCategory_id())
                         .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                         .user(user.get())
                         .build();
@@ -166,10 +166,10 @@ public class BoardServiceImpl implements BoardService {
 
         if (user.isPresent()) {
             Board article = Board.builder()
-                    .title(articleCreateDto.getTitle())
-                    .content(articleCreateDto.getContent())
+                    .title(articleCreateDto.getArticleRequestDto().getTitle())
+                    .content(articleCreateDto.getArticleRequestDto().getContent())
                     .image("https://storage.cloud.google.com/drawing-storage/" + uuid)
-                    .category_id(articleCreateDto.getCategory_id())
+                    .category_id(articleCreateDto.getArticleRequestDto().getCategory_id())
                     .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .user(user.get())
                     .build();
