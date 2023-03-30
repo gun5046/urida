@@ -42,7 +42,7 @@ class PictureGuideFragment : Fragment() {
                 index++
                 binding.viewPager.setCurrentItem(index, true)
                 if(index == 2){
-                    binding.buttonPictureGuide.text = "넘어가기"
+                    binding.buttonPictureGuide.text = requireContext().resources.getString(R.string.fragment_guide_button_next)
                 }
             } else {
                 mainActivity.popFragment()

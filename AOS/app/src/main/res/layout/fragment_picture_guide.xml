@@ -19,7 +19,7 @@
     <me.relex.circleindicator.CircleIndicator3
         android:id="@+id/circleIndicator"
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
+        android:layout_height="24dp"
         app:ci_drawable="@drawable/drawing_result_list_indicator_selected"
         app:ci_height="12dp"
         app:ci_margin="10dp"
@@ -32,7 +32,7 @@
         android:id="@+id/button_picture_guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="@string/fragment_guide_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

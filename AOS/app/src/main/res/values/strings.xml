@@ -71,7 +71,9 @@
     <string name="dialog_first_user_button">확인</string>
 
     <!--    fragment_guide-->
-    <string name="fragment_guide_first_text">test1</string>
-    <string name="fragment_guide_second_text">test2</string>
-    <string name="fragment_guide_third_text">test3</string>
+    <string name="fragment_guide_first_text">실시간으로 카메라에 찍히는 사물의 이름을 볼 수 있습니다</string>
+    <string name="fragment_guide_second_text">카메라로 사진을 촬영해 사물의 이름을 볼 수 있습니다</string>
+    <string name="fragment_guide_third_text">갤러리에서 사진을 선택해 사물의 이름을 볼 수 있습니다</string>
+    <string name="fragment_guide_button_text">다음</string>
+    <string name="fragment_guide_button_next">끝내기</string>
 </resources>
