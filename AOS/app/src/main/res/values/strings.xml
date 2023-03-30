@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">EducationForMulticulturalFamily</string>
+    <string name="app_name">URIDA</string>
 
     <!--    fragment_main-->
     <string name="fragment_main_cardview_community_another_friends">다른친구들은 뭐하고 지낼까?</string>
@@ -12,6 +12,7 @@
     <string name="fragment_study_cardview_learn" translatable="false">낱말 익히기</string>
     <string name="fragment_study_cardview_quiz" translatable="false">낱말 퀴즈</string>
     <string name="fragment_study_cardview_resolve" translatable="false">다시 풀어보기</string>
+
 
     <!--    fragment_language-->
     <string name="fragment_language_korean" translatable="false">한국어</string>

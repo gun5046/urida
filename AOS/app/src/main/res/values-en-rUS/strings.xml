@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">EducationForMulticulturalFamily</string>
+    <string name="app_name">URIDA</string>
     <string name="dialog_nickname_button">OK</string>
     <string name="dialog_nickname_editText">Nickname</string>
     <string name="dialog_nickname_text">Please set a nickname</string>
