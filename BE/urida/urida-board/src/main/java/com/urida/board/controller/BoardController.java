@@ -1,6 +1,7 @@
 package com.urida.board.controller;
 
 import com.urida.board.dto.request.ArticleCreateDto;
+import com.urida.board.dto.request.ArticleRequestDto;
 import com.urida.board.dto.request.ArticleUpdateDto;
 import com.urida.board.dto.response.BoardDetailDto;
 import com.urida.board.dto.response.BoardListDto;
@@ -67,11 +68,13 @@ public class BoardController {
             @ApiResponse(responseCode = "404", description = "사용자 없음"),
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    public Board createArticle(@Validated @ModelAttribute ArticleCreateDto articleCreateDto, BindingResult bindingResult) throws IOException {
+    public Board createArticle(@Validated @ModelAttribute ArticleRequestDto articleRequestDto, @RequestPart(value = "image",required = false) MultipartFile file, BindingResult bindingResult) throws IOException {
         if (bindingResult.hasErrors()) {
             throw new InputException("RequestData(ArticleDto)invalid");
         }
-        return boardService.createArticle(articleCreateDto);
+
+//        return boardService.createArticle(articleCreateDto);
+        return null;
     }
 
     // 게시글 수정
