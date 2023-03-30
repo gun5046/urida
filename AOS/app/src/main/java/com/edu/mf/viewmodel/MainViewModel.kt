@@ -342,6 +342,9 @@ class MainViewModel(private val repository: ProblemRepository) : ViewModel(){
         println("###   ${_selectedCategory.value!!}  ${currentIndex.value!!}    ${App.PICTURES[_selectedCategory.value!!][currentIndex.value!!]}")
         textToSpeech?.speak(App.PICTURES[_selectedCategory.value!!][currentIndex.value!!],TextToSpeech.QUEUE_FLUSH,null,null)
     }
+    fun stopTTS(){
+        textToSpeech?.stop()
+    }
     fun startCategoryTTS(){
         when(_selectedPCategory.value!!){
             0->{

@@ -55,6 +55,10 @@ class QuizRelateFragment : Fragment() {
         mainActivity.popFragment()
     }
 
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopTTS()
+    }
 
     /**
      * onBackPressed 막기

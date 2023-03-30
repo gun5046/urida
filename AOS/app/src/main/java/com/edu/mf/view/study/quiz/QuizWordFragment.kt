@@ -70,4 +70,8 @@ class QuizWordFragment : Fragment() {
         dialog.show(activity?.supportFragmentManager!!,"QuizResultDialog")
     }
 
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopTTS()
+    }
 }
