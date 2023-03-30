@@ -33,7 +33,7 @@
                 android:id="@+id/chip_fragment_community_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_community_chip_all"/>
+                android:text="@string/fragment_community_chip_all" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_fragment_community_myboard"
@@ -55,8 +55,8 @@
 
         </com.google.android.material.chip.ChipGroup>
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewpager_fragment_community"
+        <FrameLayout
+            android:id="@+id/frameLayout_fragment_community"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintVertical_weight="1"

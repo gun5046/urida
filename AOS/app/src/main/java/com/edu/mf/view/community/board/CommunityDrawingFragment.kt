@@ -34,7 +34,7 @@ class CommunityDrawingFragment: Fragment() {
         mainActivity = MainActivity.getInstance()!!
         communityService = mainActivity.communityService
         communityViewModel = CommunityViewModel()
-        Log.i("TAG", "onCreateView: ${CommunityFragment.tabPosition}")
+
         return binding.root
     }
 

@@ -14,7 +14,7 @@ interface CommunityService {
     @POST("board/create")
     fun createBoard(@Body createBoardData: CreateBoardData): Call<CreateBoardResponse>
 
-    @GET("board/{category_id}/list")
+    @GET("board/list/{category_id}")
     fun getBoardList(@Path("category_id") categoryId: Int): Call<List<BoardListItem>>
 
     @GET("board/{board_id}/{uid}")

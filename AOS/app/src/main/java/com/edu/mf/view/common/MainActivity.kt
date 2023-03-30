@@ -154,14 +154,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun addFragmentNoAnimMypage(fragment: Fragment){
-        supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.framelayout_main, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
-
     fun popFragment() {
         supportFragmentManager
             .popBackStack()

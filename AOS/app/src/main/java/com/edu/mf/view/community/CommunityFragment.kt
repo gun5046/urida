@@ -1,7 +1,6 @@
 package com.edu.mf.view.community
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +9,14 @@ import com.edu.mf.R
 import com.edu.mf.databinding.FragmentCommunityBinding
 import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.view.common.MainActivity
-import com.edu.mf.view.community.board.CommunityBoardAdapter
+import com.edu.mf.view.community.board.CommunityDrawingFragment
 import com.edu.mf.view.community.board.CommunityFreeFragment
 import com.edu.mf.view.community.chip.CommunityLikeFragment
 import com.edu.mf.view.community.chip.CommunityMyBoardFragment
 import com.edu.mf.view.community.chip.CommunityMyCommentFragment
-import com.edu.mf.view.community.chip.CommunityMypageAdapter
 import com.edu.mf.viewmodel.CommunityViewModel
-import com.google.android.material.chip.Chip
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
-import com.google.android.material.tabs.TabLayoutMediator
 
 private const val TAG = "CommunityFragment"
 class CommunityFragment: Fragment() {
@@ -28,13 +24,8 @@ class CommunityFragment: Fragment() {
     private lateinit var mainActivity: MainActivity
     private lateinit var communityService: CommunityService
     private lateinit var communityViewModel: CommunityViewModel
-    //private lateinit var tabLayout : TabLayout
-    //private var tabPosition = 0
 
-    companion object{
-        var tabPosition = 0
-        lateinit var tabLayout : TabLayout
-    }
+    private var tabPosition = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,65 +37,58 @@ class CommunityFragment: Fragment() {
         communityService = mainActivity.communityService
         communityViewModel = CommunityViewModel()
 
-        
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        changeFrameLayout(CommunityFreeFragment())
         setTabLayout()
         clickChip()
 
         binding.fabFragmentCommunity.setOnClickListener{
-            //mainActivity.addFragmentNoAnimMypage(CommunityMypageFragment())
             mainActivity.addFragmentNoAnim(CommunityRegisterFragment())
         }
     }
 
     private fun clickChip(){
-        val viewpager = binding.viewpagerFragmentCommunity
         binding.chipFragmentCommunityAll.setOnClickListener {
-            viewpager.adapter = CommunityMypageAdapter(requireActivity(), tabPosition, 0)
+            if (tabPosition == 0){
+                changeFrameLayout(CommunityFreeFragment())
+            } else{
+                changeFrameLayout(CommunityDrawingFragment())
+            }
         }
 
         binding.chipFragmentCommunityMyboard.setOnClickListener{
-            viewpager.adapter = CommunityMypageAdapter(requireActivity(), tabPosition, 1)
+            changeFrameLayout(CommunityMyBoardFragment())
         }
 
         binding.chipFragmentCommunityMycomment.setOnClickListener {
-            viewpager.adapter = CommunityMypageAdapter(requireActivity(), tabPosition, 2)
+            changeFrameLayout(CommunityMyCommentFragment())
         }
         binding.chipFragmentCommunityLike.setOnClickListener {
-            viewpager.adapter = CommunityMypageAdapter(requireActivity(), tabPosition, 3)
+            changeFrameLayout(CommunityLikeFragment())
         }
     }
 
     // tabLayout 설정
     private fun setTabLayout(){
-        val tabTitleArr = arrayOf(
-            R.string.fragment_community_tablayout_title_free
-            , R.string.fragment_community_tablayout_title_drawing
-        )
-        val viewpager = binding.viewpagerFragmentCommunity
-        tabLayout = binding.tablayoutFragmentCommunity
-
-        viewpager.adapter = CommunityBoardAdapter(requireActivity())
-
-        TabLayoutMediator(tabLayout, viewpager){ tab, position ->
-            tab.text = resources.getString(tabTitleArr[position])
-        }.attach()
+        val tabLayout = binding.tablayoutFragmentCommunity
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.fragment_community_tablayout_title_free))
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.fragment_community_tablayout_title_drawing))
 
         tabLayout.addOnTabSelectedListener(object: OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                Log.i(TAG, "onTabSelected: 클릭")
                 tabPosition = tab!!.position
                 when(tabPosition){
                     0 -> {
+                        changeFrameLayout(CommunityFreeFragment())
                         binding.fabFragmentCommunity.show()
                     }
                     1 -> {
+                        changeFrameLayout(CommunityDrawingFragment())
                         binding.fabFragmentCommunity.hide()
                     }
                 }
@@ -117,5 +101,13 @@ class CommunityFragment: Fragment() {
             }
 
         })
+    }
+
+    // frameLayout 화면 전환
+    private fun changeFrameLayout(fragment: Fragment){
+        requireActivity().supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.frameLayout_fragment_community, fragment)
+            .commit()
     }
 }
