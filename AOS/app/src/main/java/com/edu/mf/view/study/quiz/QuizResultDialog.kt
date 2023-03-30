@@ -118,7 +118,6 @@ class QuizResultDialog(
                 }
             }
         }
-        viewModel.setNextResolve()
     }
 
     @SuppressLint("SetTextI18n")
@@ -130,8 +129,8 @@ class QuizResultDialog(
                     binding.textviewDialogFragmentQuizTitle.text = "정답입니다"
                 }else{
                     val resolveRequest = ResolveRequest(
-                        viewModel.quiz.value!!.answer_i,viewModel.selectedCategory,-1,
-                        viewModel.selectedPCategory,1, App.sharedPreferencesUtil.getUser()?.uid!!,
+                        viewModel.quiz.value!!.answer_i,viewModel.selectedCategory.value!!,-1,
+                        viewModel.selectedPCategory.value!!,1, App.sharedPreferencesUtil.getUser()?.uid!!,
                         emptyList<Int>(),viewModel.quizIndex.value!!, emptyList<Int>()
                     )
                     insertResolveRequest(resolveRequest)
@@ -145,9 +144,9 @@ class QuizResultDialog(
                 } else {
                     val resolveRequest = ResolveRequest(
                         viewModel.quiz.value!!.answer_i,
-                        viewModel.selectedCategory,
+                        viewModel.selectedCategory.value!!,
                         -1,
-                        viewModel.selectedPCategory,
+                        viewModel.selectedPCategory.value!!,
                         1,
                         App.sharedPreferencesUtil.getUser()?.uid!!,
                         emptyList<Int>(),
@@ -169,9 +168,9 @@ class QuizResultDialog(
                 else {
                     val resolveRequest = ResolveRequest(
                         viewModel.selectedProblem.value!!.order_id,
-                        viewModel.selectedCategory,
+                        viewModel.selectedCategory.value!!,
                         viewModel.threeSelectedIndexTo.value!!,
-                        viewModel.selectedPCategory,
+                        viewModel.selectedPCategory.value!!,
                         1,
                         App.sharedPreferencesUtil.getUser()?.uid!!,
                         emptyList<Int>(),
@@ -180,7 +179,7 @@ class QuizResultDialog(
                     )
                     insertResolveRequest(resolveRequest)
                     binding.textviewDialogFragmentQuizTitle.text =
-                        "정답은 ${viewModel.quiz.value!!.answer_fi+1}번 ${App.PICTURES[viewModel.selectedCategory][viewModel.selectedProblem.value!!.order_id]} 입니다"
+                        "정답은 ${viewModel.quiz.value!!.answer_fi+1}번 ${App.PICTURES[viewModel.selectedCategory.value!!][viewModel.selectedProblem.value!!.order_id]} 입니다"
                     binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
                     Log.i(TAG, "checkAnswer: ${resolveRequest}")
                 }
@@ -191,9 +190,9 @@ class QuizResultDialog(
                 } else {
                     val resolveRequest = ResolveRequest(
                         viewModel.quiz.value!!.answer_fi,
-                        viewModel.selectedCategory,
+                        viewModel.selectedCategory.value!!,
                         -1,
-                        viewModel.selectedPCategory,
+                        viewModel.selectedPCategory.value!!,
                         1,
                         App.sharedPreferencesUtil.getUser()?.uid!!,
                         viewModel.quizIndex.value!!,
@@ -203,7 +202,7 @@ class QuizResultDialog(
                     Log.i(TAG, "checkAnswer: ${resolveRequest}")
                     insertResolveRequest(resolveRequest)
                     binding.textviewDialogFragmentQuizTitle.text =
-                        "정답은 ${viewModel.quiz.value!!.answer_fi+1}번 ${App.PICTURES[viewModel.selectedCategory][viewModel.quiz.value!!.problems_i[viewModel.quiz.value!!.answer_fi]]} 입니다"
+                        "정답은 ${viewModel.quiz.value!!.answer_fi+1}번 ${App.PICTURES[viewModel.selectedCategory.value!!][viewModel.quiz.value!!.problems_i[viewModel.quiz.value!!.answer_fi]]} 입니다"
                     binding.textviewDialogFragmentQuizTitle.setTextColor(Color.parseColor("#FFEB1635"))
                 }
             }
@@ -245,7 +244,7 @@ class QuizResultDialog(
         //퀴즈
         else {
             mainActivity.popQuizFragment(
-                when (viewModel.selectedPCategory) {
+                when (viewModel.selectedPCategory.value!!) {
                     0 -> "word"
                     1 -> "picture"
                     2 -> "blank"
@@ -258,8 +257,9 @@ class QuizResultDialog(
     fun onOkClick(){
         dismiss()
         if(viewModel.resolveMode){
+            viewModel.setNextResolve()
             if(viewModel.resolveIndex.value!!<viewModel.resolve.value!!.size){
-             when(viewModel.selectedPCategory){
+             when(viewModel.resolve.value!![viewModel.resolveIndex.value!!].type){
                  0-> mainActivity.addQuizFragment(QuizWordFragment(),"word")
                  1->mainActivity.addQuizFragment(QuizPictureFragment(),"picture")
                  2->mainActivity.addQuizFragment(QuizBlankFragment(),"blank")
@@ -277,7 +277,7 @@ class QuizResultDialog(
             }
         }
         else{
-            when(viewModel.selectedPCategory){
+            when(viewModel.selectedPCategory.value!!){
                 0-> mainActivity.addQuizFragment(QuizWordFragment(),"word")
                 1->mainActivity.addQuizFragment(QuizPictureFragment(),"picture")
                 2->mainActivity.addQuizFragment(QuizBlankFragment(),"blank")
