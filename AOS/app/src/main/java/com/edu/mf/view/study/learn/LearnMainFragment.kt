@@ -102,4 +102,8 @@ class LearnMainFragment : Fragment() {
         })
     }
 
+    override fun onStop() {
+        super.onStop()
+        viewmodel.stopTTS()
+    }
 }

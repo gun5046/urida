@@ -61,6 +61,10 @@ class QuizPictureFragment : Fragment() {
         dialog.isCancelable = false
         dialog.show(activity?.supportFragmentManager!!,"QuizResultDialog")
     }
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopTTS()
+    }
     /**
      * onBackPressed 막기
      */

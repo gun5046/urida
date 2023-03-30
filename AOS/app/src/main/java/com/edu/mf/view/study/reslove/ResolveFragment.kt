@@ -18,10 +18,7 @@ import com.edu.mf.repository.model.resolve.ResolveResponse
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.study.learn.LearnMainFragment
-import com.edu.mf.view.study.quiz.QuizBlankFragment
-import com.edu.mf.view.study.quiz.QuizPictureFragment
-import com.edu.mf.view.study.quiz.QuizRelateFragment
-import com.edu.mf.view.study.quiz.QuizWordFragment
+import com.edu.mf.view.study.quiz.*
 import com.edu.mf.viewmodel.MainViewModel
 import kotlinx.coroutines.*
 
@@ -86,6 +83,12 @@ class ResolveFragment: Fragment() {
         }
     }
 
+    private fun openDialog(text:String){
+        val dialog = ResolveAnswerDialog(text)
+        dialog.isCancelable = false
+        dialog.show(activity?.supportFragmentManager!!,"ResolveResultDialog")
+    }
+
     /**
      * 어댑터 초기화
      */
@@ -98,7 +101,7 @@ class ResolveFragment: Fragment() {
         }
         resolveAdapter.setOnResolveClickListener(object : ResolveAdapter.ResolveClickListener{
             override fun onClick(view: View, position: Int, data: ResolveResponse) {
-                Log.i(TAG, "정답: ${App.PICTURES[data.category_id][data.answer_id]}")
+                openDialog(App.PICTURES[data.category_id][data.answer_id])
             }
         })
     }

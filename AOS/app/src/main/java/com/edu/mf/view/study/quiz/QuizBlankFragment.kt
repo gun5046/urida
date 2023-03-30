@@ -51,6 +51,11 @@ class QuizBlankFragment : Fragment() {
             lifecycleOwner = this@QuizBlankFragment
         }
 
+
+    }
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopTTS()
     }
     fun onProblemClick(index:Int){
         val dialog = QuizResultDialog(index,2)
