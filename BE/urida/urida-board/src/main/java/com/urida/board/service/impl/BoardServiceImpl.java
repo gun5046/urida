@@ -26,6 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -46,20 +47,16 @@ public class BoardServiceImpl implements BoardService {
 
     private final Storage storage;
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<BoardListDto> getArticles(int category_id) {
-        List<Board> allArticles = boardJpqlRepo.findAll(category_id);
+    private List<BoardListDto> getBoardListDtos(List<Board> userArticles) {
         List<BoardListDto> articleDtoList = new ArrayList<>();
-
-        for (Board article : allArticles) {
+        for(Board article : userArticles) {
             BoardListDto dto = BoardListDto.builder()
                     .board_id(article.getBoard_id())
                     .title(article.getTitle())
                     .content(article.getContent())
                     .view(article.getView())
                     .dateTime(article.getTime())
-                    .category_id(category_id)
+                    .category_id(article.getCategory_id())
                     .likeCnt(likeBoardJpqlRepo.likeCnt(article.getBoard_id()))
                     .commentCnt(commentService.commentCnt(article.getBoard_id()))
                     .nickname(article.getUser().getNickname())
@@ -67,14 +64,26 @@ public class BoardServiceImpl implements BoardService {
 
             articleDtoList.add(dto);
         }
-
         return articleDtoList;
     }
 
     @Override
     @Transactional(readOnly = true)
+    public List<BoardListDto> getArticles(int category_id) {
+        List<Board> allArticles = boardJpqlRepo.findAll(category_id);
+        return getBoardListDtos(allArticles);
+
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public BoardDetailDto getArticle(Long id) {
+
         Board article = boardJpqlRepo.findById(id);
+        if(article == null){
+            throw new NoDataException("invalid data(Not Found)");
+        }
+        article.addView();
         String nickname = article.getUser().getNickname();
         List<CommentResponseDto> comments = commentService.getComments(id);
 
@@ -94,6 +103,27 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public List<BoardListDto> getArticlesByUser(Long uid, int category_id) {
+        List<Board> userArticles = boardJpqlRepo.findByUid(uid, category_id);
+        return getBoardListDtos(userArticles);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<BoardListDto> getArticleByUserCommentedOn(Long uid, int category_id) {
+        List<Board> userCommentedArticles = boardJpqlRepo.findByUserCommentedOn(uid, category_id);
+        return getBoardListDtos(userCommentedArticles);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<BoardListDto> getLiked(Long uid, int category_id) {
+        List<Board> userLikedArticles = boardJpqlRepo.findByLiked(uid, category_id);
+        return getBoardListDtos(userLikedArticles);
+    }
+
+    @Override
     public Board createArticle(ArticleCreateDto articleCreateDto) throws IOException {
         Optional<User> user = userJpqlRepo.findByUid(articleCreateDto.getUid());
 
@@ -104,7 +134,7 @@ public class BoardServiceImpl implements BoardService {
                         .content(articleCreateDto.getContent())
                         .image(null)
                         .category_id(articleCreateDto.getCategory_id())
-                        .time(LocalDateTime.now().toString())
+                        .time(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss")))
                         .user(user.get())
                         .build();
 
@@ -164,7 +194,7 @@ public class BoardServiceImpl implements BoardService {
                     .board_id(targetArticle.getBoard_id())
                     .title(targetArticle.getTitle())
                     .content(newContent)
-                    .time(LocalDateTime.now().toString())
+                    .time(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd HH:mm:ss")))
                     .user(currUser.get())
                     .comment(targetArticle.getComment())
                     .build();
@@ -196,9 +226,7 @@ public class BoardServiceImpl implements BoardService {
             likeBoardJpqlRepo.saveLikeBoard(board_id, uid);
             System.out.println(likeBoardJpqlRepo.findByUserAndBoard(uid,board_id).get().isStatus());
             return true;
-
         }
-
     }
 
     @Override
@@ -207,6 +235,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Boolean isLiked(Long board_id, Long uid) {
         Optional<Likeboard> isLiked = likeBoardJpqlRepo.findByUserAndBoard(uid, board_id);
         return isLiked.isPresent();
