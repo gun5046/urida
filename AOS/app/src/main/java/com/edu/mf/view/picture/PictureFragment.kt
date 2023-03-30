@@ -119,6 +119,9 @@ class PictureFragment: Fragment() {
                 storagePermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
             }
         }
+        binding.imageviewGuide.setOnClickListener {
+            mainActivity.addFragment(PictureGuideFragment())
+        }
         val translateOptions = TranslatorOptions.Builder()
             .setSourceLanguage(TranslateLanguage.ENGLISH)
             .setTargetLanguage(TranslateLanguage.KOREAN)

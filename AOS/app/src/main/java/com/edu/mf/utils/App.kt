@@ -19,6 +19,7 @@ class App : Application(){
         const val TAG = "App_지훈"
         var PICTURES : ArrayList<ArrayList<String>> = arrayListOf()
         var categories : ArrayList<String> = arrayListOf()
+        var firstUser = true
         lateinit var sharedPreferencesUtil:SharedPreferencesUtil
         lateinit var userRetrofit: Retrofit
         lateinit var drawingRetrofit: Retrofit

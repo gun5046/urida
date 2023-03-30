@@ -83,6 +83,7 @@ class MainActivity : AppCompatActivity() {
                 user = loginService.login(user!!.social_id!!, user!!.type!!).body()
                 if (user!!.uid != null) {
                     changeLocale(user!!.language)
+                    App.firstUser = false
                     changeFragment(MainFragment())
                 } else {
                     changeFragment(LoginFragment())

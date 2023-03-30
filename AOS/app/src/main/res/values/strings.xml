@@ -66,4 +66,12 @@
     <!--    actionbar_menu-->
     <string name="actionbar_menu_register">완료</string>
 
+    <!--    dialog_nickname-->
+    <string name="dialog_first_user_text">위와 같은 아이콘을 누르면\n도움말을 볼 수 있어요</string>
+    <string name="dialog_first_user_button">확인</string>
+
+    <!--    fragment_guide-->
+    <string name="fragment_guide_first_text">test1</string>
+    <string name="fragment_guide_second_text">test2</string>
+    <string name="fragment_guide_third_text">test3</string>
 </resources>
