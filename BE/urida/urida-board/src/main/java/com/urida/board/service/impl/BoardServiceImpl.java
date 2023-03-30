@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -139,7 +140,8 @@ public class BoardServiceImpl implements BoardService {
                         .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                         .user(user.get())
                         .build();
-
+                System.out.println(ZonedDateTime.now());
+                System.out.println(ZonedDateTime.now(ZoneId.of("Asia/Seoul")));
                 try {
                     boardJpqlRepo.saveArticle(article);
                     return article;
