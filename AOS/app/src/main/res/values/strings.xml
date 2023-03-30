@@ -47,6 +47,8 @@
     <string name="fragment_picture_cardview_preview">실시간으로 확인하기</string>
     <string name="fragment_picture_cardview_camera">촬영하기</string>
     <string name="fragment_picture_cardview_gallery">갤러리에서 불러오기</string>
+    <string name="fragment_picture_permission_camera">갤러리에서 불러오기</string>
+    <string name="fragment_picture_permission_storage">갤러리에서 불러오기</string>
 
     <!--    fragment_community-->
     <string name="fragment_community_tablayout_title_free">자유 게시판</string>
@@ -76,4 +78,8 @@
     <string name="fragment_guide_third_text">갤러리에서 사진을 선택해 사물의 이름을 볼 수 있습니다</string>
     <string name="fragment_guide_button_text">다음</string>
     <string name="fragment_guide_button_next">끝내기</string>
+
+    <!--    fragment_guide-->
+    <string name="fragment_picture_result_text">죄송해요.\n물체를 인식하기 어려워요\n다시 한번 찍어주세요</string>
+    <string name="fragment_picture_result_button">사진 다시 찍기</string>
 </resources>
