@@ -23,6 +23,9 @@ public interface BoardService {
     // 유저가 댓글 남긴 글 카테코리 별 조회
     List<BoardListDto> getArticleByUserCommentedOn(Long uid, int category_id);
 
+    // 유저가 좋아요한 글 카테고리 별 조회
+    List<BoardListDto> getLiked(Long uid, int category_id);
+
     // 게시글 작성
     Board createArticle(ArticleCreateDto articleCreateDto) throws IOException;
 

@@ -45,6 +45,13 @@ public class BoardController {
         return boardService.getArticleByUserCommentedOn(uid, category_id);
     }
 
+    // 유저가 좋아요한 게시글 조회
+    @GetMapping("/list/liked/{category_id}/{uid}")
+    public List<BoardListDto> likedArticles(@PathVariable int category_id, @PathVariable Long uid) {
+        return boardService.getLiked(uid, category_id);
+    }
+
+
     // 개별 게시글 조회
     @GetMapping("/{id}")
     public BoardDetailDto getArticle(@PathVariable Long id) {

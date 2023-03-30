@@ -109,9 +109,17 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<BoardListDto> getArticleByUserCommentedOn(Long uid, int category_id) {
         List<Board> userCommentedArticles = boardJpqlRepo.findByUserCommentedOn(uid, category_id);
         return getBoardListDtos(userCommentedArticles);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<BoardListDto> getLiked(Long uid, int category_id) {
+        List<Board> userLikedArticles = boardJpqlRepo.findByLiked(uid, category_id);
+        return getBoardListDtos(userLikedArticles);
     }
 
     @Override
@@ -226,6 +234,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Boolean isLiked(Long board_id, Long uid) {
         Optional<Likeboard> isLiked = likeBoardJpqlRepo.findByUserAndBoard(uid, board_id);
         return isLiked.isPresent();
