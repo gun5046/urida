@@ -19,7 +19,7 @@
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView_fragment_community_detail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginBottom="56dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/constraintlayout_fragment_community_detail_write_comment">
@@ -32,7 +32,6 @@
                     android:id="@+id/constraintlayout_fragment_community_detail_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="?attr/actionBarSize"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
