@@ -20,7 +20,9 @@ data class ResolveResponse(
     @SerializedName("choices")
     var choices : List<Int>,
     @SerializedName("examples")
-    var examples : List<Int>
+    var examples : List<Int>,
+    @SerializedName("titles")
+    var titles : ArrayList<Int>
 
 ){
 

@@ -40,7 +40,8 @@ class QuizRelateFragment : Fragment() {
             datas = App.PICTURES
             lifecycleOwner = this@QuizRelateFragment
         }
-        viewModel.setQuiz()
+        if(viewModel.resolveMode)viewModel.setResolveQuiz()
+        else viewModel.setQuiz()
         viewModel.setTTS()
         disableBackPress()
     }

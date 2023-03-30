@@ -20,7 +20,7 @@ class ResolveAdapter() : RecyclerView.Adapter<ResolveAdapter.ResolveAdapterHolde
         fun bind(data : ResolveResponse){
             binding.resolve = data
             binding.buttonItemFragmentResolveAnswer.setOnClickListener {view->
-                resolveClickListener.onClick(view,layoutPosition)
+                resolveClickListener.onClick(view,layoutPosition,data)
             }
             when(data.category_id){
                 0->binding.textviewItemFragmentResolveTitle.text = "과일/채소"
@@ -52,7 +52,7 @@ class ResolveAdapter() : RecyclerView.Adapter<ResolveAdapter.ResolveAdapterHolde
     }
 
     interface ResolveClickListener{
-        fun onClick(view: View,position:Int)
+        fun onClick(view: View,position:Int,data:ResolveResponse)
     }
     fun setOnResolveClickListener(resolveClickListener: ResolveClickListener){
         this.resolveClickListener = resolveClickListener

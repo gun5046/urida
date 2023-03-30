@@ -62,7 +62,7 @@ class QuizSelectCategoryDialog(
         createSelectProblemDialog?.onOkButtonClick()
         dismiss()
         mainActivity.addFragment(
-            when(viewModel.selectedPCategory){
+            when(viewModel.selectedPCategory.value!!){
                 0-> QuizWordFragment()
                 1-> QuizPictureFragment()
                 2-> QuizBlankFragment()

@@ -26,7 +26,10 @@ data class ResolveRequest(
     var examples : List<Int>,
 
     @Expose @SerializedName("choices")
-    var choices : ArrayList<Int>
+    var choices : ArrayList<Int>,
+
+    @Expose @SerializedName("titles")
+    var titles : List<Int>
 ){
 
 }

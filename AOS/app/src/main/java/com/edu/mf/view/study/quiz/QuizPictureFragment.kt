@@ -1,6 +1,7 @@
 package com.edu.mf.view.study.quiz
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,7 @@ import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.MainViewModel
 
 
+private const val TAG = "QuizPictureFragment_지훈"
 class QuizPictureFragment : Fragment() {
 
     private lateinit var binding : FragmentQuizPictureBinding
@@ -38,9 +40,10 @@ class QuizPictureFragment : Fragment() {
     private fun init(){
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         mainActivity = MainActivity.getInstance()!!
-        viewModel.setQuiz()
-        viewModel.setTTS()
+        if(viewModel.resolveMode)viewModel.setResolveQuiz()
+        else viewModel.setQuiz()
 
+        viewModel.setTTS()
         binding.apply{
             datas = App.PICTURES
             handlers = this@QuizPictureFragment

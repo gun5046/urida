@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
+
+
+    <data>
+        <variable
+            name="vm"
+            type="com.edu.mf.viewmodel.MainViewModel" />
+        <variable
+            name="handlers"
+            type="com.edu.mf.view.study.reslove.ResolveFragment" />
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -41,6 +52,7 @@
     android:textSize="20sp"
     android:textColor="@color/black"
     android:fontFamily="@font/jalnan_language"
+    android:onClick="@{()->handlers.startSolve()}"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"

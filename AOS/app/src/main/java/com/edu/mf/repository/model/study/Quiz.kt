@@ -27,7 +27,7 @@ data class Quiz(
         this.relate_categories = relate_categories
     }
 
-    //낱말보고 그림 맞추기
+    //빈칸 넣기
     constructor(answer_fi:Int,answer_i:Int,problems_i:ArrayList<Int>,problem:Problem) : this(answer_fi, answer_i){
         this.problems_i = problems_i
         this.problem = problem

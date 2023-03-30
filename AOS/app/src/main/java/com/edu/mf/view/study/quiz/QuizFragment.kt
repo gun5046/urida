@@ -32,6 +32,7 @@ class QuizFragment: Fragment(), QuizSelectCategoryDialog.CreateSelectProblemDial
         mainActivity = MainActivity.getInstance()!!
 
         binding.lifecycleOwner = this
+        viewModel.disableResolveMode()
         return binding.root
     }
 

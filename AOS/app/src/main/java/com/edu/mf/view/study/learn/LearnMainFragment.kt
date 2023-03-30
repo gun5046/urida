@@ -37,7 +37,7 @@ class LearnMainFragment : Fragment() {
         mainActivity = MainActivity.getInstance()!!
         viewmodel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         binding.apply {
-            binding.list = App.PICTURES[viewmodel.selectedCategory]
+            binding.list = App.PICTURES[viewmodel.selectedCategory.value!!]
             binding.vm = viewmodel
             handlers = this@LearnMainFragment
         }
@@ -52,8 +52,8 @@ class LearnMainFragment : Fragment() {
         init()
 
         viewmodel.currentIndex.observe(viewLifecycleOwner, Observer {
-            viewmodel.changeBookMark("${it+1}/${App.PICTURES[viewmodel.selectedCategory].size}")
-            viewmodel.setCurrentAnswer(App.PICTURES[viewmodel.selectedCategory][it])
+            viewmodel.changeBookMark("${it+1}/${App.PICTURES[viewmodel.selectedCategory.value!!].size}")
+            viewmodel.setCurrentAnswer(App.PICTURES[viewmodel.selectedCategory.value!!][it])
         })
         viewmodel.setTTS()
     }
@@ -64,7 +64,7 @@ class LearnMainFragment : Fragment() {
 
     private fun getBookMark(){
 
-        when(viewmodel.selectedCategory){
+        when(viewmodel.selectedCategory.value!!){
             0->viewmodel.setCurrentIndex(SharedPreferencesUtil(requireContext()).getFruitsBookMark())
             1->viewmodel.setCurrentIndex(SharedPreferencesUtil(requireContext()).getJobsBookMark())
             2->viewmodel.setCurrentIndex(SharedPreferencesUtil(requireContext()).getAnimalsBookMark())
@@ -74,7 +74,7 @@ class LearnMainFragment : Fragment() {
         }
     }
     private fun setBookMark(){
-        when(viewmodel.selectedCategory){
+        when(viewmodel.selectedCategory.value!!){
             0->SharedPreferencesUtil(requireContext()).setFruitsBookMark(viewmodel.currentIndex.value!!)
             1->SharedPreferencesUtil(requireContext()).setJobsBookMark(viewmodel.currentIndex.value!!)
             2->SharedPreferencesUtil(requireContext()).setAnimalsBookMark(viewmodel.currentIndex.value!!)
