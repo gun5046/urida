@@ -46,5 +46,19 @@ data class CommentListItem(
     val dateTime: String,
     @SerializedName("board_id")
     val boardId: Int,
-    val uid: Int
+    val uid: Int,
+    val nickname: String
+)
+
+data class BoardInfo(
+    @SerializedName("board_id")
+    val boardId: Int,
+    val title: String,
+    val content: String,
+    val view: Int,
+    val dateTime: String,
+    val likeCnt: Int,
+    val commentCnt: Int,
+    val nickname: String,
+    val comment: ArrayList<CommentListItem>
 )
