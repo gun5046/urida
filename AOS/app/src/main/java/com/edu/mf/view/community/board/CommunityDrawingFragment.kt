@@ -12,6 +12,7 @@ import com.edu.mf.databinding.FragmentCommunityBoardBinding
 import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.repository.model.community.BoardListItem
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.community.CommunityFragment
 import com.edu.mf.viewmodel.CommunityViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,7 +34,7 @@ class CommunityDrawingFragment: Fragment() {
         mainActivity = MainActivity.getInstance()!!
         communityService = mainActivity.communityService
         communityViewModel = CommunityViewModel()
-
+        Log.i("TAG", "onCreateView: ${CommunityFragment.tabPosition}")
         return binding.root
     }
 

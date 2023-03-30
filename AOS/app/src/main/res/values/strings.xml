@@ -51,6 +51,10 @@
     <!--    fragment_community-->
     <string name="fragment_community_tablayout_title_free">자유 게시판</string>
     <string name="fragment_community_tablayout_title_drawing">그림 게시판</string>
+    <string name="fragment_community_chip_all">전체</string>
+    <string name="fragment_community_chip_myboard">나의 게시글</string>
+    <string name="fragment_community_chip_mycomment">나의 댓글</string>
+    <string name="fragment_community_chip_like">좋아요</string>
 
     <!--    fragment_community_detail-->
     <string name="fragment_community_detail_comment_textview">댓글</string>
@@ -62,6 +66,10 @@
     <!--    fragment_community_register-->
     <string name="fragment_community_register_edittext_title">제목</string>
     <string name="fragment_community_register_edittext_content">내용</string>
+
+    <!--    fragment_community_mypage-->
+    <string name="fragment_community_mypage_tablayout_title_board">게시글</string>
+    <string name="fragment_community_mypage_tablayout_title_comment">댓글</string>
 
     <!--    actionbar_menu-->
     <string name="actionbar_menu_register">완료</string>
