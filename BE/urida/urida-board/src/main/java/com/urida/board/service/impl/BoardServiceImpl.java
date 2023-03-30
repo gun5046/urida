@@ -142,6 +142,7 @@ public class BoardServiceImpl implements BoardService {
                         .build();
                 System.out.println(ZonedDateTime.now());
                 System.out.println(ZonedDateTime.now(ZoneId.of("Asia/Seoul")));
+                System.out.println(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
                 try {
                     boardJpqlRepo.saveArticle(article);
                     return article;
