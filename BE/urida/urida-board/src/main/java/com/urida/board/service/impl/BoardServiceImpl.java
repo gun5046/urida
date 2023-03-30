@@ -97,6 +97,29 @@ public class BoardServiceImpl implements BoardService {
     public Board createArticle(ArticleCreateDto articleCreateDto) throws IOException {
         Optional<User> user = userJpqlRepo.findByUid(articleCreateDto.getUid());
 
+        if(articleCreateDto.getImage() == null) {
+            if (user.isPresent()) {
+                Board article = Board.builder()
+                        .title(articleCreateDto.getTitle())
+                        .content(articleCreateDto.getContent())
+                        .image(null)
+                        .category_id(articleCreateDto.getCategory_id())
+                        .time(LocalDateTime.now().toString())
+                        .user(user.get())
+                        .build();
+
+                try {
+                    boardJpqlRepo.saveArticle(article);
+                    return article;
+                } catch (Exception e) {
+                    System.out.println(e.toString());
+                    throw new SaveException("Value invalid");
+                }
+            } else {
+                throw new NoDataException("Value invalid");
+            }
+
+        }
         String uuid = UUID.randomUUID().toString(); // GCS에 저장될 파일 이름
         String type = articleCreateDto.getImage().getContentType(); // 파일 형식
 
