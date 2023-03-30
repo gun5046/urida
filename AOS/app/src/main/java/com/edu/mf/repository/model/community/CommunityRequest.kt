@@ -9,3 +9,11 @@ data class CreateBoardData(
     val categoryId: Int,
     val uid: Int
 )
+
+data class CreateCommentData(
+    val content: String,
+    val dateTime: String,
+    @SerializedName("board_id")
+    val boardId: Int,
+    val uid: Int
+)
