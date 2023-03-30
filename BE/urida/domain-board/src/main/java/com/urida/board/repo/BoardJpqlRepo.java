@@ -22,26 +22,9 @@ public class BoardJpqlRepo {
 
     // 특정 게시물
     public Board findById(Long boardId) {
-        System.out.println(boardId);
-        try {
             Board board = em.find(Board.class, boardId);
             board.addView();
             return board;
-        }catch(Exception e){
-            System.out.println("not found");
-        }
-
-        return new Board();
-      /*  Long uid = board.getUser().getUid();
-
-        return BoardDto.builder()
-                .board_id(board.getBoard_id())
-                .uid(uid)
-                .view(board.getView())
-                .title(board.getTitle())
-                .dateTime(board.getTime())
-                .content(board.getContent())
-                .build();*/
     }
 
     // 게시글 저장
@@ -90,23 +73,4 @@ public class BoardJpqlRepo {
             return null;
         }
     }
-
-    // 댓글 조회
-/*    public List<Comment> allComments(Long board_id) {
-
-    }*/
-
-   /* // 게시글 좋아요
-    public int likeArticle(Long id) {
-        getArticle(id).like();
-        return getArticle(id).getAssessment();
-    }
-
-    // 게시글 좋아요 취소
-    public int dislikeArticle(Long id) {
-//        Board board = em.find(Board.class, id);
-//        board.dislike();
-        getArticle(id).dislike();
-        return getArticle(id).getAssessment();
-    }*/
 }

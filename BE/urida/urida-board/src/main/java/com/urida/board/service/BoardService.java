@@ -6,6 +6,7 @@ import com.urida.board.dto.response.BoardDetailDto;
 import com.urida.board.dto.response.BoardListDto;
 import com.urida.board.entity.Board;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface BoardService {
@@ -20,7 +21,7 @@ public interface BoardService {
    /* void increaseView(Long id);*/
 
     // 게시글 작성
-    Board createArticle(ArticleCreateDto articleCreateDto);
+    Board createArticle(ArticleCreateDto articleCreateDto) throws IOException;
 
     // 게시글 수정
     Board updateArticle(ArticleUpdateDto articleUpdateDto, Long id);
