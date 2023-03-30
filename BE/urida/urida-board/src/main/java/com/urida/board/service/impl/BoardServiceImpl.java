@@ -172,7 +172,7 @@ public class BoardServiceImpl implements BoardService {
                     .content(articleCreateDto.getContent())
                     .image("https://storage.cloud.google.com/drawing-storage/" + uuid)
                     .category_id(articleCreateDto.getCategory_id())
-                    .time(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                    .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .user(user.get())
                     .build();
 
