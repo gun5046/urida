@@ -33,6 +33,12 @@ public class BoardController {
         return list;
     }
 
+    // 유저 작성글 조회
+    @GetMapping("/list/{category_id}/{uid}")
+    public List<BoardListDto> authoredArticles(@PathVariable int category_id, @PathVariable Long uid) {
+        return boardService.getArticlesByUser(uid, category_id);
+    }
+
     // 개별 게시글 조회
     @GetMapping("/{id}")
     public BoardDetailDto getArticle(@PathVariable Long id) {

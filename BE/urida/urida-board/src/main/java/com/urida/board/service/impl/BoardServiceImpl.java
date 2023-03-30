@@ -74,7 +74,12 @@ public class BoardServiceImpl implements BoardService {
     @Override
     @Transactional(readOnly = true)
     public BoardDetailDto getArticle(Long id) {
+
         Board article = boardJpqlRepo.findById(id);
+        if(article == null){
+            throw new NoDataException("invalid data(Not Found)");
+        }
+        article.addView();
         String nickname = article.getUser().getNickname();
         List<CommentResponseDto> comments = commentService.getComments(id);
 
@@ -91,6 +96,30 @@ public class BoardServiceImpl implements BoardService {
                 .comment(comments)
                 .build();
         /*return boardJpqlRepo.findById(id);*/
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<BoardListDto> getArticlesByUser(Long uid, int category_id) {
+        List<Board> userArticles = boardJpqlRepo.findByUid(uid, category_id);
+
+        List<BoardListDto> articleDtoList = new ArrayList<>();
+        for(Board article : userArticles) {
+            BoardListDto dto = BoardListDto.builder()
+                    .board_id(article.getBoard_id())
+                    .title(article.getTitle())
+                    .content(article.getContent())
+                    .view(article.getView())
+                    .dateTime(article.getTime())
+                    .category_id(article.getCategory_id())
+                    .likeCnt(likeBoardJpqlRepo.likeCnt(article.getBoard_id()))
+                    .commentCnt(commentService.commentCnt(article.getBoard_id()))
+                    .nickname(article.getUser().getNickname())
+                    .build();
+
+            articleDtoList.add(dto);
+        }
+        return articleDtoList;
     }
 
     @Override

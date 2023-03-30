@@ -2,7 +2,6 @@ package com.urida.board.repo;
 
 
 import com.urida.board.entity.Board;
-import com.urida.comment.entity.Comment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -22,9 +21,14 @@ public class BoardJpqlRepo {
 
     // 특정 게시물
     public Board findById(Long boardId) {
-            Board board = em.find(Board.class, boardId);
-            board.addView();
-            return board;
+        return em.find(Board.class, boardId);
+    }
+
+    public List<Board> findByUid(Long uid, int category_id) {
+        return em.createQuery("select b from Board b where b.user.uid = :uid and b.category_id = :category_id", Board.class)
+                .setParameter("uid", uid)
+                .setParameter("category_id", category_id)
+                .getResultList();
     }
 
     // 게시글 저장

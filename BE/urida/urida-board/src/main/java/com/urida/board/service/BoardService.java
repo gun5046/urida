@@ -17,8 +17,8 @@ public interface BoardService {
     // 개별 게시글 조회
     BoardDetailDto getArticle(Long id);
 
-    // 게시글 조회 수 증가
-   /* void increaseView(Long id);*/
+    // 유저가 쓴 글 조회
+    List<BoardListDto> getArticlesByUser(Long uid, int category_id);
 
     // 게시글 작성
     Board createArticle(ArticleCreateDto articleCreateDto) throws IOException;
