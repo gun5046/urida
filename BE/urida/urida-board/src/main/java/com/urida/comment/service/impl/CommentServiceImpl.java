@@ -40,6 +40,7 @@ public class CommentServiceImpl implements CommentService {
                     .content(comment.getContent())
                     .dateTime(comment.getDateTime())
                     .board_id(comment.getComment_id())
+                    .board_title(comment.getBoard().getTitle())
                     .uid(comment.getUser().getUid())
                     .nickname(comment.getUser().getNickname())
                     .build();

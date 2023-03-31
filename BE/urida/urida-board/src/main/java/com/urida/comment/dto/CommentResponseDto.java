@@ -19,6 +19,8 @@ public class CommentResponseDto {
     @NotEmpty
     private Long board_id;
 
+    private String board_title;
+
     private Long uid;
 
     private String nickname;
