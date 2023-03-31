@@ -1,7 +1,9 @@
 package com.edu.mf.repository.api
 
 import com.edu.mf.repository.model.community.*
+import com.google.gson.annotations.SerializedName
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -16,8 +18,16 @@ interface CommunityService {
     // 게시글 작성
     @Multipart
     @POST("board/create")
-    fun createBoard(@Part("file") createBoardData: CreateBoardData): Call<CreateBoardResponse>
-    //fun createBoard(@Part multipart: MultipartBody.Part, @Part("boardData") createBoardData: CreateBoardData): Call<CreateBoardResponse>
+    //fun createBoard(@Part multipart: MultipartBody.Part, @Part("articleRequestDto") createBoardData: CreateBoardData): Call<CreateBoardResponse>
+    fun createBoard(
+        @Part multipart: MultipartBody.Part,
+        @Part("title") title: RequestBody,
+        @Part("content") content: RequestBody,
+        @Part("category_id") category_id: RequestBody,
+        @Part("uid") uid: RequestBody
+    ): Call<CreateBoardResponse>
+
+    //fun createBoard(@Part("file") createBoardData: CreateBoardData): Call<CreateBoardResponse>
 
     // 게시글 리스트 보기(자유/그림)
     @GET("board/list/{category_id}")
@@ -78,4 +88,13 @@ interface CommunityService {
         @Path("category_id") categoryId: Int,
         @Path("uid") uid:Int
     ): Call<List<BoardListItem>>
+
+    @PUT("board/{id}")
+    fun updateBoard(
+        @Path("id") boardId: Int,
+        @Body updateBoardData: UpdateBoardData
+    ): Call<UpdateBoardResponse>
+
+    @DELETE("board/{id}")
+    fun deleteBoard(@Path("id") boardId: Int): Call<Void>
 }

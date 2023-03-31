@@ -1,6 +1,8 @@
 package com.edu.mf.view.community.detail
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,12 +19,10 @@ import com.edu.mf.R
 import com.edu.mf.databinding.FragmentCommunityDetailBinding
 import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.repository.model.User
-import com.edu.mf.repository.model.community.BoardInfo
-import com.edu.mf.repository.model.community.BoardListItem
-import com.edu.mf.repository.model.community.CommentListItem
-import com.edu.mf.repository.model.community.CreateCommentData
+import com.edu.mf.repository.model.community.*
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.community.CommunityRegisterFragment
 import com.edu.mf.viewmodel.CommunityViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +40,7 @@ class CommunityDetailFragment(
     private lateinit var mainActivity: MainActivity
     private lateinit var communityService: CommunityService
     private lateinit var communityViewModel: CommunityViewModel
+    private lateinit var commentAdapter: CommunityDetailCommentAdapter
     private lateinit var user: User
 
     private var clickState = false
@@ -89,7 +90,52 @@ class CommunityDetailFragment(
                 updateComment(communityViewModel.commentItem.value!!)
             }
         }
+
         binding.imageviewFragmentCommunityDetailBack.bringToFront()
+        if (boardItem.nickname == user.nickname){
+            binding.imageviewFragmentCommunityDetailDots.apply {
+                visibility = View.VISIBLE
+                setOnClickListener {
+                    makeDialog()
+                }
+            }
+        }
+    }
+
+    // 게시글 수정 및 삭제 다이얼로그 만들기
+    private fun makeDialog(){
+        val menuItems: Array<String> = arrayOf(
+            binding.root.resources.getString(R.string.fragment_community_detail_comment_dialog_edit)
+            , binding.root.resources.getString(R.string.fragment_community_detail_comment_dialog_delete)
+        )
+
+        val dialog = AlertDialog.Builder(binding.root.context, R.style.CommunityDialog)
+        dialog.apply {
+            setItems(menuItems, DialogInterface.OnClickListener() { dialogInterface, dialogPos ->
+                if (dialogPos == 0){  // 수정
+                    mainActivity.addFragmentNoAnim(
+                        CommunityRegisterFragment(communityViewModel.boardListItem.value, boardItem.categoryId)
+                    )
+                } else{  // 삭제
+                    deleteBoard()
+                    backPressed()
+                }
+            })
+            show()
+        }
+    }
+
+    // 게시글 삭제
+    private fun deleteBoard(){
+        communityService.deleteBoard(boardItem.boardId)
+            .enqueue(object : Callback<Void>{
+                override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                }
+
+                override fun onFailure(call: Call<Void>, t: Throwable) {
+                    Log.d(TAG, "onFailure: ${t.message}")
+                }
+        })
     }
 
     // 좋아요 상태 받아오기
@@ -191,7 +237,6 @@ class CommunityDetailFragment(
         }
     }
 
-    lateinit var commentAdapter: CommunityDetailCommentAdapter
     // 댓글 recyclerview 설정
     private fun setCommentAdapter(commentList: List<CommentListItem>){
         commentAdapter = CommunityDetailCommentAdapter(
@@ -308,6 +353,7 @@ class CommunityDetailFragment(
                             body.content,
                             boardItem.categoryId,
                             boardItem.view,
+                            body.image,
                             body.dateTime,
                             body.likeCnt,
                             body.commentCnt,

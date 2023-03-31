@@ -26,14 +26,14 @@ import com.edu.mf.R
 import com.edu.mf.databinding.FragmentCommunityRegisterBinding
 import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.repository.model.User
-import com.edu.mf.repository.model.community.CreateBoardData
-import com.edu.mf.repository.model.community.CreateBoardResponse
+import com.edu.mf.repository.model.community.*
 import com.edu.mf.utils.App
 import com.edu.mf.utils.SharedPreferencesUtil
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.drawing.result.DrawingResultShareDialog
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okio.BufferedSink
@@ -44,7 +44,10 @@ import retrofit2.Response
 import java.io.File
 
 private const val TAG = "CommunityRegisterFragme"
-class CommunityRegisterFragment: Fragment(), MenuProvider {
+class CommunityRegisterFragment(
+    private val boardItem: BoardListItem?,
+    private var tabPosition: Int
+    ): Fragment(), MenuProvider {
     private lateinit var binding: FragmentCommunityRegisterBinding
     private lateinit var mainActivity: MainActivity
     private lateinit var communityService: CommunityService
@@ -53,7 +56,6 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
     private lateinit var actionBar: ActionBar
     private lateinit var drawingUri: Uri
     private var galleryUri = "".toUri()
-    private var categoryId = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,6 +76,8 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
         setActionBar()
         chkPermissionGallery()
         chkDrawingUri()
+
+        binding.boardListItem = boardItem
     }
 
     // 그림 uri가 있는지 체크
@@ -85,7 +89,6 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
             setImg(drawingUri)
 
             DrawingResultShareDialog.savedDrawingUri = "".toUri()
-            categoryId = 1
         }
     }
 
@@ -202,15 +205,21 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
             multipart = galleryUri.asMultipart("file", requireContext().contentResolver)!!
         }
 
-        val boardData = CreateBoardData(
-            binding.edittextFragmentCommunityRegisterTitle.text.toString()
-            , binding.edittextFragmentCommunityRegisterContent.text.toString()
-            , multipart
-            , categoryId
-            , user.uid!!
-        )
+//        val boardData = CreateBoardData(
+//            binding.edittextFragmentCommunityRegisterTitle.text.toString()
+//            , binding.edittextFragmentCommunityRegisterContent.text.toString()
+//            , tabPosition
+//            , user.uid!!
+//        )
 
-        communityService.createBoard(boardData)
+
+        communityService.createBoard(
+            multipart!!,
+            makeRequestBody(binding.edittextFragmentCommunityRegisterTitle.text.toString()),
+            makeRequestBody(binding.edittextFragmentCommunityRegisterContent.text.toString()),
+            makeRequestBodyInt(tabPosition.toString()),
+            makeRequestBodyInt(user.uid!!.toString())
+        )
             .enqueue(object : Callback<CreateBoardResponse>{
                 override fun onResponse(
                     call: Call<CreateBoardResponse>,
@@ -227,6 +236,14 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
                 }
             }
         )
+    }
+
+    private fun makeRequestBody(string: String): RequestBody{
+        return RequestBody.create("text/plain".toMediaTypeOrNull(), string)
+    }
+
+    private fun makeRequestBodyInt(string: String): RequestBody{
+        return RequestBody.create("text/plain".toMediaTypeOrNull(), string)
     }
 
     // 액션바 설정
@@ -246,6 +263,28 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
         )
     }
 
+    // 게시글 수정
+    private fun updateBoard(){
+        val updateBoardData = UpdateBoardData(
+            binding.edittextFragmentCommunityRegisterContent.text.toString(), ""
+        )
+        communityService.updateBoard(boardItem!!.boardId, updateBoardData)
+            .enqueue(object : Callback<UpdateBoardResponse>{
+                override fun onResponse(
+                    call: Call<UpdateBoardResponse>,
+                    response: Response<UpdateBoardResponse>
+                ) {
+                    if (response.code() == 200){
+                        val body = response.body()!!
+                    }
+                }
+
+                override fun onFailure(call: Call<UpdateBoardResponse>, t: Throwable) {
+                    Log.d(TAG, "onFailure: ${t.message}")
+                }
+            })
+    }
+
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.actionbar_menu, menu)
     }
@@ -254,7 +293,12 @@ class CommunityRegisterFragment: Fragment(), MenuProvider {
         when(menuItem.itemId){
             R.id.actionbar_register -> {
                 if (chkEmpty()){
-                    sendBoard()
+                    if (boardItem != null){
+                        updateBoard()
+                    } else{
+                        sendBoard()
+                    }
+
                     delSavedImg(drawingUri)
                     mainActivity.popFragment()
                     actionBar.hide()

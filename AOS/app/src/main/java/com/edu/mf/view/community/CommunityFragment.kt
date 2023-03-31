@@ -53,7 +53,9 @@ class CommunityFragment: Fragment() {
         chipClickListener()
 
         binding.fabFragmentCommunity.setOnClickListener{
-            mainActivity.addFragmentNoAnim(CommunityRegisterFragment())
+            mainActivity.addFragmentNoAnim(
+                CommunityRegisterFragment(null, 0)
+            )
         }
     }
 

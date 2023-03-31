@@ -30,4 +30,14 @@ object BindingAdapters {
             .load(imgDrawable)
             .into(view)
     }
+
+    @JvmStatic
+    @BindingAdapter("imgUrl")
+    fun loadImgUrl(view: ImageView, imgUrl: String?){
+        if (imgUrl != null){
+            Glide.with(view)
+                .load(imgUrl)
+                .into(view)
+        }
+    }
 }

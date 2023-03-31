@@ -45,6 +45,18 @@
                         app:layout_constraintLeft_toLeftOf="parent"/>
 
                     <ImageView
+                        android:id="@+id/imageview_fragment_community_detail_dots"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_more"
+                        android:background="@drawable/community_click_event"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"/>
+
+                    <ImageView
                         android:id="@+id/imageview_fragment_community_detail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
