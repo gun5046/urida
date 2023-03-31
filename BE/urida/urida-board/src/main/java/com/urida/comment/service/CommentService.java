@@ -13,6 +13,8 @@ public interface CommentService {
 
     List<CommentResponseDto> getComments(Long board_id);
 
+    List<CommentResponseDto> getWrittenComments(Long uid);
+
     Comment updateComment(Long comment_id, CommentRequestDto commentRequestDto);
 
     int commentCnt(Long board_id);
