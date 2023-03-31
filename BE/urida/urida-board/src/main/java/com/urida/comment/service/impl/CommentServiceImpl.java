@@ -32,6 +32,23 @@ public class CommentServiceImpl implements CommentService {
     private final BoardJpqlRepo boardJpqlRepo;
     private final CommentJpqlRepo commentJpqlRepo;
 
+    private List<CommentResponseDto> getCommentResponseDtos(List<Comment> commentList) {
+        List<CommentResponseDto> commentResponseDto = new ArrayList<>();
+        for (Comment comment : commentList) {
+            CommentResponseDto dto = CommentResponseDto.builder()
+                    .comment_id(comment.getComment_id())
+                    .content(comment.getContent())
+                    .dateTime(comment.getDateTime())
+                    .board_id(comment.getComment_id())
+                    .uid(comment.getUser().getUid())
+                    .nickname(comment.getUser().getNickname())
+                    .build();
+
+            commentResponseDto.add(dto);
+        }
+        return commentResponseDto;
+    }
+
     @Override
     public Comment createComment(CommentRequestDto commentRequestDto) {
         Board targetArticle = boardJpqlRepo.getArticle(commentRequestDto.getBoard_id());
@@ -59,20 +76,15 @@ public class CommentServiceImpl implements CommentService {
     @Transactional(readOnly = true)
     public List<CommentResponseDto> getComments (Long board_id) {
         List<Comment> comments = commentJpqlRepo.getComments(board_id);
-        List<CommentResponseDto> commentDto = new ArrayList<>();
-        for( Comment comment : comments){
-            CommentResponseDto dto = CommentResponseDto.builder()
-                    .comment_id(comment.getComment_id())
-                    .content(comment.getContent())
-                    .dateTime(comment.getDateTime())
-                    .board_id(board_id)
-                    .uid(comment.getUser().getUid())
-                    .nickname(comment.getUser().getNickname())
-                    .build();
+        return getCommentResponseDtos(comments);
+    }
 
-            commentDto.add(dto);
-        }
-        return commentDto;
+    // 유저 작성한 댓글 조회
+    @Override
+    @Transactional(readOnly = true)
+    public List<CommentResponseDto> getWrittenComments(Long uid) {
+        List<Comment> writtenComments = commentJpqlRepo.writtenComments(uid);
+        return getCommentResponseDtos(writtenComments);
     }
 
     // 특정 댓글 수정하기

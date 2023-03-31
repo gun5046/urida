@@ -41,12 +41,19 @@ public class CommentJpqlRepo {
         em.remove(findById(commentId));
     }
 
-    // 대댓글 검색
+    // 사용자 작성 댓글 조회
+    public List<Comment> writtenComments(Long uid) {
+        return em.createQuery("select c from Comment c where c.user.uid = :uid", Comment.class)
+                .setParameter("uid", uid)
+                .getResultList();
+    }
+
+   /* // 대댓글 검색
     public List<Comment> findChildComments(Long commentId) {
         return em.createQuery("select distinct c from Comment c left join fetch c.parentComment pc"
                                 + "left join fetch c.childComments cc where c.id =:commentId"
                         , Comment.class)
                 .setParameter("commentId", commentId)
                 .getResultList();
-    }
+    }*/
 }
