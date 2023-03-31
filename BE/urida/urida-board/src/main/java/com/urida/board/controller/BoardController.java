@@ -55,18 +55,25 @@ public class BoardController {
     }
 
     // 게시글 작성
-    @PostMapping(value="/create", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    @PostMapping(value = "/create", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "성공"),
             @ApiResponse(responseCode = "401", description = "인증 실패"),
             @ApiResponse(responseCode = "404", description = "사용자 없음"),
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    public Board createArticle(@Validated @ModelAttribute ArticleRequestDto articleRequestDto, @RequestPart(value = "image",required = false) MultipartFile file, BindingResult bindingResult) throws IOException {
+    public Board createArticle(@Validated
+                               @RequestPart(value = "title", required = false) String title,
+                               @RequestPart(value = "content", required = false) String content,
+                               @RequestPart(value = "category_id", required = false) int category_id,
+                               @RequestPart(value = "uid", required = false) Long uid,
+                               @RequestPart(value = "image", required = false) MultipartFile file,
+                               BindingResult bindingResult) throws IOException {
+
         if (bindingResult.hasErrors()) {
             throw new InputException("RequestData(ArticleDto)invalid");
         }
-
+        System.out.println("123");
 //        return boardService.createArticle(articleCreateDto);
         return null;
     }
