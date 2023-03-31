@@ -1,7 +1,6 @@
 package com.edu.mf.view.community
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import com.edu.mf.databinding.FragmentCommunityBinding
 import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.community.board.CommunityFreeFragment
-import com.edu.mf.view.community.chip.CommunityMyCommentFragment
 import com.edu.mf.viewmodel.CommunityViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener

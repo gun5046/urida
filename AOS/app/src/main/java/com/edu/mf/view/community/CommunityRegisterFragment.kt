@@ -109,7 +109,9 @@ class CommunityRegisterFragment(
                 openGallery()
             } else{
                 Toast.makeText(
-                    requireContext(), "저장장치 접근 권한을 확인해주세요", Toast.LENGTH_SHORT
+                    requireContext(),
+                    resources.getString(R.string.fragment_picture_permission_storage),
+                    Toast.LENGTH_SHORT
                 ).show()
 
                 val settingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
@@ -192,7 +194,12 @@ class CommunityRegisterFragment(
     private fun chkEmpty(): Boolean{
         if (binding.edittextFragmentCommunityRegisterTitle.text.toString() == ""
             || binding.edittextFragmentCommunityRegisterContent.text.toString() == ""){
-            Toast.makeText(requireContext(), "빈 칸을 모두 입력해주세요", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                resources.getString(R.string.fragment_community_register_chk_content),
+                Toast.LENGTH_SHORT
+            ).show()
+
             return false
         }
         return true

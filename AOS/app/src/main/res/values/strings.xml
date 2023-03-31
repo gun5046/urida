@@ -73,6 +73,7 @@
     <!--    fragment_community_mypage-->
     <string name="fragment_community_mypage_tablayout_title_board">게시글</string>
     <string name="fragment_community_mypage_tablayout_title_comment">댓글</string>
+    <string name="fragment_community_register_chk_content">빈 칸을 모두 입력해주세요</string>
 
     <!--    actionbar_menu-->
     <string name="actionbar_menu_register">완료</string>

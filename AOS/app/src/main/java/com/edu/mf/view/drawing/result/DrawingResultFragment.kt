@@ -121,6 +121,11 @@ class DrawingResultFragment(
         })
     }
 
+    override fun onStop() {
+        super.onStop()
+        mainViewModel.stopTTS()
+    }
+
     data class ImgInfo(
         val categoryIdx: Int,
         val pictureIdx: Int

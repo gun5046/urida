@@ -1,7 +1,6 @@
 package com.edu.mf.view.community.board
 
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,9 +16,7 @@ import com.edu.mf.repository.model.community.MyCommentResponse
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.community.CommunityFragment
-import com.edu.mf.view.community.chip.CommunityMyCommentAdapter
 import com.edu.mf.viewmodel.CommunityViewModel
-import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
