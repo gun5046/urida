@@ -80,11 +80,11 @@ public class CommentServiceImpl implements CommentService {
         return getCommentResponseDtos(comments);
     }
 
-    // 유저 작성한 댓글 조회
+        // 유저 작성한 댓글 조회
     @Override
     @Transactional(readOnly = true)
-    public List<CommentResponseDto> getWrittenComments(Long uid) {
-        List<Comment> writtenComments = commentJpqlRepo.writtenComments(uid);
+    public List<CommentResponseDto> getWrittenComments(Long uid, int category_id) {
+        List<Comment> writtenComments = commentJpqlRepo.writtenComments(uid, category_id);
         return getCommentResponseDtos(writtenComments);
     }
 
