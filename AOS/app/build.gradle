@@ -57,6 +57,9 @@ dependencies {
     def retrofit_version = "2.9.0"
     def glide_version = "4.13.2"
 
+    //splash
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+
     //flipview
     implementation 'com.wajahatkarim:EasyFlipView:3.0.3'
 
