@@ -72,4 +72,9 @@ class PictureResultFragment : Fragment() {
             mainActivity.popFragment()
         }
     }
+
+    override fun onStop() {
+        super.onStop()
+        mainViewModel.stopTTS()
+    }
 }
