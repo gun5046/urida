@@ -25,6 +25,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintlayout_voice_result_empty"
             android:layout_width="match_parent"
@@ -35,8 +36,7 @@
             android:paddingTop="54dp"
             android:paddingEnd="20dp"
             android:paddingBottom="18dp"
-            android:visibility="gone"
-            tools:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:id="@+id/textview_fragment_voice_result_redrawing"
@@ -104,9 +104,7 @@
             android:id="@+id/constraintlayout_fragment_voice_result"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="80dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginBottom="80dp"
             android:background="@drawable/learn_list_light_10"
             android:paddingStart="20dp"
@@ -145,6 +143,16 @@
                 app:layout_constraintRight_toRightOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/text_fragment_voice_result_temp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

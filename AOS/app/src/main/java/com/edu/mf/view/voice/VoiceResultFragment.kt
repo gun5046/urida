@@ -38,6 +38,7 @@ class VoiceResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.mainViewModel = mainViewModel
         binding.voiceResultWord = voiceViewModel.word
+        binding.textFragmentVoiceResultTemp.text = voiceViewModel.word
         val pictures = App.PICTURES
         for (i in 0 until pictures.size){
             for(j in 0 until pictures[i].size){

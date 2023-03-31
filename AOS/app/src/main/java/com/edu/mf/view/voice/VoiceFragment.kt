@@ -87,7 +87,6 @@ class VoiceFragment : Fragment() {
                 if(response.code() == 200){
                     voiceViewModel.setWord(response.body()!!)
                 }
-                //viewModel 생성 후 결과 값 받아서 저장 및 결과 카테고리에 있는지 확인하는 함수 필요
                 mainActivity.runOnUiThread {
                     dialog!!.dismiss()
                     mainActivity.addFragment(VoiceResultFragment())
