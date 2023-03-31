@@ -36,8 +36,10 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import okio.BufferedSink
 import okio.source
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -205,22 +207,17 @@ class CommunityRegisterFragment(
             multipart = galleryUri.asMultipart("file", requireContext().contentResolver)!!
         }
 
-//        val boardData = CreateBoardData(
-//            binding.edittextFragmentCommunityRegisterTitle.text.toString()
-//            , binding.edittextFragmentCommunityRegisterContent.text.toString()
-//            , tabPosition
-//            , user.uid!!
-//        )
-
+        val boardData = CreateBoardData(
+            binding.edittextFragmentCommunityRegisterTitle.text.toString()
+            , binding.edittextFragmentCommunityRegisterContent.text.toString()
+            , tabPosition
+            , user.uid!!
+        )
 
         communityService.createBoard(
             multipart!!,
-            makeRequestBody(binding.edittextFragmentCommunityRegisterTitle.text.toString()),
-            makeRequestBody(binding.edittextFragmentCommunityRegisterContent.text.toString()),
-            makeRequestBodyInt(tabPosition.toString()),
-            makeRequestBodyInt(user.uid!!.toString())
-        )
-            .enqueue(object : Callback<CreateBoardResponse>{
+            makeRequestBody(boardData)
+        ).enqueue(object : Callback<CreateBoardResponse>{
                 override fun onResponse(
                     call: Call<CreateBoardResponse>,
                     response: Response<CreateBoardResponse>
@@ -238,12 +235,15 @@ class CommunityRegisterFragment(
         )
     }
 
-    private fun makeRequestBody(string: String): RequestBody{
-        return RequestBody.create("text/plain".toMediaTypeOrNull(), string)
-    }
+    private fun makeRequestBody(data: CreateBoardData): RequestBody{
+        val jsonObject = JSONObject()
+        jsonObject.put("title", data.title)
+        jsonObject.put("content", data.content)
+        jsonObject.put("category_id", data.categoryId)
+        jsonObject.put("uid", data.uid)
 
-    private fun makeRequestBodyInt(string: String): RequestBody{
-        return RequestBody.create("text/plain".toMediaTypeOrNull(), string)
+        return jsonObject.toString()
+            .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
     }
 
     // 액션바 설정

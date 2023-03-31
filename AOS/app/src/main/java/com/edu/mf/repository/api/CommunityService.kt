@@ -18,16 +18,10 @@ interface CommunityService {
     // 게시글 작성
     @Multipart
     @POST("board/create")
-    //fun createBoard(@Part multipart: MultipartBody.Part, @Part("articleRequestDto") createBoardData: CreateBoardData): Call<CreateBoardResponse>
     fun createBoard(
         @Part multipart: MultipartBody.Part,
-        @Part("title") title: RequestBody,
-        @Part("content") content: RequestBody,
-        @Part("category_id") category_id: RequestBody,
-        @Part("uid") uid: RequestBody
+        @Part("articleRequestDto") createBoardData: RequestBody
     ): Call<CreateBoardResponse>
-
-    //fun createBoard(@Part("file") createBoardData: CreateBoardData): Call<CreateBoardResponse>
 
     // 게시글 리스트 보기(자유/그림)
     @GET("board/list/{category_id}")
