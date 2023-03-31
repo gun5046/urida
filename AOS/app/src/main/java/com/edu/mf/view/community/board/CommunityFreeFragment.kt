@@ -1,6 +1,7 @@
 package com.edu.mf.view.community.board
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,7 @@ class CommunityFreeFragment(
 
     companion object{
         var myBoard = false
+        //var restoreState:Parcelable
     }
 
     override fun onCreateView(

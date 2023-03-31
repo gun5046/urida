@@ -35,6 +35,8 @@ object BindingAdapters {
     @BindingAdapter("imgUrl")
     fun loadImgUrl(view: ImageView, imgUrl: String?){
         if (imgUrl != null){
+            view.visibility = View.VISIBLE
+
             Glide.with(view)
                 .load(imgUrl)
                 .into(view)

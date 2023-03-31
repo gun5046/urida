@@ -19,7 +19,7 @@ interface CommunityService {
     @Multipart
     @POST("board/create")
     fun createBoard(
-        @Part multipart: MultipartBody.Part,
+        @Part multipart: MultipartBody.Part?,
         @Part("articleRequestDto") createBoardData: RequestBody
     ): Call<CreateBoardResponse>
 

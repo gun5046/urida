@@ -1,6 +1,7 @@
 package com.edu.mf.view.community
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,7 +49,6 @@ class CommunityFragment: Fragment() {
             binding.fabFragmentCommunity.hide()
         }
         changeFrameLayout(CommunityFreeFragment(tabPosition))
-
         setTabLayout()
         chipClickListener()
 

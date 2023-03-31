@@ -215,7 +215,7 @@ class CommunityRegisterFragment(
         )
 
         communityService.createBoard(
-            multipart!!,
+            multipart,
             makeRequestBody(boardData)
         ).enqueue(object : Callback<CreateBoardResponse>{
                 override fun onResponse(
