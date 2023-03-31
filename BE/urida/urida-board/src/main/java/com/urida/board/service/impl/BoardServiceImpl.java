@@ -1,5 +1,6 @@
 package com.urida.board.service.impl;
 
+import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
@@ -32,10 +33,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -155,6 +153,7 @@ public class BoardServiceImpl implements BoardService {
         // cloud 이미지 업로드
         BlobInfo blobInfo = storage.create(
                 BlobInfo.newBuilder(drawingStorage, uuid)
+                        .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER))))
                         .setContentType(type)
                         .build(),
                 file.getInputStream()
@@ -164,7 +163,7 @@ public class BoardServiceImpl implements BoardService {
             Board article = Board.builder()
                     .title(articleRequestDto.getTitle())
                     .content(articleRequestDto.getContent())
-                    .image("https://storage.cloud.google.com/drawing-storage/" + uuid)
+                    .image("https://storage.googleapis.com/drawing-storage/" + uuid)
                     .category_id(articleRequestDto.getCategory_id())
                     .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .user(user.get())
