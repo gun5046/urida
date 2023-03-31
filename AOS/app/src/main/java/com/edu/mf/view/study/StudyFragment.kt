@@ -48,6 +48,10 @@ class StudyFragment: Fragment() {
             cardviewResolve.setOnClickListener {
                 mainActivity.addFragment(ResolveFragment())
             }
+
+            imageviewGuide.setOnClickListener {
+                mainActivity.addFragment(StudyGuideFragment())
+            }
         }
     }
     /**

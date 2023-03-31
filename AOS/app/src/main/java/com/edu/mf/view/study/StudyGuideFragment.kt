@@ -1,4 +1,4 @@
-package com.edu.mf.view.picture
+package com.edu.mf.view.study
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.edu.mf.R
-import com.edu.mf.databinding.FragmentPictureGuideBinding
+import com.edu.mf.databinding.FragmentStudyGuideBinding
 import com.edu.mf.view.common.MainActivity
 
-class PictureGuideFragment : Fragment() {
+class StudyGuideFragment : Fragment() {
 
-    private lateinit var binding: FragmentPictureGuideBinding
+    private lateinit var binding: FragmentStudyGuideBinding
     private lateinit var mainActivity: MainActivity
     private var index = 0
 
@@ -20,7 +20,7 @@ class PictureGuideFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mainActivity = MainActivity.getInstance()!!
-        binding = FragmentPictureGuideBinding.inflate(inflater, container, false)
+        binding = FragmentStudyGuideBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -28,21 +28,21 @@ class PictureGuideFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val imageList = listOf(R.drawable.guide_picture_3, R.drawable.guide_picture_3, R.drawable.guide_picture_3)
         val stringList = listOf(
-            requireContext().resources.getString(R.string.fragment_picture_guide_first_text),
-            requireContext().resources.getString(R.string.fragment_picture_guide_second_text),
-            requireContext().resources.getString(R.string.fragment_picture_guide_third_text)
+            requireContext().resources.getString(R.string.fragment_study_guide_first_text),
+            requireContext().resources.getString(R.string.fragment_study_guide_second_text),
+            requireContext().resources.getString(R.string.fragment_study_guide_third_text)
         )
-        binding.viewPager.adapter = PictureGuideAdapter(requireContext(), imageList, stringList)
+        binding.viewPager.adapter = StudyGuideAdapter(requireContext(), imageList, stringList)
         binding.viewPager.isUserInputEnabled = false
         binding.circleIndicator.createIndicators(3, 0)
         binding.circleIndicator.setViewPager(binding.viewPager)
 
-        binding.buttonPictureGuide.setOnClickListener {
+        binding.buttonStudyGuide.setOnClickListener {
             if(index < 2){
                 index++
                 binding.viewPager.setCurrentItem(index, true)
                 if(index == 2){
-                    binding.buttonPictureGuide.text = requireContext().resources.getString(R.string.fragment_picture_guide_button_next)
+                    binding.buttonStudyGuide.text = requireContext().resources.getString(R.string.fragment_study_guide_button_next)
                 }
             } else {
                 mainActivity.popFragment()
