@@ -59,4 +59,7 @@
     <string name="dialog_fragment_voice_result_main_button">첫 화면으로</string>
     <string name="dialog_fragment_voice_result_button">다시 말하기</string>
 
+    <!--    dialog_voice_wait-->
+    <string name="dialog_voice_wait_text">단어를 예측중입니다\n잠시만 기다려주세요</string>
+
 </resources>

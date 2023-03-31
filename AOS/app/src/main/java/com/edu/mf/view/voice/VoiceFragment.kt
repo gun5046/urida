@@ -2,6 +2,7 @@ package com.edu.mf.view.voice
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
+import com.edu.mf.databinding.DialogVoiceWaitBinding
 import com.edu.mf.databinding.FragmentVoiceBinding
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.VoiceViewModel
@@ -25,6 +27,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.Response
+import org.json.JSONObject
 import java.io.File
 
 //http://j8d202.p.ssafy.io:8084/stt/audiopredict/ POST, PCM 파일 보내서 단어 받기
@@ -37,6 +40,7 @@ class VoiceFragment : Fragment() {
     private var isRecording = false
     private lateinit var mainActivity: MainActivity
     private lateinit var voiceViewModel: VoiceViewModel
+    private var dialog: AlertDialog? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,6 +80,7 @@ class VoiceFragment : Fragment() {
         if(isRecording){
             isRecording = false
             waveRecorder.stopRecording()
+            showDialog()
             CoroutineScope(Dispatchers.IO).launch {
                 val body = File(filePath!!).asRequestBody("multipart/form-data".toMediaTypeOrNull())
                 val response = mainActivity.sttService.sttResult(MultipartBody.Part.createFormData("audio_file", "record.wav", body))
@@ -84,6 +89,7 @@ class VoiceFragment : Fragment() {
                 }
                 //viewModel 생성 후 결과 값 받아서 저장 및 결과 카테고리에 있는지 확인하는 함수 필요
                 mainActivity.runOnUiThread {
+                    dialog!!.dismiss()
                     mainActivity.addFragment(VoiceResultFragment())
                 }
             }
@@ -93,5 +99,15 @@ class VoiceFragment : Fragment() {
             waveRecorder.startRecording()
             binding.buttonRecord.text = requireContext().resources.getString(R.string.fragment_voice_button_record_end)
         }
+    }
+
+    fun showDialog(){
+        val builder = AlertDialog.Builder(requireContext())
+        val dialogBinding = DialogVoiceWaitBinding.inflate(layoutInflater)
+        builder.setView(dialogBinding.root)
+        builder.setCancelable(false)
+        dialog = builder.create()
+        dialog!!.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog!!.show()
     }
 }
