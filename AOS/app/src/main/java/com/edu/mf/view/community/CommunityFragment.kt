@@ -72,7 +72,8 @@ class CommunityFragment: Fragment() {
         }
 
         binding.chipFragmentCommunityMycomment.setOnClickListener {
-            changeFrameLayout(CommunityMyCommentFragment())
+            chipPosition = 2
+            changeFrameLayout(CommunityFreeFragment(tabPosition))
         }
 
         binding.chipFragmentCommunityLike.setOnClickListener {

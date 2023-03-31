@@ -19,7 +19,7 @@ interface CommunityService {
     @Multipart
     @POST("board/create")
     fun createBoard(
-        @Part multipart: MultipartBody.Part?,
+        @Part image: MultipartBody.Part?,
         @Part("articleRequestDto") createBoardData: RequestBody
     ): Call<CreateBoardResponse>
 
@@ -77,11 +77,11 @@ interface CommunityService {
     ): Call<List<BoardListItem>>
 
     // 내가 작성한 댓글 목록 받기
-    @GET("board/list/commented/{category_id}/{uid}")
+    @GET("board/comment/list/{category_id}/{uid}")
     fun getMyCommentList(
         @Path("category_id") categoryId: Int,
         @Path("uid") uid:Int
-    ): Call<List<BoardListItem>>
+    ): Call<List<MyCommentResponse>>
 
     @PUT("board/{id}")
     fun updateBoard(

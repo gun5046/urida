@@ -352,7 +352,7 @@ class CommunityDetailFragment(
                             body.title,
                             body.content,
                             boardItem.categoryId,
-                            boardItem.view,
+                            body.view,
                             body.image,
                             body.dateTime,
                             body.likeCnt,

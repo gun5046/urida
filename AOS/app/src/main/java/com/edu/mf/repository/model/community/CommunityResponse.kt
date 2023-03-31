@@ -79,3 +79,16 @@ data class UpdateBoardResponse(
     val comment: ArrayList<CommentResponse>,
     val commentCnt: Int
 )
+
+data class MyCommentResponse(
+    @SerializedName("comment_id")
+    val commentId: Int,
+    val content: String,
+    val dateTime: String,
+    @SerializedName("board_id")
+    val boardId: Int,
+    @SerializedName("board_title")
+    val boardTitle: String,
+    val uid: Int,
+    val nickname: String
+)
