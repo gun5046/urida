@@ -4,15 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import com.edu.mf.databinding.FragmentDrawingResultViewpagerBinding
 import com.edu.mf.repository.model.drawing.DrawingResponse
+import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.DrawingViewModel
 
 class DrawingResultViewPagerFragment(
     private val drawingResponse: DrawingResponse
 ): Fragment() {
     private lateinit var binding: FragmentDrawingResultViewpagerBinding
+    private lateinit var mainActivity: MainActivity
     private lateinit var drawingViewModel: DrawingViewModel
     private lateinit var resultWordList: ArrayList<String>
 
@@ -22,6 +25,7 @@ class DrawingResultViewPagerFragment(
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDrawingResultViewpagerBinding.inflate(inflater, container, false)
+        mainActivity = MainActivity.getInstance()!!
         drawingViewModel = DrawingViewModel()
 
         return binding.root
@@ -31,10 +35,17 @@ class DrawingResultViewPagerFragment(
         super.onViewCreated(view, savedInstanceState)
 
         binding.drawingViewModel = drawingViewModel
+        binding.drawingResultViewpager = this@DrawingResultViewPagerFragment
+
+        initView()
+        disableBackPress()
 
         drawingViewModel.setDrawingResponse(drawingResponse)
         DrawingResultFragment(drawingResponse).getImgIdx(drawingViewModel)
+    }
 
+    // viewPager 초기화, indicator 연결
+    private fun initView(){
         val viewpager= binding.viewpagerFragmentDrawingResultViewpager
         viewpager.adapter = DrawingResultViewPagerItemFragment(
             requireActivity(), drawingViewModel, makeWordList(), drawingResponse
@@ -53,5 +64,19 @@ class DrawingResultViewPagerFragment(
         resultWordList.add(drawingResponse.secondPrediction)
 
         return resultWordList
+    }
+
+    // 뒤로가기 아이콘 클릭 시
+    fun backPressed(){
+        mainActivity.popFragment()
+    }
+
+    // onBackPressed 막기
+    private fun disableBackPress(){
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner, object : OnBackPressedCallback(true){
+                override fun handleOnBackPressed() {
+                }
+            })
     }
 }

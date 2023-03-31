@@ -26,9 +26,20 @@ object BindingAdapters {
         val imgDrawable = view.context.resources.getIdentifier(
             imgSrc, "drawable", view.context.packageName
         )
-
         Glide.with(view)
             .load(imgDrawable)
             .into(view)
+    }
+
+    @JvmStatic
+    @BindingAdapter("imgUrl")
+    fun loadImgUrl(view: ImageView, imgUrl: String?){
+        if (imgUrl != null){
+            view.visibility = View.VISIBLE
+
+            Glide.with(view)
+                .load(imgUrl)
+                .into(view)
+        }
     }
 }

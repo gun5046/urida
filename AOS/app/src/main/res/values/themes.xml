@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.EducationForMulticulturalFamily" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.EducationForMulticulturalFamily" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -33,6 +33,6 @@
         <item name="backgroundColor">#cdb4db</item>
         <item name="colorControlNormal">#cdb4db</item>
         <item name="colorControlActivated">@color/radio_button_clicked</item>
-
     </style>
+
 </resources>

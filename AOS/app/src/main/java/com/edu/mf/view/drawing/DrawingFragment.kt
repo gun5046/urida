@@ -1,6 +1,7 @@
 package com.edu.mf.view.drawing
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -8,7 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -18,14 +19,11 @@ import com.edu.mf.repository.model.drawing.DrawingRequest
 import com.edu.mf.repository.model.drawing.DrawingResponse
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.drawing.result.DrawingResultFragment
-import com.edu.mf.view.drawing.result.DrawingResultRedrawingDialog
+import com.edu.mf.view.drawing.result.DrawingResultShareDialog
 import com.edu.mf.view.drawing.result.DrawingResultViewPagerFragment
 import com.edu.mf.viewmodel.DrawingViewModel
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,9 +38,9 @@ class DrawingFragment: Fragment() {
     private lateinit var toolList: ArrayList<ImageView>
     private lateinit var matrix: MutableList<ArrayList<ArrayList<Int>>>
 
-
     companion object{
         lateinit var graphicView:GraphicView
+        lateinit var drawingBitmap: Bitmap
         val colorPicker = ColorPickerDialog.newBuilder()!!
         var palette = mutableSetOf<Int>()
     }
@@ -55,7 +53,7 @@ class DrawingFragment: Fragment() {
         binding = FragmentDrawingBinding.inflate(inflater, container, false)
         mainActivity = MainActivity.getInstance()!!
         drawingViewModel = DrawingViewModel()
-        graphicView = GraphicView(this.requireContext())
+        graphicView = GraphicView(this.requireContext(), binding.constraintlayoutFragmentDrawingCanvas)
         pointList = GraphicView.pointList
 
         return binding.root
@@ -69,6 +67,7 @@ class DrawingFragment: Fragment() {
         graphicView.paint.strokeWidth = 10.0F
 
         initList()
+        clickBackPress()
         penClickListener()
         penLongClickListener()
 
@@ -87,8 +86,6 @@ class DrawingFragment: Fragment() {
 
             if (matrix.size != 0) {
                 sendMatrix()
-            } else{
-                Toast.makeText(requireContext(), "그림을 그려주세요", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -97,10 +94,10 @@ class DrawingFragment: Fragment() {
     private fun changeFragment(){
         drawingViewModel.drawingResponse.observe(viewLifecycleOwner, Observer{
             when(it.predictionType){
-                0 -> mainActivity.changeFragment(DrawingResultFragment(it))
-                1 -> mainActivity.changeFragment(DrawingResultViewPagerFragment(it))
+                0 -> mainActivity.addFragment(DrawingResultFragment(it))
+                1 -> mainActivity.addFragment(DrawingResultViewPagerFragment(it))
                 2 -> {
-                    val dialog = DrawingResultRedrawingDialog()
+                    val dialog = DrawingResultShareDialog()
                     dialog.show(childFragmentManager, "DrawingResultDialog")
                 }
             }
@@ -109,7 +106,6 @@ class DrawingFragment: Fragment() {
 
     // 3차원 행렬 만들기
     private fun makeMatrix(){
-        //val pointList = GraphicView.pointList
         var xList = ArrayList<Int>()
         var yList = ArrayList<Int>()
 
@@ -285,6 +281,16 @@ class DrawingFragment: Fragment() {
             binding.imageviewFragmentDrawingPenBlue,
             binding.imageviewFragmentDrawingPenBlack
         )
+    }
+
+    // onBackPressed시 현재 fragment pop
+    private fun clickBackPress(){
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner, object : OnBackPressedCallback(true){
+                override fun handleOnBackPressed() {
+                    mainActivity.popFragment()
+                }
+            })
     }
 
     override fun onDestroyView() {

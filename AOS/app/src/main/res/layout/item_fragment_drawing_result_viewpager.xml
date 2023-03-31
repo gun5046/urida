@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="MainViewModel"
+            type="com.edu.mf.viewmodel.MainViewModel" />
+
+        <variable
+            name="CategoryIdx"
+            type="Integer" />
+
+        <variable
+            name="PictureIdx"
+            type="Integer" />
+
+        <variable
+            name="DrawingResultWord"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_fragment_drawing_result_viewpager_item_first"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="60dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/learn_list_light_10"
+        app:layout_constraintBottom_toTopOf="@id/textview_fragment_learn_progress"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageview_fragment_drawing_result_viewpager_item_first"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            app:imgSrc="@{@string/fragment_drawing_result_list_imageview(CategoryIdx, PictureIdx)}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/textview_fragment_drawing_result_viewpager_item_first" />
+
+        <TextView
+            android:id="@+id/textview_fragment_drawing_result_viewpager_item_first"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:fontFamily="@font/jalnan_language"
+            android:onClick="@{()->MainViewModel.startTTS()}"
+            android:text="@{DrawingResultWord}"
+            android:textColor="#4a5759"
+            android:textSize="40sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
