@@ -4,6 +4,7 @@ import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.urida.board.dto.request.ArticleCreateDto;
+import com.urida.board.dto.request.ArticleRequestDto;
 import com.urida.board.dto.request.ArticleUpdateDto;
 import com.urida.board.dto.response.BoardDetailDto;
 import com.urida.board.dto.response.BoardListDto;
@@ -23,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -121,16 +123,16 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board createArticle(ArticleCreateDto articleCreateDto) throws IOException {
-        Optional<User> user = userJpqlRepo.findByUid(articleCreateDto.getArticleRequestDto().getUid());
+    public Board createArticle(ArticleRequestDto articleRequestDto, MultipartFile file) throws IOException {
+        Optional<User> user = userJpqlRepo.findByUid(articleRequestDto.getUid());
 
-        if(articleCreateDto.getImage() == null) {
+        if(file == null) {
             if (user.isPresent()) {
                 Board article = Board.builder()
-                        .title(articleCreateDto.getArticleRequestDto().getTitle())
-                        .content(articleCreateDto.getArticleRequestDto().getContent())
+                        .title(articleRequestDto.getTitle())
+                        .content(articleRequestDto.getContent())
                         .image(null)
-                        .category_id(articleCreateDto.getArticleRequestDto().getCategory_id())
+                        .category_id(articleRequestDto.getCategory_id())
                         .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                         .user(user.get())
                         .build();
@@ -148,22 +150,22 @@ public class BoardServiceImpl implements BoardService {
 
         }
         String uuid = UUID.randomUUID().toString(); // GCS에 저장될 파일 이름
-        String type = articleCreateDto.getImage().getContentType(); // 파일 형식
+        String type =file.getContentType(); // 파일 형식
 
         // cloud 이미지 업로드
         BlobInfo blobInfo = storage.create(
                 BlobInfo.newBuilder(drawingStorage, uuid)
                         .setContentType(type)
                         .build(),
-                articleCreateDto.getImage().getInputStream()
+                file.getInputStream()
         );
 
         if (user.isPresent()) {
             Board article = Board.builder()
-                    .title(articleCreateDto.getArticleRequestDto().getTitle())
-                    .content(articleCreateDto.getArticleRequestDto().getContent())
+                    .title(articleRequestDto.getTitle())
+                    .content(articleRequestDto.getContent())
                     .image("https://storage.cloud.google.com/drawing-storage/" + uuid)
-                    .category_id(articleCreateDto.getArticleRequestDto().getCategory_id())
+                    .category_id(articleRequestDto.getCategory_id())
                     .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .user(user.get())
                     .build();
