@@ -72,12 +72,19 @@
     <string name="dialog_first_user_text">위와 같은 아이콘을 누르면\n도움말을 볼 수 있어요</string>
     <string name="dialog_first_user_button">확인</string>
 
-    <!--    fragment_guide-->
-    <string name="fragment_guide_first_text">실시간으로 카메라에 찍히는 사물의 이름을 볼 수 있습니다</string>
-    <string name="fragment_guide_second_text">카메라로 사진을 촬영해 사물의 이름을 볼 수 있습니다</string>
-    <string name="fragment_guide_third_text">갤러리에서 사진을 선택해 사물의 이름을 볼 수 있습니다</string>
-    <string name="fragment_guide_button_text">다음</string>
-    <string name="fragment_guide_button_next">끝내기</string>
+    <!--    fragment_picture_guide-->
+    <string name="fragment_picture_guide_first_text">실시간으로 카메라에 찍히는 사물의 이름을 볼 수 있어요</string>
+    <string name="fragment_picture_guide_second_text">카메라로 사진을 촬영해 사물의 이름을 볼 수 있어요</string>
+    <string name="fragment_picture_guide_third_text">갤러리에서 사진을 선택해 사물의 이름을 볼 수 있어요</string>
+    <string name="fragment_picture_guide_button_text">다음</string>
+    <string name="fragment_picture_guide_button_next">끝내기</string>
+
+    <!--    fragment_study_guide-->
+    <string name="fragment_study_guide_first_text">낱말 익히기를 통해 단어를 학습할 수 있어요</string>
+    <string name="fragment_study_guide_second_text">낱말 퀴즈에서 익혔던 단어를 공부할 수 있어요</string>
+    <string name="fragment_study_guide_third_text">다시 풀어보기를 통해 틀렸던 퀴즈들은 다시 도전해 볼 수 있어요</string>
+    <string name="fragment_study_guide_button_text">다음</string>
+    <string name="fragment_study_guide_button_next">끝내기</string>
 
     <!--    fragment_guide-->
     <string name="fragment_picture_result_text">죄송해요.\n물체를 인식하기 어려워요\n다시 한번 찍어주세요</string>
