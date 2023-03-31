@@ -72,6 +72,7 @@ public class BoardController {
         if (bindingResult.hasErrors()) {
             throw new InputException("RequestData(ArticleDto)invalid");
         }
+        System.out.println(file.toString());
         return boardService.createArticle(articleRequestDto, file);
     }
 

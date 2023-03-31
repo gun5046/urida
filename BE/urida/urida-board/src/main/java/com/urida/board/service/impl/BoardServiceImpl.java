@@ -134,7 +134,7 @@ public class BoardServiceImpl implements BoardService {
                         .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                         .user(user.get())
                         .build();
-
+                System.out.println("없음...");
                 try {
                     boardJpqlRepo.saveArticle(article);
                     return article;
@@ -168,7 +168,7 @@ public class BoardServiceImpl implements BoardService {
                     .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .user(user.get())
                     .build();
-
+            System.out.println("PLEAASE");
             try {
                 boardJpqlRepo.saveArticle(article);
                 return article;
