@@ -52,9 +52,9 @@ public class CommentController {
     }
 
     // 유저 작성 댓글
-    @GetMapping("/list/{uid}")
-    public List<CommentResponseDto> userCommentList(@PathVariable Long uid) {
-        return commentService.getWrittenComments(uid);
+    @GetMapping("/list/{category_id}/{uid}")
+    public List<CommentResponseDto> userCommentList(@PathVariable int category_id ,@PathVariable Long uid) {
+        return commentService.getWrittenComments(uid, category_id);
     }
 
     // 특정 게시물 댓글
