@@ -12,6 +12,7 @@ import com.edu.mf.R
 import com.edu.mf.databinding.ActivityMainBinding
 import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.repository.api.DrawingService
+import com.edu.mf.repository.api.SttService
 import com.edu.mf.repository.api.UserService
 import com.edu.mf.repository.db.ProblemDatabase
 import com.edu.mf.repository.db.ProblemRepository
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val loginService = App.userRetrofit.create(UserService::class.java)
     val drawingService = App.drawingRetrofit.create(DrawingService::class.java)
+    val sttService = App.drawingRetrofit.create(SttService::class.java)
     val communityService = App.communityRetrofit.create(CommunityService::class.java)
 
     var user: User? = null
