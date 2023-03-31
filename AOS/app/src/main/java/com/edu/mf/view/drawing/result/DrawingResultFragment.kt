@@ -30,7 +30,7 @@ class DrawingResultFragment(
     ): View? {
         binding = FragmentDrawingResultBinding.inflate(inflater, container, false)
         mainActivity = MainActivity.getInstance()!!
-        mainViewModel = ViewModelProvider(requireActivity())[mainViewModel::class.java]
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         drawingViewModel = DrawingViewModel()
         return binding.root
     }
