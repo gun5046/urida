@@ -1,6 +1,7 @@
 package com.edu.mf.view.community.board
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.edu.mf.databinding.ItemFragmentCommunityFreeBinding
@@ -41,6 +42,12 @@ class CommunityFreeAdapter(
                 binding.boardItem = boardItem
                 binding.cardviewItemFragmentCommunityFree.setOnClickListener {
                     mainActivity.addFragment(CommunityDetailFragment(boardItem))
+                }
+
+                if (CommunityFreeFragment.myBoard){
+                    binding.textviewItemFragmentCommunityFreeWriter.visibility = View.GONE
+                } else{
+                    binding.textviewItemFragmentCommunityFreeWriter.visibility = View.VISIBLE
                 }
             }
         }
