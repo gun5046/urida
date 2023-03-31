@@ -65,10 +65,7 @@ public class BoardController {
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
     public Board createArticle(@Validated
-                               @RequestPart(value = "title", required = false) String title,
-                               @RequestPart(value = "content", required = false) String content,
-                               @RequestPart(value = "category_id", required = false) int category_id,
-                               @RequestPart(value = "uid", required = false) Long uid,
+                               @RequestPart(value = "articleRequestDto", required = false) ArticleRequestDto articleRequestDto,
                                @RequestPart(value = "image", required = false) MultipartFile file,
                                BindingResult bindingResult) throws IOException {
 
