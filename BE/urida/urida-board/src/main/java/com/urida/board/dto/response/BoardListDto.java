@@ -13,6 +13,8 @@ public class BoardListDto {
 
     private String content;
 
+    private String image;
+
     private int category_id;
 
     private int view;
@@ -24,4 +26,5 @@ public class BoardListDto {
     private int commentCnt;
 
     private String nickname;
+
 }

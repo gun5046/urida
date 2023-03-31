@@ -57,6 +57,7 @@ public class BoardServiceImpl implements BoardService {
                     .board_id(article.getBoard_id())
                     .title(article.getTitle())
                     .content(article.getContent())
+                    .image(article.getImage())
                     .view(article.getView())
                     .dateTime(article.getTime())
                     .category_id(article.getCategory_id())
@@ -110,13 +111,6 @@ public class BoardServiceImpl implements BoardService {
     public List<BoardListDto> getArticlesByUser(Long uid, int category_id) {
         List<Board> userArticles = boardJpqlRepo.findByUid(uid, category_id);
         return getBoardListDtos(userArticles);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<BoardListDto> getArticleByUserCommentedOn(Long uid, int category_id) {
-        List<Board> userCommentedArticles = boardJpqlRepo.findByUserCommentedOn(uid, category_id);
-        return getBoardListDtos(userCommentedArticles);
     }
 
     @Override
