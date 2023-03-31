@@ -24,6 +24,7 @@ import com.edu.mf.view.community.CommunityFragment
 import com.edu.mf.view.drawing.DrawingFragment
 import com.edu.mf.view.picture.PictureFragment
 import com.edu.mf.view.study.StudyFragment
+import com.edu.mf.view.voice.VoiceFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -64,6 +65,9 @@ class MainFragment: Fragment() {
 
             cardviewCommunity.setOnClickListener {
                 mainActivity.addFragment(CommunityFragment())
+            }
+            cardviewVoice.setOnClickListener{
+                mainActivity.addFragment(VoiceFragment())
             }
 
             imageviewSettings.setOnClickListener {

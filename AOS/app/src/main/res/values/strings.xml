@@ -2,11 +2,12 @@
     <string name="app_name">URIDA</string>
 
     <!--    fragment_main-->
-    <string name="fragment_main_cardview_community_another_friends">다른친구들은 뭐하고 지낼까?</string>
-    <string name="fragment_main_cardview_community_transfer_community">커뮤니티로 이동</string>
-    <string name="fragment_main_cardview_study_transfer_study">단어학습</string>
-    <string name="fragment_main_cardview_drawing_transfer_drawing">그림으로 찾기</string>
-    <string name="fragment_main_cardview_picture_transfer_picture">사진으로 찾기</string>
+    <string name="fragment_main_cardview_community_another_friends" translatable="false">다른친구들은 뭐하고 지낼까?</string>
+    <string name="fragment_main_cardview_community_transfer_community" translatable="false">커뮤니티로 이동</string>
+    <string name="fragment_main_cardview_study_transfer_study" translatable="false">단어학습</string>
+    <string name="fragment_main_cardview_drawing_transfer_drawing" translatable="false">그림으로 찾기</string>
+    <string name="fragment_main_cardview_picture_transfer_picture" translatable="false">사진으로 찾기</string>
+    <string name="fragment_main_cardview_voice_transfer_voice">음성으로 찾기</string>
 
     <!--    fragment_study-->
     <string name="fragment_study_cardview_learn" translatable="false">낱말 익히기</string>
@@ -94,6 +95,19 @@
     <string name="fragment_study_guide_third_text">다시 풀어보기를 통해 틀렸던 퀴즈들은 다시 도전해 볼 수 있어요</string>
     <string name="fragment_study_guide_button_text">다음</string>
     <string name="fragment_study_guide_button_next">끝내기</string>
+
+    <!--    fragment_voice-->
+    <string name="fragment_voice_button_record">녹음하기</string>
+    <string name="fragment_voice_button_record_end">끝내기</string>
+    <string name="fragment_voice_text_voice">아래 버튼을 눌러 단어를 녹음해보세요</string>
+
+    <!--    fragment_voice_result-->
+    <string name="dialog_fragment_voice_result_textview">잘 모르겠어요.\n\n다시 한번 말해주실래요?</string>
+    <string name="dialog_fragment_voice_result_main_button">첫 화면으로</string>
+    <string name="dialog_fragment_voice_result_button">다시 말하기</string>
+
+    <!--    dialog_voice_wait-->
+    <string name="dialog_voice_wait_text">단어를 예측중입니다\n잠시만 기다려주세요</string>
 
     <!--    fragment_guide-->
     <string name="fragment_picture_result_text">죄송해요.\n물체를 인식하기 어려워요\n다시 한번 찍어주세요</string>
