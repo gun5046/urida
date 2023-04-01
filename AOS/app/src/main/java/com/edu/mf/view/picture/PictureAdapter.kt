@@ -9,12 +9,16 @@ import com.edu.mf.databinding.ItemMainPhotoFragBinding
 import com.edu.mf.repository.model.Category
 
 class PictureAdapter(val categories:List<Category>) : RecyclerView.Adapter<PictureAdapter.PictureViewHolder>(){
+    private lateinit var pictureClickListener: PictureClickListener
     inner class PictureViewHolder(val binding : ItemMainPhotoFragBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(data : Category){
             binding.textviewItemTitle.text = data.title
             binding.textviewItemDescription.text = data.description
             binding.imageviewItemIcon.setImageResource(data.src)
+            binding.constraintlayoutItemMainPhoto.setOnClickListener {
+                pictureClickListener.onClick(layoutPosition,data)
+            }
         }
 
     }
@@ -31,5 +35,11 @@ class PictureAdapter(val categories:List<Category>) : RecyclerView.Adapter<Pictu
 
     override fun getItemCount(): Int {
         return categories.size
+    }
+    interface PictureClickListener{
+        fun onClick(position:Int,data:Category)
+    }
+    fun setOnPictureClickListener(pictureClickListener: PictureClickListener){
+        this.pictureClickListener = pictureClickListener
     }
 }
