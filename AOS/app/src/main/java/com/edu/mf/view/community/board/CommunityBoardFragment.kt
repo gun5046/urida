@@ -22,7 +22,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 private const val TAG = "CommunityFreeFragment"
-class CommunityFreeFragment(
+class CommunityBoardFragment(
     private val tabPosition: Int
     ): Fragment() {
     private lateinit var binding: FragmentCommunityBoardBinding
@@ -33,7 +33,7 @@ class CommunityFreeFragment(
 
     companion object{
         var myBoard = false
-        //var restoreState:Parcelable
+        var rViewItemPosition = 0
     }
 
     override fun onCreateView(
@@ -62,6 +62,7 @@ class CommunityFreeFragment(
         binding.recyclerviewFragmentCommunity.apply {
             adapter = freeAdapter
             layoutManager = LinearLayoutManager(requireContext())
+            scrollToPosition(rViewItemPosition)
         }
     }
 
@@ -71,6 +72,7 @@ class CommunityFreeFragment(
         binding.recyclerviewFragmentCommunity.apply {
             adapter = drawingAdapter
             layoutManager = GridLayoutManager(requireContext(), 2)
+            scrollToPosition(rViewItemPosition)
         }
     }
 
@@ -88,6 +90,10 @@ class CommunityFreeFragment(
     // chip 선택에 따른 화면 변화
     private fun chipClickListener(){
         myBoard = false
+        if (CommunityFragment.clickChip){
+            rViewItemPosition = 0
+        }
+
         when(CommunityFragment.chipPosition){
             0 -> getFreeBoardData()
             1 -> getMyBoardList()
