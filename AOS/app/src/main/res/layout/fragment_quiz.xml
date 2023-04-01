@@ -25,12 +25,22 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
-            android:text="원하는 유형의 단어를 학습해보세요!\n단어를 클릭하면 해당 단어를 음성으로 읽어줘요!\n자동으로 책갈피 기능을 제공해요!"
+            android:text="원하는 유형의 퀴즈들을 풀어보세요!\n틀렸다고 걱정하지 마세요!\n틀린 문제들은 다시풀어보기로 이동해요!"
             android:textSize="16sp"
             android:fontFamily="@font/kakao_bold"
             android:breakStrategy="high_quality"
             app:layout_constraintTop_toBottomOf="@id/textview_fragment_quiz_title"
             app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            android:background="#bad7f2"
+            app:layout_constraintTop_toBottomOf="@id/textview_fragment_quiz_subtitle"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_fragment_quiz_list"
@@ -38,10 +48,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:background="@drawable/learn_list_pink_10"
-            app:layout_constraintTop_toBottomOf="@id/textview_fragment_quiz_title"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

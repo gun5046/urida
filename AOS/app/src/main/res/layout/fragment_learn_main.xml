@@ -19,7 +19,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f7e1d7">
+        android:background="#bad7f2">
 
         <ImageView
             android:id="@+id/imageview_learn_fragment_backward"
