@@ -75,7 +75,7 @@ class MainFragment: Fragment() {
     private lateinit var previewPermissionLauncher : ActivityResultLauncher<String>
     private lateinit var cameraPermissionLauncher : ActivityResultLauncher<String>
     private lateinit var storagePermissionLauncher : ActivityResultLauncher<String>
-
+    private lateinit var reqPermission : ActivityResultLauncher<String>
     private lateinit var pictureViewModel: PictureViewModel
     private var uri: Uri? = null
     private var translator: Translator? = null
@@ -119,37 +119,20 @@ class MainFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         Glide.with(this).load(R.raw.charac).into(binding.imageviewChrac)
-
-
-        //chkPermissionDrawingFragment()
-
-        /*binding.apply {
-            cardviewStudy.setOnClickListener {
-                mainActivity.addFragment(StudyFragment())
-            }
-
-            cardviewPicture.setOnClickListener {
-                mainActivity.addFragment(PictureFragment())
-            }
-
+        binding.apply {
             cardviewCommunity.setOnClickListener {
                 mainActivity.addFragment(CommunityFragment())
             }
-
-            imageviewSettings.setOnClickListener {
+            imageviewSettings.setOnClickListener{
                 showSettingDialog()
             }
-        }*/
+        }
     }
 
-    /*// 그림으로 찾기 클릭 시 permission 체크
+    // 그림으로 찾기 클릭 시 permission 체크
     private fun chkPermissionDrawingFragment(){
-        val reqPermission = requestPermission()
-        binding.cardviewDrawing.setOnClickListener {
-            reqPermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        }
-    }*/
-
+        reqPermission = requestPermission()
+    }
     // 미디어 접근권한
     private fun requestPermission(): ActivityResultLauncher<String> {
         return registerForActivityResult(ActivityResultContracts.RequestPermission()){
@@ -193,11 +176,13 @@ class MainFragment: Fragment() {
         dialog.show()
     }
     private fun init(){
+        chkPermissionDrawingFragment()
         initPhoto()
         if(wordList.size<1)
         setListData()
         setAdapter()
    }
+
     private fun initPhoto(){
         previewPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it){
@@ -349,7 +334,23 @@ class MainFragment: Fragment() {
             adapter = pictureAdapter
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
         }
+
         drawingAdapter = DrawingAdapter(drawingList)
+        drawingAdapter.setOnClickDrawingClickListener(object:DrawingAdapter.DrawingClickListener{
+            override fun onClick(position: Int, data: Category) {
+                when(position){
+                    //그림으로 찾아보기
+                    0->{
+                        reqPermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    }
+                    //음성으로 찾아보기
+                    else->{
+
+                    }
+                }
+            }
+
+        })
         binding.recylcerviewFragmentDrawing.apply {
             adapter = drawingAdapter
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)

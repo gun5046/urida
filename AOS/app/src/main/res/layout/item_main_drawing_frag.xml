@@ -9,6 +9,7 @@
             type="com.edu.mf.repository.model.Category" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintlayout_main_frag_drawing"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="10dp">
