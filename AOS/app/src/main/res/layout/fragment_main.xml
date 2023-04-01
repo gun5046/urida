@@ -136,7 +136,7 @@
         android:id="@+id/textview_fragment_main_drawing_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="그림 그리기"
+        android:text="찾아보기"
         android:textSize="16sp"
         android:fontFamily="@font/nexon_gothic_bold"
         android:layout_marginLeft="14dp"

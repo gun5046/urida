@@ -366,8 +366,8 @@ class MainFragment: Fragment() {
         photoList.add(Category("실시간으로 확인하기","어?저게 뭐였지?\n걱정마세요\n카메라에 탐지된 물체가\n무엇인지 알려줄게요",R.drawable.ic_video,LearnFragment()))
         photoList.add(Category("사진 찍고 확인하기","사진을 찍어보세요\n사진에 탐지된 물체가\n무엇인지 알려줄게요",R.drawable.ic_camera_plus,LearnFragment()))
         photoList.add(Category("갤러리에서 불러오기","갤러리에서 사진을 선택해보세요\n사진에 탐지된 물체가\n무엇인지 알려줄게요",R.drawable.ic_gallery,LearnFragment()))
-        drawingList.add(Category("그림 그리기","무슨 단어였는지 헷갈리세요?\n그림을 그려보세요\n저희가 알려줄게요",R.drawable.ic_drawing_main,DrawingFragment()))
-        drawingList.add(Category("음성 녹음","어떻게 쓰는지 모르시겠다고요?\n음성을 녹음해보세요\n저희가 알려줄게요",R.drawable.ic_mic,DrawingFragment()))
+        drawingList.add(Category("그림으로 찾기","무슨 단어였는지 헷갈리세요?\n그림을 그려보세요\n저희가 알려줄게요",R.drawable.ic_drawing_main,DrawingFragment()))
+        drawingList.add(Category("음성으로 찾기","어떻게 쓰는지 모르시겠다고요?\n음성을 녹음해보세요\n저희가 알려줄게요",R.drawable.ic_mic,DrawingFragment()))
     }
 
     fun changeLocale(language: Int){
