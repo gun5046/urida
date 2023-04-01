@@ -10,13 +10,16 @@ import com.edu.mf.repository.model.Category
 
 class StudyAdapter(val categories:List<Category>):RecyclerView.Adapter<StudyAdapter.StduyViewHolder>(){
     private lateinit var binding : ItemMainWordFragBinding
+    private lateinit var studyClickListener: StudyClickListener
     inner class StduyViewHolder(val binding : ItemMainWordFragBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(category:Category){
             binding.textviewItemTitle.text = category.title
             binding.textviewItemDescription.text = category.description
             binding.imageviewItemIcon.setImageResource(category.src)
-
+            binding.constraintlayoutItemMainWord.setOnClickListener {
+                studyClickListener.onClick(layoutPosition,category)
+            }
         }
     }
 
@@ -34,4 +37,11 @@ class StudyAdapter(val categories:List<Category>):RecyclerView.Adapter<StudyAdap
     override fun getItemCount(): Int {
         return categories.size
     }
+    interface StudyClickListener{
+        fun onClick(position:Int,data:Category)
+    }
+    fun setOnStudyClickListener(studyClickListener: StudyClickListener){
+        this.studyClickListener = studyClickListener
+    }
+
 }

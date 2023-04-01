@@ -15,6 +15,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.edu.mf.R
@@ -32,6 +33,7 @@ import com.edu.mf.view.study.StudyFragment
 import com.edu.mf.view.study.learn.LearnFragment
 import com.edu.mf.view.study.quiz.QuizFragment
 import com.edu.mf.view.study.reslove.ResolveFragment
+import com.edu.mf.viewmodel.MainViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,6 +41,7 @@ import kotlinx.coroutines.launch
 class MainFragment: Fragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var mainActivity: MainActivity
+    private lateinit var viewModel : MainViewModel
     private lateinit var wordAdapter : StudyAdapter
     private lateinit var pictureAdapter: PictureAdapter
     private lateinit var drawingAdapter : DrawingAdapter
@@ -51,6 +54,7 @@ class MainFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         mainActivity = MainActivity.getInstance()!!
         return binding.root
     }
@@ -132,11 +136,34 @@ class MainFragment: Fragment() {
         dialog.show()
     }
     private fun init(){
+        if(wordList.size<1)
         setListData()
         setAdapter()
     }
     private fun setAdapter(){
         wordAdapter = StudyAdapter(wordList)
+        wordAdapter.setOnStudyClickListener(object:StudyAdapter.StudyClickListener{
+            override fun onClick(position: Int, data: Category) {
+                when(position){
+                    //낱말 익히기
+                    0->{
+                        viewModel.setMode(1)
+                        mainActivity.addFragment(LearnFragment())
+                    }
+                    //낱말 퀴즈
+                    1->{
+                        viewModel.setMode(2)
+                        mainActivity.addFragment(QuizFragment())
+                    }
+                    //다시 풀어보기
+                    else->{
+                        mainActivity.addFragment(ResolveFragment())
+                    }
+
+                }
+            }
+
+        })
         binding.recylcerviewFragmentMainWord.apply{
             adapter = wordAdapter
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
