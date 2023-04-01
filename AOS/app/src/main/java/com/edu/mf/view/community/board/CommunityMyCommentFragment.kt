@@ -1,4 +1,4 @@
-package com.edu.mf.view.community.chip
+package com.edu.mf.view.community.board
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.CommunityViewModel
 
-class CommunityMyBoardFragment: Fragment() {
+class CommunityMyCommentFragment:Fragment() {
     private lateinit var binding: FragmentCommunityBoardBinding
     private lateinit var mainActivity: MainActivity
     private lateinit var communityService: CommunityService

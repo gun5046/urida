@@ -59,4 +59,9 @@ class DrawingResultViewPagerItemFragment(
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
     }
+
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        super.destroyItem(container, position, `object`)
+        mainViewModel.stopTTS()
+    }
 }

@@ -10,8 +10,7 @@ import com.edu.mf.R
 import com.edu.mf.databinding.FragmentCommunityBinding
 import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.view.common.MainActivity
-import com.edu.mf.view.community.board.CommunityFreeFragment
-import com.edu.mf.view.community.chip.CommunityMyCommentFragment
+import com.edu.mf.view.community.board.CommunityBoardFragment
 import com.edu.mf.viewmodel.CommunityViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
@@ -27,6 +26,7 @@ class CommunityFragment: Fragment() {
 
     companion object{
         var chipPosition = 0
+        var clickChip = false
     }
 
     override fun onCreateView(
@@ -48,7 +48,9 @@ class CommunityFragment: Fragment() {
         if (tabPosition != 0){
             binding.fabFragmentCommunity.hide()
         }
-        changeFrameLayout(CommunityFreeFragment(tabPosition))
+        clickChip = false
+        changeFrameLayout(CommunityBoardFragment(tabPosition))
+
         setTabLayout()
         chipClickListener()
 
@@ -62,23 +64,27 @@ class CommunityFragment: Fragment() {
     // chip 선택시 화면 변화시키기
     private fun chipClickListener(){
         binding.chipFragmentCommunityAll.setOnClickListener {
+            clickChip = true
             chipPosition = 0
-            changeFrameLayout(CommunityFreeFragment(tabPosition))
+            changeFrameLayout(CommunityBoardFragment(tabPosition))
         }
 
         binding.chipFragmentCommunityMyboard.setOnClickListener{
+            clickChip = true
             chipPosition = 1
-            changeFrameLayout(CommunityFreeFragment(tabPosition))
+            changeFrameLayout(CommunityBoardFragment(tabPosition))
         }
 
         binding.chipFragmentCommunityMycomment.setOnClickListener {
+            clickChip = true
             chipPosition = 2
-            changeFrameLayout(CommunityFreeFragment(tabPosition))
+            changeFrameLayout(CommunityBoardFragment(tabPosition))
         }
 
         binding.chipFragmentCommunityLike.setOnClickListener {
+            clickChip = true
             chipPosition = 3
-            changeFrameLayout(CommunityFreeFragment(tabPosition))
+            changeFrameLayout(CommunityBoardFragment(tabPosition))
         }
     }
 
@@ -92,7 +98,7 @@ class CommunityFragment: Fragment() {
         tabLayout.addOnTabSelectedListener(object: OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 tabPosition = tab!!.position
-                changeFrameLayout(CommunityFreeFragment(tabPosition))
+                changeFrameLayout(CommunityBoardFragment(tabPosition))
                 when(tabPosition){
                     0 -> binding.fabFragmentCommunity.show()
                     1 -> binding.fabFragmentCommunity.hide()
