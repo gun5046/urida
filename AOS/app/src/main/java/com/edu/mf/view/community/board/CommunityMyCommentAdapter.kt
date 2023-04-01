@@ -1,4 +1,4 @@
-package com.edu.mf.view.community.chip
+package com.edu.mf.view.community.board
 
 import android.util.Log
 import android.view.LayoutInflater

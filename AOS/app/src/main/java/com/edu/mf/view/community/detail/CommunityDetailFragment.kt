@@ -23,6 +23,7 @@ import com.edu.mf.repository.model.community.*
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.community.CommunityRegisterFragment
+import com.edu.mf.view.community.board.CommunityBoardFragment
 import com.edu.mf.viewmodel.CommunityViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -66,14 +67,14 @@ class CommunityDetailFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         commentUpdate = false
-
-        binding.communityDetail = this
-        getBoardInfo()
         communityViewModel.boardListItem.observe(viewLifecycleOwner){
             binding.boardItem = it
         }
-        clickBackPress()
+        communityViewModel.setBoardItem(boardItem)
+        binding.communityDetail = this
 
+        getBoardInfo()
+        clickBackPress()
         getLikeState()
         binding.imageviewFragmentCommunityDetailLikeEmpty.setOnClickListener {
             updateLikeState()
@@ -92,14 +93,7 @@ class CommunityDetailFragment(
         }
 
         binding.imageviewFragmentCommunityDetailBack.bringToFront()
-        if (boardItem.nickname == user.nickname){
-            binding.imageviewFragmentCommunityDetailDots.apply {
-                visibility = View.VISIBLE
-                setOnClickListener {
-                    makeDialog()
-                }
-            }
-        }
+        showDots()
     }
 
     // 게시글 수정 및 삭제 다이얼로그 만들기
@@ -117,6 +111,11 @@ class CommunityDetailFragment(
                         CommunityRegisterFragment(communityViewModel.boardListItem.value, boardItem.categoryId)
                     )
                 } else{  // 삭제
+                    CommunityBoardFragment.rViewItemPosition--
+                    if (CommunityBoardFragment.rViewItemPosition < 0){
+                        CommunityBoardFragment.rViewItemPosition = 0
+                    }
+
                     deleteBoard()
                     backPressed()
                 }
@@ -389,6 +388,18 @@ class CommunityDetailFragment(
             inputManager.showSoftInput(commentEditText, 0)
 
             commentEditText.setSelection(commentEditText.text.length)
+        }
+    }
+
+    // 내가 작성한 게시글이라면 수정 삭제 가능한 버튼 보이기
+    private fun showDots(){
+        if (boardItem.nickname == user.nickname){
+            binding.imageviewFragmentCommunityDetailDots.apply {
+                visibility = View.VISIBLE
+                setOnClickListener {
+                    makeDialog()
+                }
+            }
         }
     }
 
