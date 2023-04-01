@@ -23,7 +23,9 @@ import com.edu.mf.databinding.FragmentMainBinding
 import com.edu.mf.repository.model.Category
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.community.CommunityFragment
+import com.edu.mf.view.drawing.DrawingAdapter
 import com.edu.mf.view.drawing.DrawingFragment
+import com.edu.mf.view.picture.PictureAdapter
 import com.edu.mf.view.picture.PictureFragment
 import com.edu.mf.view.study.StudyAdapter
 import com.edu.mf.view.study.StudyFragment
@@ -38,8 +40,11 @@ class MainFragment: Fragment() {
     private lateinit var binding: FragmentMainBinding
     private lateinit var mainActivity: MainActivity
     private lateinit var wordAdapter : StudyAdapter
+    private lateinit var pictureAdapter: PictureAdapter
+    private lateinit var drawingAdapter : DrawingAdapter
     private var wordList : ArrayList<Category> = arrayListOf()
     private var photoList : ArrayList<Category> = arrayListOf()
+    private var drawingList : ArrayList<Category> = arrayListOf()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -136,6 +141,16 @@ class MainFragment: Fragment() {
             adapter = wordAdapter
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
         }
+        pictureAdapter = PictureAdapter(photoList)
+        binding.recylcerviewFragmentMainPhoto.apply {
+            adapter = pictureAdapter
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        }
+        drawingAdapter = DrawingAdapter(drawingList)
+        binding.recylcerviewFragmentDrawing.apply {
+            adapter = drawingAdapter
+            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        }
     }
 
     /**
@@ -145,6 +160,11 @@ class MainFragment: Fragment() {
         wordList.add(Category("낱말 익히기","평소 헷갈렸던 단어\n그림과 함께 \n학습해보아요",R.drawable.ic_learn,LearnFragment()))
         wordList.add(Category("낱말 퀴즈","같이 공부했던 단어를\n활용해서\n퀴즈를 풀어보아요",R.drawable.ic_quiz,QuizFragment()))
         wordList.add(Category("다시 풀어보기","아쉽게 틀렸던 \n퀴즈들은\n다시 한번 풀어보아요",R.drawable.ic_resolve,ResolveFragment()))
+        photoList.add(Category("실시간으로 확인하기","어?저게 뭐였지?\n걱정마세요\n카메라에 탐지된 물체가\n무엇인지 알려줄게요",R.drawable.ic_video,LearnFragment()))
+        photoList.add(Category("사진 찍고 확인하기","사진을 찍어보세요\n사진에 탐지된 물체가\n무엇인지 알려줄게요",R.drawable.ic_camera_plus,LearnFragment()))
+        photoList.add(Category("갤러리에서 불러오기","갤러리에서 사진을 선택해보세요\n사진에 탐지된 물체가\n무엇인지 알려줄게요",R.drawable.ic_gallery,LearnFragment()))
+        drawingList.add(Category("그림 그리기","무슨 단어였는지 헷갈리세요?\n그림을 그려보세요\n저희가 알려줄게요",R.drawable.ic_drawing_main,DrawingFragment()))
+        drawingList.add(Category("음성 녹음","어떻게 쓰는지 모르시겠다고요?\n음성을 녹음해보세요\n저희가 알려줄게요",R.drawable.ic_mic,DrawingFragment()))
     }
 
     fun changeLocale(language: Int){
