@@ -361,8 +361,8 @@ class MainFragment: Fragment() {
      * Recyclerview안에 들어가는 data 초기화
      */
     private fun setListData(){
-        wordList.add(Category("낱말 익히기","평소 헷갈렸던 단어\n그림과 함께 \n학습해보아요",R.drawable.ic_learn,LearnFragment()))
-        wordList.add(Category("낱말 퀴즈","같이 공부했던 단어를\n활용해서\n퀴즈를 풀어보아요",R.drawable.ic_quiz,QuizFragment()))
+        wordList.add(Category("단어 익히기","평소 헷갈렸던 단어\n그림과 함께 \n학습해보아요",R.drawable.ic_learn,LearnFragment()))
+        wordList.add(Category("단어 퀴즈","같이 공부했던 단어를\n활용해서\n퀴즈를 풀어보아요",R.drawable.ic_quiz,QuizFragment()))
         wordList.add(Category("다시 풀어보기","아쉽게 틀렸던 \n퀴즈들은\n다시 한번 풀어보아요",R.drawable.ic_resolve,ResolveFragment()))
         photoList.add(Category("실시간으로 확인하기","어?저게 뭐였지?\n걱정마세요\n카메라에 탐지된 물체가\n무엇인지 알려줄게요",R.drawable.ic_video,LearnFragment()))
         photoList.add(Category("사진 찍고 확인하기","사진을 찍어보세요\n사진에 탐지된 물체가\n무엇인지 알려줄게요",R.drawable.ic_camera_plus,LearnFragment()))
