@@ -17,7 +17,7 @@ import com.edu.mf.view.study.learn.LearnAdapter
 import com.edu.mf.viewmodel.MainViewModel
 
 class QuizFragment: Fragment(), QuizSelectCategoryDialog.CreateSelectProblemDialogListener{
-    private lateinit var learnAdapter: LearnAdapter
+    private lateinit var quizAdapter: QuizAdapter
     private lateinit var binding: FragmentQuizBinding
     private lateinit var viewModel : MainViewModel
     private lateinit var mainActivity: MainActivity
@@ -30,7 +30,6 @@ class QuizFragment: Fragment(), QuizSelectCategoryDialog.CreateSelectProblemDial
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_quiz,container,false)
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         mainActivity = MainActivity.getInstance()!!
-
         binding.lifecycleOwner = this
         viewModel.disableResolveMode()
         return binding.root
@@ -45,14 +44,13 @@ class QuizFragment: Fragment(), QuizSelectCategoryDialog.CreateSelectProblemDial
     }
 
     private fun setAdapter(){
-        learnAdapter = LearnAdapter()
-        learnAdapter.setFlag(2)
-        learnAdapter.setList(App.categories)
+        quizAdapter = QuizAdapter()
+        quizAdapter.setList(App.categories)
         binding.recyclerviewFragmentQuizList.apply{
             layoutManager = LinearLayoutManager(context)
-            adapter = learnAdapter
+            adapter = quizAdapter
         }
-        learnAdapter.setOnCategoryClickListener(object : LearnAdapter.CategoryClickListener{
+        quizAdapter.setOnQuizClickListener(object : QuizAdapter.QuizClickListener{
             override fun onClick(view: View, position: Int) {
                 viewModel.changeCategory(position)
                 val dialog = QuizSelectCategoryDialog(this@QuizFragment)
