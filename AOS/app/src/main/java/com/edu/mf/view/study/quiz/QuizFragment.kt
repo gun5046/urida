@@ -40,25 +40,12 @@ class QuizFragment: Fragment(), QuizSelectCategoryDialog.CreateSelectProblemDial
         init()
     }
     private fun init(){
-        setAdapter()
+        defaultFragment()
+    }
+    private fun defaultFragment(){
+        childFragmentManager.beginTransaction().replace(R.id.framelayout_container_quiz,QuizSelectFragment()).addToBackStack(null).commit()
     }
 
-    private fun setAdapter(){
-        quizAdapter = QuizAdapter()
-        quizAdapter.setList(App.categories)
-        binding.recyclerviewFragmentQuizList.apply{
-            layoutManager = LinearLayoutManager(context)
-            adapter = quizAdapter
-        }
-        quizAdapter.setOnQuizClickListener(object : QuizAdapter.QuizClickListener{
-            override fun onClick(view: View, position: Int) {
-                viewModel.changeCategory(position)
-                val dialog = QuizSelectCategoryDialog(this@QuizFragment)
-                dialog.isCancelable = false
-                dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
-            }
-        })
-    }
 
     override fun onOkButtonClick() {
 
