@@ -27,7 +27,7 @@ class QuizAdapter(
         fun bind(data:String){
             binding.data = data
             binding.position = layoutPosition+1
-            binding.constraintItemQuiz.setOnClickListener {view->
+            binding.buttonItemQuizStart.setOnClickListener {view->
                 quizClickListener.onClick(view,layoutPosition)
             }
         }
