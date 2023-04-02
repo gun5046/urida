@@ -1,10 +1,13 @@
 package com.edu.mf.view.study.quiz
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.edu.mf.R
@@ -22,6 +25,7 @@ class QuizSelectCategoryFragment : Fragment() {
     private var categories = ArrayList<PCategory>()
     private lateinit var dialogAdapter: LearnDialogAdapter
     private lateinit var mainActivity: MainActivity
+    private var nextFlag : Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -52,6 +56,7 @@ class QuizSelectCategoryFragment : Fragment() {
                             position->{
                                 viewModel.changePCategory(position)
                                 categories[i].isClicked = true
+                                nextFlag = true
                             }
                             else->{
                                 categories[i].isClicked = false
@@ -68,15 +73,25 @@ class QuizSelectCategoryFragment : Fragment() {
         }
     }
     fun clickOkButton(){
-        clickBackButton()
-        mainActivity.addFragment(
-            when(viewModel.selectedPCategory.value!!){
-                0-> QuizWordFragment()
-                1-> QuizPictureFragment()
-                2-> QuizBlankFragment()
-                else -> QuizRelateFragment()
-            }
-        )
+        if(nextFlag){
+            mainActivity.addFragment(
+                when(viewModel.selectedPCategory.value!!){
+                    0-> QuizWordFragment()
+                    1-> QuizPictureFragment()
+                    2-> QuizBlankFragment()
+                    else -> QuizRelateFragment()
+                }
+            )
+            clickBackButton()
+        }else{
+            val tv = TextView(requireContext())
+            tv.text = "카테고리를 먼저 선택해주세요"
+            tv.setTextColor(Color.parseColor("#FF0000"))
+            var toast = Toast.makeText(requireContext(),"",Toast.LENGTH_SHORT)
+            toast.view = tv
+            toast.show()
+        }
+
     }
 
     fun clickBackButton(){
