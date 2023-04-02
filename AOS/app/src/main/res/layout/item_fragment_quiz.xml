@@ -12,7 +12,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:padding="10dp"
     android:layout_margin="10dp"
-    android:background="@drawable/learn_list_black_10"
+    android:background="@drawable/learn_list_light_gray_10"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
