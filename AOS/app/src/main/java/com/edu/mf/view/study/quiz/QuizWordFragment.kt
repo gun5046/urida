@@ -37,7 +37,7 @@ class QuizWordFragment : Fragment() {
         if(viewModel.resolveMode) viewModel.setResolveQuiz()
         else viewModel.setQuiz()
         viewModel.setTTS()
-        disableBackPress()
+        //disableBackPress()
         return binding.root
     }
 
