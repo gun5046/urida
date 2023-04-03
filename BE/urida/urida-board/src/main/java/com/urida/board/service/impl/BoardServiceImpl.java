@@ -124,7 +124,7 @@ public class BoardServiceImpl implements BoardService {
     public Board createArticle(ArticleRequestDto articleRequestDto, MultipartFile file) throws IOException {
         Optional<User> user = userJpqlRepo.findByUid(articleRequestDto.getUid());
 
-        if(file == null) {
+        if(file.isEmpty()) {
             if (user.isPresent()) {
                 Board article = Board.builder()
                         .title(articleRequestDto.getTitle())

@@ -113,7 +113,7 @@ class CommunityDetailCommentAdapter(
             .enqueue(object : Callback<Int>{
                 override fun onResponse(call: Call<Int>, response: Response<Int>) {
                     if (response.code() == 200){
-                        deleteNotify()
+                        deleteNotify(commentItem)
                     }
                 }
 
@@ -131,7 +131,7 @@ class CommunityDetailCommentAdapter(
     }
 
     // 댓글 삭제 후 리사이클러뷰 갱신
-    private fun deleteNotify(){
+    private fun deleteNotify(commentItem: CommentListItem){
         this.notifyItemRemoved(itemPosition)
         commentList.removeAt(itemPosition)
         communityDetailFragment.getBoardInfo()

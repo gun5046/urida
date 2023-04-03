@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.edu.mf.repository.model.community.BoardInfo
 import com.edu.mf.repository.model.community.BoardListItem
 import com.edu.mf.repository.model.community.CommentListItem
 import kotlinx.coroutines.launch
@@ -21,9 +20,6 @@ class CommunityViewModel: ViewModel() {
 
     private val _commentItem = MutableLiveData<CommentListItem>()
     val commentItem: LiveData<CommentListItem> = _commentItem
-
-    private val _boardInfo = MutableLiveData<BoardInfo>()
-    val boardInfo: LiveData<BoardInfo> = _boardInfo
 
     fun getBoardList(boardList: List<BoardListItem>){
         viewModelScope.launch {
@@ -46,12 +42,6 @@ class CommunityViewModel: ViewModel() {
     fun getCommentItem(commentItem: CommentListItem){
         viewModelScope.launch {
             _commentItem.value = commentItem
-        }
-    }
-
-    fun getBoardInfo(boardInfo: BoardInfo){
-        viewModelScope.launch {
-            _boardInfo.value = boardInfo
         }
     }
 }

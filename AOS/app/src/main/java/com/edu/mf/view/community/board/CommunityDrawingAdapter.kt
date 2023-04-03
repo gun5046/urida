@@ -40,6 +40,7 @@ class CommunityDrawingAdapter(
             fun bind(boardItem: BoardListItem){
                 binding.boardItem = boardItem
                 binding.cardviewItemFragmentCommunityDrawing.setOnClickListener {
+                    CommunityBoardFragment.rViewItemPosition = layoutPosition
                     mainActivity.addFragment(CommunityDetailFragment(boardItem))
                 }
             }

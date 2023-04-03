@@ -44,7 +44,7 @@
         <item name="android:windowBackground">@drawable/community_dialog</item>
     </style>
 
-    <!--  MaterialButton Style  -->
+    <!--  MaterialButton Style Community Comment Button  -->
     <style name="MaterialButtonStyle" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/drawing_dialog_button_fill</item>
         <item name="android:textColor">@color/white</item>

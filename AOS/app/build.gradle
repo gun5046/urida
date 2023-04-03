@@ -57,6 +57,10 @@ dependencies {
     def retrofit_version = "2.9.0"
     def glide_version = "4.13.2"
 
+    //splash
+    implementation 'androidx.core:core-splashscreen:1.0.0-beta01'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
     //flipview
     implementation 'com.wajahatkarim:EasyFlipView:3.0.3'
 
@@ -112,6 +116,9 @@ dependencies {
 
     // ViewPager indicator
     implementation 'me.relex:circleindicator:2.1.6'
+
+    //Wav Recorder
+    implementation 'com.github.squti:Android-Wave-Recorder:1.7.0'
 
     implementation 'com.google.guava:guava:27.1-android'
     implementation 'androidx.core:core-ktx:1.7.0'
