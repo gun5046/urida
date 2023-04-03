@@ -43,7 +43,7 @@ class QuizRelateFragment : Fragment() {
         if(viewModel.resolveMode)viewModel.setResolveQuiz()
         else viewModel.setQuiz()
         viewModel.setTTS()
-        //disableBackPress()
+        disableBackPress()
     }
     fun onProblemClick(index:Int){
         val dialog = QuizResultDialog(index,3)

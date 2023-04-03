@@ -66,19 +66,21 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <androidx.appcompat.widget.AppCompatButton
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/button_fragment_resolve_start"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="문제풀기"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:fontFamily="@font/jalnan_language"
+        android:src="@drawable/ic_learn_arrow_foward_24"
+        android:backgroundTint="@color/white"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="6dp"
         android:onClick="@{()->handlers.startSolve()}"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:background="@drawable/resolve_button_blue_10"/>
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
 
     <!--<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/button_fragment_resolve_start"
