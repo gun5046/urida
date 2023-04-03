@@ -26,10 +26,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.edu.mf.R
+import com.edu.mf.databinding.DialogFragmentMainFirstUserBinding
 import com.edu.mf.databinding.FragmentLanguageBinding
 import com.edu.mf.databinding.FragmentMainBinding
 import com.edu.mf.repository.model.Category
 import com.edu.mf.repository.model.picture.DetectedPicture
+import com.edu.mf.utils.App
 import com.edu.mf.utils.BitmapUtil
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.community.CommunityFragment
@@ -41,6 +43,7 @@ import com.edu.mf.view.picture.PicturePreviewFragment
 import com.edu.mf.view.picture.PictureResultFragment
 import com.edu.mf.view.study.StudyAdapter
 import com.edu.mf.view.study.StudyFragment
+import com.edu.mf.view.voice.VoiceFragment
 import com.edu.mf.view.study.learn.LearnFragment
 import com.edu.mf.view.study.quiz.QuizFragment
 import com.edu.mf.view.study.reslove.ResolveFragment
@@ -117,6 +120,12 @@ class MainFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        chkPermissionDrawingFragment()
+
+        if(App.firstUser){
+            showFirstUserDialog()
+        }
+
         init()
         Glide.with(this).load(R.raw.charac).into(binding.imageviewChrac)
         binding.apply {
@@ -345,7 +354,7 @@ class MainFragment: Fragment() {
                     }
                     //음성으로 찾아보기
                     else->{
-
+                        mainActivity.addFragment(VoiceFragment())
                     }
                 }
             }
@@ -377,5 +386,18 @@ class MainFragment: Fragment() {
             mainActivity.loginService.languageSetting(language, mainActivity.user!!.uid!!)
         }
         mainActivity.changeFragment(MainFragment())
+    }
+
+    fun showFirstUserDialog(){
+        val builder = AlertDialog.Builder(requireContext())
+        val dialogBinding = DialogFragmentMainFirstUserBinding.inflate(layoutInflater)
+        builder.setView(dialogBinding.root)
+        val dialog = builder.create()
+        dialogBinding.buttonDialogFirstUser.setOnClickListener {
+            dialog.dismiss()
+            App.firstUser = false
+        }
+        dialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog.show()
     }
 }

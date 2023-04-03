@@ -14,6 +14,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="grey_icon">#FFB1A2A2</color>
+    <color name="grey_00">#333333</color>
     <color name="grey_01">#5f5f69</color>
     <color name="grey_02">#52514d</color>
     <color name="grey_03">#555555</color>

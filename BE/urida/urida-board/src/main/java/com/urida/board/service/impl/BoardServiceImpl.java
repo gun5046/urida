@@ -1,9 +1,11 @@
 package com.urida.board.service.impl;
 
+import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.urida.board.dto.request.ArticleCreateDto;
+import com.urida.board.dto.request.ArticleRequestDto;
 import com.urida.board.dto.request.ArticleUpdateDto;
 import com.urida.board.dto.response.BoardDetailDto;
 import com.urida.board.dto.response.BoardListDto;
@@ -23,13 +25,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -46,20 +50,17 @@ public class BoardServiceImpl implements BoardService {
 
     private final Storage storage;
 
-    @Override
-    @Transactional(readOnly = true)
-    public List<BoardListDto> getArticles(int category_id) {
-        List<Board> allArticles = boardJpqlRepo.findAll(category_id);
+    private List<BoardListDto> getBoardListDtos(List<Board> userArticles) {
         List<BoardListDto> articleDtoList = new ArrayList<>();
-
-        for (Board article : allArticles) {
+        for(Board article : userArticles) {
             BoardListDto dto = BoardListDto.builder()
                     .board_id(article.getBoard_id())
                     .title(article.getTitle())
                     .content(article.getContent())
+                    .image(article.getImage())
                     .view(article.getView())
                     .dateTime(article.getTime())
-                    .category_id(category_id)
+                    .category_id(article.getCategory_id())
                     .likeCnt(likeBoardJpqlRepo.likeCnt(article.getBoard_id()))
                     .commentCnt(commentService.commentCnt(article.getBoard_id()))
                     .nickname(article.getUser().getNickname())
@@ -67,14 +68,26 @@ public class BoardServiceImpl implements BoardService {
 
             articleDtoList.add(dto);
         }
-
         return articleDtoList;
     }
 
     @Override
     @Transactional(readOnly = true)
+    public List<BoardListDto> getArticles(int category_id) {
+        List<Board> allArticles = boardJpqlRepo.findAll(category_id);
+        return getBoardListDtos(allArticles);
+
+    }
+
+    @Override
+    @Transactional(readOnly = true)
     public BoardDetailDto getArticle(Long id) {
+
         Board article = boardJpqlRepo.findById(id);
+        if(article == null){
+            throw new NoDataException("invalid data(Not Found)");
+        }
+        article.addView();
         String nickname = article.getUser().getNickname();
         List<CommentResponseDto> comments = commentService.getComments(id);
 
@@ -94,20 +107,34 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board createArticle(ArticleCreateDto articleCreateDto) throws IOException {
-        Optional<User> user = userJpqlRepo.findByUid(articleCreateDto.getUid());
+    @Transactional(readOnly = true)
+    public List<BoardListDto> getArticlesByUser(Long uid, int category_id) {
+        List<Board> userArticles = boardJpqlRepo.findByUid(uid, category_id);
+        return getBoardListDtos(userArticles);
+    }
 
-        if(articleCreateDto.getImage() == null) {
+    @Override
+    @Transactional(readOnly = true)
+    public List<BoardListDto> getLiked(Long uid, int category_id) {
+        List<Board> userLikedArticles = boardJpqlRepo.findByLiked(uid, category_id);
+        return getBoardListDtos(userLikedArticles);
+    }
+
+    @Override
+    public Board createArticle(ArticleRequestDto articleRequestDto, MultipartFile file) throws IOException {
+        Optional<User> user = userJpqlRepo.findByUid(articleRequestDto.getUid());
+
+        if(file.isEmpty()) {
             if (user.isPresent()) {
                 Board article = Board.builder()
-                        .title(articleCreateDto.getTitle())
-                        .content(articleCreateDto.getContent())
+                        .title(articleRequestDto.getTitle())
+                        .content(articleRequestDto.getContent())
                         .image(null)
-                        .category_id(articleCreateDto.getCategory_id())
-                        .time(LocalDateTime.now().toString())
+                        .category_id(articleRequestDto.getCategory_id())
+                        .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                         .user(user.get())
                         .build();
-
+                System.out.println("없음...");
                 try {
                     boardJpqlRepo.saveArticle(article);
                     return article;
@@ -121,26 +148,27 @@ public class BoardServiceImpl implements BoardService {
 
         }
         String uuid = UUID.randomUUID().toString(); // GCS에 저장될 파일 이름
-        String type = articleCreateDto.getImage().getContentType(); // 파일 형식
+        String type =file.getContentType(); // 파일 형식
 
         // cloud 이미지 업로드
         BlobInfo blobInfo = storage.create(
                 BlobInfo.newBuilder(drawingStorage, uuid)
+                        .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER))))
                         .setContentType(type)
                         .build(),
-                articleCreateDto.getImage().getInputStream()
+                file.getInputStream()
         );
 
         if (user.isPresent()) {
             Board article = Board.builder()
-                    .title(articleCreateDto.getTitle())
-                    .content(articleCreateDto.getContent())
-                    .image("https://storage.cloud.google.com/drawing-storage/" + uuid)
-                    .category_id(articleCreateDto.getCategory_id())
-                    .time(LocalDateTime.now().toString())
+                    .title(articleRequestDto.getTitle())
+                    .content(articleRequestDto.getContent())
+                    .image("https://storage.googleapis.com/drawing-storage/" + uuid)
+                    .category_id(articleRequestDto.getCategory_id())
+                    .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .user(user.get())
                     .build();
-
+            System.out.println("PLEAASE");
             try {
                 boardJpqlRepo.saveArticle(article);
                 return article;
@@ -164,7 +192,7 @@ public class BoardServiceImpl implements BoardService {
                     .board_id(targetArticle.getBoard_id())
                     .title(targetArticle.getTitle())
                     .content(newContent)
-                    .time(LocalDateTime.now().toString())
+                    .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .user(currUser.get())
                     .comment(targetArticle.getComment())
                     .build();
@@ -196,9 +224,7 @@ public class BoardServiceImpl implements BoardService {
             likeBoardJpqlRepo.saveLikeBoard(board_id, uid);
             System.out.println(likeBoardJpqlRepo.findByUserAndBoard(uid,board_id).get().isStatus());
             return true;
-
         }
-
     }
 
     @Override
@@ -207,6 +233,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Boolean isLiked(Long board_id, Long uid) {
         Optional<Likeboard> isLiked = likeBoardJpqlRepo.findByUserAndBoard(uid, board_id);
         return isLiked.isPresent();

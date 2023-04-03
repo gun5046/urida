@@ -18,6 +18,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.edu.mf.R
 import com.edu.mf.databinding.FragmentPictureBinding
 import com.edu.mf.repository.model.picture.DetectedPicture
 import com.edu.mf.utils.BitmapUtil
@@ -81,21 +82,21 @@ class PictureFragment: Fragment() {
             if(it){
                 mainActivity.addFragment(PicturePreviewFragment())
             } else {
-                Toast.makeText(requireContext(), "카메라 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_camera), Toast.LENGTH_SHORT).show()
             }
         }
         val cameraPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it){
                 launchCamera()
             } else {
-                Toast.makeText(requireContext(), "카메라 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_camera), Toast.LENGTH_SHORT).show()
             }
         }
         val storagePermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it){
                 launchGallery()
             } else {
-                Toast.makeText(requireContext(), "저장장치 접근 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_storage), Toast.LENGTH_SHORT).show()
             }
         }
         binding.cardviewPreview.setOnClickListener {
@@ -118,6 +119,9 @@ class PictureFragment: Fragment() {
             } else {
                 storagePermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
             }
+        }
+        binding.imageviewGuide.setOnClickListener {
+            mainActivity.addFragment(PictureGuideFragment())
         }
         val translateOptions = TranslatorOptions.Builder()
             .setSourceLanguage(TranslateLanguage.ENGLISH)
