@@ -24,7 +24,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/main_background">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingbutton_fragment_learn_main_previous"

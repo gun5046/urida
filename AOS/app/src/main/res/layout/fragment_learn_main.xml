@@ -19,7 +19,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF">
+        android:background="@color/main_background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintlayout_fragment_learn_main_word"
