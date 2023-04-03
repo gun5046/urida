@@ -27,27 +27,27 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textview_fragment_voice_subtitle"
+            android:id="@+id/textview_fragment_voice_result_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:breakStrategy="high_quality"
             android:fontFamily="@font/kakao_bold"
-            android:text="저희가 감지한 단어에요!\n단어를 클릭하면 해당 단어를 음성으로 읽어줘요!"
+            android:text="@string/fragment_voice_result_text_subtitle"
             android:textSize="16sp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_fragment_voice_title" />
+            app:layout_constraintTop_toBottomOf="@+id/textview_fragment_voice_result_title" />
 
         <TextView
-            android:id="@+id/textview_fragment_voice_title"
+            android:id="@+id/textview_fragment_voice_result_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="60dp"
             android:fontFamily="@font/kakao_otf_bold"
             android:gravity="left"
-            android:text="탐지 결과"
+            android:text="@string/fragment_voice_result_text_title"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -61,7 +61,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_fragment_voice_subtitle">
+            app:layout_constraintTop_toBottomOf="@+id/textview_fragment_voice_result_subtitle">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintlayout_fragment_voice_result"

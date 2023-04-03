@@ -52,6 +52,10 @@
     <string name="fragment_picture_permission_camera">카메라 권한을 확인해주세요</string>
     <string name="fragment_picture_permission_storage">저장장치 접근 권한을 확인해주세요</string>
 
+    <!--    fragment_picture_result-->
+    <string name="fragment_picture_result_text_title">탐지 결과</string>
+    <string name="fragment_picture_result_text_subtitle">저희가 감지한 사물의 리스트에요!\n단어를 클릭하면 해당 단어를 음성으로 읽어줘요</string>
+
     <!--    fragment_community-->
     <string name="fragment_community_tablayout_title_free">자유 게시판</string>
     <string name="fragment_community_tablayout_title_drawing">그림 게시판</string>
@@ -98,11 +102,15 @@
     <string name="fragment_study_guide_button_next">끝내기</string>
 
     <!--    fragment_voice-->
-    <string name="fragment_voice_button_record">녹음하기</string>
-    <string name="fragment_voice_button_record_end">끝내기</string>
+    <string name="fragment_voice_text_title">음성으로 찾기</string>
+    <string name="fragment_voice_text_subtitle">어떻게 쓰는지 모르시겠다고요?\n음성을 녹음해보세요\n저희가 알려줄게요</string>
     <string name="fragment_voice_text_voice">아래 버튼을 눌러 단어를 녹음해보세요</string>
+    <string name="fragment_voice_text_voice_recording">녹음 중입니다</string>
+    <string name="fragment_voice_permission_record_audio">음성 녹음 권한을 확인해주세요</string>
 
     <!--    fragment_voice_result-->
+    <string name="fragment_voice_result_text_title">탐지 결과</string>
+    <string name="fragment_voice_result_text_subtitle">저희가 감지한 단어에요!\n단어를 클릭하면 해당 단어를 음성으로 읽어줘요!</string>
     <string name="dialog_fragment_voice_result_textview">잘 모르겠어요.\n\n다시 한번 말해주실래요?</string>
     <string name="dialog_fragment_voice_result_main_button">첫 화면으로</string>
     <string name="dialog_fragment_voice_result_button">다시 말하기</string>

@@ -61,7 +61,7 @@ class VoiceFragment : Fragment() {
             if(it[Manifest.permission.RECORD_AUDIO] == true && it[Manifest.permission.WRITE_EXTERNAL_STORAGE] == true && it[Manifest.permission.READ_EXTERNAL_STORAGE] == true){
                 onRecordButtonClick()
             } else {
-                Toast.makeText(requireContext(), "음성 녹음 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), requireContext().getString(R.string.fragment_voice_permission_record_audio), Toast.LENGTH_SHORT).show()
             }
         }
         binding.buttonRecord.setOnClickListener {
@@ -96,7 +96,7 @@ class VoiceFragment : Fragment() {
         } else {
             isRecording = true
             waveRecorder.startRecording()
-            binding.textVoice.text = "녹음 중입니다"
+            binding.textVoice.text = requireContext().getString(R.string.fragment_voice_text_voice_recording)
             binding.buttonRecord.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_stop))
         }
     }
