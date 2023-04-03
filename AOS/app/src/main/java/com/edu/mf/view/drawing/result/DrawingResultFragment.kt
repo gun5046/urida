@@ -42,7 +42,7 @@ class DrawingResultFragment(
         binding.mainViewModel = mainViewModel
         binding.drawingViewModel = drawingViewModel
 
-        disableBackPress()
+        clickBackPress()
 
         drawingViewModel.setDrawingResponse(drawingResponse)
         getImgIdx(drawingViewModel)
@@ -107,18 +107,14 @@ class DrawingResultFragment(
         _drawingViewModel.setImgInfoList(imgInfoList)
     }
 
-    // 뒤로가기 아이콘 클릭 시
-    fun backPressed(){
-        mainActivity.popFragment()
-    }
-
-    // onBackPressed 막기
-    private fun disableBackPress(){
+    // onBackPressed시 현재 fragment pop
+    private fun clickBackPress(){
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner, object : OnBackPressedCallback(true){
                 override fun handleOnBackPressed() {
+                    mainActivity.popFragment()
                 }
-        })
+            })
     }
 
     override fun onStop() {

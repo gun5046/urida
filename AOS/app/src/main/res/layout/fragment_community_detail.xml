@@ -26,7 +26,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/white">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintlayout_fragment_community_detail_image"
@@ -54,6 +55,7 @@
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
                         android:visibility="gone"
+                        android:background="@color/white"
                         app:imgUrl="@{BoardItem.image}"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
