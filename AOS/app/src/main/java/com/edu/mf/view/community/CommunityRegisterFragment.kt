@@ -269,7 +269,9 @@ class CommunityRegisterFragment(
     // 게시글 수정
     private fun updateBoard(){
         val updateBoardData = UpdateBoardData(
-            binding.edittextFragmentCommunityRegisterContent.text.toString(), ""
+            binding.edittextFragmentCommunityRegisterTitle.text.toString(),
+            binding.edittextFragmentCommunityRegisterContent.text.toString(),
+            ""
         )
         
         communityService.updateBoard(boardItem!!.boardId, updateBoardData)
