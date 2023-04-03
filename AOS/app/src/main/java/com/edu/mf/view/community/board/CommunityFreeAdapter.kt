@@ -1,8 +1,10 @@
 package com.edu.mf.view.community.board
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.edu.mf.databinding.ItemFragmentCommunityFreeBinding
 import com.edu.mf.repository.model.community.BoardListItem
 import com.edu.mf.view.common.MainActivity
@@ -40,7 +42,14 @@ class CommunityFreeAdapter(
             fun bind(boardItem: BoardListItem){
                 binding.boardItem = boardItem
                 binding.cardviewItemFragmentCommunityFree.setOnClickListener {
+                    CommunityBoardFragment.rViewItemPosition = layoutPosition
                     mainActivity.addFragment(CommunityDetailFragment(boardItem))
+                }
+
+                if (CommunityBoardFragment.myBoard){
+                    binding.textviewItemFragmentCommunityFreeWriter.visibility = View.GONE
+                } else{
+                    binding.textviewItemFragmentCommunityFreeWriter.visibility = View.VISIBLE
                 }
             }
         }

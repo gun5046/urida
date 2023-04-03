@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="splash_background">#FFFFFF</color>
+    <color name="main_background">#FBFBFB</color>
+    <color name="background_blue">#bad7f2</color>
     <color name="primary_purple">#DDC2F9</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
@@ -11,6 +14,7 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="grey_icon">#FFB1A2A2</color>
+    <color name="grey_00">#333333</color>
     <color name="grey_01">#5f5f69</color>
     <color name="grey_02">#52514d</color>
     <color name="grey_03">#555555</color>

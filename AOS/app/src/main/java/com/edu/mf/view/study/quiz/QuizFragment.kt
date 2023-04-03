@@ -17,7 +17,7 @@ import com.edu.mf.view.study.learn.LearnAdapter
 import com.edu.mf.viewmodel.MainViewModel
 
 class QuizFragment: Fragment(), QuizSelectCategoryDialog.CreateSelectProblemDialogListener{
-    private lateinit var learnAdapter: LearnAdapter
+    private lateinit var quizAdapter: QuizAdapter
     private lateinit var binding: FragmentQuizBinding
     private lateinit var viewModel : MainViewModel
     private lateinit var mainActivity: MainActivity
@@ -30,7 +30,6 @@ class QuizFragment: Fragment(), QuizSelectCategoryDialog.CreateSelectProblemDial
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_quiz,container,false)
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         mainActivity = MainActivity.getInstance()!!
-
         binding.lifecycleOwner = this
         viewModel.disableResolveMode()
         return binding.root
@@ -41,26 +40,12 @@ class QuizFragment: Fragment(), QuizSelectCategoryDialog.CreateSelectProblemDial
         init()
     }
     private fun init(){
-        setAdapter()
+        defaultFragment()
+    }
+    private fun defaultFragment(){
+        childFragmentManager.beginTransaction().replace(R.id.framelayout_container_quiz,QuizSelectFragment()).addToBackStack(null).commit()
     }
 
-    private fun setAdapter(){
-        learnAdapter = LearnAdapter()
-        learnAdapter.setFlag(2)
-        learnAdapter.setList(App.categories)
-        binding.recyclerviewFragmentQuizList.apply{
-            layoutManager = LinearLayoutManager(context)
-            adapter = learnAdapter
-        }
-        learnAdapter.setOnCategoryClickListener(object : LearnAdapter.CategoryClickListener{
-            override fun onClick(view: View, position: Int) {
-                viewModel.changeCategory(position)
-                val dialog = QuizSelectCategoryDialog(this@QuizFragment)
-                dialog.isCancelable = false
-                dialog.show(activity?.supportFragmentManager!!,"CreateSelectCategoryDialog")
-            }
-        })
-    }
 
     override fun onOkButtonClick() {
 

@@ -28,9 +28,9 @@ class PictureGuideFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val imageList = listOf(R.drawable.guide_picture_3, R.drawable.guide_picture_3, R.drawable.guide_picture_3)
         val stringList = listOf(
-            requireContext().resources.getString(R.string.fragment_guide_first_text),
-            requireContext().resources.getString(R.string.fragment_guide_second_text),
-            requireContext().resources.getString(R.string.fragment_guide_third_text)
+            requireContext().resources.getString(R.string.fragment_picture_guide_first_text),
+            requireContext().resources.getString(R.string.fragment_picture_guide_second_text),
+            requireContext().resources.getString(R.string.fragment_picture_guide_third_text)
         )
         binding.viewPager.adapter = PictureGuideAdapter(requireContext(), imageList, stringList)
         binding.viewPager.isUserInputEnabled = false
@@ -42,7 +42,7 @@ class PictureGuideFragment : Fragment() {
                 index++
                 binding.viewPager.setCurrentItem(index, true)
                 if(index == 2){
-                    binding.buttonPictureGuide.text = requireContext().resources.getString(R.string.fragment_guide_button_next)
+                    binding.buttonPictureGuide.text = requireContext().resources.getString(R.string.fragment_picture_guide_button_next)
                 }
             } else {
                 mainActivity.popFragment()

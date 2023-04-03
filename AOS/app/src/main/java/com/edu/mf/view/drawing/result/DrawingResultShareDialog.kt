@@ -51,7 +51,11 @@ class DrawingResultShareDialog: DialogFragment() {
             dialog?.dismiss()
             mainActivity.popFragment()
             mainActivity.addFragment(CommunityFragment())
-            mainActivity.addFragmentNoAnim(CommunityRegisterFragment())
+            mainActivity.addFragmentNoAnim(
+                CommunityRegisterFragment(
+                    null, 1
+                )
+            )
         }
 
         return binding.root

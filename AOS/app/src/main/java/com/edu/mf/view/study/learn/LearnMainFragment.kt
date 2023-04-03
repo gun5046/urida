@@ -43,7 +43,6 @@ class LearnMainFragment : Fragment() {
         }
 
         binding.lifecycleOwner = this
-        disableBackPress()
         return binding.root
     }
     
@@ -92,15 +91,7 @@ class LearnMainFragment : Fragment() {
         mainActivity.popFragment()
     }
 
-    /**
-     * onBackPressed 막기
-     */
-    private fun disableBackPress(){
-        activity?.onBackPressedDispatcher?.addCallback(viewLifecycleOwner,object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-            }
-        })
-    }
+
 
     override fun onStop() {
         super.onStop()

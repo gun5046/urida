@@ -17,3 +17,8 @@ data class CreateCommentData(
     val boardId: Int,
     val uid: Int
 )
+
+data class UpdateBoardData(
+    val content: String,
+    val dateTime: String
+)
