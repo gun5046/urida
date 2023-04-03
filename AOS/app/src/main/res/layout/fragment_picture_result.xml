@@ -86,6 +86,7 @@
                     android:backgroundTint="@color/white"
                     android:backgroundTintMode="add"
                     android:textColor="@color/black"
+                    android:text="@string/fragment_picture_result_button"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"

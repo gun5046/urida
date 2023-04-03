@@ -74,10 +74,10 @@
             android:layout_height="wrap_content"
             android:onClick="@{()->vm.startTTS()}"
             android:src="@drawable/ic_volume"
-            android:layout_marginTop="6dp"
-            app:layout_constraintBottom_toTopOf="@id/constraintlayout_fragment_learn_main_word"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginRight="20dp"
             android:backgroundTint="@color/white" />
 
         <TextView
