@@ -3,5 +3,6 @@
     <font
         android:fontStyle="normal"
         android:font="@font/nexon_gothic_bold"
+        android:fontWeight="700"
         />
 </font-family>

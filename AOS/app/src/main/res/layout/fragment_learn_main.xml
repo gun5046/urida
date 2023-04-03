@@ -19,24 +19,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#f7e1d7">
-
-        <ImageView
-            android:id="@+id/imageview_learn_fragment_backward"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="20dp"
-            android:onClick="@{()->handlers.backPressed()}"
-            android:src="@drawable/ic_backward_gray"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+        android:background="@color/main_background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintlayout_fragment_learn_main_word"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="100dp"
             android:layout_marginRight="30dp"
             android:layout_marginBottom="80dp"
             android:background="@drawable/learn_list_light_10"
@@ -52,44 +42,24 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="40dp"
                 app:imgSrc="@{@string/fragment_drawing_result_list_imageview(vm.selectedCategory,vm.currentIndex)}"
                 app:layout_constraintBottom_toTopOf="@id/textview_fragment_learn_main_answer"
-                app:layout_constraintLeft_toRightOf="@id/imageview_fragment_learn_main_left"
-                app:layout_constraintRight_toLeftOf="@id/imageview_fragment_learn_main_right"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageview_fragment_learn_main_right"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:onClick="@{()->vm.increaseIndex()}"
-                android:visibility="@{vm.currentIndex==(list.size())-1?View.GONE:View.VISIBLE}"
-                android:src="@drawable/study_arrow_right"
-                app:layout_constraintBottom_toBottomOf="@id/textview_fragment_learn_main_answer"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/imageview_fragment_learn_main_left"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:visibility="@{vm.currentIndex==0?View.GONE:View.VISIBLE}"
-                android:onClick="@{()->vm.decreaseIndex()}"
-                android:src="@drawable/study_arrow_left"
-                app:layout_constraintBottom_toBottomOf="@id/textview_fragment_learn_main_answer"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+
 
             <TextView
                 android:id="@+id/textview_fragment_learn_main_answer"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="30dp"
                 android:gravity="center"
-                android:fontFamily="@font/maple"
-                android:onClick="@{()->vm.startTTS()}"
+                android:fontFamily="@font/kakao_regular"
                 android:text="@{vm.answer}"
                 android:textColor="#4a5759"
                 android:textSize="40sp"
@@ -97,8 +67,18 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingbutton_fragment_learn_main_tts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->vm.startTTS()}"
+            android:src="@drawable/ic_volume"
+            android:layout_marginTop="6dp"
+            app:layout_constraintBottom_toTopOf="@id/constraintlayout_fragment_learn_main_word"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="20dp"
+            android:backgroundTint="@color/white" />
 
         <TextView
             android:id="@+id/textview_fragment_learn_progress"
@@ -118,14 +98,41 @@
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:progressDrawable="@drawable/progress_background"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="100dp"
             android:max="@{list.size()}"
             android:progress="@{vm.currentIndex+1}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/floatingbutton_fragment_learn_main_next"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingbutton_fragment_learn_main_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_learn_arrow_back"
+            android:backgroundTint="@color/white"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:visibility="@{vm.currentIndex==0?View.GONE:View.VISIBLE}"
+            android:onClick="@{()->vm.decreaseIndex()}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingbutton_fragment_learn_main_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_learn_arrow_foward_24"
+            android:onClick="@{()->vm.increaseIndex()}"
+            android:visibility="@{vm.currentIndex==(list.size())-1?View.GONE:View.VISIBLE}"
+            android:backgroundTint="@color/white"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
