@@ -171,31 +171,19 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintlayout_fragment_drawing_canvas_sketchbook"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <ImageView
-            android:id="@+id/imageview_fragment_drawing_guide"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="20dp"
-            android:src="@drawable/ic_guide2"
-            app:layout_constraintHorizontal_weight="0.2"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/button_fragment_drawing_drawing_result"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_fragment_drawing_drawing_result"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
             android:layout_marginBottom="20dp"
             android:elevation="4dp"
             android:text="@string/fragment_drawing_button_drawing_result"
             android:textSize="16sp"
             android:background="@drawable/drawing_button_result_next"
             app:layout_constraintHorizontal_weight="0.9"
-            app:layout_constraintLeft_toRightOf="@+id/imageview_fragment_drawing_guide"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 

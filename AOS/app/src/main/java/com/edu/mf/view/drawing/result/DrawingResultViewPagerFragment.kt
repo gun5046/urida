@@ -38,7 +38,7 @@ class DrawingResultViewPagerFragment(
         binding.drawingResultViewpager = this@DrawingResultViewPagerFragment
 
         initView()
-        disableBackPress()
+        clickBackPress()
 
         drawingViewModel.setDrawingResponse(drawingResponse)
         DrawingResultFragment(drawingResponse).getImgIdx(drawingViewModel)
@@ -66,16 +66,12 @@ class DrawingResultViewPagerFragment(
         return resultWordList
     }
 
-    // 뒤로가기 아이콘 클릭 시
-    fun backPressed(){
-        mainActivity.popFragment()
-    }
-
-    // onBackPressed 막기
-    private fun disableBackPress(){
+    // onBackPressed시 현재 fragment pop
+    private fun clickBackPress(){
         requireActivity().onBackPressedDispatcher.addCallback(
             viewLifecycleOwner, object : OnBackPressedCallback(true){
                 override fun handleOnBackPressed() {
+                    mainActivity.popFragment()
                 }
             })
     }

@@ -19,6 +19,7 @@ data class CreateCommentData(
 )
 
 data class UpdateBoardData(
+    val title: String,
     val content: String,
     val dateTime: String
 )

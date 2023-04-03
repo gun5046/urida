@@ -401,6 +401,7 @@ class CommunityDetailFragment(
                 setOnClickListener {
                     makeDialog()
                 }
+                bringToFront()
             }
         }
     }

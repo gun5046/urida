@@ -20,7 +20,7 @@ interface CommunityService {
     @POST("board/create")
     fun createBoard(
         @Part image: MultipartBody.Part?,
-        @Part("articleRequestDto") createBoardData: RequestBody
+        @Part("articleRequestDto") createBoardData: CreateBoardData
     ): Call<CreateBoardResponse>
 
     // 게시글 리스트 보기(자유/그림)
@@ -83,12 +83,14 @@ interface CommunityService {
         @Path("uid") uid:Int
     ): Call<List<MyCommentResponse>>
 
+    // 게시글 수정
     @PUT("board/{id}")
     fun updateBoard(
         @Path("id") boardId: Int,
         @Body updateBoardData: UpdateBoardData
     ): Call<UpdateBoardResponse>
 
+    // 게시글 삭제
     @DELETE("board/{id}")
     fun deleteBoard(@Path("id") boardId: Int): Call<Void>
 }

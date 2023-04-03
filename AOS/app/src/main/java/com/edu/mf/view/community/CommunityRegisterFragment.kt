@@ -28,18 +28,15 @@ import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.repository.model.User
 import com.edu.mf.repository.model.community.*
 import com.edu.mf.utils.App
-import com.edu.mf.utils.SharedPreferencesUtil
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.drawing.result.DrawingResultShareDialog
+import com.edu.mf.viewmodel.CommunityViewModel
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import okio.BufferedSink
 import okio.source
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -79,6 +76,9 @@ class CommunityRegisterFragment(
         chkPermissionGallery()
         chkDrawingUri()
 
+        if (boardItem != null){
+            binding.imageviewFragmentCommunityRegisterPlus.visibility = View.GONE
+        }
         binding.boardListItem = boardItem
     }
 
@@ -91,6 +91,7 @@ class CommunityRegisterFragment(
             setImg(drawingUri)
 
             DrawingResultShareDialog.savedDrawingUri = "".toUri()
+            binding.cardviewFragmentCommunityRegister.isClickable = false
         }
     }
 
@@ -98,7 +99,9 @@ class CommunityRegisterFragment(
     private fun chkPermissionGallery(){
         val reqPermission = requestPermission()
         binding.cardviewFragmentCommunityRegister.setOnClickListener {
-            reqPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            if (boardItem == null){
+                reqPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
         }
     }
 
@@ -141,6 +144,7 @@ class CommunityRegisterFragment(
         }
     }
 
+    // 이미지뷰 설정
     private fun setImg(uri: Uri){
         binding.imageviewFragmentCommunityRegister.setImageURI(uri)
         binding.imageviewFragmentCommunityRegisterPlus.visibility = View.GONE
@@ -208,10 +212,11 @@ class CommunityRegisterFragment(
     // 작성한 게시글 서버로 전송
     private fun sendBoard(){
         var multipart:MultipartBody.Part? = null
+
         if (drawingUri != "".toUri()){
-            multipart = drawingUri.asMultipart("file", requireContext().contentResolver)!!
+            multipart = drawingUri.asMultipart("image", requireContext().contentResolver)!!
         } else if (galleryUri != "".toUri()){
-            multipart = galleryUri.asMultipart("file", requireContext().contentResolver)!!
+            multipart = galleryUri.asMultipart("image", requireContext().contentResolver)!!
         }
 
         val boardData = CreateBoardData(
@@ -223,15 +228,17 @@ class CommunityRegisterFragment(
 
         communityService.createBoard(
             multipart,
-            makeRequestBody(boardData)
+            boardData
         ).enqueue(object : Callback<CreateBoardResponse>{
                 override fun onResponse(
                     call: Call<CreateBoardResponse>,
                     response: Response<CreateBoardResponse>
                 ) {
                     if (response.code() == 200){
-                        val body = response.body()!!
+                        delSavedImg(drawingUri)
 
+                        mainActivity.popFragment()
+                        actionBar.hide()
                     }
                 }
 
@@ -240,17 +247,6 @@ class CommunityRegisterFragment(
                 }
             }
         )
-    }
-
-    private fun makeRequestBody(data: CreateBoardData): RequestBody{
-        val jsonObject = JSONObject()
-        jsonObject.put("title", data.title)
-        jsonObject.put("content", data.content)
-        jsonObject.put("category_id", data.categoryId)
-        jsonObject.put("uid", data.uid)
-
-        return jsonObject.toString()
-            .toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
     }
 
     // 액션바 설정
@@ -273,8 +269,11 @@ class CommunityRegisterFragment(
     // 게시글 수정
     private fun updateBoard(){
         val updateBoardData = UpdateBoardData(
-            binding.edittextFragmentCommunityRegisterContent.text.toString(), ""
+            binding.edittextFragmentCommunityRegisterTitle.text.toString(),
+            binding.edittextFragmentCommunityRegisterContent.text.toString(),
+            ""
         )
+        
         communityService.updateBoard(boardItem!!.boardId, updateBoardData)
             .enqueue(object : Callback<UpdateBoardResponse>{
                 override fun onResponse(
@@ -282,7 +281,10 @@ class CommunityRegisterFragment(
                     response: Response<UpdateBoardResponse>
                 ) {
                     if (response.code() == 200){
-                        val body = response.body()!!
+                        delSavedImg(drawingUri)
+
+                        mainActivity.popFragment()
+                        actionBar.hide()
                     }
                 }
 
@@ -305,10 +307,6 @@ class CommunityRegisterFragment(
                     } else{
                         sendBoard()
                     }
-
-                    delSavedImg(drawingUri)
-                    mainActivity.popFragment()
-                    actionBar.hide()
                 }
             }
             android.R.id.home -> {
