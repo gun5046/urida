@@ -19,6 +19,10 @@ import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.community.CommunityFragment
 import com.edu.mf.view.community.CommunityRegisterFragment
 import com.edu.mf.view.drawing.DrawingFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.FileOutputStream
 
 class DrawingResultShareDialog: DialogFragment() {
@@ -51,11 +55,13 @@ class DrawingResultShareDialog: DialogFragment() {
             dialog?.dismiss()
             mainActivity.popFragment()
             mainActivity.addFragment(CommunityFragment())
-            mainActivity.addFragmentNoAnim(
-                CommunityRegisterFragment(
-                    null, 1
+            CoroutineScope(Dispatchers.Main).launch {
+                mainActivity.addFragmentNoAnim(
+                    CommunityRegisterFragment(
+                        null, 1
+                    )
                 )
-            )
+            }
         }
 
         return binding.root
@@ -65,7 +71,6 @@ class DrawingResultShareDialog: DialogFragment() {
     private fun saveFile(bitmap: Bitmap): Uri?{
         val values = ContentValues()
         values.put(MediaStore.Images.Media.DISPLAY_NAME, "mf_drawing")
-        //values.put(Images.Media.MIME_TYPE, "image/jpeg")
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/png")
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
@@ -78,7 +83,6 @@ class DrawingResultShareDialog: DialogFragment() {
 
             if (descriptor != null){
                 val fos = FileOutputStream(descriptor.fileDescriptor)
-                //bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos)
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos)
                 fos.close()
                 descriptor.close()

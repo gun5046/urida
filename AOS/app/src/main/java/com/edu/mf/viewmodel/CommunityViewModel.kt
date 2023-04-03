@@ -12,8 +12,8 @@ class CommunityViewModel: ViewModel() {
     private val _boardList = MutableLiveData<List<BoardListItem>>()
     val boardList: LiveData<List<BoardListItem>> = _boardList
 
-    private val _boardListItem = MutableLiveData<BoardListItem>()
-    val boardListItem: LiveData<BoardListItem> = _boardListItem
+    private val _boardListItem = MutableLiveData<BoardListItem?>()
+    val boardListItem: LiveData<BoardListItem?> = _boardListItem
 
     private val _commentList = MutableLiveData<List<CommentListItem>>()
     val commentList: LiveData<List<CommentListItem>> = _commentList
@@ -27,7 +27,7 @@ class CommunityViewModel: ViewModel() {
         }
     }
 
-    fun setBoardItem(boardListItem: BoardListItem){
+    fun setBoardItem(boardListItem: BoardListItem?){
         viewModelScope.launch {
             _boardListItem.value = boardListItem
         }
