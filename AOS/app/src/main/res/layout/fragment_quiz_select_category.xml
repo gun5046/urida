@@ -52,7 +52,7 @@
                 android:layout_margin="10dp"
                 android:layout_marginTop="10dp"
                 android:onClick="@{()->handlers.clickBackButton()}"
-                android:text="뒤로가기"
+                android:text="이전으로"
                 android:fontFamily="@font/kakao_otf_bold"
                 android:textStyle="bold"
                 android:textSize="20sp"

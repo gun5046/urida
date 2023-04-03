@@ -15,17 +15,14 @@
     android:padding="10dp"
     android:background="@drawable/learn_list_light_gray_10">
 
-
-
-
     <TextView
         android:id="@+id/textview_item_fragment_resolve_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="과일/채소"
-        android:textSize="24sp"
-        android:fontFamily="@font/jalnan_language"
-        android:layout_marginTop="10dp"
+        android:textSize="22sp"
+        android:fontFamily="@font/kakao_otf_bold"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
@@ -35,9 +32,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:text="그림보고 단어 맞추기"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/jalnan_language"
         android:textSize="20sp"
+        android:fontFamily="@font/kakao_otf_bold"
+        android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/textview_item_fragment_resolve_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
@@ -46,11 +43,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="정답확인"
-        android:background="@drawable/learn_list_light_green_10"
-        android:layout_marginRight="8dp"
-        android:textSize="14sp"
-        android:fontFamily="@font/jalnan_language"
+        android:textSize="16sp"
         android:textColor="@color/black"
+        android:background="@drawable/learn_list_light_8"
+        android:fontFamily="@font/kakao_otf_bold"
+        android:layout_marginRight="10dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
     <TextView
@@ -58,8 +55,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:fontFamily="@font/jalnan_language"
-        android:textColor="#F83737"
+        android:fontFamily="@font/kakao_otf_bold"
+        android:textColor="@color/background_blue"
         android:text="@{`오답횟수 : `+resolve.wrong_cnt}"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="20dp"

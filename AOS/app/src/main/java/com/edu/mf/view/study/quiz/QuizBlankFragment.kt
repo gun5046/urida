@@ -43,7 +43,7 @@ class QuizBlankFragment : Fragment() {
         if(viewModel.resolveMode) viewModel.getResolveProblem()
         else viewModel.getProblem()
         viewModel.setTTS()
-        disableBackPress()
+        //disableBackPress()
         binding.apply{
             datas = App.PICTURES
             handlers = this@QuizBlankFragment

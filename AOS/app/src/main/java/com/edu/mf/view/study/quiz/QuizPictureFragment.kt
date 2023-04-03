@@ -50,7 +50,7 @@ class QuizPictureFragment : Fragment() {
             vm = viewModel
             lifecycleOwner = this@QuizPictureFragment
         }
-        disableBackPress()
+        //disableBackPress()
     }
     fun onBackPressed(){
         mainActivity.popQuizFragment("picture")
