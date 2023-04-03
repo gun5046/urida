@@ -35,16 +35,6 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:id="@+id/imageview_fragment_community_detail_back"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_margin="20dp"
-                        android:onClick="@{()->CommunityDetail.backPressed()}"
-                        android:src="@drawable/ic_backward_gray"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"/>
-
-                    <ImageView
                         android:id="@+id/imageview_fragment_community_detail_dots"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
@@ -76,6 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardCornerRadius="20dp"
+                    app:cardUseCompatPadding="true"
                     app:layout_constraintTop_toBottomOf="@+id/constraintlayout_fragment_community_detail_image"
                     app:layout_constraintBottom_toTopOf="@+id/textView_fragment_community_detail_content">
 
@@ -229,9 +220,10 @@
                     android:id="@+id/textView_fragment_community_detail_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="14dp"
-                    android:padding="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="24dp"
+                    android:paddingStart="24dp"
+                    android:paddingEnd="24dp"
                     android:text="@{BoardItem.content}"
                     android:textColor="@color/grey_03"
                     android:textSize="16sp"
@@ -244,7 +236,7 @@
                     android:id="@+id/view_fragment_community_detail_1"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/grey_07"
+                    android:background="@color/grey_08"
                     app:layout_constraintTop_toBottomOf="@+id/textView_fragment_community_detail_content"
                     app:layout_constraintBottom_toTopOf="@+id/constraintlayout_fragment_community_detail_content"/>
 
@@ -252,7 +244,7 @@
                     android:id="@+id/constraintlayout_fragment_community_detail_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="14dp"
+                    android:paddingStart="22dp"
                     android:paddingEnd="20dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
@@ -303,7 +295,7 @@
                     android:id="@+id/view_fragment_community_detail_2"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/grey_07"
+                    android:background="@color/grey_08"
                     app:layout_constraintTop_toBottomOf="@+id/constraintlayout_fragment_community_detail_content"
                     app:layout_constraintBottom_toTopOf="@+id/recyclerview_fragment_community_comment"/>
 

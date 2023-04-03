@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.edu.mf.databinding.FragmentCommunityBoardBinding
@@ -71,7 +73,7 @@ class CommunityBoardFragment(
         val drawingAdapter = CommunityDrawingAdapter(mainActivity, communityViewModel, boardList)
         binding.recyclerviewFragmentCommunity.apply {
             adapter = drawingAdapter
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = GridLayoutManager(requireContext(), 1)
             scrollToPosition(rViewItemPosition)
         }
     }

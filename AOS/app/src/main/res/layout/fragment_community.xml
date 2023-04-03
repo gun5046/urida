@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabTextAppearance="@style/TabText"
+        app:tabSelectedTextColor="@color/background_light_green"
         app:tabIndicatorColor="@color/background_light_green"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -33,25 +34,33 @@
                 android:id="@+id/chip_fragment_community_all"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_community_chip_all" />
+                android:text="@string/fragment_community_chip_all"
+                android:textColor="@color/grey_00"
+                app:chipBackgroundColor="@color/grey_09"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_fragment_community_myboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_community_chip_myboard"/>
+                android:text="@string/fragment_community_chip_myboard"
+                android:textColor="@color/grey_00"
+                app:chipBackgroundColor="@color/grey_09"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_fragment_community_mycomment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_community_chip_mycomment"/>
+                android:text="@string/fragment_community_chip_mycomment"
+                android:textColor="@color/grey_00"
+                app:chipBackgroundColor="@color/grey_09"/>
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_fragment_community_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fragment_community_chip_like"/>
+                android:text="@string/fragment_community_chip_like"
+                android:textColor="@color/grey_00"
+                app:chipBackgroundColor="@color/grey_09"/>
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -72,6 +81,7 @@
         android:layout_margin="30dp"
         android:src="@drawable/ic_plus"
         android:backgroundTint="@color/background_light_green"
+        app:tint="@color/grey_09"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
