@@ -86,13 +86,15 @@ class CommunityDetailFragment(
         getCommentList()
         binding.buttonFragmentCommunityDetailWriteComment.setOnClickListener {
             if (!commentUpdate){
-                writeComment()
+                if (binding.edittextFragmentCommunityDetailWriteComment.text.trim().toString()
+                    != ""){
+                    writeComment()
+                }
             } else{
                 updateComment(communityViewModel.commentItem.value!!)
             }
         }
 
-        binding.imageviewFragmentCommunityDetailBack.bringToFront()
         showDots()
     }
 
