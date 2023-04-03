@@ -185,21 +185,14 @@ public class BoardServiceImpl implements BoardService {
     public Board updateArticle(ArticleUpdateDto articleUpdateDto, Long id) {
         Board targetArticle = boardJpqlRepo.findById(id);
         Optional<User> currUser = userJpqlRepo.findByUid(targetArticle.getUser().getUid());
-        String newContent = articleUpdateDto.getContent();
 
         if (currUser.isPresent()) {
-            Board updatedArticle = Board.builder()
-                    .board_id(targetArticle.getBoard_id())
-                    .title(targetArticle.getTitle())
-                    .content(newContent)
-                    .time(ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-                    .user(currUser.get())
-                    .comment(targetArticle.getComment())
-                    .build();
+
+            targetArticle.updateBoard(articleUpdateDto.getTitle(),articleUpdateDto.getContent());
 
             try {
-                boardJpqlRepo.saveArticle(updatedArticle);
-                return updatedArticle;
+                boardJpqlRepo.saveArticle(targetArticle);
+                return targetArticle;
             } catch (Exception e) {
                 throw new SaveException("Value invalid");
             }
