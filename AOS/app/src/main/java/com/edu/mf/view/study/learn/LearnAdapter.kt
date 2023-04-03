@@ -5,11 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.edu.mf.R
 import com.edu.mf.databinding.ItemFragmentLearnBinding
+import com.edu.mf.utils.App
+import com.edu.mf.utils.SharedPreferencesUtil
 
 
 class LearnAdapter(
@@ -23,7 +26,26 @@ class LearnAdapter(
         fun bind(data:String){
             binding.data = data
             binding.flag = flag
-            binding.buttonItemLearnStart.setOnClickListener {view->
+            binding.position = layoutPosition+1
+            binding.currentIndex = when(layoutPosition){
+                0->SharedPreferencesUtil(binding.root.context).getFruitsBookMark()
+                1->SharedPreferencesUtil(binding.root.context).getJobsBookMark()
+                2->SharedPreferencesUtil(binding.root.context).getAnimalsBookMark()
+                3->SharedPreferencesUtil(binding.root.context).getObjectsBookMark()
+                4->SharedPreferencesUtil(binding.root.context).getPlacesBookMark()
+                else->SharedPreferencesUtil(binding.root.context).getActionsBookMark()
+            }
+            binding.lastIndex = App.PICTURES[layoutPosition].size
+            binding.progress = when(layoutPosition){
+                0->SharedPreferencesUtil(binding.root.context).getFruitsBookMark()
+                1->SharedPreferencesUtil(binding.root.context).getJobsBookMark()
+                2->SharedPreferencesUtil(binding.root.context).getAnimalsBookMark()
+                3->SharedPreferencesUtil(binding.root.context).getObjectsBookMark()
+                4->SharedPreferencesUtil(binding.root.context).getPlacesBookMark()
+                else->SharedPreferencesUtil(binding.root.context).getActionsBookMark()
+            }+1 / App.PICTURES[layoutPosition].size * 100
+
+            binding.constraintItemLearn.setOnClickListener {view->
                 categoryClickListener.onClick(view,layoutPosition)
             }
         }
