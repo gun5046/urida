@@ -1,7 +1,6 @@
 package com.urida.board.entity;
 
 import com.urida.comment.entity.Comment;
-import com.urida.likeboard.entity.Likeboard;
 import com.urida.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,6 +10,9 @@ import org.hibernate.annotations.ColumnDefault;
 
 
 import javax.persistence.*;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,7 +60,11 @@ public class Board {
     public void addView(){
         this.view++;
     }
-
+    public void updateBoard(String title, String content){
+        this.title = title;
+        this.content = content;
+        this.time = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
 //    /* 좋아요 추가*/
 //    public void like(){
 //        this.assessment++;

@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ArticleUpdateDto {
 
+    private String title;
     private String content;
 
     private String dateTime;
