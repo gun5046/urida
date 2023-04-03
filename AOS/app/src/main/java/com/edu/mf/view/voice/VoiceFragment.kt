@@ -92,11 +92,12 @@ class VoiceFragment : Fragment() {
                     mainActivity.addFragment(VoiceResultFragment())
                 }
             }
-            binding.buttonRecord.text = requireContext().resources.getString(R.string.fragment_voice_button_record)
+//            binding.buttonRecord.text = requireContext().resources.getString(R.string.fragment_voice_button_record)
         } else {
             isRecording = true
             waveRecorder.startRecording()
-            binding.buttonRecord.text = requireContext().resources.getString(R.string.fragment_voice_button_record_end)
+            binding.textVoice.text = "녹음 중입니다"
+            binding.buttonRecord.setImageDrawable(ContextCompat.getDrawable(requireContext(), R.drawable.ic_stop))
         }
     }
 
