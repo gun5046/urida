@@ -16,7 +16,7 @@ class StudyAdapter(val categories:List<Category>):RecyclerView.Adapter<StudyAdap
         fun bind(category:Category){
             binding.textviewItemTitle.text = category.title
             binding.textviewItemDescription.text = category.description
-            binding.imageviewItemIcon.setImageResource(category.src)
+            //binding.imageviewItemIcon.setImageResource(category.src)
             binding.constraintlayoutItemMainWord.setOnClickListener {
                 studyClickListener.onClick(layoutPosition,category)
             }
