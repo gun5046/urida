@@ -73,13 +73,12 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_learn_arrow_foward_24"
         android:backgroundTint="@color/white"
-        android:layout_marginLeft="6dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="6dp"
         android:onClick="@{()->handlers.startSolve()}"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintRight_toRightOf="parent" />
 
 
     <!--<com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
