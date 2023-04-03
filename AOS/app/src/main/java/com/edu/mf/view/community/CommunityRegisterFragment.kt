@@ -29,6 +29,7 @@ import com.edu.mf.repository.model.User
 import com.edu.mf.repository.model.community.*
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.community.board.CommunityBoardFragment
 import com.edu.mf.view.drawing.result.DrawingResultShareDialog
 import com.edu.mf.viewmodel.CommunityViewModel
 import okhttp3.MediaType
@@ -305,6 +306,7 @@ class CommunityRegisterFragment(
                     if (boardItem != null){
                         updateBoard()
                     } else{
+                        CommunityBoardFragment.rViewItemPosition = 0
                         sendBoard()
                     }
                 }
