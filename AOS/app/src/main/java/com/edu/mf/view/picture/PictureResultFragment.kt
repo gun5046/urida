@@ -62,6 +62,8 @@ class PictureResultFragment : Fragment() {
                 binding.recyclerview.visibility = View.GONE
                 binding.layoutEmpty.visibility = View.VISIBLE
             } else {
+                binding.textviewFragmentPictureResultTitle.visibility = View.VISIBLE
+                binding.textviewFragmentPictureResultSubtitle.visibility = View.VISIBLE
                 binding.recyclerview.visibility = View.VISIBLE
                 binding.layoutEmpty.visibility = View.GONE
             }

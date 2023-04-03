@@ -7,20 +7,54 @@
     android:layout_height="match_parent"
     tools:context=".view.picture.PictureResultFragment">
 
+    <TextView
+        android:id="@+id/textview_fragment_picture_result_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
+        android:fontFamily="@font/kakao_otf_bold"
+        android:gravity="left"
+        android:text="탐지 결과"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textview_fragment_picture_result_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:breakStrategy="high_quality"
+        android:fontFamily="@font/kakao_bold"
+        android:text="저희가 감지한 사물의 리스트에요!\n단어를 클릭하면 해당 단어를 음성으로 읽어줘요!"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_fragment_picture_result_title" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:background="#FAF2AC"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="gone" />
+        app:layout_constraintTop_toBottomOf="@+id/textview_fragment_picture_result_subtitle" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_empty"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#FAF2AC"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +73,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" >
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -49,17 +83,22 @@
                     android:id="@+id/button_empty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/fragment_picture_result_button"
+                    android:backgroundTint="@color/white"
+                    android:backgroundTintMode="add"
+                    android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_empty" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_empty"
+                    app:strokeColor="@color/teal_200"
+                    app:strokeWidth="0.5dp" />
 
                 <TextView
                     android:id="@+id/text_empty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
                     android:textAlignment="center"
                     android:text="@string/fragment_picture_result_text"
                     app:layout_constraintBottom_toTopOf="@+id/button_empty"
