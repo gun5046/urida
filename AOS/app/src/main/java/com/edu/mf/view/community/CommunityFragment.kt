@@ -161,6 +161,7 @@ class CommunityFragment: Fragment() {
         tabLayout.addOnTabSelectedListener(object: OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 tabPosition = tab!!.position
+                CommunityBoardFragment.rViewItemPosition = 0
                 changeFrameLayout(CommunityBoardFragment(tabPosition))
                 when(tabPosition){
                     0 -> binding.fabFragmentCommunity.show()
