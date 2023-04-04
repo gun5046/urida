@@ -74,6 +74,7 @@
     <!--    fragment_community_register-->
     <string name="fragment_community_register_edittext_title">제목</string>
     <string name="fragment_community_register_edittext_content">내용</string>
+    <string name="fragment_community_register_edittext_imagesize_fail">이미지 용량이 커서 업로드에 실패하였습니다</string>
 
     <!--    fragment_community_mypage-->
     <string name="fragment_community_mypage_tablayout_title_board">게시글</string>
@@ -122,6 +123,9 @@
     <string name="fragment_picture_result_text">죄송해요.\n물체를 인식하기 어려워요\n다시 한번 찍어주세요</string>
     <string name="fragment_picture_result_button">홈 화면으로 이동</string>
 
+    <!--  dialog_loading  -->
+    <string name="dialog_loading">Loading..</string>
+
     <!--    category-->
     <string name="fruit_vegetables">과일/채소</string>
     <string name="job">직업</string>
@@ -167,4 +171,5 @@
     <string name="problem_category_third_subtitle">주어진 그림과 문장을 보고 \n어떤 단어가 들어가야 할지 맞춰 보아요</string>
     <string name="problem_category_fourth_title">연관된 단어 맞추기</string>
     <string name="problem_category_fourth_subtitle">제시된 단어들과 연관된 단어를 골라 보아요</string>
+
 </resources>

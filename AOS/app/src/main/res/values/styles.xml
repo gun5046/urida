@@ -54,4 +54,9 @@
     <style name="TabText" parent="TextAppearance.Design.Tab">
         <item name="android:fontFamily">@font/kakao_otf_bold</item>
     </style>
+
+    <!--  Transparent Dialog  -->
+    <style name="TransparentDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>

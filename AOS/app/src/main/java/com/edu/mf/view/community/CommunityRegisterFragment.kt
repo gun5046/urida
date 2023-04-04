@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.ActionBar
 import android.os.Bundle
@@ -28,6 +29,7 @@ import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.repository.model.User
 import com.edu.mf.repository.model.community.*
 import com.edu.mf.utils.App
+import com.edu.mf.view.common.LoadingDialog
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.community.board.CommunityBoardFragment
 import com.edu.mf.view.drawing.result.DrawingResultShareDialog
@@ -56,6 +58,7 @@ class CommunityRegisterFragment(
     private lateinit var actionBar: ActionBar
     private lateinit var drawingUri: Uri
     private var galleryUri = "".toUri()
+    private val loadingDialog = LoadingDialog()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -140,23 +143,40 @@ class CommunityRegisterFragment(
 
             if (uri != null){
                 setImg(uri)
-                galleryUri = uri
             }
         }
     }
 
-    // 이미지뷰 설정
+    // 이미지뷰에 이미지 띄우기
     private fun setImg(uri: Uri){
-        binding.imageviewFragmentCommunityRegister.setImageURI(uri)
-        binding.imageviewFragmentCommunityRegisterPlus.visibility = View.GONE
+        if (!getFileSize(uri)){
+            Toast.makeText(
+                requireContext(),
+                resources.getString(R.string.fragment_community_register_edittext_imagesize_fail),
+                Toast.LENGTH_SHORT
+            ).show()
+        } else{
+            if (drawingUri == "".toUri()){
+                galleryUri = uri
+            }
+            binding.imageviewFragmentCommunityRegister.setImageURI(uri)
+            binding.imageviewFragmentCommunityRegisterPlus.visibility = View.GONE
+        }
     }
 
-    // DrawingFragment에서 생성된 이미지 삭제
-    private fun delSavedImg(delImgUri: Uri){
-        if (drawingUri != "".toUri()){
-            val file = File(getPath(delImgUri))
-            file.delete()
+    // get img size
+    private fun getFileSize(imgUri: Uri): Boolean{
+        val path = getPath(imgUri)
+        if (path == ""){
+            return false
         }
+
+        val file = File(path)
+        val fileSize = Integer.parseInt((file.length()).toString())
+        if(fileSize > 83_886_080){
+            return false
+        }
+        return true
     }
 
     // 이미지 절대경로 가져오기
@@ -195,10 +215,18 @@ class CommunityRegisterFragment(
         }
     }
 
+    // DrawingFragment에서 생성된 이미지 삭제
+    private fun delSavedImg(delImgUri: Uri){
+        if (drawingUri != "".toUri()){
+            val file = File(getPath(delImgUri))
+            file.delete()
+        }
+    }
+
     // 빈 칸 유효성 검사
     private fun chkEmpty(): Boolean{
-        if (binding.edittextFragmentCommunityRegisterTitle.text.toString() == ""
-            || binding.edittextFragmentCommunityRegisterContent.text.toString() == ""){
+        if (binding.edittextFragmentCommunityRegisterTitle.text.toString().trim() == ""
+            || binding.edittextFragmentCommunityRegisterContent.text.toString().trim() == ""){
             Toast.makeText(
                 requireContext(),
                 resources.getString(R.string.fragment_community_register_chk_content),
@@ -208,6 +236,15 @@ class CommunityRegisterFragment(
             return false
         }
         return true
+    }
+
+    // 로딩화면 띄우고 없애기
+    private fun changeLoadingState(state: Boolean){
+        if(!state){
+            loadingDialog.dismiss()
+        } else{
+            loadingDialog.show(mainActivity.supportFragmentManager, null)
+        }
     }
 
     // 작성한 게시글 서버로 전송
@@ -241,29 +278,13 @@ class CommunityRegisterFragment(
                         mainActivity.popFragment()
                         actionBar.hide()
                     }
+                    changeLoadingState(false)
                 }
 
                 override fun onFailure(call: Call<CreateBoardResponse>, t: Throwable) {
                     Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
-        )
-    }
-
-    // 액션바 설정
-    private fun setActionBar(){
-        actionBar = mainActivity.supportActionBar!!
-        actionBar.title = ""
-        actionBar.setDisplayHomeAsUpEnabled(true)
-        actionBar.setBackgroundDrawable(
-            ContextCompat.getDrawable(requireContext(), R.color.background_light_green)
-        )
-        actionBar.show()
-
-        requireActivity().addMenuProvider(
-            this
-            , viewLifecycleOwner
-            , Lifecycle.State.RESUMED
         )
     }
 
@@ -287,6 +308,7 @@ class CommunityRegisterFragment(
                         mainActivity.popFragment()
                         actionBar.hide()
                     }
+                    changeLoadingState(false)
                 }
 
                 override fun onFailure(call: Call<UpdateBoardResponse>, t: Throwable) {
@@ -303,6 +325,8 @@ class CommunityRegisterFragment(
         when(menuItem.itemId){
             R.id.actionbar_register -> {
                 if (chkEmpty()){
+                    changeLoadingState(true)
+
                     if (boardItem != null){
                         updateBoard()
                     } else{
@@ -318,6 +342,23 @@ class CommunityRegisterFragment(
             }
         }
         return true
+    }
+
+    // 액션바 설정
+    private fun setActionBar(){
+        actionBar = mainActivity.supportActionBar!!
+        actionBar.title = ""
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setBackgroundDrawable(
+            ContextCompat.getDrawable(requireContext(), R.color.background_light_green)
+        )
+        actionBar.show()
+
+        requireActivity().addMenuProvider(
+            this
+            , viewLifecycleOwner
+            , Lifecycle.State.RESUMED
+        )
     }
 
     override fun onDestroyView() {

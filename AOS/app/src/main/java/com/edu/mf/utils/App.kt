@@ -569,6 +569,7 @@ class App : Application(){
         PICTURES[6].add("숟가락")
         PICTURES[6].add("태양")
         PICTURES[6].add("백조")
+        PICTURES[6].add("빗자루")
     }
 
 }
