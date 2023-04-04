@@ -16,8 +16,11 @@ class DrawingAdapter(val categories:List<Category>) : RecyclerView.Adapter<Drawi
         fun bind(data : Category){
             binding.textviewItemTitle.text = data.title
             binding.textviewItemDescription.text = data.description
-            binding.imageviewItemIcon.setImageResource(data.src)
-            binding.constraintlayoutMainFragDrawing.setOnClickListener {
+            //binding.imageviewItemIcon.setImageResource(data.src)
+            binding.constraintlayoutItemMainDrawing.setOnClickListener {
+                drawingClickListener.onClick(layoutPosition,data)
+            }
+            binding.myButton.setOnClickListener {
                 drawingClickListener.onClick(layoutPosition,data)
             }
         }
