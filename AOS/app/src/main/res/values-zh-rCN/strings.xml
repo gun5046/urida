@@ -92,7 +92,7 @@
     <string name="fragment_quiz_select_category_cancel">到前一个</string>
     <string name="fragment_quiz_select_category_empty">请先选择类别</string>
     <string name="fragment_resolve_title">再试一次</string>
-    <string name="fragment_resolve_subtitle">再次解决错误的问题！\n如果您对正确答案感到好奇！\n请点击检查答案按钮！</string>
+    <string name="fragment_resolve_subtitle">再次解决错误的问题！\n如果您对正确答案感到好奇\n请点击检查答案按钮！</string>
     <string name="problem_category_first_title">看图猜词</string>
     <string name="problem_category_first_subtitle">看图猜猜是哪个词。</string>
     <string name="problem_category_second_title">猜字和图片</string>
@@ -101,4 +101,6 @@
     <string name="problem_category_third_subtitle">看给定的图片和句子，\n猜猜应该包括哪个词。</string>
     <string name="problem_category_fourth_title">匹配相关词</string>
     <string name="problem_category_fourth_subtitle">选择一个与出现的词相关的词</string>
+    <string name="fragment_resolve_empty">没有问题可以再次解决</string>
+    <string name="fragment_community_register_edittext_imagesize_fail">由于图像尺寸过大，上传失败</string>
 </resources>

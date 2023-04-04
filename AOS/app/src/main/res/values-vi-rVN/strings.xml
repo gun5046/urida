@@ -93,7 +93,7 @@
     <string name="fragment_quiz_select_category_ok">gỡ rối</string>
     <string name="fragment_quiz_select_category_empty">Vui lòng chọn một danh mục trước</string>
     <string name="fragment_resolve_title">thử lại</string>
-    <string name="fragment_resolve_subtitle">Giải lại các câu hỏi sai!\nNếu bạn tò mò về câu trả lời đúng!\nVui lòng nhấp vào nút Kiểm tra câu trả lời!</string>
+    <string name="fragment_resolve_subtitle">Giải lại các câu hỏi sai!\nNếu bạn tò mò về câu trả lời đúng\nVui lòng nhấp vào nút Kiểm tra câu trả lời!</string>
     <string name="problem_category_first_title">Nhìn vào bức tranh và đoán từ</string>
     <string name="problem_category_first_subtitle">Hãy nhìn vào bức tranh và đoán xem đó là từ gì.</string>
     <string name="problem_category_second_title">Đoán từ và hình ảnh</string>
@@ -101,4 +101,6 @@
     <string name="problem_category_third_title">Điền vào chỗ trống những từ thích hợp</string>
     <string name="problem_category_third_subtitle">Nhìn vào bức tranh và câu đã cho và\nđoán xem từ nào sẽ được thêm vào.</string>
     <string name="problem_category_fourth_title">nối các từ liên quan</string>
+    <string name="fragment_resolve_empty">Không có vấn đề để giải quyết một lần nữa</string>
+    <string name="fragment_community_register_edittext_imagesize_fail">Tải lên không thành công do kích thước hình ảnh lớn</string>
 </resources>

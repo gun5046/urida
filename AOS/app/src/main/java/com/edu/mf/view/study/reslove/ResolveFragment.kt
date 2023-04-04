@@ -119,7 +119,7 @@ class ResolveFragment: Fragment() {
             }
         }
         else{
-            Toast.makeText(requireContext(),"다시 풀어볼 문제가 없습니다",Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),resources.getString(R.string.fragment_resolve_empty),Toast.LENGTH_SHORT).show()
         }
     }
 

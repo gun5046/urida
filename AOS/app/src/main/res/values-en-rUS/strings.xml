@@ -17,11 +17,11 @@
     <string name="fragment_study_cardview_quiz">Word quiz</string>
     <string name="fragment_study_cardview_learn">Learning words</string>
     <string name="fragment_drawing_button_drawing_result">What is this?</string>
-    <string name="fragment_drawing_dialog_title">Color choice</string>
+    <string name="fragment_drawing_dialog_title">Color picker</string>
     <string name="fragment_drawing_dialog_custom">Choose a different color</string>
     <string name="fragment_drawing_dialog_presets">Add to Palette</string>
-    <string name="fragment_drawing_dialog_complete">Complete</string>
-    <string name="dialog_fragment_drawing_result_redrawing_textview">I\'m not sure.\n\nShould I go ask other friends?</string>
+    <string name="fragment_drawing_dialog_complete">Select</string>
+    <string name="dialog_fragment_drawing_result_redrawing_textview">Not sure what this is.\n\nWant to go ask other friends?</string>
     <string name="dialog_fragment_drawing_result_redrawing_main_button">Go to main</string>
     <string name="dialog_fragment_drawing_result_share_button">Share</string>
     <string name="fragment_picture_cardview_preview">Check in real time</string>
@@ -41,12 +41,12 @@
     <string name="fragment_community_detail_comment_dialog_edit">Edit</string>
     <string name="fragment_community_detail_comment_dialog_delete">Delete</string>
     <string name="fragment_community_detail_comment_edittext">Please enter your comment.</string>
-    <string name="fragment_community_detail_comment_button">Leave</string>
+    <string name="fragment_community_detail_comment_button">Add</string>
     <string name="fragment_community_register_edittext_title">Title</string>
     <string name="fragment_community_register_edittext_content">Content</string>
     <string name="fragment_community_mypage_tablayout_title_board">Post</string>
     <string name="fragment_community_mypage_tablayout_title_comment">Comment</string>
-    <string name="actionbar_menu_register">Complete</string>
+    <string name="actionbar_menu_register">Post</string>
     <string name="dialog_first_user_text">If you press the icon like the one above,\nyou can see Help</string>
     <string name="dialog_first_user_button">OK</string>
     <string name="fragment_picture_guide_first_text">You can see the names of objects captured by the camera in real time.</string>
@@ -91,7 +91,7 @@
     <string name="fragment_quiz_select_category_title">Please select a problem type</string>
     <string name="fragment_quiz_select_category_cancel">Previous</string>
     <string name="fragment_resolve_title">Re-solving</string>
-    <string name="fragment_resolve_subtitle">Solve the wrong questions again!\nIf you are curious about the correct answer!\nPlease click the Check Answer button!</string>
+    <string name="fragment_resolve_subtitle">Solve the Questions you\'ve got wrong again!\nIf you are curious about the correct answer\nPlease click the Check Answer button!</string>
     <string name="problem_category_first_title">Look at the picture and guess the word</string>
     <string name="problem_category_first_subtitle">Look at the picture and guess which word it is</string>
     <string name="problem_category_second_title">Guess the word with picture</string>
@@ -101,4 +101,6 @@
     <string name="problem_category_third_subtitle">Look at the given picture and sentence and guess which word fits in</string>
     <string name="problem_category_fourth_subtitle">Choose a word related to the presented words</string>
     <string name="fragment_quiz_select_category_empty">Please select a category first</string>
+    <string name="fragment_resolve_empty">No problems to solve again</string>
+    <string name="fragment_community_register_edittext_imagesize_fail">Upload failed due to large image size</string>
 </resources>

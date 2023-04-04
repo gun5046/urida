@@ -124,7 +124,7 @@
     <string name="fragment_picture_result_button">홈 화면으로 이동</string>
 
     <!--  dialog_loading  -->
-    <string name="dialog_loading">Loading..</string>
+    <string name="dialog_loading" translatable="false">Loading..</string>
 
     <!--    category-->
     <string name="fruit_vegetables">과일/채소</string>
@@ -161,6 +161,7 @@
     <!--    fragment_resolve-->
     <string name="fragment_resolve_title">다시 풀어보기</string>
     <string name="fragment_resolve_subtitle">틀렸던 문제들을 다시 한번 풀어보세요!\n정답이 궁금한 경우엔!\n정답확인 버튼을 눌러주세요!</string>
+    <string name="fragment_resolve_empty">다시 풀어볼 문제가 없습니다</string>
 
     <!--    problem_category-->
     <string name="problem_category_first_title">그림보고 낱말 맞추기</string>
