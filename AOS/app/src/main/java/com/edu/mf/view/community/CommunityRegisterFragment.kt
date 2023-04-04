@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentResolver
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.ActionBar
 import android.os.Bundle
@@ -140,23 +141,40 @@ class CommunityRegisterFragment(
 
             if (uri != null){
                 setImg(uri)
-                galleryUri = uri
             }
         }
     }
 
     // 이미지뷰 설정
     private fun setImg(uri: Uri){
-        binding.imageviewFragmentCommunityRegister.setImageURI(uri)
-        binding.imageviewFragmentCommunityRegisterPlus.visibility = View.GONE
+        if (!getFileSize(uri)){
+            Toast.makeText(
+                requireContext(),
+                resources.getString(R.string.fragment_community_register_edittext_imagesize_fail),
+                Toast.LENGTH_SHORT
+            ).show()
+        } else{
+            if (drawingUri == "".toUri()){
+                galleryUri = uri
+            }
+            binding.imageviewFragmentCommunityRegister.setImageURI(uri)
+            binding.imageviewFragmentCommunityRegisterPlus.visibility = View.GONE
+        }
     }
 
-    // DrawingFragment에서 생성된 이미지 삭제
-    private fun delSavedImg(delImgUri: Uri){
-        if (drawingUri != "".toUri()){
-            val file = File(getPath(delImgUri))
-            file.delete()
+    // get img size
+    private fun getFileSize(imgUri: Uri): Boolean{
+        val path = getPath(imgUri)
+        if (path == ""){
+            return false
         }
+
+        val file = File(path)
+        val fileSize = Integer.parseInt((file.length()).toString())
+        if(fileSize > 83_886_080){
+            return false
+        }
+        return true
     }
 
     // 이미지 절대경로 가져오기
@@ -192,6 +210,14 @@ class CommunityRegisterFragment(
                 it.close()
                 null
             }
+        }
+    }
+
+    // DrawingFragment에서 생성된 이미지 삭제
+    private fun delSavedImg(delImgUri: Uri){
+        if (drawingUri != "".toUri()){
+            val file = File(getPath(delImgUri))
+            file.delete()
         }
     }
 

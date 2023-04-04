@@ -74,6 +74,7 @@
     <!--    fragment_community_register-->
     <string name="fragment_community_register_edittext_title">제목</string>
     <string name="fragment_community_register_edittext_content">내용</string>
+    <string name="fragment_community_register_edittext_imagesize_fail">이미지 용량이 커서 업로드에 실패하였습니다</string>
 
     <!--    fragment_community_mypage-->
     <string name="fragment_community_mypage_tablayout_title_board">게시글</string>
