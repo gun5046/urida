@@ -121,7 +121,7 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Board createArticle(ArticleRequestDto articleRequestDto, MultipartFile file) throws IOException {
+    public Board createArticle(ArticleRequestDto articleRequestDto, Optional<MultipartFile> file) throws IOException {
         Optional<User> user = userJpqlRepo.findByUid(articleRequestDto.getUid());
 
         if(file.isEmpty()) {
@@ -148,7 +148,7 @@ public class BoardServiceImpl implements BoardService {
 
         }
         String uuid = UUID.randomUUID().toString(); // GCS에 저장될 파일 이름
-        String type =file.getContentType(); // 파일 형식
+        String type =file.get().getContentType(); // 파일 형식
 
         // cloud 이미지 업로드
         BlobInfo blobInfo = storage.create(
@@ -156,7 +156,7 @@ public class BoardServiceImpl implements BoardService {
                         .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER))))
                         .setContentType(type)
                         .build(),
-                file.getInputStream()
+                file.get().getInputStream()
         );
 
         if (user.isPresent()) {
