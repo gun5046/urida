@@ -181,6 +181,7 @@ class MainActivity : AppCompatActivity() {
         val configuration = this.resources.configuration
         configuration.setLocale(locale)
         resources.updateConfiguration(configuration, resources.displayMetrics)
+        App.resetCategory(resources)
     }
 
 

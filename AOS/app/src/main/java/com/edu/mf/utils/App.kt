@@ -1,8 +1,10 @@
 package com.edu.mf.utils
 
 import android.app.Application
+import android.content.res.Resources
 import android.util.Log
 import com.edu.mf.BuildConfig
+import com.edu.mf.R
 import com.google.gson.GsonBuilder
 import com.kakao.sdk.common.KakaoSdk
 import com.navercorp.nid.NaverIdLoginSDK
@@ -25,6 +27,16 @@ class App : Application(){
         lateinit var drawingRetrofit: Retrofit
         lateinit var communityRetrofit: Retrofit
         lateinit var resolveRetrofit : Retrofit
+
+        fun resetCategory(resources: Resources){
+            categories.clear()
+            categories.add(resources.getString(R.string.fruit_vegetables))
+            categories.add(resources.getString(R.string.job))
+            categories.add(resources.getString(R.string.animal))
+            categories.add(resources.getString(R.string.`object`))
+            categories.add(resources.getString(R.string.place))
+            categories.add(resources.getString(R.string.action))
+        }
     }
 
     override fun onCreate() {

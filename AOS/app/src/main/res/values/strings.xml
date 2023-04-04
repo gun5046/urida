@@ -121,4 +121,15 @@
     <!--    fragment_guide-->
     <string name="fragment_picture_result_text">죄송해요.\n물체를 인식하기 어려워요\n다시 한번 찍어주세요</string>
     <string name="fragment_picture_result_button">홈 화면으로 이동</string>
+
+    <!--    category-->
+    <string name="fruit_vegetables">과일/채소</string>
+    <string name="job">직업</string>
+    <string name="animal">동물</string>
+    <string name="object">물체</string>
+    <string name="place">장소</string>
+    <string name="action">행동</string>
+
+    <!--    item_fragment_learn-->
+    <string name="item_fragment_learn_unit">유닛 </string>
 </resources>

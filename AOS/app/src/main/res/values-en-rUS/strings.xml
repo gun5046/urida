@@ -73,4 +73,11 @@
     <string name="fragment_study_guide_second_text">You can study the words you learned in the word quiz</string>
     <string name="fragment_study_guide_first_text">You can learn words through vocabulary learning</string>
     <string name="fragment_community_register_chk_content">Please fill in all blank fields</string>
+    <string name="fruit_vegetables">Fruits/Vegetables</string>
+    <string name="job">Jobs</string>
+    <string name="animal">Animals</string>
+    <string name="object">Objects</string>
+    <string name="place">Places</string>
+    <string name="action">Actions</string>
+    <string name="item_fragment_learn_unit">"Unit "</string>
 </resources>
