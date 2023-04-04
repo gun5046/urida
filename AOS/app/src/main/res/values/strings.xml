@@ -2,17 +2,17 @@
     <string name="app_name">URIDA</string>
 
     <!--    fragment_main-->
-    <string name="fragment_main_cardview_community_another_friends" translatable="false">다른친구들은 뭐하고 지낼까?</string>
-    <string name="fragment_main_cardview_community_transfer_community" translatable="false">커뮤니티로 이동</string>
-    <string name="fragment_main_cardview_study_transfer_study" translatable="false">단어학습</string>
-    <string name="fragment_main_cardview_drawing_transfer_drawing" translatable="false">그림으로 찾기</string>
-    <string name="fragment_main_cardview_picture_transfer_picture" translatable="false">사진으로 찾기</string>
+    <string name="fragment_main_cardview_community_another_friends">다른친구들은 뭐하고 지낼까?</string>
+    <string name="fragment_main_cardview_community_transfer_community">커뮤니티로 이동</string>
+    <string name="fragment_main_cardview_study_transfer_study">단어학습</string>
+    <string name="fragment_main_cardview_drawing_transfer_drawing">그림으로 찾기</string>
+    <string name="fragment_main_cardview_picture_transfer_picture">사진으로 찾기</string>
     <string name="fragment_main_cardview_voice_transfer_voice">음성으로 찾기</string>
 
     <!--    fragment_study-->
-    <string name="fragment_study_cardview_learn" translatable="false">낱말 익히기</string>
-    <string name="fragment_study_cardview_quiz" translatable="false">낱말 퀴즈</string>
-    <string name="fragment_study_cardview_resolve" translatable="false">다시 풀어보기</string>
+    <string name="fragment_study_cardview_learn">낱말 익히기</string>
+    <string name="fragment_study_cardview_quiz">낱말 퀴즈</string>
+    <string name="fragment_study_cardview_resolve">다시 풀어보기</string>
 
 
     <!--    fragment_language-->
@@ -38,7 +38,7 @@
     <string name="fragment_drawing_dialog_complete">완료</string>
 
     <!--    fragment_drawing_result_list-->
-    <string name="fragment_drawing_result_list_imageview">pictures_%1$d_%2$d</string>
+    <string name="fragment_drawing_result_list_imageview" translatable="false">pictures_%1$d_%2$d</string>
 
     <!--    dialog_fragment_drawing_result_share-->
     <string name="dialog_fragment_drawing_result_redrawing_textview">잘 모르겠어요.\n\n다른 친구들에게\n물어보러 갈까요?</string>
