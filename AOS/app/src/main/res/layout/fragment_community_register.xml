@@ -11,7 +11,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="20dp">
+        android:paddingBottom="20dp"
+        android:background="@color/main_background">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardview_fragment_community_register"
@@ -28,7 +29,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:padding="14dp">
+                android:padding="14dp"
+                android:background="@color/main_background">
 
                 <ImageView
                     android:id="@+id/imageview_fragment_community_register"
