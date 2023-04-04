@@ -29,6 +29,7 @@ import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.repository.model.User
 import com.edu.mf.repository.model.community.*
 import com.edu.mf.utils.App
+import com.edu.mf.view.common.LoadingDialog
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.community.board.CommunityBoardFragment
 import com.edu.mf.view.drawing.result.DrawingResultShareDialog
@@ -57,6 +58,7 @@ class CommunityRegisterFragment(
     private lateinit var actionBar: ActionBar
     private lateinit var drawingUri: Uri
     private var galleryUri = "".toUri()
+    private val loadingDialog = LoadingDialog()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -145,7 +147,7 @@ class CommunityRegisterFragment(
         }
     }
 
-    // 이미지뷰 설정
+    // 이미지뷰에 이미지 띄우기
     private fun setImg(uri: Uri){
         if (!getFileSize(uri)){
             Toast.makeText(
@@ -223,8 +225,8 @@ class CommunityRegisterFragment(
 
     // 빈 칸 유효성 검사
     private fun chkEmpty(): Boolean{
-        if (binding.edittextFragmentCommunityRegisterTitle.text.toString() == ""
-            || binding.edittextFragmentCommunityRegisterContent.text.toString() == ""){
+        if (binding.edittextFragmentCommunityRegisterTitle.text.toString().trim() == ""
+            || binding.edittextFragmentCommunityRegisterContent.text.toString().trim() == ""){
             Toast.makeText(
                 requireContext(),
                 resources.getString(R.string.fragment_community_register_chk_content),
@@ -234,6 +236,15 @@ class CommunityRegisterFragment(
             return false
         }
         return true
+    }
+
+    // 로딩화면 띄우고 없애기
+    private fun changeLoadingState(state: Boolean){
+        if(!state){
+            loadingDialog.dismiss()
+        } else{
+            loadingDialog.show(mainActivity.supportFragmentManager, null)
+        }
     }
 
     // 작성한 게시글 서버로 전송
@@ -267,29 +278,13 @@ class CommunityRegisterFragment(
                         mainActivity.popFragment()
                         actionBar.hide()
                     }
+                    changeLoadingState(false)
                 }
 
                 override fun onFailure(call: Call<CreateBoardResponse>, t: Throwable) {
                     Log.d(TAG, "onFailure: ${t.message}")
                 }
             }
-        )
-    }
-
-    // 액션바 설정
-    private fun setActionBar(){
-        actionBar = mainActivity.supportActionBar!!
-        actionBar.title = ""
-        actionBar.setDisplayHomeAsUpEnabled(true)
-        actionBar.setBackgroundDrawable(
-            ContextCompat.getDrawable(requireContext(), R.color.background_light_green)
-        )
-        actionBar.show()
-
-        requireActivity().addMenuProvider(
-            this
-            , viewLifecycleOwner
-            , Lifecycle.State.RESUMED
         )
     }
 
@@ -313,6 +308,7 @@ class CommunityRegisterFragment(
                         mainActivity.popFragment()
                         actionBar.hide()
                     }
+                    changeLoadingState(false)
                 }
 
                 override fun onFailure(call: Call<UpdateBoardResponse>, t: Throwable) {
@@ -329,6 +325,8 @@ class CommunityRegisterFragment(
         when(menuItem.itemId){
             R.id.actionbar_register -> {
                 if (chkEmpty()){
+                    changeLoadingState(true)
+
                     if (boardItem != null){
                         updateBoard()
                     } else{
@@ -344,6 +342,23 @@ class CommunityRegisterFragment(
             }
         }
         return true
+    }
+
+    // 액션바 설정
+    private fun setActionBar(){
+        actionBar = mainActivity.supportActionBar!!
+        actionBar.title = ""
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setBackgroundDrawable(
+            ContextCompat.getDrawable(requireContext(), R.color.background_light_green)
+        )
+        actionBar.show()
+
+        requireActivity().addMenuProvider(
+            this
+            , viewLifecycleOwner
+            , Lifecycle.State.RESUMED
+        )
     }
 
     override fun onDestroyView() {

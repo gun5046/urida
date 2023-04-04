@@ -122,4 +122,7 @@
     <!--    fragment_guide-->
     <string name="fragment_picture_result_text">죄송해요.\n물체를 인식하기 어려워요\n다시 한번 찍어주세요</string>
     <string name="fragment_picture_result_button">홈 화면으로 이동</string>
+
+    <!--  dialog_loading  -->
+    <string name="dialog_loading">Loading..</string>
 </resources>
