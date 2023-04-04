@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/board")
@@ -85,14 +86,15 @@ public class BoardController {
             @ApiResponse(responseCode = "404", description = "사용자 없음"),
             @ApiResponse(responseCode = "500", description = "서버 오류")
     })
-    public Board createArticle(@RequestPart(value="articleRequestDto") ArticleRequestDto articleRequestDto,
-                               @RequestPart(value = "image", required = false) MultipartFile file
+    public Board createArticle(@Validated @RequestPart(value="articleRequestDto") ArticleRequestDto articleRequestDto,
+                               @RequestPart(value = "image", required = false) MultipartFile file, BindingResult bindingResult
     ) throws IOException {
 
-//        if (bindingResult.hasErrors()) {
-//            throw new InputException("RequestData(ArticleDto)invalid");
-//        }
-        return boardService.createArticle(articleRequestDto, file);
+        if (bindingResult.hasErrors()) {
+            throw new InputException("RequestData(ArticleDto)invalid");
+        }
+        Optional<MultipartFile> f = Optional.ofNullable(file);
+        return boardService.createArticle(articleRequestDto, f);
 
     }
 

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edu.mf.R
 import com.edu.mf.databinding.ItemFragmentResolveBinding
 import com.edu.mf.repository.model.resolve.ResolveResponse
+import com.edu.mf.utils.App
 
 class ResolveAdapter() : RecyclerView.Adapter<ResolveAdapter.ResolveAdapterHolder>() {
 
@@ -22,20 +23,8 @@ class ResolveAdapter() : RecyclerView.Adapter<ResolveAdapter.ResolveAdapterHolde
             binding.buttonItemFragmentResolveAnswer.setOnClickListener {view->
                 resolveClickListener.onClick(view,layoutPosition,data)
             }
-            when(data.category_id){
-                0->binding.textviewItemFragmentResolveTitle.text = "과일/채소"
-                1->binding.textviewItemFragmentResolveTitle.text = "직업"
-                2->binding.textviewItemFragmentResolveTitle.text = "동물"
-                3->binding.textviewItemFragmentResolveTitle.text = "물체"
-                4->binding.textviewItemFragmentResolveTitle.text = "장소"
-                else->binding.textviewItemFragmentResolveTitle.text = "행동"
-            }
-            when(data.type){
-                0->binding.textviewItemFragmentResolveCategory.text = "그림보고 단어 맞추기"
-                1->binding.textviewItemFragmentResolveCategory.text = "낱말보고 그림 맞추기"
-                2->binding.textviewItemFragmentResolveCategory.text = "빈칸에 알맞는 말 넣기"
-                else->binding.textviewItemFragmentResolveCategory.text = "연관된 단어 맞추기"
-            }
+            binding.textviewItemFragmentResolveTitle.text = App.categories[data.category_id]
+            binding.textviewItemFragmentResolveCategory.text = App.pCategories[data.type].title
         }
 
     }

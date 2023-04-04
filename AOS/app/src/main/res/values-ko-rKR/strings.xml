@@ -1,15 +1,159 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">URIDA</string>
-    <string name="dialog_nickname_button">확인</string>
-    <string name="dialog_nickname_editText">닉네임</string>
-    <string name="dialog_nickname_text">닉네임을 설정해주세요</string>
-    <string name="dialog_nickname_blank">닉네임을 입력해주세요.</string>
-    <string name="dialog_nickname_duplicate">중복되는 닉네임입니다.</string>
-    <string name="dialog_nickname_unallowed">영어 알파벳 소문자, 대문자, 숫자만 허용됩니다.</string>
+
+    <!--    fragment_main-->
     <string name="fragment_main_cardview_community_another_friends">다른친구들은 뭐하고 지낼까?</string>
     <string name="fragment_main_cardview_community_transfer_community">커뮤니티로 이동</string>
     <string name="fragment_main_cardview_study_transfer_study">단어학습</string>
     <string name="fragment_main_cardview_drawing_transfer_drawing">그림으로 찾기</string>
     <string name="fragment_main_cardview_picture_transfer_picture">사진으로 찾기</string>
+    <string name="fragment_main_cardview_voice_transfer_voice">음성으로 찾기</string>
+
+    <!--    fragment_study-->
+    <string name="fragment_study_cardview_learn">낱말 익히기</string>
+    <string name="fragment_study_cardview_quiz">낱말 퀴즈</string>
+    <string name="fragment_study_cardview_resolve">다시 풀어보기</string>
+
+    <!--    dialog_nickname-->
+    <string name="dialog_nickname_text">닉네임을 설정해주세요</string>
+    <string name="dialog_nickname_editText">닉네임</string>
+    <string name="dialog_nickname_button">확인</string>
+    <string name="dialog_nickname_blank">닉네임을 입력해주세요.</string>
+    <string name="dialog_nickname_duplicate">중복되는 닉네임입니다.</string>
+    <string name="dialog_nickname_unallowed">영어 알파벳 소문자, 대문자, 숫자만 허용됩니다.</string>
+
+    <!--    fragment_drawing-->
+    <string name="fragment_drawing_button_drawing_result">이게 뭘까요?</string>
+    <string name="fragment_drawing_dialog_title">색상 선택</string>
+    <string name="fragment_drawing_dialog_custom">다른색 선택</string>
+    <string name="fragment_drawing_dialog_presets">팔레트에 추가</string>
+    <string name="fragment_drawing_dialog_complete">완료</string>
+
+    <!--    dialog_fragment_drawing_result_share-->
+    <string name="dialog_fragment_drawing_result_redrawing_textview">잘 모르겠어요.\n\n다른 친구들에게\n물어보러 갈까요?</string>
+    <string name="dialog_fragment_drawing_result_redrawing_main_button">처음으로</string>
+    <string name="dialog_fragment_drawing_result_share_button">공유하기</string>
+
+    <!--    fragment_picture-->
+    <string name="fragment_picture_cardview_preview">실시간으로 확인하기</string>
+    <string name="fragment_picture_cardview_camera">촬영하기</string>
+    <string name="fragment_picture_cardview_gallery">갤러리에서 불러오기</string>
+    <string name="fragment_picture_permission_camera">카메라 권한을 확인해주세요</string>
+    <string name="fragment_picture_permission_storage">저장장치 접근 권한을 확인해주세요</string>
+
+    <!--    fragment_picture_result-->
+    <string name="fragment_picture_result_text_title">탐지 결과</string>
+    <string name="fragment_picture_result_text_subtitle">저희가 감지한 사물의 리스트에요!\n단어를 클릭하면 해당 단어를 음성으로 읽어줘요</string>
+
+    <!--    fragment_community-->
+    <string name="fragment_community_tablayout_title_free">자유 게시판</string>
+    <string name="fragment_community_tablayout_title_drawing">그림 게시판</string>
+    <string name="fragment_community_chip_all">전체</string>
+    <string name="fragment_community_chip_myboard">나의 게시글</string>
+    <string name="fragment_community_chip_mycomment">나의 댓글</string>
+    <string name="fragment_community_chip_like">좋아요</string>
+
+    <!--    fragment_community_detail-->
+    <string name="fragment_community_detail_comment_textview">댓글</string>
+    <string name="fragment_community_detail_comment_dialog_edit">수정</string>
+    <string name="fragment_community_detail_comment_dialog_delete">삭제</string>
+    <string name="fragment_community_detail_comment_edittext">댓글을 입력해주세요.</string>
+    <string name="fragment_community_detail_comment_button">등록</string>
+
+    <!--    fragment_community_register-->
+    <string name="fragment_community_register_edittext_title">제목</string>
+    <string name="fragment_community_register_edittext_content">내용</string>
+
+    <!--    fragment_community_mypage-->
+    <string name="fragment_community_mypage_tablayout_title_board">게시글</string>
+    <string name="fragment_community_mypage_tablayout_title_comment">댓글</string>
+    <string name="fragment_community_register_chk_content">빈 칸을 모두 입력해주세요</string>
+
+    <!--    actionbar_menu-->
+    <string name="actionbar_menu_register">완료</string>
+
+    <!--    dialog_nickname-->
+    <string name="dialog_first_user_text">위와 같은 아이콘을 누르면\n도움말을 볼 수 있어요</string>
+    <string name="dialog_first_user_button">확인</string>
+
+    <!--    fragment_picture_guide-->
+    <string name="fragment_picture_guide_first_text">실시간으로 카메라에 찍히는 사물의 이름을 볼 수 있어요</string>
+    <string name="fragment_picture_guide_second_text">카메라로 사진을 촬영해 사물의 이름을 볼 수 있어요</string>
+    <string name="fragment_picture_guide_third_text">갤러리에서 사진을 선택해 사물의 이름을 볼 수 있어요</string>
+    <string name="fragment_picture_guide_button_text">다음</string>
+    <string name="fragment_picture_guide_button_next">끝내기</string>
+
+    <!--    fragment_study_guide-->
+    <string name="fragment_study_guide_first_text">낱말 익히기를 통해 단어를 학습할 수 있어요</string>
+    <string name="fragment_study_guide_second_text">낱말 퀴즈에서 익혔던 단어를 공부할 수 있어요</string>
+    <string name="fragment_study_guide_third_text">다시 풀어보기를 통해 틀렸던 퀴즈들은 다시 도전해 볼 수 있어요</string>
+    <string name="fragment_study_guide_button_text">다음</string>
+    <string name="fragment_study_guide_button_next">끝내기</string>
+
+    <!--    fragment_voice-->
+    <string name="fragment_voice_text_title">음성으로 찾기</string>
+    <string name="fragment_voice_text_subtitle">어떻게 쓰는지 모르시겠다고요?\n음성을 녹음해보세요\n저희가 알려줄게요</string>
+    <string name="fragment_voice_text_voice">아래 버튼을 눌러 단어를 녹음해보세요</string>
+    <string name="fragment_voice_text_voice_recording">녹음 중입니다</string>
+    <string name="fragment_voice_permission_record_audio">음성 녹음 권한을 확인해주세요</string>
+
+    <!--    fragment_voice_result-->
+    <string name="fragment_voice_result_text_title">탐지 결과</string>
+    <string name="fragment_voice_result_text_subtitle">저희가 감지한 단어에요!\n단어를 클릭하면 해당 단어를 음성으로 읽어줘요!</string>
+    <string name="dialog_fragment_voice_result_textview">잘 모르겠어요.\n\n다시 한번 말해주실래요?</string>
+    <string name="dialog_fragment_voice_result_main_button">첫 화면으로</string>
+    <string name="dialog_fragment_voice_result_button">다시 말하기</string>
+
+    <!--    dialog_voice_wait-->
+    <string name="dialog_voice_wait_text">단어를 예측중입니다\n잠시만 기다려주세요</string>
+
+    <!--    fragment_guide-->
+    <string name="fragment_picture_result_text">죄송해요.\n물체를 인식하기 어려워요\n다시 한번 찍어주세요</string>
+    <string name="fragment_picture_result_button">홈 화면으로 이동</string>
+
+    <!--    category-->
+    <string name="fruit_vegetables">과일/채소</string>
+    <string name="job">직업</string>
+    <string name="animal">동물</string>
+    <string name="object">물체</string>
+    <string name="place">장소</string>
+    <string name="action">행동</string>
+
+    <!--    item_fragment_learn-->
+    <string name="item_fragment_learn_unit">유닛 </string>
+
+    <!--    item_fragment_quiz-->
+    <string name="item_fragment_quiz_button">문제풀기</string>
+
+    <!--    fragment_learn-->
+    <string name="fragment_learn_title">단어 익히기</string>
+    <string name="fragment_learn_subtitle">원하는 유형의 단어를 학습해보세요!\n단어를 클릭하면 해당 단어를 음성으로 읽어줘요!\n자동으로 책갈피 기능을 제공해요!</string>
+    <string name="fragment_learn_unit">총6유닛</string>
+
+    <!--    fragment_quiz-->
+    <string name="fragment_quiz_title">낱말 퀴즈</string>
+    <string name="fragment_quiz_subtitle">네가지 유형의 퀴즈들을 풀어보세요!\n틀렸다고 걱정하지 마세요!\n틀린 문제들은 다시풀어보기로 이동해요!</string>
+
+    <!--    fragment_quiz_select-->
+    <string name="fragment_quiz_select_unit">총6유닛</string>
+
+    <!--    fragment_quiz_select_category-->
+    <string name="fragment_quiz_select_category_title">문제 유형을 선택해주세요</string>
+    <string name="fragment_quiz_select_category_cancel">이전으로</string>
+    <string name="fragment_quiz_select_category_ok">문제풀기</string>
+    <string name="fragment_quiz_select_category_empty">카테고리를 먼저 선택해주세요</string>
+
+    <!--    fragment_resolve-->
+    <string name="fragment_resolve_title">다시 풀어보기</string>
+    <string name="fragment_resolve_subtitle">틀렸던 문제들을 다시 한번 풀어보세요!\n정답이 궁금한 경우엔!\n정답확인 버튼을 눌러주세요!</string>
+
+    <!--    problem_category-->
+    <string name="problem_category_first_title">그림보고 낱말 맞추기</string>
+    <string name="problem_category_first_subtitle">그림을 보고 어떤 단어인지 맞춰 보아요</string>
+    <string name="problem_category_second_title">낱말보고 그림 맞추기</string>
+    <string name="problem_category_second_subtitle">주어진 단어를 보고 어떤 그림인지 맞춰 보아요</string>
+    <string name="problem_category_third_title">빈칸에 알맞는 말 넣기</string>
+    <string name="problem_category_third_subtitle">주어진 그림과 문장을 보고 \n어떤 단어가 들어가야 할지 맞춰 보아요</string>
+    <string name="problem_category_fourth_title">연관된 단어 맞추기</string>
+    <string name="problem_category_fourth_subtitle">제시된 단어들과 연관된 단어를 골라 보아요</string>
 </resources>

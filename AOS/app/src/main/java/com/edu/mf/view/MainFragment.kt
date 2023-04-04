@@ -149,7 +149,7 @@ class MainFragment: Fragment() {
                 mainActivity.addFragment(DrawingFragment())
             } else{
                 Toast.makeText(
-                    requireContext(), "저장장치 접근 권한을 확인해주세요", Toast.LENGTH_SHORT
+                    requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_storage), Toast.LENGTH_SHORT
                 ).show()
 
                 val settingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
@@ -197,21 +197,21 @@ class MainFragment: Fragment() {
             if(it){
                 mainActivity.addFragment(PicturePreviewFragment())
             } else {
-                Toast.makeText(requireContext(), "카메라 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_camera), Toast.LENGTH_SHORT).show()
             }
         }
         cameraPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it){
                 launchCamera()
             } else {
-                Toast.makeText(requireContext(), "카메라 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_camera), Toast.LENGTH_SHORT).show()
             }
         }
         storagePermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it){
                 launchGallery()
             } else {
-                Toast.makeText(requireContext(), "저장장치 접근 권한을 확인해주세요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_storage), Toast.LENGTH_SHORT).show()
             }
         }
         val translateOptions = TranslatorOptions.Builder()

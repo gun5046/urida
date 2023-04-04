@@ -1,8 +1,11 @@
 package com.edu.mf.utils
 
 import android.app.Application
+import android.content.res.Resources
 import android.util.Log
 import com.edu.mf.BuildConfig
+import com.edu.mf.R
+import com.edu.mf.repository.model.study.PCategory
 import com.google.gson.GsonBuilder
 import com.kakao.sdk.common.KakaoSdk
 import com.navercorp.nid.NaverIdLoginSDK
@@ -19,12 +22,35 @@ class App : Application(){
         const val TAG = "App_지훈"
         var PICTURES : ArrayList<ArrayList<String>> = arrayListOf()
         var categories : ArrayList<String> = arrayListOf()
+        var pCategories : ArrayList<PCategory> = arrayListOf()
         var firstUser = true
         lateinit var sharedPreferencesUtil:SharedPreferencesUtil
         lateinit var userRetrofit: Retrofit
         lateinit var drawingRetrofit: Retrofit
         lateinit var communityRetrofit: Retrofit
         lateinit var resolveRetrofit : Retrofit
+
+        fun resetCategory(resources: Resources){
+            categories.clear()
+            categories.add(resources.getString(R.string.fruit_vegetables))
+            categories.add(resources.getString(R.string.job))
+            categories.add(resources.getString(R.string.animal))
+            categories.add(resources.getString(R.string.`object`))
+            categories.add(resources.getString(R.string.place))
+            categories.add(resources.getString(R.string.action))
+        }
+
+        fun resetPCategories(resources: Resources){
+            pCategories.clear()
+            pCategories.add(PCategory(resources.getString(R.string.problem_category_first_title),
+                resources.getString(R.string.problem_category_first_subtitle)))
+            pCategories.add(PCategory(resources.getString(R.string.problem_category_second_title),
+                resources.getString(R.string.problem_category_second_subtitle)))
+            pCategories.add(PCategory(resources.getString(R.string.problem_category_third_title),
+                resources.getString(R.string.problem_category_third_subtitle)))
+            pCategories.add(PCategory(resources.getString(R.string.problem_category_fourth_title),
+                resources.getString(R.string.problem_category_fourth_subtitle)))
+        }
     }
 
     override fun onCreate() {
@@ -71,6 +97,7 @@ class App : Application(){
         setActionImage()
         setDrawsImage()
         setCategoryData()
+        setPCategories()
     }
 
     private fun setPictures(){
@@ -89,6 +116,15 @@ class App : Application(){
         categories.add("장소")
         categories.add("행동")
     }
+
+    private fun setPCategories(){
+        pCategories.clear()
+        pCategories.add(PCategory("그림보고 낱말 맞추기","그림을 보고 어떤 단어인지 맞춰 보아요"))
+        pCategories.add(PCategory("낱말보고 그림 맞추기","주어진 단어를 보고 어떤 그림인지 맞춰 보아요"))
+        pCategories.add(PCategory("빈칸에 알맞는 말 넣기","주어진 그림과 문장을 보고 \n어떤 단어가 들어가야 할지 맞춰 보아요"))
+        pCategories.add(PCategory("연관된 단어 맞추기","제시된 단어들과 연관된 단어를 골라 보아요"))
+    }
+
     private fun setFruitsImage(){
         PICTURES[0].add("사과")
         PICTURES[0].add("아보카도")

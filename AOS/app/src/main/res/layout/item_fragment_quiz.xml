@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="@{`유닛 `+position}"
+            android:text="@{@string/item_fragment_learn_unit + position}"
             android:textSize="16sp"
             android:fontFamily="@font/kakao_otf_bold"
             android:layout_marginTop="8dp"
@@ -37,23 +37,24 @@
 
         <TextView
             android:id="@+id/textview_item_learn_title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@{data}"
-            android:textSize="22sp"
-            android:fontFamily="@font/kakao_otf_bold"
-            android:textColor="@color/black"
-            android:layout_marginTop="8dp"
             android:layout_marginLeft="16dp"
-            app:layout_constraintTop_toBottomOf="@id/textview_item_learn_unit"
-            app:layout_constraintLeft_toLeftOf="parent"/>
+            android:layout_marginTop="8dp"
+            android:textAlignment="textStart"
+            android:fontFamily="@font/kakao_otf_bold"
+            android:text="@{data}"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_item_learn_unit" />
 
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_item_quiz_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="문제풀기"
+            android:text="@string/item_fragment_quiz_button"
             android:textSize="16sp"
             android:textColor="@color/black"
             android:background="@drawable/learn_list_light_8"

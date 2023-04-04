@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public interface BoardService {
 
@@ -26,7 +27,7 @@ public interface BoardService {
     List<BoardListDto> getLiked(Long uid, int category_id);
 
     // 게시글 작성
-    Board createArticle(ArticleRequestDto articleRequestDto, MultipartFile file) throws IOException;
+    Board createArticle(ArticleRequestDto articleRequestDto, Optional<MultipartFile> file) throws IOException;
 
     // 게시글 수정
     Board updateArticle(ArticleUpdateDto articleUpdateDto, Long id);

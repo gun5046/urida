@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:text="@{`유닛 `+position}"
+        android:text="@{@string/item_fragment_learn_unit + position}"
         android:textSize="16sp"
         android:fontFamily="@font/kakao_otf_bold"
         android:layout_marginTop="8dp"

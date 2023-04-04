@@ -26,7 +26,7 @@ public class BoardJpqlRepo {
 
     // 유저 작성한 게시글 (카테고리 별)
     public List<Board> findByUid(Long uid, int category_id) {
-        return em.createQuery("select b from Board b where b.user.uid = :uid and b.category_id = :category_id", Board.class)
+        return em.createQuery("select b from Board b where b.user.uid = :uid and b.category_id = :category_id order by time desc", Board.class)
                 .setParameter("uid", uid)
                 .setParameter("category_id", category_id)
                 .getResultList();
@@ -34,7 +34,7 @@ public class BoardJpqlRepo {
 
     // 유저가 좋아요 한 글 (카테고리 별)
     public List<Board> findByLiked(Long uid, int catetory_id) {
-        return em.createQuery("select l.board from Likeboard l where l.user.uid = :uid and l.board.category_id = :category_id", Board.class)
+        return em.createQuery("select l.board from Likeboard l where l.user.uid = :uid and l.board.category_id = :category_id order by l.board.time desc", Board.class)
                 .setParameter("uid", uid)
                 .setParameter("category_id", catetory_id)
                 .getResultList();
