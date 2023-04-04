@@ -132,4 +132,39 @@
 
     <!--    item_fragment_learn-->
     <string name="item_fragment_learn_unit">유닛 </string>
+
+    <!--    item_fragment_quiz-->
+    <string name="item_fragment_quiz_button">문제풀기</string>
+
+    <!--    fragment_learn-->
+    <string name="fragment_learn_title">단어 익히기</string>
+    <string name="fragment_learn_subtitle">원하는 유형의 단어를 학습해보세요!\n단어를 클릭하면 해당 단어를 음성으로 읽어줘요!\n자동으로 책갈피 기능을 제공해요!</string>
+    <string name="fragment_learn_unit">총6유닛</string>
+
+    <!--    fragment_quiz-->
+    <string name="fragment_quiz_title">낱말 퀴즈</string>
+    <string name="fragment_quiz_subtitle">네가지 유형의 퀴즈들을 풀어보세요!\n틀렸다고 걱정하지 마세요!\n틀린 문제들은 다시풀어보기로 이동해요!</string>
+
+    <!--    fragment_quiz_select-->
+    <string name="fragment_quiz_select_unit">총6유닛</string>
+
+    <!--    fragment_quiz_select_category-->
+    <string name="fragment_quiz_select_category_title">문제 유형을 선택해주세요</string>
+    <string name="fragment_quiz_select_category_cancel">이전으로</string>
+    <string name="fragment_quiz_select_category_ok">문제풀기</string>
+    <string name="fragment_quiz_select_category_empty">카테고리를 먼저 선택해주세요</string>
+
+    <!--    fragment_resolve-->
+    <string name="fragment_resolve_title">다시 풀어보기</string>
+    <string name="fragment_resolve_subtitle">틀렸던 문제들을 다시 한번 풀어보세요!\n정답이 궁금한 경우엔!\n정답확인 버튼을 눌러주세요!</string>
+
+    <!--    problem_category-->
+    <string name="problem_category_first_title">그림보고 낱말 맞추기</string>
+    <string name="problem_category_first_subtitle">그림을 보고 어떤 단어인지 맞춰 보아요</string>
+    <string name="problem_category_second_title">낱말보고 그림 맞추기</string>
+    <string name="problem_category_second_subtitle">주어진 단어를 보고 어떤 그림인지 맞춰 보아요</string>
+    <string name="problem_category_third_title">빈칸에 알맞는 말 넣기</string>
+    <string name="problem_category_third_subtitle">주어진 그림과 문장을 보고 \n어떤 단어가 들어가야 할지 맞춰 보아요</string>
+    <string name="problem_category_fourth_title">연관된 단어 맞추기</string>
+    <string name="problem_category_fourth_subtitle">제시된 단어들과 연관된 단어를 골라 보아요</string>
 </resources>

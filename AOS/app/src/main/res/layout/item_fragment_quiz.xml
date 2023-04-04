@@ -54,7 +54,7 @@
             android:id="@+id/button_item_quiz_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="문제풀기"
+            android:text="@string/item_fragment_quiz_button"
             android:textSize="16sp"
             android:textColor="@color/black"
             android:background="@drawable/learn_list_light_8"

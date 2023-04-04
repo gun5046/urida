@@ -182,6 +182,7 @@ class MainActivity : AppCompatActivity() {
         configuration.setLocale(locale)
         resources.updateConfiguration(configuration, resources.displayMetrics)
         App.resetCategory(resources)
+        App.resetPCategories(resources)
     }
 
 

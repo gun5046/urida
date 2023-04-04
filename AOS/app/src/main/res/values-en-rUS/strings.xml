@@ -80,4 +80,25 @@
     <string name="place">Places</string>
     <string name="action">Actions</string>
     <string name="item_fragment_learn_unit">"Unit "</string>
+    <string name="item_fragment_quiz_button">Solve</string>
+    <string name="fragment_quiz_select_category_ok">Solve</string>
+    <string name="fragment_learn_title">Learn words</string>
+    <string name="fragment_learn_subtitle">Learn the type of word you want!\nClick on a word and it reads the word aloud!\nAutomatically provides a bookmark function!</string>
+    <string name="fragment_learn_unit">Total 6 units</string>
+    <string name="fragment_quiz_title">Word quiz</string>
+    <string name="fragment_quiz_subtitle">Take the four types of quizzes!\nDon\'t worry if you get it wrong!\nGo to resolving the wrong questions!</string>
+    <string name="fragment_quiz_select_unit">Total 6 units</string>
+    <string name="fragment_quiz_select_category_title">Please select a problem type</string>
+    <string name="fragment_quiz_select_category_cancel">Previous</string>
+    <string name="fragment_resolve_title">Resolving</string>
+    <string name="fragment_resolve_subtitle">Solve the wrong questions again!\nIf you are curious about the correct answer!\nPlease click the Check Answer button!</string>
+    <string name="problem_category_first_title">Look at the picture and guess the word</string>
+    <string name="problem_category_first_subtitle">Look at the picture and guess which word it is.</string>
+    <string name="problem_category_second_title">Guess the word and picture</string>
+    <string name="problem_category_third_title">Fill in the blanks with appropriate words</string>
+    <string name="problem_category_fourth_title">Match related words</string>
+    <string name="problem_category_second_subtitle">Look at the given word and guess which picture it is</string>
+    <string name="problem_category_third_subtitle">Look at the given picture and sentence and guess which word should be guess.</string>
+    <string name="problem_category_fourth_subtitle">Choose a word related to the words presented</string>
+    <string name="fragment_quiz_select_category_empty">Please select a category first</string>
 </resources>
