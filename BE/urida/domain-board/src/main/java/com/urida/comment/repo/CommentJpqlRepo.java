@@ -43,7 +43,7 @@ public class CommentJpqlRepo {
 
     // 사용자 작성 댓글 조회
     public List<Comment> writtenComments(Long uid, int category_id) {
-        return em.createQuery("select c from Comment c where c.user.uid = :uid and c.board.category_id = :category_id", Comment.class)
+        return em.createQuery("select c from Comment c where c.user.uid = :uid and c.board.category_id = :category_id order by dateTime desc", Comment.class)
                 .setParameter("uid", uid)
                 .setParameter("category_id", category_id)
                 .getResultList();
