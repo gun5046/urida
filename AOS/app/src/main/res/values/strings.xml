@@ -56,6 +56,12 @@
     <string name="dialog_fragment_drawing_result_redrawing_main_button">처음으로</string>
     <string name="dialog_fragment_drawing_result_share_button">공유하기</string>
 
+    <!--    fragment_drawing_result-->
+    <string name="fragment_drawing_result_text_subtitle">저희가 예측한 사물이에요!\n단어를 클릭하면 해당 단어를 음성으로 읽어줘요</string>
+
+    <!--    fragment_drawing_result_viewpager-->
+    <string name="fragment_drawing_result_viewpager_text_subtitle">저희가 예측한 사물의 리스트에요!\n단어를 클릭하면 해당 단어를 음성으로 읽어줘요</string>
+
     <!--    fragment_picture-->
     <string name="fragment_picture_cardview_preview">실시간으로 확인하기</string>
     <string name="fragment_picture_cardview_camera">촬영하기</string>

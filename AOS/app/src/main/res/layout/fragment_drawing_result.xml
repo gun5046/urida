@@ -21,60 +21,88 @@
         android:layout_height="match_parent"
         android:background="@color/main_background">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingbutton_fragment_drawing_result"
+        <TextView
+            android:id="@+id/textview_fragment_drawing_result_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="60dp"
+            android:fontFamily="@font/kakao_otf_bold"
+            android:text="@string/fragment_voice_result_text_title"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/textview_fragment_drawing_result_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="40dp"
-            android:onClick="@{()->MainViewModel.startTTS()}"
-            android:src="@drawable/ic_volume"
-            android:backgroundTint="@color/white"
-            app:backgroundTint="@color/find_bold_green"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/kakao_bold"
+            android:text="@string/fragment_drawing_result_text_subtitle"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@+id/textview_fragment_drawing_result_title"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintlayout_fragment_drawing_result_word"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="20dp"
-            android:paddingStart="20dp"
-            android:paddingEnd="20dp"
-            android:paddingBottom="60dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/drawing_result_card_border">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/find_light_green"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_fragment_drawing_result_subtitle">
 
-            <ImageView
-                android:id="@+id/imageview_fragment_drawing_result"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                app:imgSrc="@{@string/fragment_drawing_result_list_imageview(DrawingViewModel.imgInfoList.get(0).categoryIdx, DrawingViewModel.imgInfoList.get(0).pictureIdx)}"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/textview_fragment_drawing_result" />
-
-            <TextView
-                android:id="@+id/textview_fragment_drawing_result"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintlayout_fragment_drawing_result"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:gravity="center"
-                android:fontFamily="@font/baemin"
-                android:text="@{DrawingViewModel.drawingResponse.contentIfNotHandled.firstPrediction}"
-                android:textColor="@color/grey_card_text"
-                android:textSize="40sp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@+id/imageview_fragment_drawing_result"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent" />
+                android:layout_height="match_parent"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="80dp"
+                android:background="@drawable/picture_rounded_rectangle"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:paddingBottom="30dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageview_fragment_drawing_result"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="28dp"
+                    android:layout_marginBottom="8dp"
+                    app:imgSrc="@{@string/fragment_drawing_result_list_imageview(DrawingViewModel.imgInfoList.get(0).categoryIdx, DrawingViewModel.imgInfoList.get(0).pictureIdx)}"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/textview_fragment_drawing_result" />
+
+                <TextView
+                    android:id="@+id/textview_fragment_drawing_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="@{DrawingViewModel.drawingResponse.contentIfNotHandled.firstPrediction}"
+                    android:textColor="@color/grey_card_text"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/jalnan"
+                    android:onClick="@{()->MainViewModel.startTTS()}"
+                    app:layout_constraintTop_toBottomOf="@+id/imageview_fragment_drawing_result"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
