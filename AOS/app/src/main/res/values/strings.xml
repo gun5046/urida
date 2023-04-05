@@ -11,9 +11,9 @@
     <string name="fragment_main_study_word_resolve">다시\n풀어보기</string>
     <string name="fragment_main_picture_title" >사진찍기</string>
     <string name="fragment_main_picture_subscription" translatable="false">카메라에 감지된 물체들을 탐지</string>
-    <string name="fragment_main_picture_live">실시간으로\n확인하기</string>
-    <string name="fragment_main_picture_photo">사진 찍기</string>
-    <string name="fragment_main_picture_gallery">갤러리에서\n불러오기</string>
+    <string name="fragment_main_picture_live">실시간\n확인하기</string>
+    <string name="fragment_main_picture_photo">사진찍기</string>
+    <string name="fragment_main_picture_gallery">갤러리\n불러오기</string>
 
     <string name="fragment_main_find_title">찾아보기</string>
     <string name="fragment_main_find_subtitle">그림과 음성을 활용한 원하는 단어 찾기</string>

@@ -43,7 +43,8 @@ class App : Application(){
             .build()
         setImageData()
         drawingRetrofit = Retrofit.Builder()
-            .baseUrl("http://j8d202.p.ssafy.io:8084/")
+            .baseUrl("http://j8d202.p.ssafy.io:8" +
+                    "084/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()

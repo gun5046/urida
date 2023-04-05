@@ -21,6 +21,7 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -111,7 +112,8 @@ class MainFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_main,container,false)
+        binding.handlers = this
         viewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         pictureViewModel = ViewModelProvider(requireActivity())[PictureViewModel::class.java]
         mainActivity = MainActivity.getInstance()!!
@@ -187,8 +189,6 @@ class MainFragment: Fragment() {
     private fun init(){
         chkPermissionDrawingFragment()
         initPhoto()
-        if(wordList.size<1)
-        setListData()
         setAdapter()
    }
 
@@ -303,10 +303,10 @@ class MainFragment: Fragment() {
             }
 
         })
-        binding.recylcerviewFragmentMainWord.apply{
+        /*binding.recylcerviewFragmentMainWord.apply{
             adapter = wordAdapter
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-        }
+        }*/
         pictureAdapter = PictureAdapter(photoList)
         pictureAdapter.setOnPictureClickListener(object : PictureAdapter.PictureClickListener{
             override fun onClick(position: Int, data: Category) {
@@ -339,10 +339,10 @@ class MainFragment: Fragment() {
             }
 
         })
-        binding.recylcerviewFragmentMainPhoto.apply {
+      /*  binding.recylcerviewFragmentMainPhoto.apply {
             adapter = pictureAdapter
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
-        }
+        }*/
 
         drawingAdapter = DrawingAdapter(drawingList)
         drawingAdapter.setOnClickDrawingClickListener(object:DrawingAdapter.DrawingClickListener{
@@ -360,10 +360,49 @@ class MainFragment: Fragment() {
             }
 
         })
-        binding.recylcerviewFragmentDrawing.apply {
+       /* binding.recylcerviewFragmentDrawing.apply {
             adapter = drawingAdapter
             layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+        }*/
+    }
+
+    fun onClickWordLearn(){
+        viewModel.setMode(1)
+        mainActivity.addFragment(LearnFragment())
+    }
+    fun onClickWordQuiz(){
+        viewModel.setMode(2)
+        mainActivity.addFragment(QuizFragment())
+    }
+    fun onClickWordResolve(){
+        mainActivity.addFragment(ResolveFragment())
+    }
+    fun onClickPhotoLive(){
+        if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+            mainActivity.addFragment(PicturePreviewFragment())
+        } else {
+            previewPermissionLauncher.launch(Manifest.permission.CAMERA)
         }
+    }
+    fun onClickPhotoPicture(){
+        if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED){
+            launchCamera()
+        } else {
+            cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+        }
+    }
+    fun onClickPhotoGallery(){
+        if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            launchGallery()
+        } else {
+            storagePermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+        }
+    }
+    fun onClickFindPicture(){
+        reqPermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    }
+    fun onClickFindVoice(){
+        mainActivity.addFragment(VoiceFragment())
     }
 
     /**
