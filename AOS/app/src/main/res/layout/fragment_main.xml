@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
@@ -12,8 +13,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/main_background">
 
 
     <ImageView
@@ -151,7 +151,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="20dp">
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp">
 
                     <TextView
                         android:id="@+id/textview_item_title"
@@ -162,12 +163,13 @@
                         android:textSize="16sp"
                         android:text="@string/fragment_main_study_word_learn"
                         android:textStyle="bold"
+                        android:layout_marginBottom="10dp"
                         android:autoSizeMinTextSize="10sp"
                         android:autoSizeStepGranularity="1dp"
                         android:autoSizeTextType="uniform"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/imageview_item_icon" />
 
                     <TextView
                         android:id="@+id/textview_item_description"
@@ -178,6 +180,14 @@
                         android:textSize="12sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/textview_item_title" />
+                    <ImageView
+                        android:id="@+id/imageview_item_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_learn"
+                        android:layout_marginRight="10dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -232,7 +242,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="20dp">
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp">
 
                     <TextView
                         android:id="@+id/textview_quiz_title"
@@ -243,12 +254,13 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:text="@string/fragment_main_study_word_quiz"
+                        android:layout_marginBottom="10dp"
                         android:autoSizeMinTextSize="10sp"
                         android:autoSizeStepGranularity="1dp"
                         android:autoSizeTextType="uniform"
+                        app:layout_constraintTop_toBottomOf="@id/imageview_quiz_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintLeft_toLeftOf="parent" />
 
                     <TextView
                         android:id="@+id/textview_quiz_description"
@@ -259,6 +271,15 @@
                         android:textSize="12sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/textview_quiz_title" />
+
+                    <ImageView
+                        android:id="@+id/imageview_quiz_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_quiz"
+                        android:layout_marginRight="10dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -315,7 +336,8 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="20dp">
+                    android:paddingLeft="20dp"
+                    android:paddingTop="20dp">
 
                     <TextView
                         android:id="@+id/textview_resolve_title"
@@ -326,12 +348,13 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:text="@string/fragment_main_study_word_resolve"
+                        android:layout_marginBottom="10dp"
                         android:autoSizeMinTextSize="10sp"
                         android:autoSizeStepGranularity="1dp"
                         android:autoSizeTextType="uniform"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toBottomOf="@id/imageview_resolve_icon"/>
 
                     <TextView
                         android:id="@+id/textview_resolve_description"
@@ -342,6 +365,15 @@
                         android:textSize="16sp"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/textview_resolve_title" />
+
+                    <ImageView
+                        android:id="@+id/imageview_resolve_icon"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_resolve"
+                        android:layout_marginRight="10dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintRight_toRightOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -459,7 +491,8 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="20dp">
+                            android:paddingTop="20dp"
+                            android:paddingLeft="20dp">
 
                             <TextView
                                 android:id="@+id/textview_live_title"
@@ -473,9 +506,10 @@
                                 android:autoSizeMinTextSize="10sp"
                                 android:autoSizeStepGranularity="1dp"
                                 android:autoSizeTextType="uniform"
+                                android:layout_marginBottom="10dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toBottomOf="@id/imageview_live_icon"  />
 
                             <TextView
                                 android:id="@+id/textview_live_description"
@@ -486,6 +520,14 @@
                                 android:textSize="12sp"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/textview_live_title" />
+                            <ImageView
+                                android:id="@+id/imageview_live_icon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_video"
+                                android:layout_marginRight="10dp"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"/>
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -542,7 +584,8 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="20dp">
+                            android:paddingTop="20dp"
+                            android:paddingLeft="20dp">
 
                             <TextView
                                 android:id="@+id/textview_picture_title"
@@ -553,12 +596,13 @@
                                 android:textSize="16sp"
                                 android:textStyle="bold"
                                 android:text="@string/fragment_main_picture_photo"
+                                android:layout_marginBottom="10dp"
                                 android:autoSizeMinTextSize="10sp"
                                 android:autoSizeStepGranularity="1dp"
                                 android:autoSizeTextType="uniform"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toBottomOf="@id/imageview_picture_icon"/>
 
                             <TextView
                                 android:id="@+id/textview_picture_description"
@@ -569,6 +613,14 @@
                                 android:textSize="12sp"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/textview_picture_title" />
+                            <ImageView
+                                android:id="@+id/imageview_picture_icon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/ic_picture_main"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"/>
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -627,7 +679,8 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="20dp">
+                            android:paddingTop="20dp"
+                            android:paddingLeft="20dp">
 
                             <TextView
                                 android:id="@+id/textview_gallery_title"
@@ -641,9 +694,10 @@
                                 android:autoSizeMinTextSize="10sp"
                                 android:autoSizeStepGranularity="1dp"
                                 android:autoSizeTextType="uniform"
+                                android:layout_marginBottom="10dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toBottomOf="@id/imageview_gallery_icon"/>
 
                             <TextView
                                 android:id="@+id/textview_gallery_description"
@@ -654,6 +708,15 @@
                                 android:textSize="16sp"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/textview_gallery_title" />
+
+                            <ImageView
+                                android:id="@+id/imageview_gallery_icon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/ic_gallery"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"/>
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -772,7 +835,8 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="20dp">
+                            android:paddingLeft="20dp"
+                            android:paddingTop="20dp">
 
                             <TextView
                                 android:id="@+id/textview_drawing_title"
@@ -787,9 +851,10 @@
                                 android:autoSizeMinTextSize="10sp"
                                 android:autoSizeStepGranularity="1dp"
                                 android:autoSizeTextType="uniform"
+                                android:layout_marginBottom="10dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toBottomOf="@id/imageview_drawing_icon"/>
 
                             <TextView
                                 android:id="@+id/textview_drawing_description"
@@ -800,6 +865,15 @@
                                 android:textSize="12sp"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/textview_drawing_title" />
+
+                            <ImageView
+                                android:id="@+id/imageview_drawing_icon"
+                                android:layout_width="17dp"
+                                android:layout_height="16dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/ic_drawing_main"
+                                app:layout_constraintRight_toRightOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
 
@@ -855,7 +929,8 @@
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="20dp">
+                            android:paddingLeft="20dp"
+                            android:paddingTop="20dp">
 
                             <TextView
                                 android:id="@+id/textview_voice_title"
@@ -871,7 +946,7 @@
                                 android:text="@string/fragment_main_find_title_voice"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toBottomOf="@id/imageview_voice_icon"/>
 
                             <TextView
                                 android:id="@+id/textview_voice_description"
@@ -882,6 +957,15 @@
                                 android:textSize="12sp"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/textview_voice_title" />
+
+                            <ImageView
+                                android:id="@+id/imageview_voice_icon"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/ic_mic_main"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"/>
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
 
