@@ -2,6 +2,12 @@
 <resources>
     <color name="splash_background">#FFFFFF</color>
     <color name="main_background">#FBFBFB</color>
+    <color name="horizon_line">#DDD9D9</color>
+    <color name="word_bold_blue">#0465FF</color>
+    <color name="find_light_green">#e7faf8</color>
+    <color name="find_bold_green">#3c9f81</color>
+    <color name="background_picture">#FAF2AC</color>
+    <color name="background_drawing">#fed0bb</color>
     <color name="background_blue">#bad7f2</color>
     <color name="background_blue2">#8ED7F8</color>
     <color name="primary_purple">#DDC2F9</color>

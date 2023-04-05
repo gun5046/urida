@@ -20,6 +20,9 @@ class StudyAdapter(val categories:List<Category>):RecyclerView.Adapter<StudyAdap
             binding.constraintlayoutItemMainWord.setOnClickListener {
                 studyClickListener.onClick(layoutPosition,category)
             }
+            binding.myButton.setOnClickListener {
+                studyClickListener.onClick(layoutPosition,category)
+            }
         }
     }
 

@@ -15,8 +15,11 @@ class PictureAdapter(val categories:List<Category>) : RecyclerView.Adapter<Pictu
         fun bind(data : Category){
             binding.textviewItemTitle.text = data.title
             binding.textviewItemDescription.text = data.description
-            binding.imageviewItemIcon.setImageResource(data.src)
-            binding.constraintlayoutItemMainPhoto.setOnClickListener {
+            //binding.imageviewItemIcon.setImageResource(data.src)
+            binding.constraintlayoutItemMainPicture.setOnClickListener {
+                pictureClickListener.onClick(layoutPosition,data)
+            }
+            binding.myButton.setOnClickListener {
                 pictureClickListener.onClick(layoutPosition,data)
             }
         }

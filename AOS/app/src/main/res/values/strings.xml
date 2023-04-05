@@ -2,17 +2,30 @@
     <string name="app_name">URIDA</string>
 
     <!--    fragment_main-->
-    <string name="fragment_main_cardview_community_another_friends">다른친구들은 뭐하고 지낼까?</string>
-    <string name="fragment_main_cardview_community_transfer_community">커뮤니티로 이동</string>
-    <string name="fragment_main_cardview_study_transfer_study">단어학습</string>
-    <string name="fragment_main_cardview_drawing_transfer_drawing">그림으로 찾기</string>
-    <string name="fragment_main_cardview_picture_transfer_picture">사진으로 찾기</string>
-    <string name="fragment_main_cardview_voice_transfer_voice">음성으로 찾기</string>
+    <string name="fragment_main_cardview_community_another_friends" translatable="false">다른친구들은 뭐하고 지낼까?</string>
+    <string name="fragment_main_cardview_community_transfer_community" translatable="false">커뮤니티로 이동</string>
+    <string name="fragment_main_study_word_title">단어학습</string>
+    <string name="fragment_main_study_word_subscription">다문화 아이들을 위한 초등 기초단어</string>
+    <string name="fragment_main_study_word_learn">단어\n익히기</string>
+    <string name="fragment_main_study_word_quiz">단어퀴즈</string>
+    <string name="fragment_main_study_word_resolve">다시\n풀어보기</string>
+    <string name="fragment_main_picture_title" >사진찍기</string>
+    <string name="fragment_main_picture_subscription" translatable="false">카메라에 감지된 물체들을 탐지</string>
+    <string name="fragment_main_picture_live">실시간으로\n확인하기</string>
+    <string name="fragment_main_picture_photo">사진 찍기</string>
+    <string name="fragment_main_picture_gallery">갤러리에서\n불러오기</string>
+
+    <string name="fragment_main_find_title">찾아보기</string>
+    <string name="fragment_main_find_subtitle">그림과 음성을 활용한 원하는 단어 찾기</string>
+    <string name="fragment_main_find_title_picture" translatable="false">그림으로 찾기</string>
+    <string name="fragment_main_find_title_voice">음성으로 찾기</string>
+
+
 
     <!--    fragment_study-->
-    <string name="fragment_study_cardview_learn">낱말 익히기</string>
-    <string name="fragment_study_cardview_quiz">낱말 퀴즈</string>
-    <string name="fragment_study_cardview_resolve">다시 풀어보기</string>
+    <string name="fragment_study_cardview_learn" translatable="false">낱말 익히기</string>
+    <string name="fragment_study_cardview_quiz" translatable="false">낱말 퀴즈</string>
+    <string name="fragment_study_cardview_resolve" >다시 풀어보기</string>
 
 
     <!--    fragment_language-->
