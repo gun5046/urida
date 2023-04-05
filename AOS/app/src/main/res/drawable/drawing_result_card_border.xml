@@ -6,7 +6,7 @@
     <solid android:color="#FFFFFF"/>
     <!--테두리 색 + 테두리 너비-->
     <corners android:radius="10dp"/>
-    <stroke android:width="6dp" android:color="@color/primary_pink"/>
+    <stroke android:width="6dp" android:color="@color/find_bold_green"/>
     <!--꼭지점 휘는 각도-->
     <corners
         android:topLeftRadius="10dp"

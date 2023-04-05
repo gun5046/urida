@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -18,6 +17,7 @@ import com.edu.mf.R
 import com.edu.mf.databinding.DialogVoiceWaitBinding
 import com.edu.mf.databinding.FragmentVoiceBinding
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.common.NotificationDialog
 import com.edu.mf.viewmodel.VoiceViewModel
 import com.github.squti.androidwaverecorder.WaveRecorder
 import kotlinx.coroutines.CoroutineScope
@@ -61,7 +61,11 @@ class VoiceFragment : Fragment() {
             if(it[Manifest.permission.RECORD_AUDIO] == true && it[Manifest.permission.WRITE_EXTERNAL_STORAGE] == true && it[Manifest.permission.READ_EXTERNAL_STORAGE] == true){
                 onRecordButtonClick()
             } else {
-                Toast.makeText(requireContext(), requireContext().getString(R.string.fragment_voice_permission_record_audio), Toast.LENGTH_SHORT).show()
+                NotificationDialog(
+                    resources.getString(
+                        R.string.fragment_voice_permission_record_audio
+                    )
+                ).show(childFragmentManager, null)
             }
         }
         binding.buttonRecord.setOnClickListener {

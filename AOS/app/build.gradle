@@ -5,6 +5,8 @@ plugins {
     id 'com.google.dagger.hilt.android'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 android {
     namespace 'com.edu.mf'
     compileSdk 32
@@ -16,11 +18,12 @@ android {
         versionCode 1
         versionName "1.0"
 
-        manifestPlaceholders = [Kakao_API_KEY: "13b66e0b9e990177d4b06d6e78dc6314"]
-        buildConfigField "String","Kakao_API_KEY","\"13b66e0b9e990177d4b06d6e78dc6314\""
-        buildConfigField "String","OAUTH_CLIENT_ID","\"IoMTBJkwtbxrbuyQr8zF\""
-        buildConfigField "String","OAUTH_CLIENT_SECRET","\"4z90cNhKyQ\""
-        buildConfigField "String","OAUTH_CLIENT_NAME","\"EducationForMulticulturalFamily\""
+        manifestPlaceholders["Kakao_API_KEY"] = "Kakao_API_KEY"
+        buildConfigField "String","BASE_URL", properties["BASE_URL"]
+        buildConfigField "String","Kakao_API_KEY", properties["Kakao_API_KEY"]
+        buildConfigField "String","OAUTH_CLIENT_ID", properties["OAUTH_CLIENT_ID"]
+        buildConfigField "String","OAUTH_CLIENT_SECRET", properties["OAUTH_CLIENT_SECRET"]
+        buildConfigField "String","OAUTH_CLIENT_NAME", properties["OAUTH_CLIENT_NAME"]
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
