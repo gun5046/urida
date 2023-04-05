@@ -119,7 +119,6 @@ class CommunityDetailFragment(
                     }
 
                     deleteBoard()
-                    backPressed()
                 }
             })
             show()
@@ -131,6 +130,7 @@ class CommunityDetailFragment(
         communityService.deleteBoard(boardItem.boardId)
             .enqueue(object : Callback<Void>{
                 override fun onResponse(call: Call<Void>, response: Response<Void>) {
+                    backPressed()
                 }
 
                 override fun onFailure(call: Call<Void>, t: Throwable) {

@@ -17,6 +17,7 @@ import com.edu.mf.R
 import com.edu.mf.databinding.FragmentDrawingBinding
 import com.edu.mf.repository.model.drawing.DrawingRequest
 import com.edu.mf.repository.model.drawing.DrawingResponse
+import com.edu.mf.view.common.EventObserver
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.drawing.result.DrawingResultFragment
 import com.edu.mf.view.drawing.result.DrawingResultShareDialog
@@ -92,7 +93,7 @@ class DrawingFragment: Fragment() {
 
     // response 결과에 따라 이동할 Fragment 결정
     private fun changeFragment(){
-        drawingViewModel.drawingResponse.observe(viewLifecycleOwner, Observer{
+        drawingViewModel.drawingResponse.observe(viewLifecycleOwner, EventObserver{
             when(it.predictionType){
                 0 -> mainActivity.addFragment(DrawingResultFragment(it))
                 1 -> mainActivity.addFragment(DrawingResultViewPagerFragment(it))

@@ -67,7 +67,7 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:fontFamily="@font/baemin"
-                android:text="@{DrawingViewModel.drawingResponse.firstPrediction}"
+                android:text="@{DrawingViewModel.drawingResponse.contentIfNotHandled.firstPrediction}"
                 android:textColor="@color/grey_card_text"
                 android:textSize="40sp"
                 android:textStyle="bold"
