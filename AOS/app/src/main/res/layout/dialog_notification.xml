@@ -22,7 +22,7 @@
             android:id="@+id/textview_dialog_noti"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="28dp"
+            android:layout_marginBottom="30dp"
             android:gravity="center"
             android:text="@{Message}"
             android:textColor="@color/grey_02"
