@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="Message"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="40dp"
+        android:paddingStart="34dp"
+        android:paddingEnd="34dp"
+        android:paddingBottom="14dp"
+        android:background="@drawable/drawing_dialog"
+        android:backgroundTint="@color/white">
+
+        <TextView
+            android:id="@+id/textview_dialog_noti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="28dp"
+            android:gravity="center"
+            android:text="@{Message}"
+            android:textColor="@color/grey_02"
+            android:textSize="18sp"
+            android:fontFamily="@font/kakao_otf_bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/button_dialog_noti"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_dialog_noti"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="40dp"
+            android:paddingEnd="40dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="4dp"
+            android:text="@string/dialog_first_user_button"
+            android:textSize="14sp"
+            android:background="@drawable/drawing_dialog_button_fill"
+            app:layout_constraintTop_toBottomOf="@+id/textview_dialog_noti"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

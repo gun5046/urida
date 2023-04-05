@@ -13,7 +13,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -23,6 +22,7 @@ import com.edu.mf.databinding.FragmentPictureBinding
 import com.edu.mf.repository.model.picture.DetectedPicture
 import com.edu.mf.utils.BitmapUtil
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.common.NotificationDialog
 import com.edu.mf.viewmodel.PictureViewModel
 import com.google.mlkit.common.model.LocalModel
 import com.google.mlkit.nl.translate.TranslateLanguage
@@ -82,21 +82,33 @@ class PictureFragment: Fragment() {
             if(it){
                 mainActivity.addFragment(PicturePreviewFragment())
             } else {
-                Toast.makeText(requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_camera), Toast.LENGTH_SHORT).show()
+                NotificationDialog(
+                    resources.getString(
+                        R.string.fragment_picture_permission_camera
+                    )
+                ).show(childFragmentManager, null)
             }
         }
         val cameraPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it){
                 launchCamera()
             } else {
-                Toast.makeText(requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_camera), Toast.LENGTH_SHORT).show()
+                NotificationDialog(
+                    resources.getString(
+                        R.string.fragment_picture_permission_camera
+                    )
+                ).show(childFragmentManager, null)
             }
         }
         val storagePermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it){
                 launchGallery()
             } else {
-                Toast.makeText(requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_storage), Toast.LENGTH_SHORT).show()
+                NotificationDialog(
+                    resources.getString(
+                        R.string.fragment_picture_permission_storage
+                    )
+                ).show(childFragmentManager, null)
             }
         }
         binding.cardviewPreview.setOnClickListener {
