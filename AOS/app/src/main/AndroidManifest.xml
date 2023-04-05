@@ -53,8 +53,6 @@
         <activity
             android:name=".view.common.MainActivity"
             android:exported="true"
-            android:largeHeap="true"
-            android:hardwareAccelerated="false"
             android:windowSoftInputMode="adjustResize">
 
         </activity>
