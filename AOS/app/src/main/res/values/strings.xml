@@ -15,8 +15,8 @@
 
     <string name="fragment_main_find_title">찾아보기</string>
     <string name="fragment_main_find_subtitle">그림과 음성을 활용한 원하는 단어 찾기</string>
-    <string name="fragment_main_find_title_picture">그림으로 찾기</string>
-    <string name="fragment_main_find_title_voice">음성으로 찾기</string>
+    <string name="fragment_main_find_title_picture">그림으로\n찾기</string>
+    <string name="fragment_main_find_title_voice">음성으로\n찾기</string>
 
 
 

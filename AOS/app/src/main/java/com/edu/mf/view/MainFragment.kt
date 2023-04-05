@@ -7,6 +7,7 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -23,6 +24,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.gif.GifDrawable
+import com.bumptech.glide.request.target.DrawableImageViewTarget
+import com.bumptech.glide.request.transition.Transition
 import com.edu.mf.R
 import com.edu.mf.databinding.DialogFragmentMainFirstUserBinding
 import com.edu.mf.databinding.FragmentLanguageBinding
@@ -119,8 +124,21 @@ class MainFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         chkPermissionDrawingFragment()
+        Glide.with(requireContext()).load(R.raw.ic_community_title)
+            .into(object : DrawableImageViewTarget(binding.imageviewFragmentMainCommunity) {
+                override fun onResourceReady(
+                    resource: Drawable,
+                    transition: Transition<in Drawable>?
+                ) {
+                    if (resource is GifDrawable) {
+                        (resource as GifDrawable).setLoopCount(3)
+                    }
+                    super.onResourceReady(resource, transition)
+                }
+            })
 
-        if(App.firstUser){
+        if(App.firstUser)
+        {
             showFirstUserDialog()
         }
 
