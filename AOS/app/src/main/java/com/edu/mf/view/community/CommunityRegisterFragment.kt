@@ -173,7 +173,7 @@ class CommunityRegisterFragment(
 
         val file = File(path)
         val fileSize = Integer.parseInt((file.length()).toString())
-        if(fileSize > 20_971_520){
+        if(fileSize > 10_485_760){
             return false
         }
         return true
