@@ -23,7 +23,7 @@ class App : Application(){
         var PICTURES : ArrayList<ArrayList<String>> = arrayListOf()
         var categories : ArrayList<String> = arrayListOf()
         var pCategories : ArrayList<PCategory> = arrayListOf()
-        var firstUser = true
+        var firstUser = false
         lateinit var sharedPreferencesUtil:SharedPreferencesUtil
         lateinit var userRetrofit: Retrofit
         lateinit var drawingRetrofit: Retrofit
