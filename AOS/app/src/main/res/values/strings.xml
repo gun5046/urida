@@ -184,4 +184,8 @@
     <string name="problem_category_fourth_title">연관된 단어 맞추기</string>
     <string name="problem_category_fourth_subtitle">제시된 단어들과 연관된 단어를 골라 보아요</string>
 
+    <!--    dialog_exit-->
+    <string name="dialog_exit_question">정말 나가시겠습니까?</string>
+    <string name="dialog_exit_button_cancel">취 소</string>
+    <string name="dialog_exit_button_out">나가기</string>
 </resources>

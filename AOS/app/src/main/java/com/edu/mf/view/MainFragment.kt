@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -30,6 +31,7 @@ import com.edu.mf.repository.model.Category
 import com.edu.mf.repository.model.picture.DetectedPicture
 import com.edu.mf.utils.App
 import com.edu.mf.utils.BitmapUtil
+import com.edu.mf.view.common.ExitDialog
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.common.NotificationDialog
 import com.edu.mf.view.community.CommunityFragment
@@ -186,6 +188,7 @@ class MainFragment: Fragment() {
         chkPermissionDrawingFragment()
         initPhoto()
         setAdapter()
+        clickBackPress()
    }
 
     private fun initPhoto(){
@@ -445,5 +448,15 @@ class MainFragment: Fragment() {
         }
         dialog.window?.setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.show()
+    }
+
+    // onBackPressed시 앱 종료
+    private fun clickBackPress(){
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner, object : OnBackPressedCallback(true){
+                override fun handleOnBackPressed() {
+                    ExitDialog().show(childFragmentManager, null)
+                }
+            })
     }
 }
