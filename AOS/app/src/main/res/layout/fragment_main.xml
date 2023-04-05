@@ -15,7 +15,6 @@
     android:layout_height="match_parent"
     android:background="@color/main_background">
 
-
     <ImageView
         android:id="@+id/imageview_fragment_main_icon"
         android:layout_width="60dp"

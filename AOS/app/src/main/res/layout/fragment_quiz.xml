@@ -15,7 +15,7 @@
             android:layout_marginTop="60dp"
             android:fontFamily="@font/kakao_otf_bold"
             android:gravity="left"
-            android:text="@string/fragment_quiz_title"
+            android:text="@string/fragment_main_study_word_quiz"
             android:textColor="@color/black"
             android:textSize="24sp"
             app:layout_constraintLeft_toLeftOf="parent"

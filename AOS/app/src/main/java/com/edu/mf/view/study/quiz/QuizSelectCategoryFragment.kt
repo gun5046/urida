@@ -44,6 +44,7 @@ class QuizSelectCategoryFragment : Fragment() {
         return binding.root
     }
     private fun init(){
+        App.resetPCategories(resources)
         setAdapter()
     }
     private fun setAdapter(){
