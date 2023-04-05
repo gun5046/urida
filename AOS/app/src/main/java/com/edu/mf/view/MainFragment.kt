@@ -6,7 +6,6 @@ import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -16,15 +15,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.edu.mf.R
 import com.edu.mf.databinding.DialogFragmentMainFirstUserBinding
 import com.edu.mf.databinding.FragmentLanguageBinding
@@ -34,15 +30,14 @@ import com.edu.mf.repository.model.picture.DetectedPicture
 import com.edu.mf.utils.App
 import com.edu.mf.utils.BitmapUtil
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.common.NotificationDialog
 import com.edu.mf.view.community.CommunityFragment
 import com.edu.mf.view.drawing.DrawingAdapter
 import com.edu.mf.view.drawing.DrawingFragment
 import com.edu.mf.view.picture.PictureAdapter
-import com.edu.mf.view.picture.PictureFragment
 import com.edu.mf.view.picture.PicturePreviewFragment
 import com.edu.mf.view.picture.PictureResultFragment
 import com.edu.mf.view.study.StudyAdapter
-import com.edu.mf.view.study.StudyFragment
 import com.edu.mf.view.voice.VoiceFragment
 import com.edu.mf.view.study.learn.LearnFragment
 import com.edu.mf.view.study.quiz.QuizFragment
@@ -105,7 +100,6 @@ class MainFragment: Fragment() {
         }
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -148,9 +142,11 @@ class MainFragment: Fragment() {
             if (it){
                 mainActivity.addFragment(DrawingFragment())
             } else{
-                Toast.makeText(
-                    requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_storage), Toast.LENGTH_SHORT
-                ).show()
+                NotificationDialog(
+                    resources.getString(
+                        R.string.fragment_picture_permission_storage
+                    )
+                ).show(childFragmentManager, null)
 
                 val settingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                     .setData(Uri.parse("package:" + requireContext().packageName))
@@ -197,21 +193,33 @@ class MainFragment: Fragment() {
             if(it){
                 mainActivity.addFragment(PicturePreviewFragment())
             } else {
-                Toast.makeText(requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_camera), Toast.LENGTH_SHORT).show()
+                NotificationDialog(
+                    resources.getString(
+                        R.string.fragment_picture_permission_camera
+                    )
+                ).show(childFragmentManager, null)
             }
         }
         cameraPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it){
                 launchCamera()
             } else {
-                Toast.makeText(requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_camera), Toast.LENGTH_SHORT).show()
+                NotificationDialog(
+                    resources.getString(
+                        R.string.fragment_picture_permission_camera
+                    )
+                ).show(childFragmentManager, null)
             }
         }
         storagePermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()){
             if(it){
                 launchGallery()
             } else {
-                Toast.makeText(requireContext(), requireContext().resources.getString(R.string.fragment_picture_permission_storage), Toast.LENGTH_SHORT).show()
+                NotificationDialog(
+                    resources.getString(
+                        R.string.fragment_picture_permission_storage
+                    )
+                ).show(childFragmentManager, null)
             }
         }
         val translateOptions = TranslatorOptions.Builder()
@@ -277,7 +285,6 @@ class MainFragment: Fragment() {
         intent.action = Intent.ACTION_GET_CONTENT
         launcher.launch(Intent.createChooser(intent, ""))
     }
-
 
     private fun setAdapter(){
         wordAdapter = StudyAdapter(wordList)

@@ -14,7 +14,6 @@ import android.provider.OpenableColumns
 import android.provider.Settings
 import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -31,6 +30,7 @@ import com.edu.mf.repository.model.community.*
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.LoadingDialog
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.common.NotificationDialog
 import com.edu.mf.view.community.board.CommunityBoardFragment
 import com.edu.mf.view.drawing.result.DrawingResultShareDialog
 import com.edu.mf.viewmodel.CommunityViewModel
@@ -115,11 +115,11 @@ class CommunityRegisterFragment(
             if (it){
                 openGallery()
             } else{
-                Toast.makeText(
-                    requireContext(),
-                    resources.getString(R.string.fragment_picture_permission_storage),
-                    Toast.LENGTH_SHORT
-                ).show()
+                NotificationDialog(
+                    resources.getString(
+                        R.string.fragment_picture_permission_storage
+                    )
+                ).show(childFragmentManager, null)
 
                 val settingsIntent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
                     .setData(Uri.parse("package:" + requireContext().packageName))
@@ -150,11 +150,11 @@ class CommunityRegisterFragment(
     // 이미지뷰에 이미지 띄우기
     private fun setImg(uri: Uri){
         if (!getFileSize(uri)){
-            Toast.makeText(
-                requireContext(),
-                resources.getString(R.string.fragment_community_register_edittext_imagesize_fail),
-                Toast.LENGTH_SHORT
-            ).show()
+            NotificationDialog(
+                resources.getString(
+                    R.string.fragment_community_register_edittext_imagesize_fail
+                )
+            ).show(childFragmentManager, null)
         } else{
             if (drawingUri == "".toUri()){
                 galleryUri = uri
@@ -227,11 +227,11 @@ class CommunityRegisterFragment(
     private fun chkEmpty(): Boolean{
         if (binding.edittextFragmentCommunityRegisterTitle.text.toString().trim() == ""
             || binding.edittextFragmentCommunityRegisterContent.text.toString().trim() == ""){
-            Toast.makeText(
-                requireContext(),
-                resources.getString(R.string.fragment_community_register_chk_content),
-                Toast.LENGTH_SHORT
-            ).show()
+            NotificationDialog(
+                resources.getString(
+                    R.string.fragment_community_register_chk_content
+                )
+            ).show(childFragmentManager, null)
 
             return false
         }

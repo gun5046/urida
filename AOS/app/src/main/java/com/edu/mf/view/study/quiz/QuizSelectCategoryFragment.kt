@@ -16,6 +16,7 @@ import com.edu.mf.databinding.FragmentQuizSelectCategoryBinding
 import com.edu.mf.repository.model.study.PCategory
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.common.NotificationDialog
 import com.edu.mf.view.study.learn.LearnDialogAdapter
 import com.edu.mf.viewmodel.MainViewModel
 
@@ -83,12 +84,11 @@ class QuizSelectCategoryFragment : Fragment() {
             )
             clickBackButton()
         }else{
-            val tv = TextView(requireContext())
-            tv.text = resources.getString(R.string.fragment_quiz_select_category_empty)
-            tv.setTextColor(Color.parseColor("#FF0000"))
-            var toast = Toast.makeText(requireContext(),"",Toast.LENGTH_SHORT)
-            toast.view = tv
-            toast.show()
+            NotificationDialog(
+                resources.getString(
+                    R.string.fragment_quiz_select_category_empty
+                )
+            ).show(childFragmentManager, null)
         }
 
     }

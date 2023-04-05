@@ -46,7 +46,7 @@
             android:onClick="@{()->MainViewModel.startTTS()}"
             android:src="@drawable/ic_volume"
             android:backgroundTint="@color/white"
-            app:backgroundTint="@color/primary_pink"
+            app:backgroundTint="@color/find_bold_green"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent" />
 

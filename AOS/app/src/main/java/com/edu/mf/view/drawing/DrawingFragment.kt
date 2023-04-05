@@ -147,6 +147,9 @@ class DrawingFragment: Fragment() {
                     drawingViewModel.setDrawingResponse(body)
 
                     changeFragment()
+                } else{
+                    val dialog = DrawingResultShareDialog()
+                    dialog.show(childFragmentManager, "DrawingResultDialog")
                 }
             }
 
