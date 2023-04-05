@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         private var instance: MainActivity? = null
+        var languageNumber : Int = 0
         fun getInstance(): MainActivity? {
             return instance
         }

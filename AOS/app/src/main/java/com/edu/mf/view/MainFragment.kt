@@ -6,6 +6,7 @@ import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.Signature
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -126,8 +127,9 @@ class MainFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         chkPermissionDrawingFragment()
-        Glide.with(requireContext()).load(R.raw.ic_community)
-            .apply(RequestOptions().signature(ObjectKey("asdasd")).skipMemoryCache(true).diskCacheStrategy(
+
+        Glide.with(requireContext()).load(resources.getIdentifier("ic_community_${MainActivity.languageNumber}","raw",requireActivity().packageName))
+            .apply(RequestOptions().skipMemoryCache(true).diskCacheStrategy(
                 DiskCacheStrategy.NONE))
             .into(object : DrawableImageViewTarget(binding.imageviewFragmentMainCommunity) {
                 override fun onResourceReady(
@@ -189,68 +191,18 @@ class MainFragment: Fragment() {
         dialogBinding.apply {
             layoutKorean.setOnClickListener {
                 changeLocale(0)
-                Glide.with(requireContext()).load(R.raw.ic_community_us)
-                    .into(object : DrawableImageViewTarget(binding.imageviewFragmentMainCommunity) {
-                        override fun onResourceReady(
-                            resource: Drawable,
-                            transition: Transition<in Drawable>?
-                        ) {
-                            if (resource is GifDrawable) {
-                                (resource as GifDrawable).setLoopCount(3)
-                            }
-                            super.onResourceReady(resource, transition)
-                        }
-                    })
                 dialog.dismiss()
             }
             layoutChinese.setOnClickListener {
                 changeLocale(1)
-                Glide.with(requireContext()).load(R.raw.ic_community_us)
-                    .into(object : DrawableImageViewTarget(binding.imageviewFragmentMainCommunity) {
-                        override fun onResourceReady(
-                            resource: Drawable,
-                            transition: Transition<in Drawable>?
-                        ) {
-                            if (resource is GifDrawable) {
-                                (resource as GifDrawable).setLoopCount(3)
-                            }
-                            super.onResourceReady(resource, transition)
-                        }
-                    })
                 dialog.dismiss()
             }
             layoutVietnam.setOnClickListener {
                 changeLocale(2)
-                Glide.with(requireContext()).load(R.raw.ic_community_us)
-                    .into(object : DrawableImageViewTarget(binding.imageviewFragmentMainCommunity) {
-                        override fun onResourceReady(
-                            resource: Drawable,
-                            transition: Transition<in Drawable>?
-                        ) {
-                            if (resource is GifDrawable) {
-                                (resource as GifDrawable).setLoopCount(3)
-                            }
-                            super.onResourceReady(resource, transition)
-                        }
-                    })
                 dialog.dismiss()
             }
             layoutEnglish.setOnClickListener {
                 changeLocale(3)
-                Glide.with(requireContext()).load(R.raw.ic_community_us)
-                    .apply(RequestOptions().signature(ObjectKey("asdasd")).skipMemoryCache(true).diskCacheStrategy(
-                        DiskCacheStrategy.NONE))
-                    .into(object : DrawableImageViewTarget(binding.imageviewFragmentMainCommunity) {
-                        override fun onResourceReady(
-                            resource: Drawable,
-                            transition: Transition<in Drawable>?
-                        ) {
-                            if (resource is GifDrawable) {
-                                (resource as GifDrawable).setLoopCount(3)
-                            }
-                            super.onResourceReady(resource, transition)
-                        }
-                    })
                 dialog.dismiss()
             }
 
@@ -505,6 +457,7 @@ class MainFragment: Fragment() {
 
     fun changeLocale(language: Int){
         mainActivity.changeLocale(language)
+        MainActivity.languageNumber = language
         CoroutineScope(Dispatchers.IO).launch {
             mainActivity.loginService.languageSetting(language, mainActivity.user!!.uid!!)
         }
