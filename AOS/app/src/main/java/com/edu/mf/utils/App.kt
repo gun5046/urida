@@ -500,7 +500,7 @@ class App : Application(){
         PICTURES[6].add("무릎")
         PICTURES[6].add("사다리")
         PICTURES[6].add("햄버거")
-        PICTURES[6].add("나뭇입")
+        PICTURES[6].add("나뭇잎")
         PICTURES[6].add("다리")
         PICTURES[6].add("전구")
         PICTURES[6].add("벼락")
