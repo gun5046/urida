@@ -2,17 +2,31 @@
     <string name="app_name">URIDA</string>
 
     <!--    fragment_main-->
-    <string name="fragment_main_cardview_community_another_friends">다른친구들은 뭐하고 지낼까?</string>
-    <string name="fragment_main_cardview_community_transfer_community">커뮤니티로 이동</string>
-    <string name="fragment_main_cardview_study_transfer_study">단어학습</string>
-    <string name="fragment_main_cardview_drawing_transfer_drawing">그림으로 찾기</string>
-    <string name="fragment_main_cardview_picture_transfer_picture">사진으로 찾기</string>
-    <string name="fragment_main_cardview_voice_transfer_voice">음성으로 찾기</string>
+    <string name="fragment_main_study_word_title">단어학습</string>
+    <string name="fragment_main_study_word_subscription">다문화 아이들을 위한 초등 기초단어</string>
+    <string name="fragment_main_study_word_learn">단어\n익히기</string>
+    <string name="fragment_main_study_word_quiz">단어퀴즈</string>
+    <string name="fragment_main_study_word_resolve">다시\n풀어보기</string>
+    <string name="fragment_main_picture_title" >사진찍기</string>
+    <string name="fragment_main_picture_subscription">카메라에 감지된 물체들을 탐지</string>
+    <string name="fragment_main_picture_live">실시간으로\n확인하기</string>
+    <string name="fragment_main_picture_photo">사진 찍기</string>
+    <string name="fragment_main_picture_gallery">갤러리에서\n불러오기</string>
+
+    <string name="fragment_main_find_title">찾아보기</string>
+    <string name="fragment_main_find_subtitle">그림과 음성을 활용한 원하는 단어 찾기</string>
+    <string name="fragment_main_find_title_picture">그림으로 찾기</string>
+    <string name="fragment_main_find_title_voice">음성으로 찾기</string>
+
+
 
     <!--    fragment_study-->
     <string name="fragment_study_cardview_learn">낱말 익히기</string>
     <string name="fragment_study_cardview_quiz">낱말 퀴즈</string>
-    <string name="fragment_study_cardview_resolve">다시 풀어보기</string>
+    <string name="fragment_study_cardview_resolve" >다시 풀어보기</string>
+
+
+    <!--    fragment_language-->
 
     <!--    dialog_nickname-->
     <string name="dialog_nickname_text">닉네임을 설정해주세요</string>
@@ -28,6 +42,8 @@
     <string name="fragment_drawing_dialog_custom">다른색 선택</string>
     <string name="fragment_drawing_dialog_presets">팔레트에 추가</string>
     <string name="fragment_drawing_dialog_complete">완료</string>
+
+    <!--    fragment_drawing_result_list-->
 
     <!--    dialog_fragment_drawing_result_share-->
     <string name="dialog_fragment_drawing_result_redrawing_textview">잘 모르겠어요.\n\n다른 친구들에게\n물어보러 갈까요?</string>
@@ -63,6 +79,7 @@
     <!--    fragment_community_register-->
     <string name="fragment_community_register_edittext_title">제목</string>
     <string name="fragment_community_register_edittext_content">내용</string>
+    <string name="fragment_community_register_edittext_imagesize_fail">이미지 용량이 커서 업로드에 실패하였습니다</string>
 
     <!--    fragment_community_mypage-->
     <string name="fragment_community_mypage_tablayout_title_board">게시글</string>
@@ -111,6 +128,8 @@
     <string name="fragment_picture_result_text">죄송해요.\n물체를 인식하기 어려워요\n다시 한번 찍어주세요</string>
     <string name="fragment_picture_result_button">홈 화면으로 이동</string>
 
+    <!--  dialog_loading  -->
+
     <!--    category-->
     <string name="fruit_vegetables">과일/채소</string>
     <string name="job">직업</string>
@@ -145,7 +164,8 @@
 
     <!--    fragment_resolve-->
     <string name="fragment_resolve_title">다시 풀어보기</string>
-    <string name="fragment_resolve_subtitle">틀렸던 문제들을 다시 한번 풀어보세요!\n정답이 궁금한 경우엔\n정답확인 버튼을 눌러주세요!</string>
+    <string name="fragment_resolve_subtitle">틀렸던 문제들을 다시 한번 풀어보세요!\n정답이 궁금한 경우엔!\n정답확인 버튼을 눌러주세요!</string>
+    <string name="fragment_resolve_empty">다시 풀어볼 문제가 없습니다</string>
 
     <!--    problem_category-->
     <string name="problem_category_first_title">그림보고 낱말 맞추기</string>
@@ -156,6 +176,5 @@
     <string name="problem_category_third_subtitle">주어진 그림과 문장을 보고 \n어떤 단어가 들어가야 할지 맞춰 보아요</string>
     <string name="problem_category_fourth_title">연관된 단어 맞추기</string>
     <string name="problem_category_fourth_subtitle">제시된 단어들과 연관된 단어를 골라 보아요</string>
-    <string name="fragment_resolve_empty">다시 풀어볼 문제가 없습니다</string>
-    <string name="fragment_community_register_edittext_imagesize_fail">이미지 용량이 커서 업로드에 실패하였습니다</string>
+
 </resources>

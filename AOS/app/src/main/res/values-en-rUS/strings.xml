@@ -7,12 +7,6 @@
     <string name="dialog_nickname_unallowed">Only English lowercase letters, uppercase letters and numbers are allowed.</string>
     <string name="dialog_nickname_blank">Please enter your nickname.</string>
     <string name="dialog_nickname_duplicate">This is a duplicate nickname.</string>
-    <string name="fragment_main_cardview_community_another_friends">What are the other friends doing?</string>
-    <string name="fragment_main_cardview_community_transfer_community">Go to community</string>
-    <string name="fragment_main_cardview_study_transfer_study">Word learning</string>
-    <string name="fragment_main_cardview_drawing_transfer_drawing">Find by drawing</string>
-    <string name="fragment_main_cardview_picture_transfer_picture">Find by photo</string>
-    <string name="fragment_main_cardview_voice_transfer_voice">"Find by voice"</string>
     <string name="fragment_study_cardview_resolve">Re-solve quiz</string>
     <string name="fragment_study_cardview_quiz">Word quiz</string>
     <string name="fragment_study_cardview_learn">Learning words</string>
@@ -26,7 +20,7 @@
     <string name="dialog_fragment_drawing_result_share_button">Share</string>
     <string name="fragment_picture_cardview_preview">Check in real time</string>
     <string name="fragment_picture_cardview_camera">Take a picture</string>
-    <string name="fragment_picture_cardview_gallery">load from gallery</string>
+    <string name="fragment_picture_cardview_gallery">Load from gallery</string>
     <string name="fragment_picture_permission_camera">Please check camera permission</string>
     <string name="fragment_picture_permission_storage">Please check storage device access rights</string>
     <string name="fragment_picture_result_text_title">Detection result</string>
@@ -103,4 +97,18 @@
     <string name="fragment_quiz_select_category_empty">Please select a category first</string>
     <string name="fragment_resolve_empty">No problems to solve again</string>
     <string name="fragment_community_register_edittext_imagesize_fail">Upload failed due to large image size</string>
+    <string name="fragment_main_study_word_title">Learning words</string>
+    <string name="fragment_main_study_word_subscription">Basic words for multicultural children</string>
+    <string name="fragment_main_study_word_learn">Learn\nwords</string>
+    <string name="fragment_main_study_word_quiz">Word\nquiz</string>
+    <string name="fragment_main_study_word_resolve">Re-solving</string>
+    <string name="fragment_main_picture_photo">Take a picture</string>
+    <string name="fragment_main_picture_gallery">Load from gallery</string>
+    <string name="fragment_main_picture_live">Check in real time</string>
+    <string name="fragment_main_picture_title">Take a picture</string>
+    <string name="fragment_main_picture_subscription">Detect objects detected by the camera</string>
+    <string name="fragment_main_find_subtitle">Find the word you want using pictures and voice</string>
+    <string name="fragment_main_find_title_voice">Find by voice</string>
+    <string name="fragment_main_find_title_picture">Find by drawing</string>
+    <string name="fragment_main_find_title">Find</string>
 </resources>

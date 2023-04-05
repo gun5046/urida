@@ -7,12 +7,6 @@
     <string name="dialog_nickname_unallowed">Chỉ cho phép chữ thường, chữ hoa và số tiếng Anh.</string>
     <string name="dialog_nickname_blank">Vui lòng nhập nickname của bạn.</string>
     <string name="dialog_nickname_duplicate">Đây là một biệt hiệu trùng lặp.</string>
-    <string name="fragment_main_cardview_community_another_friends">Các bạn khác đang làm gì?</string>
-    <string name="fragment_main_cardview_community_transfer_community">đi đến cộng đồng</string>
-    <string name="fragment_main_cardview_study_transfer_study">học từ</string>
-    <string name="fragment_main_cardview_drawing_transfer_drawing">tìm theo hình ảnh</string>
-    <string name="fragment_main_cardview_picture_transfer_picture">tìm theo ảnh</string>
-    <string name="fragment_main_cardview_voice_transfer_voice">tìm kiếm bằng giọng nói</string>
     <string name="fragment_study_cardview_resolve">thử lại</string>
     <string name="fragment_study_cardview_quiz">đố chữ</string>
     <string name="fragment_study_cardview_learn">học từ</string>
@@ -103,4 +97,18 @@
     <string name="problem_category_fourth_title">nối các từ liên quan</string>
     <string name="fragment_resolve_empty">Không có vấn đề để giải quyết một lần nữa</string>
     <string name="fragment_community_register_edittext_imagesize_fail">Tải lên không thành công do kích thước hình ảnh lớn</string>
+    <string name="fragment_main_find_title_voice">tìm kiếm bằng giọng nói</string>
+    <string name="fragment_main_find_title_picture">tìm theo hình ảnh</string>
+    <string name="fragment_main_find_subtitle">Tìm từ bạn muốn bằng hình ảnh và giọng nói</string>
+    <string name="fragment_main_find_title">duyệt</string>
+    <string name="fragment_main_picture_gallery">trong phòng trưng bày Trọng tải</string>
+    <string name="fragment_main_picture_photo">chụp ảnh</string>
+    <string name="fragment_main_picture_live">trong thời gian thực kiểm tra</string>
+    <string name="fragment_main_picture_subscription">Phát hiện các đối tượng được phát hiện bởi máy ảnh</string>
+    <string name="fragment_main_picture_title">chụp ảnh</string>
+    <string name="fragment_main_study_word_resolve">lại gỡ rối</string>
+    <string name="fragment_main_study_word_quiz">đố chữ</string>
+    <string name="fragment_main_study_word_learn">từ học hỏi</string>
+    <string name="fragment_main_study_word_subscription">Từ cơ bản tiểu học cho trẻ em đa văn hóa</string>
+    <string name="fragment_main_study_word_title">học từ</string>
 </resources>

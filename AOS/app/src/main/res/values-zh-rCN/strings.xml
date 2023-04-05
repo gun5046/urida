@@ -7,12 +7,6 @@
     <string name="dialog_nickname_unallowed">只允许英文小写字母、大写字母和数字</string>
     <string name="dialog_nickname_blank">请输入您的昵称</string>
     <string name="dialog_nickname_duplicate">这是一个重复的昵称</string>
-    <string name="fragment_main_cardview_community_another_friends">其他朋友在做什么？</string>
-    <string name="fragment_main_cardview_community_transfer_community">去社区</string>
-    <string name="fragment_main_cardview_study_transfer_study">单词学习</string>
-    <string name="fragment_main_cardview_drawing_transfer_drawing">按图查找</string>
-    <string name="fragment_main_cardview_picture_transfer_picture">按照片查找</string>
-    <string name="fragment_main_cardview_voice_transfer_voice">语音搜索</string>
     <string name="fragment_study_cardview_resolve">再试一次</string>
     <string name="fragment_study_cardview_quiz">单词测验</string>
     <string name="fragment_study_cardview_learn">学习单词</string>
@@ -103,4 +97,18 @@
     <string name="problem_category_fourth_subtitle">选择一个与出现的词相关的词</string>
     <string name="fragment_resolve_empty">没有问题可以再次解决</string>
     <string name="fragment_community_register_edittext_imagesize_fail">由于图像尺寸过大，上传失败</string>
+    <string name="fragment_main_study_word_title">单词学习</string>
+    <string name="fragment_main_study_word_subscription">多元文化儿童的初级基本词汇</string>
+    <string name="fragment_main_study_word_learn">单词 学习</string>
+    <string name="fragment_main_study_word_quiz">单词测验</string>
+    <string name="fragment_main_study_word_resolve">再次 解决</string>
+    <string name="fragment_main_picture_title">拍照</string>
+    <string name="fragment_main_picture_photo">拍照</string>
+    <string name="fragment_main_picture_subscription">检测摄像头检测到的物体</string>
+    <string name="fragment_main_picture_live">实时 查看</string>
+    <string name="fragment_main_picture_gallery">在画廊 加载</string>
+    <string name="fragment_main_find_title">浏览</string>
+    <string name="fragment_main_find_subtitle">使用图片和语音查找您想要的单词</string>
+    <string name="fragment_main_find_title_picture">按图查找</string>
+    <string name="fragment_main_find_title_voice">语音搜索</string>
 </resources>
