@@ -17,6 +17,7 @@ import com.edu.mf.repository.api.ResolveService
 import com.edu.mf.repository.model.resolve.ResolveResponse
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.common.NotificationDialog
 import com.edu.mf.view.study.learn.LearnMainFragment
 import com.edu.mf.view.study.quiz.*
 import com.edu.mf.viewmodel.MainViewModel
@@ -119,10 +120,11 @@ class ResolveFragment: Fragment() {
             }
         }
         else{
-            Toast.makeText(requireContext(),resources.getString(R.string.fragment_resolve_empty),Toast.LENGTH_SHORT).show()
+            NotificationDialog(
+                resources.getString(
+                    R.string.fragment_resolve_empty
+                )
+            ).show(childFragmentManager, null)
         }
     }
-
-
-
 }
