@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.edu.mf.R
 import com.edu.mf.databinding.ItemMainWordFragBinding
 import com.edu.mf.repository.model.Category
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.NonDisposableHandle.parent
 
 class StudyAdapter(val categories:List<Category>):RecyclerView.Adapter<StudyAdapter.StduyViewHolder>(){
     private lateinit var binding : ItemMainWordFragBinding
@@ -28,7 +30,6 @@ class StudyAdapter(val categories:List<Category>):RecyclerView.Adapter<StudyAdap
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StduyViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-
         binding = DataBindingUtil.inflate<ItemMainWordFragBinding>(inflater, R.layout.item_main_word_frag,parent,false)
         return StduyViewHolder(binding)
     }
