@@ -70,7 +70,6 @@ class DrawingFragment: Fragment() {
         initList()
         clickBackPress()
         penClickListener()
-        penLongClickListener()
 
         binding.imageviewFragmentDrawingEraser.setOnClickListener {
             binding.imageviewFragmentDrawingEraser.y = -60F
@@ -202,69 +201,6 @@ class DrawingFragment: Fragment() {
                 continue
             }
             toolList[i].y = -52F
-        }
-    }
-
-    // pen 롱 클릭 이벤트
-    private fun penLongClickListener(){
-        binding.apply {
-            imageviewFragmentDrawingPalette.setOnLongClickListener {
-                cardviewFragmentDrawingPenWidth.visibility = View.VISIBLE
-                penWidthClickListener()
-                return@setOnLongClickListener true
-            }
-            imageviewFragmentDrawingPenRed.setOnLongClickListener {
-                cardviewFragmentDrawingPenWidth.visibility = View.VISIBLE
-                penWidthClickListener()
-                return@setOnLongClickListener true
-            }
-            imageviewFragmentDrawingPenYellow.setOnLongClickListener {
-                cardviewFragmentDrawingPenWidth.visibility = View.VISIBLE
-                penWidthClickListener()
-                return@setOnLongClickListener true
-            }
-            imageviewFragmentDrawingPenGreen.setOnLongClickListener {
-                cardviewFragmentDrawingPenWidth.visibility = View.VISIBLE
-                penWidthClickListener()
-                return@setOnLongClickListener true
-            }
-            imageviewFragmentDrawingPenBlue.setOnLongClickListener {
-                cardviewFragmentDrawingPenWidth.visibility = View.VISIBLE
-                penWidthClickListener()
-                return@setOnLongClickListener true
-            }
-            imageviewFragmentDrawingPenBlack.setOnLongClickListener {
-                cardviewFragmentDrawingPenWidth.visibility = View.VISIBLE
-                penWidthClickListener()
-                return@setOnLongClickListener true
-            }
-        }
-    }
-
-    // pen shape 클릭 이벤트
-    private fun penWidthClickListener(){
-        binding.apply {
-            imageviewFragmentDrawingPenWidth1.setOnClickListener {
-                cardviewFragmentDrawingPenWidth.visibility = View.GONE
-                setStrokeWidth(1)
-            }
-            imageviewFragmentDrawingPenWidth2.setOnClickListener {
-                cardviewFragmentDrawingPenWidth.visibility = View.GONE
-                setStrokeWidth(2)
-            }
-            imageviewFragmentDrawingPenWidth3.setOnClickListener {
-                cardviewFragmentDrawingPenWidth.visibility = View.GONE
-                setStrokeWidth(3)
-            }
-        }
-    }
-
-    // strokeWidth 변경
-    private fun setStrokeWidth(width: Int){
-        when(width){
-            1 -> graphicView.paint.strokeWidth = 10F
-            2 -> graphicView.paint.strokeWidth = 20F
-            3 -> graphicView.paint.strokeWidth = 30F
         }
     }
 
