@@ -21,23 +21,27 @@
         android:layout_height="wrap_content"
         android:text="과일/채소"
         android:textSize="22sp"
+        android:layout_marginRight="10dp"
         android:fontFamily="@font/kakao_otf_bold"
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"/>
+        app:layout_constraintRight_toLeftOf="@id/textview_item_fragment_resolve_count"/>
     <TextView
         android:id="@+id/textview_item_fragment_resolve_category"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:text="그림보고 단어 맞추기"
         android:textSize="20sp"
         android:fontFamily="@font/kakao_otf_bold"
         android:textColor="@color/black"
         app:layout_constraintTop_toBottomOf="@id/textview_item_fragment_resolve_title"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/button_item_fragment_resolve_answer"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_item_fragment_resolve_answer"
         android:layout_width="wrap_content"
