@@ -2,6 +2,9 @@
     <string name="app_name">URIDA</string>
 
     <!--    fragment_main-->
+    <string name="fragment_quiz_listen_tts" translatable="false">지문 듣기</string>
+    <string name="fragment_quiz_listen_category_tts" translatable="false">보기 듣기</string>
+    <string name="fragment_quiz_listen_problem_tts" translatable="false">문제 듣기</string>
     <string name="fragment_main_study_word_title">단어학습</string>
     <string name="fragment_main_study_word_subscription">다문화 아이들을 위한 초등 기초단어</string>
     <string name="fragment_main_study_word_learn">단어\n익히기</string>
