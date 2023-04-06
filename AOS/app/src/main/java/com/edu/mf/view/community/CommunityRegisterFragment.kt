@@ -34,9 +34,7 @@ import com.edu.mf.view.common.LoadingDialog
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.common.NotificationDialog
 import com.edu.mf.view.community.board.CommunityBoardFragment
-import com.edu.mf.view.community.detail.CommunityDetailFragment
 import com.edu.mf.view.drawing.result.DrawingResultShareDialog
-import com.edu.mf.viewmodel.CommunityViewModel
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -95,12 +93,14 @@ class CommunityRegisterFragment(
 
     // 그림 uri가 있는지 체크
     private fun chkDrawingUri(){
-        drawingUri = DrawingResultShareDialog.savedDrawingUri
-        if (drawingUri != "".toUri()){
+        if (tabPosition == 1){
             binding.imageviewFragmentCommunityRegister.background =
                 ContextCompat.getDrawable(requireContext(), R.color.white)
-            setImg(drawingUri)
+        }
 
+        drawingUri = DrawingResultShareDialog.savedDrawingUri
+        if (drawingUri != "".toUri()){
+            setImg(drawingUri)
             DrawingResultShareDialog.savedDrawingUri = "".toUri()
             binding.cardviewFragmentCommunityRegister.isClickable = false
         }
