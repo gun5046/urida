@@ -18,6 +18,8 @@ package com.google.mlkit.vision.demo.kotlin.objectdetector
 
 import android.content.Context
 import android.util.Log
+import androidx.core.content.res.ResourcesCompat
+import com.edu.mf.R
 import com.edu.mf.view.picture.GraphicOverlay
 import com.edu.mf.view.picture.VisionProcessorBase
 import com.google.android.gms.tasks.Task
@@ -30,7 +32,7 @@ import com.google.mlkit.vision.objects.ObjectDetectorOptionsBase
 import java.io.IOException
 
 /** A processor to run object detector.  */
-class ObjectDetectorProcessor(context: Context, options: ObjectDetectorOptionsBase, val translator: Translator) :
+class ObjectDetectorProcessor(val context: Context, options: ObjectDetectorOptionsBase, val translator: Translator) :
   VisionProcessorBase<List<DetectedObject>>(context) {
 
   private val detector: ObjectDetector = ObjectDetection.getClient(options)
@@ -70,7 +72,7 @@ class ObjectDetectorProcessor(context: Context, options: ObjectDetectorOptionsBa
           } else if(it.equals("수하물 및 가방")){
             str = "가방"
           }
-          graphicOverlay.add(ObjectGraphic(graphicOverlay, result, str))
+          graphicOverlay.add(ObjectGraphic(graphicOverlay, result, str, ResourcesCompat.getFont(context, R.font.baemin)!!))
           graphicOverlay.postInvalidate()
         }
       }

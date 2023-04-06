@@ -20,6 +20,7 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
+import android.graphics.Typeface
 import com.edu.mf.view.picture.GraphicOverlay
 import com.google.mlkit.vision.objects.DetectedObject
 import java.util.Locale
@@ -34,7 +35,8 @@ class ObjectGraphic constructor(
   overlay: GraphicOverlay,
   private val detectedObject: DetectedObject,
 //  val translator: Translator
-  val translatedText: String
+  val translatedText: String,
+  val font: Typeface
 ) : GraphicOverlay.Graphic(overlay) {
 
 //  private var translatedText = ""
@@ -50,6 +52,7 @@ class ObjectGraphic constructor(
       textPaints[i] = Paint()
       textPaints[i].color = COLORS[i][0]
       textPaints[i].textSize = TEXT_SIZE
+      textPaints[i].typeface = font
       boxPaints[i] = Paint()
       boxPaints[i].color = COLORS[i][1]
       boxPaints[i].style = Paint.Style.STROKE
