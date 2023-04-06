@@ -67,7 +67,6 @@ class QuizResultDialog(
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-
         return view
     }
     override fun onResume() {
