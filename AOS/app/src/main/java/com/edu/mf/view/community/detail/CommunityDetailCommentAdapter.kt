@@ -52,7 +52,7 @@ class CommunityDetailCommentAdapter(
     }
 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
-        holder.bind(commentList[position])
+        holder.bind(commentList[position], position)
     }
 
     override fun getItemCount(): Int {
@@ -62,14 +62,14 @@ class CommunityDetailCommentAdapter(
     inner class CommentViewHolder(
         private val binding: ItemFragmentCommunityDetailCommentBinding
         ): RecyclerView.ViewHolder(binding.root){
-            fun bind(commentItem: CommentListItem){
+            fun bind(commentItem: CommentListItem, position: Int){
                 binding.commentItem = commentItem
 
                 communityViewModel.commentItem.observe(communityDetailFragment.viewLifecycleOwner){
-                    chkMyComment(it, adapterPosition)
+                    chkMyComment(it, position)
                 }
                 communityViewModel.getCommentItem(commentItem)
-                binding.executePendingBindings()
+                //binding.executePendingBindings()
             }
         }
 
@@ -135,6 +135,7 @@ class CommunityDetailCommentAdapter(
         commentList[itemPosition] = commentItem
         communityDetailFragment.getBoardInfo()
         this.notifyItemChanged(itemPosition)
+        CommunityDetailFragment.commentUpdate = false
     }
 
     // 댓글 삭제 후 리사이클러뷰 갱신
