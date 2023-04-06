@@ -1,10 +1,13 @@
 package com.edu.mf.view.study.learn
 
+import android.content.Context
 import android.provider.ContactsContract.Data
+import android.text.BoringLayout.Metrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +29,7 @@ class LearnAdapter(
         fun bind(data:String){
             binding.data = data
             binding.flag = flag
+            binding.imageviewItemIcon.setImageResource(binding.root.resources.getIdentifier("ic_word_icon_${layoutPosition}","drawable",binding.root.context.packageName))
             binding.position = layoutPosition+1
             binding.currentIndex = when(layoutPosition){
                 0->SharedPreferencesUtil(binding.root.context).getFruitsBookMark()

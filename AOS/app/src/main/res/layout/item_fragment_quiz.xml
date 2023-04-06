@@ -49,6 +49,15 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_item_learn_unit" />
 
+        <ImageView
+            android:id="@+id/imageview_item_icon"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toRightOf="@id/textview_item_learn_title"
+            app:layout_constraintTop_toTopOf="@id/textview_item_learn_title"
+            app:layout_constraintBottom_toBottomOf="@id/textview_item_learn_title"/>
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_item_quiz_start"

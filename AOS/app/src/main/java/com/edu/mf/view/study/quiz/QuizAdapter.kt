@@ -25,6 +25,7 @@ class QuizAdapter(
     inner class LearnViewHolder(val binding:ItemFragmentQuizBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(data:String){
+            binding.imageviewItemIcon.setImageResource(binding.root.resources.getIdentifier("ic_word_icon_${layoutPosition}","drawable",binding.root.context.packageName))
             binding.data = data
             binding.position = layoutPosition+1
             binding.buttonItemQuizStart.setOnClickListener {view->
