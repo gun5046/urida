@@ -117,6 +117,12 @@ class DrawingResultFragment(
             })
     }
 
+    // 홈으로 가기
+    fun onBackPressed(){
+        mainActivity.popFragment()
+        mainActivity.popFragment()
+    }
+
     override fun onStop() {
         super.onStop()
         mainViewModel.stopTTS()

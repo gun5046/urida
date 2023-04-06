@@ -23,6 +23,7 @@ import com.edu.mf.repository.model.resolve.ResolveRequest
 import com.edu.mf.repository.model.resolve.ResolveResponse
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.common.NotificationDialog
 import com.edu.mf.viewmodel.MainViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -267,7 +268,11 @@ class QuizResultDialog(
              }
             }
             else{
-                Toast.makeText(requireContext(),"문제의 끝입니다. 전 페이지로 이동합니다",Toast.LENGTH_SHORT).show()
+                NotificationDialog(
+                    resources.getString(
+                        R.string.dialog_fragment_quiz_result_end
+                    )
+                ).show(childFragmentManager, null)
                 try{
                     Thread.sleep(2000)
                 }catch(e:InterruptedException){

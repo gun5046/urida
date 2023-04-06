@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.edu.mf.R
 import com.edu.mf.databinding.FragmentVoiceResultBinding
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
@@ -36,6 +35,7 @@ class VoiceResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.voiceResultFragment = this@VoiceResultFragment
         binding.mainViewModel = mainViewModel
         binding.voiceResultWord = voiceViewModel.word
         val pictures = App.PICTURES
@@ -65,5 +65,11 @@ class VoiceResultFragment : Fragment() {
             binding.constraintlayoutVoiceResultEmpty.visibility = View.VISIBLE
             binding.constraintlayoutFragmentVoiceResult.visibility = View.GONE
         }
+    }
+
+    // 홈으로 가기
+    fun onBackPressed(){
+        mainActivity.popFragment()
+        mainActivity.popFragment()
     }
 }
