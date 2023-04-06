@@ -153,7 +153,7 @@ class ObjectGraphic constructor(
     private const val NUM_COLORS = 10
     private val COLORS =
       arrayOf(
-        intArrayOf(Color.BLACK, Color.WHITE),
+        intArrayOf(Color.BLACK, Color.argb(155,251, 251, 251)),
         intArrayOf(Color.WHITE, Color.MAGENTA),
         intArrayOf(Color.BLACK, Color.LTGRAY),
         intArrayOf(Color.WHITE, Color.RED),
