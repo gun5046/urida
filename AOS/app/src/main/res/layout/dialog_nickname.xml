@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:backgroundTint="@color/main_background"
     app:behavior_draggable="false"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehaviour">
 
@@ -20,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -28,7 +29,7 @@
         android:layout_marginBottom="32dp"
         android:text="@string/dialog_nickname_button"
         android:textColor="@color/black"
-        android:backgroundTint="@color/white"
+        android:background="@drawable/resolve_button_blue_10"
         android:backgroundTintMode="add"
         app:strokeColor="@color/teal_200"
         app:strokeWidth="0.5dp"

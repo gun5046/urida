@@ -66,6 +66,7 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.objects.ObjectDetection
 import com.google.mlkit.vision.objects.ObjectDetector
 import com.google.mlkit.vision.objects.custom.CustomObjectDetectorOptions
+import com.kakao.sdk.common.util.Utility
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -129,7 +130,7 @@ class MainFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         chkPermissionDrawingFragment()
-
+        Log.d(TAG, "key_hash: ${Utility.getKeyHash(context!!)}")
         Glide.with(requireContext()).load(resources.getIdentifier("ic_community_${MainActivity.languageNumber}","raw",requireActivity().packageName))
             .apply(RequestOptions().skipMemoryCache(true).diskCacheStrategy(
                 DiskCacheStrategy.NONE))

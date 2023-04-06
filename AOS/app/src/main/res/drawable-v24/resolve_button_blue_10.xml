@@ -8,7 +8,5 @@
 
 
     <!--꼭지점 휘는 각도-->
-    <corners
-       android:topLeftRadius="10dp"
-        android:topRightRadius="10dp"/>
+    <corners android:radius="10dp"/>
 </shape>
