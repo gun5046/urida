@@ -79,6 +79,5 @@ class DrawingResultViewPagerFragment(
     // 홈으로 가기
     fun onBackPressed(){
         mainActivity.popFragment()
-        mainActivity.popFragment()
     }
 }
