@@ -105,14 +105,16 @@ class ObjectGraphic constructor(
     rect.right = max(x0, x1)
     rect.top = translateY(rect.top)
     rect.bottom = translateY(rect.bottom)
-    canvas.drawRect(rect, boxPaints[colorID])
+    canvas.drawRoundRect(rect, 20f, 20f, boxPaints[colorID])
 
     // Draws other object info.
-    canvas.drawRect(
+    canvas.drawRoundRect(
       rect.left,
       rect.top + yLabelOffset,
       rect.left + textWidth + STROKE_WIDTH,
       rect.top,
+      20f,
+      20f,
       labelPaints[colorID]
     )
     yLabelOffset += TEXT_SIZE
