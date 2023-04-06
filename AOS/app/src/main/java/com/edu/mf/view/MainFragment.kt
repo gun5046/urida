@@ -277,6 +277,13 @@ class MainFragment: Fragment() {
                     if (detected.labels.isNotEmpty()){
                         translator!!.translate(detected.labels[0].text)
                             .addOnSuccessListener { text ->
+                                var label = text
+                                if(label.equals("쥐")){
+                                    label = "마우스"
+                                }
+                                if(label.equals("수하물 및 가방")){
+                                    label = "가방"
+                                }
                                 val detectedPicture = DetectedPicture(
                                     Bitmap.createBitmap(
                                         bitmap,
@@ -285,7 +292,7 @@ class MainFragment: Fragment() {
                                         detected.boundingBox.width(),
                                         detected.boundingBox.height()
                                     ),
-                                    if(text.equals("쥐")) "마우스" else text
+                                    label
                                 )
                                 Log.d(TAG, "detect: $text")
                                 pictureViewModel.addPicture(detectedPicture)

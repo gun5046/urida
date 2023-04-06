@@ -64,7 +64,12 @@ class ObjectDetectorProcessor(context: Context, options: ObjectDetectorOptionsBa
       if(result.labels.isNotEmpty()){
         translator.translate(result.labels[0].text).addOnSuccessListener {
           Log.d(TAG, "onSuccess: ${result.labels[0].text}, ${it}")
-          val str = if(it.equals("쥐")) "마우스" else it
+          var str = it
+          if(it.equals("쥐")){
+            str = "마우스"
+          } else if(it.equals("수하물 및 가방")){
+            str = "가방"
+          }
           graphicOverlay.add(ObjectGraphic(graphicOverlay, result, str))
           graphicOverlay.postInvalidate()
         }
