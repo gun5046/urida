@@ -72,7 +72,7 @@ class ObjectDetectorProcessor(val context: Context, options: ObjectDetectorOptio
           } else if(it.equals("수하물 및 가방")){
             str = "가방"
           }
-          graphicOverlay.add(ObjectGraphic(graphicOverlay, result, str, ResourcesCompat.getFont(context, R.font.baemin)!!))
+          graphicOverlay.add(ObjectGraphic(graphicOverlay, result, str, ResourcesCompat.getFont(context, R.font.kakao_bold)!!))
           graphicOverlay.postInvalidate()
         }
       }
