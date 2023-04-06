@@ -246,6 +246,7 @@ class CommunityDetailFragment(
     // 댓글 recyclerview 설정
     private fun setCommentAdapter(commentList: List<CommentListItem>){
         commentAdapter = CommunityDetailCommentAdapter(
+            mainActivity,
             this,
             binding.edittextFragmentCommunityDetailWriteComment,
             communityService,
@@ -261,7 +262,7 @@ class CommunityDetailFragment(
     }
 
     // 댓글 목록 받기
-    private fun getCommentList(){
+    fun getCommentList(){
         communityService.getCommentList(boardItem.boardId)
             .enqueue(object : Callback<List<CommentListItem>>{
             override fun onResponse(

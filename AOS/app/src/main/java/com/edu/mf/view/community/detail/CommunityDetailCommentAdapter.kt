@@ -1,24 +1,21 @@
 package com.edu.mf.view.community.detail
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.DialogInterface
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import androidx.activity.OnBackPressedCallback
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.edu.mf.R
 import com.edu.mf.databinding.ItemFragmentCommunityDetailCommentBinding
 import com.edu.mf.repository.api.CommunityService
 import com.edu.mf.repository.model.User
 import com.edu.mf.repository.model.community.CommentListItem
-import com.edu.mf.repository.model.community.CreateCommentData
+import com.edu.mf.view.common.LoadingDialog
 import com.edu.mf.view.common.MainActivity
 import com.edu.mf.viewmodel.CommunityViewModel
 import retrofit2.Call
@@ -27,14 +24,18 @@ import retrofit2.Response
 
 private const val TAG = "CommunityDetailCommentA"
 class CommunityDetailCommentAdapter(
+    private val mainActivity: MainActivity,
     private val communityDetailFragment: CommunityDetailFragment,
     private val commentEdittext: EditText,
     private val communityService: CommunityService,
     private val communityViewModel: CommunityViewModel,
     private var commentList: MutableList<CommentListItem>,
     private val user: User
-): RecyclerView.Adapter<CommunityDetailCommentAdapter.CommentViewHolder>() {
+): ListAdapter<CommentListItem, CommunityDetailCommentAdapter.CommentViewHolder>(
+    CommentDiffCallback()
+) {
     private lateinit var binding:ItemFragmentCommunityDetailCommentBinding
+    private val loadingDialog = LoadingDialog()
 
     companion object{
         var itemPosition: Int = 0
@@ -51,7 +52,7 @@ class CommunityDetailCommentAdapter(
     }
 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
-        holder.bind(commentList[position], position)
+        holder.bind(commentList[position])
     }
 
     override fun getItemCount(): Int {
@@ -61,10 +62,14 @@ class CommunityDetailCommentAdapter(
     inner class CommentViewHolder(
         private val binding: ItemFragmentCommunityDetailCommentBinding
         ): RecyclerView.ViewHolder(binding.root){
-            fun bind(commentItem: CommentListItem, position: Int){
+            fun bind(commentItem: CommentListItem){
                 binding.commentItem = commentItem
+
+                communityViewModel.commentItem.observe(communityDetailFragment.viewLifecycleOwner){
+                    chkMyComment(it, adapterPosition)
+                }
                 communityViewModel.getCommentItem(commentItem)
-                chkMyComment(commentItem, position)
+                binding.executePendingBindings()
             }
         }
 
@@ -100,6 +105,7 @@ class CommunityDetailCommentAdapter(
                     commentEdittext.setText(commentItem.content)
                     communityViewModel.getCommentItem(commentItem)
                 } else{  // 삭제
+                    changeLoadingState(true)
                     deleteComment(commentItem)
                 }
             })
@@ -113,8 +119,9 @@ class CommunityDetailCommentAdapter(
             .enqueue(object : Callback<Int>{
                 override fun onResponse(call: Call<Int>, response: Response<Int>) {
                     if (response.code() == 200){
-                        deleteNotify(commentItem)
+                        deleteNotify()
                     }
+                    changeLoadingState(false)
                 }
 
                 override fun onFailure(call: Call<Int>, t: Throwable) {
@@ -131,9 +138,29 @@ class CommunityDetailCommentAdapter(
     }
 
     // 댓글 삭제 후 리사이클러뷰 갱신
-    private fun deleteNotify(commentItem: CommentListItem){
-        this.notifyItemRemoved(itemPosition)
+    private fun deleteNotify(){
         commentList.removeAt(itemPosition)
+        communityDetailFragment.getCommentList()
         communityDetailFragment.getBoardInfo()
+        this.notifyItemRemoved(itemPosition)
+    }
+
+    // 로딩화면 띄우고 없애기
+    private fun changeLoadingState(state: Boolean){
+        if(!state){
+            loadingDialog.dismiss()
+        } else{
+            loadingDialog.show(mainActivity.supportFragmentManager, null)
+        }
+    }
+}
+
+class CommentDiffCallback: DiffUtil.ItemCallback<CommentListItem>(){
+    override fun areItemsTheSame(oldItem: CommentListItem, newItem: CommentListItem): Boolean {
+        return oldItem.commentId == newItem.commentId
+    }
+
+    override fun areContentsTheSame(oldItem: CommentListItem, newItem: CommentListItem): Boolean {
+        return oldItem == newItem
     }
 }
