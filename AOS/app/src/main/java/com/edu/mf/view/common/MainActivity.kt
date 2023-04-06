@@ -165,6 +165,7 @@ class MainActivity : AppCompatActivity() {
 
     fun changeLocale(type: Int) {
         var locale = Locale("ko", "KR")
+        languageNumber = type
         when (type) {
             0 -> {
                 locale = Locale("ko", "KR")
