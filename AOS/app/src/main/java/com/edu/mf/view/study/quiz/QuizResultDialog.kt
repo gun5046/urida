@@ -267,13 +267,14 @@ class QuizResultDialog(
              }
             }
             else{
-                NotificationDialog(
-                    resources.getString(
-                        R.string.dialog_fragment_quiz_result_end
-                    )
-                ).show(childFragmentManager, null)
                 try{
-                    Thread.sleep(2000)
+                    kotlin.run {
+                        NotificationDialog(
+                            resources.getString(
+                                R.string.dialog_fragment_quiz_result_end
+                            )
+                        ).show(parentFragmentManager, null)
+                    }
                 }catch(e:InterruptedException){
                     e.printStackTrace()
                 }

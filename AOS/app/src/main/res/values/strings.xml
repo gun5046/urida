@@ -167,7 +167,7 @@
     <string name="fragment_quiz_select_unit">총6유닛</string>
 
     <!--    dialog_fragment_quiz_result-->
-    <string name="dialog_fragment_quiz_result_end">문제의 끝입니다. 전 페이지로 이동합니다</string>
+    <string name="dialog_fragment_quiz_result_end">모든 문제의 끝 입니다.\n전 화면으로 이동합니다.</string>
 
     <!--    fragment_quiz_select_category-->
     <string name="fragment_quiz_select_category_title">문제 유형을 선택해주세요</string>
