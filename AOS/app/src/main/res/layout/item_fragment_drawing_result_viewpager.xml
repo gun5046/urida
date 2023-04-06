@@ -24,8 +24,6 @@
         android:id="@+id/constraintlayout_fragment_drawing_result_viewpager_item_first"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="20dp"
-        android:paddingEnd="20dp"
         android:paddingBottom="30dp"
         android:background="@drawable/picture_rounded_rectangle"
         app:layout_constraintTop_toTopOf="parent"
@@ -33,11 +31,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingbutton_fragment_drawing_result_tts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_volume"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:onClick="@{()->MainViewModel.startTTS()}"
+            app:backgroundTint="@color/find_light_green"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
         <ImageView
             android:id="@+id/imageview_fragment_drawing_result_viewpager_item_first"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="28dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:layout_marginBottom="8dp"
             app:imgSrc="@{@string/fragment_drawing_result_list_imageview(CategoryIdx, PictureIdx)}"
             app:layout_constraintTop_toTopOf="parent"
@@ -50,6 +63,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
             android:gravity="center"
             android:text="@{DrawingResultWord}"
             android:textColor="@color/grey_card_text"
