@@ -22,6 +22,7 @@ import com.edu.mf.repository.model.User
 import com.edu.mf.repository.model.community.*
 import com.edu.mf.utils.App
 import com.edu.mf.view.common.MainActivity
+import com.edu.mf.view.common.OnSingleClickListener
 import com.edu.mf.view.community.CommunityRegisterFragment
 import com.edu.mf.view.community.board.CommunityBoardFragment
 import com.edu.mf.viewmodel.CommunityViewModel
@@ -72,6 +73,10 @@ class CommunityDetailFragment(
         }
         communityViewModel.setBoardItem(boardItem)
         binding.communityDetail = this
+        
+        binding.constraintlayoutFragmentCommunityDetail.setOnClickListener {
+            hideKeyboard()
+        }
 
         getBoardInfo()
         clickBackPress()
@@ -84,7 +89,7 @@ class CommunityDetailFragment(
         }
 
         getCommentList()
-        binding.buttonFragmentCommunityDetailWriteComment.setOnClickListener {
+        binding.buttonFragmentCommunityDetailWriteComment.setOnSingleClickListener {
             if (!commentUpdate){
                 if (binding.edittextFragmentCommunityDetailWriteComment.text.trim().toString()
                     != ""){
@@ -421,5 +426,13 @@ class CommunityDetailFragment(
     // 뒤로가기 아이콘 클릭 시
     fun backPressed(){
         mainActivity.popFragment()
+    }
+
+    // 중복 클릭 방지
+    private fun View.setOnSingleClickListener(onSingleClick: (View) -> Unit){
+        val oneClick = OnSingleClickListener{
+            onSingleClick(it)
+        }
+        setOnClickListener(oneClick)
     }
 }

@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentResolver
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -14,6 +15,7 @@ import android.provider.OpenableColumns
 import android.provider.Settings
 import android.util.Log
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
@@ -33,7 +35,6 @@ import com.edu.mf.view.common.MainActivity
 import com.edu.mf.view.common.NotificationDialog
 import com.edu.mf.view.community.board.CommunityBoardFragment
 import com.edu.mf.view.drawing.result.DrawingResultShareDialog
-import com.edu.mf.viewmodel.CommunityViewModel
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -79,6 +80,10 @@ class CommunityRegisterFragment(
         setActionBar()
         chkPermissionGallery()
         chkDrawingUri()
+        
+        binding.constraintlayoutFragmentCommunityRegister.setOnClickListener {
+            hideKeyboard()
+        }
 
         if (boardItem != null){
             binding.imageviewFragmentCommunityRegisterPlus.visibility = View.GONE
@@ -88,12 +93,14 @@ class CommunityRegisterFragment(
 
     // 그림 uri가 있는지 체크
     private fun chkDrawingUri(){
-        drawingUri = DrawingResultShareDialog.savedDrawingUri
-        if (drawingUri != "".toUri()){
+        if (tabPosition == 1){
             binding.imageviewFragmentCommunityRegister.background =
                 ContextCompat.getDrawable(requireContext(), R.color.white)
-            setImg(drawingUri)
+        }
 
+        drawingUri = DrawingResultShareDialog.savedDrawingUri
+        if (drawingUri != "".toUri()){
+            setImg(drawingUri)
             DrawingResultShareDialog.savedDrawingUri = "".toUri()
             binding.cardviewFragmentCommunityRegister.isClickable = false
         }
@@ -358,6 +365,15 @@ class CommunityRegisterFragment(
             this
             , viewLifecycleOwner
             , Lifecycle.State.RESUMED
+        )
+    }
+
+    // 등록버튼 클릭 후 키보드 내리기
+    private fun hideKeyboard(){
+        val inputManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(
+            requireActivity().currentFocus!!.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
         )
     }
 

@@ -117,9 +117,8 @@ class DrawingResultFragment(
             })
     }
 
-    // 홈으로 가기
+    // 이전 화면으로 가기
     fun onBackPressed(){
-        mainActivity.popFragment()
         mainActivity.popFragment()
     }
 

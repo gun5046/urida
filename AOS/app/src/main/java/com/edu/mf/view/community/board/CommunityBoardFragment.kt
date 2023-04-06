@@ -55,7 +55,6 @@ class CommunityBoardFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d(TAG, "onViewCreated: $rViewItemPosition")
         chipClickListener()
     }
 
