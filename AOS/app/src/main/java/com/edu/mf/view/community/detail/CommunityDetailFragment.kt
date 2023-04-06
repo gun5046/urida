@@ -72,6 +72,10 @@ class CommunityDetailFragment(
         }
         communityViewModel.setBoardItem(boardItem)
         binding.communityDetail = this
+        
+        binding.constraintlayoutFragmentCommunityDetail.setOnClickListener {
+            hideKeyboard()
+        }
 
         getBoardInfo()
         clickBackPress()
