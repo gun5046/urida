@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginStart="20dp"
-
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -91,65 +90,6 @@
             app:layout_constraintRight_toRightOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview_fragment_drawing_pen_width"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@+id/constraintlayout_fragment_drawing_draw_tools">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp">
-
-            <ImageButton
-                android:id="@+id/imageview_fragment_drawing_pen_width_1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:padding="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:src="@drawable/drawing_pen_shape"
-                android:background="@drawable/drawing_pen_shape_pressed"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/imageview_fragment_drawing_pen_width_2"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <ImageView
-                android:id="@+id/imageview_fragment_drawing_pen_width_2"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:padding="8dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:src="@drawable/drawing_pen_shape"
-                android:background="@drawable/drawing_pen_shape_pressed"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/imageview_fragment_drawing_pen_width_1"
-                app:layout_constraintRight_toLeftOf="@+id/imageview_fragment_drawing_pen_width_3"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <ImageView
-                android:id="@+id/imageview_fragment_drawing_pen_width_3"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:padding="5dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:src="@drawable/drawing_pen_shape"
-                android:background="@drawable/drawing_pen_shape_pressed"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/imageview_fragment_drawing_pen_width_2"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintlayout_fragment_drawing_canvas_sketchbook"
