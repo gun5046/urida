@@ -31,7 +31,7 @@ public class SwaggerConfiguration {
     private ApiInfo apiInfo() {
         return new ApiInfo(
                 "Uri,Da",
-                "싸피 특화 프로젝트",
+                "",
                 "version1.0",
                 "",
                 new Contact("Contact Me", "", ""),
