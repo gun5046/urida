@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="VoiceResultFragment"
+            type="com.edu.mf.view.voice.VoiceResultFragment" />
+
+        <variable
+            name="MainViewModel"
+            type="com.edu.mf.viewmodel.MainViewModel" />
+
+        <variable
+            name="CategoryIdx"
+            type="Integer" />
+
+        <variable
+            name="PictureIdx"
+            type="Integer" />
+
+        <variable
+            name="VoiceResultWord"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/find_light_green">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingbutton_fragment_drawing_result_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_learn_arrow_back"
+            android:backgroundTint="@color/white"
+            android:onClick="@{()->VoiceResultFragment.onBackPressed()}"
+            app:backgroundTint="@color/find_light_green"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintlayout_fragment_voice_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="60dp"
+            android:background="@drawable/picture_rounded_rectangle"
+            android:paddingBottom="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/imageview_fragment_voice_result_tts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:src="@drawable/ic_volume"
+                android:backgroundTint="@color/white"
+                android:onClick="@{()->MainViewModel.startTTS()}"
+                app:backgroundTint="@color/find_light_green"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+            <ImageView
+                android:id="@+id/imageview_fragment_voice_result"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="34dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                app:imgSrc="@{@string/fragment_drawing_result_list_imageview(CategoryIdx, PictureIdx)}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/textview_fragment_voice_result" />
+
+            <TextView
+                android:id="@+id/textview_fragment_voice_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:gravity="center"
+                android:text="@{VoiceResultWord}"
+                android:textColor="@color/grey_card_text"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/jalnan"
+                app:layout_constraintTop_toBottomOf="@+id/imageview_fragment_voice_result"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintlayout_voice_result_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/drawing_dialog"
+            android:backgroundTint="@color/white"
+            android:paddingStart="20dp"
+            android:paddingTop="54dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="18dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textview_fragment_voice_result_redrawing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/dialog_fragment_voice_result_textview"
+                android:textColor="@color/grey_02"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintlayout_fragment_voice_result_redrawing"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintlayout_fragment_voice_result_redrawing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textview_fragment_voice_result_redrawing">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_fragment_voice_result_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/drawing_dialog_button_border"
+                    android:elevation="4dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="@string/dialog_fragment_voice_result_main_button"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/button_fragment_voice_result_redrawing"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_fragment_voice_result_redrawing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginStart="70dp"
+                    android:background="@drawable/drawing_dialog_button_fill"
+                    android:elevation="4dp"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="@string/dialog_fragment_voice_result_button"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/button_fragment_voice_result_main"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

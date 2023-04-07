@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="vm"
+            type="com.edu.mf.viewmodel.MainViewModel" />
+        <variable
+            name="handlers"
+            type="com.edu.mf.view.study.quiz.QuizResultDialog" />
+    </data>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_quiz_result_background">
+    <TextView
+        android:id="@+id/textview_dialog_fragment_quiz_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/jalnan_language"
+        android:textSize="18sp"
+        android:text="정답입니다"
+        android:layout_margin="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:gravity="center"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_dialog_fragment_quiz_cancle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="홈으로 이동"
+        android:onClick="@{()->handlers.onCancleClick()}"
+        android:textColor="@color/primary_blue"
+        android:fontFamily="@font/jalnan_language"
+        android:textSize="14sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/dialog_quiz_result_cancle"
+        app:layout_constraintRight_toLeftOf="@id/button_dialog_fragment_quiz_next"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/button_dialog_fragment_quiz_next"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="다음문제"
+        android:onClick="@{()->handlers.onOkClick()}"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:fontFamily="@font/jalnan_language"
+        android:textSize="14sp"
+        android:textColor="@color/white"
+        android:background="@drawable/dialog_quiz_result_next"
+        app:layout_constraintLeft_toRightOf="@id/button_dialog_fragment_quiz_cancle"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

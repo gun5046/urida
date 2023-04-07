@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="clickListener"
+            type="com.edu.mf.view.study.learn.LearnAdapter.CategoryClickListener" />
+        <variable
+            name="data"
+            type="String" />
+        <variable
+            name="position"
+            type="Integer" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_item_quiz"
+        android:padding="10dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/learn_list_light_gray_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textview_item_learn_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="@{@string/item_fragment_learn_unit + position}"
+            android:textSize="16sp"
+            android:fontFamily="@font/kakao_otf_bold"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+        <TextView
+            android:id="@+id/textview_item_learn_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:textAlignment="textStart"
+            android:fontFamily="@font/kakao_otf_bold"
+            android:text="@{data}"
+            android:textColor="@color/black"
+            android:textSize="22sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_item_learn_unit" />
+
+        <ImageView
+            android:id="@+id/imageview_item_icon"
+            android:layout_width="20dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintLeft_toRightOf="@id/textview_item_learn_title"
+            app:layout_constraintTop_toTopOf="@id/textview_item_learn_title"
+            app:layout_constraintBottom_toBottomOf="@id/textview_item_learn_title"/>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_item_quiz_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/item_fragment_quiz_button"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:background="@drawable/learn_list_light_8"
+            android:fontFamily="@font/kakao_otf_bold"
+            android:layout_marginRight="10dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
