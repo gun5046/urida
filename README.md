@@ -32,8 +32,6 @@
 - - -
 # 📚 기술스택
 
-![Untitled 1](.png)
-
 | 분야 | 사용기술 |
 | --- | --- |
 | FrontEnd | Android(Kotlin), MVVM |
@@ -45,12 +43,11 @@
 
 - - -
 # :bulb: 아키텍처
-![Untitled 1](.png)
-
+![Architecture1.png](./Architecture1.png)
 - - - 
 # :chart_with_upwards_trend: ERD
-![Untitled 1](.png)
 
+![image.png](./image.png)
 - - -
 # :see_no_evil: 기능 엿보기 (GIF)
 
