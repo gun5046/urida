@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="DrawingViewModel"
+            type="com.edu.mf.viewmodel.DrawingViewModel" />
+
+        <variable
+            name="DrawingResultViewpager"
+            type="com.edu.mf.view.drawing.result.DrawingResultViewPagerFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/find_light_green">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingbutton_fragment_drawing_result_viewpager_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_learn_arrow_back"
+            android:backgroundTint="@color/white"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:onClick="@{()->DrawingResultViewpager.onBackPressed()}"
+            app:backgroundTint="@color/find_light_green"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"/>
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_marginTop="30dp"-->
+<!--            android:background="@color/find_light_green"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/textview_fragment_drawing_result_viewpager_subtitle">-->
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager_fragment_drawing_result_viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="40dp"
+                app:layout_marginBaseline="20dp"
+                app:layout_constraintVertical_weight="1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/circleindicator_fragment_drawing_result_viewpager"/>
+
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/circleindicator_fragment_drawing_result_viewpager"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="20dp"
+                app:ci_drawable="@drawable/drawing_result_list_indicator_selected"
+                app:ci_width="10dp"
+                app:ci_height="10dp"
+                app:ci_margin="10dp"
+                app:layout_constraintVertical_weight="0.1"
+                app:layout_constraintTop_toBottomOf="@+id/viewpager_fragment_drawing_result_viewpager"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
