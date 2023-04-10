@@ -37,7 +37,7 @@ import retrofit2.Response
 private const val TAG = "CommunityDetailFragment"
 class CommunityDetailFragment(
     private val boardItem: BoardListItem
-    ): Fragment() {
+): Fragment() {
     private lateinit var binding: FragmentCommunityDetailBinding
     private lateinit var mainActivity: MainActivity
     private lateinit var communityService: CommunityService
@@ -73,7 +73,7 @@ class CommunityDetailFragment(
         }
         communityViewModel.setBoardItem(boardItem)
         binding.communityDetail = this
-        
+
         binding.constraintlayoutFragmentCommunityDetail.setOnClickListener {
             hideKeyboard()
         }
@@ -141,7 +141,7 @@ class CommunityDetailFragment(
                 override fun onFailure(call: Call<Void>, t: Throwable) {
                     Log.d(TAG, "onFailure: ${t.message}")
                 }
-        })
+            })
     }
 
     // 좋아요 상태 받아오기
@@ -265,20 +265,20 @@ class CommunityDetailFragment(
     fun getCommentList(){
         communityService.getCommentList(boardItem.boardId)
             .enqueue(object : Callback<List<CommentListItem>>{
-            override fun onResponse(
-                call: Call<List<CommentListItem>>,
-                response: Response<List<CommentListItem>>
-            ) {
-                if(response.code() == 200){
-                    val body = response.body()!!
-                    setCommentAdapter(body)
+                override fun onResponse(
+                    call: Call<List<CommentListItem>>,
+                    response: Response<List<CommentListItem>>
+                ) {
+                    if(response.code() == 200){
+                        val body = response.body()!!
+                        setCommentAdapter(body)
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<List<CommentListItem>>, t: Throwable) {
-                Log.d(TAG, "onFailure: ${t.message}")
-            }
-        })
+                override fun onFailure(call: Call<List<CommentListItem>>, t: Throwable) {
+                    Log.d(TAG, "onFailure: ${t.message}")
+                }
+            })
     }
 
     // 댓글 작성
@@ -291,23 +291,23 @@ class CommunityDetailFragment(
         )
         communityService.createComment(commentData)
             .enqueue(object : Callback<CommentListItem>{
-            override fun onResponse(
-                call: Call<CommentListItem>,
-                response: Response<CommentListItem>
-            ) {
-                if (response.code() == 200){
-                    binding.edittextFragmentCommunityDetailWriteComment.setText("")
-                    hideKeyboard()
+                override fun onResponse(
+                    call: Call<CommentListItem>,
+                    response: Response<CommentListItem>
+                ) {
+                    if (response.code() == 200){
+                        binding.edittextFragmentCommunityDetailWriteComment.setText("")
+                        hideKeyboard()
 
-                    getBoardInfo()
-                    getCommentList()
+                        getBoardInfo()
+                        getCommentList()
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<CommentListItem>, t: Throwable) {
-                Log.d(TAG, "onFailure: ${t.message}")
-            }
-        })
+                override fun onFailure(call: Call<CommentListItem>, t: Throwable) {
+                    Log.d(TAG, "onFailure: ${t.message}")
+                }
+            })
     }
 
     // 댓글 수정
@@ -379,10 +379,13 @@ class CommunityDetailFragment(
     // 등록버튼 클릭 후 키보드 내리기
     private fun hideKeyboard(){
         val inputManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputManager.hideSoftInputFromWindow(
-            requireActivity().currentFocus!!.windowToken,
-            InputMethodManager.HIDE_NOT_ALWAYS
-        )
+
+        if(inputManager.isAcceptingText){
+            inputManager.hideSoftInputFromWindow(
+                requireActivity().currentFocus!!.windowToken,
+                InputMethodManager.HIDE_NOT_ALWAYS
+            )
+        }
     }
 
     // 댓글 다이얼로그 수정 버튼 클릭 시 키보드 올리기

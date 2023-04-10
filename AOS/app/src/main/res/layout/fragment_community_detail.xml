@@ -361,6 +361,7 @@
                 android:fontFamily="@font/kakao_otf_regular"
                 android:background="@drawable/drawing_dialog_button_border"
                 android:backgroundTint="@color/grey_08"
+                android:maxLength="200"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/button_fragment_community_detail_write_comment"
