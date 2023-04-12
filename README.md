@@ -35,9 +35,9 @@
 | 분야 | 사용기술 |
 | --- | --- |
 | FrontEnd | Android(Kotlin), MVVM |
-| BackEnd | SpringBoot, FCM |
-| Database | MariaDB |
-| DevOps | AWS EC2, docker, GitLab Runner, Google Cloud Platform |
+| BackEnd | SpringBoot,MSA|
+| Database | MySQL |
+| DevOps | AWS EC2, GPU, Docker, Jenkins|
 | Tool | Jira, Notion, IntelliJ, AndroidStudio, GitLab |
 | Design | Figma |
 
