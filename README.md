@@ -79,10 +79,10 @@
 ![갤러리에서_불러오기](https://user-images.githubusercontent.com/68943993/231978779-a8c634e8-33c7-4ddf-af67-a54aaeb1c0e7.gif)
 
 ### 그림으로 찾기
-![그림으로_찾기](/uploads/f0f01f215c7af75879702c271aa5da3f/그림으로_찾기.gif)
+![그림으로_찾기](https://user-images.githubusercontent.com/68943993/231979635-924bb6ca-96f5-4cf2-aa4c-5b4102a9e995.gif)
 
 ### 음성으로 찾기
-![음성으로_찾기](/uploads/eb9ed9e22862ac73e87b56f680d70777/음성으로_찾기.gif)
+![음성으로_찾기](https://user-images.githubusercontent.com/68943993/231979641-417d5184-ba1b-443b-9fb1-7d25e8884343.gif)
 
 ### 게시글 수정, 댓글, 카테고리 확인
 ![게시글_수정__댓글__카테고리별](https://user-images.githubusercontent.com/68943993/231979353-c7f81bbb-22c0-43ff-a893-47fab700dc63.gif)
