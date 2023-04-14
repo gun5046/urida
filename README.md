@@ -1,5 +1,5 @@
 # 특화 프로젝트 D202
-![016](/uploads/3b89cafc449d6c09f62a7778af931cc8/016.png)
+![016](https://user-images.githubusercontent.com/68943993/231980305-2bf20024-4c3d-46c6-ace4-ca133b7c23c9.png)
 # :rocket: 프로젝트 소개
 ## :pencil2: 점점 증가하는 다문화 학생들을 위한 교육 앱 'URIDA' :pencil2:
 - 한국어ㆍ베트남어ㆍ중국어ㆍ영어 4개 국어를 지원하여 **약 70%** 의 다문화 학생들이 사용할 수 있습니다.
@@ -43,52 +43,52 @@
 
 - - -
 # :bulb: 아키텍처
-![Architecture1.png](./Architecture1.png)
+![Architecture1.png](https://user-images.githubusercontent.com/68943993/231980316-9a8dafa3-2044-4de1-baca-85d595241685.png)
 - - - 
 # :chart_with_upwards_trend: ERD
 
-![image.png](./image.png)
+![image.png](https://user-images.githubusercontent.com/68943993/231980328-c939736a-c6ba-4416-870f-657e235c114f.png)
 - - -
 # :see_no_evil: 기능 엿보기 (GIF)
 
 ### 회원가입
-![회원가입](/uploads/ca8c5daca6054b3e9e5fa6a98f79b874/회원가입.gif)
+![회원가입](https://user-images.githubusercontent.com/68943993/231978062-f19ecba4-892c-4133-9d69-eddeae25db36.gif)
 
 ### 단순 로그인
-![단순_로그인](/uploads/849a6a6b7edc1def373926bc9c6dcdfd/단순_로그인.gif)
+![단순_로그인](https://user-images.githubusercontent.com/68943993/231978075-ff69ddea-cb50-4d16-bfc8-c6304a0fd020.gif)
 
 ### 언어 변경
-![언어_변경_기능](/uploads/b7457356d361640572438d2ca42d0662/언어_변경_기능.gif)
+![언어_변경_기능](https://user-images.githubusercontent.com/68943993/231978406-abe73f7a-79be-4051-9f03-99796583c2e9.gif)
 
 ### 단어 익히기
-![단어_익히기](/uploads/506843006cbfdd4d9dd53ecf9abbb1de/단어_익히기.gif)
+![단어_익히기](https://user-images.githubusercontent.com/68943993/231977846-b7aa5803-acac-4276-95a0-efa451f49215.gif)
 
 ### 단어 퀴즈
-![단어_퀴즈](/uploads/c8f5ff9a740e1935da847917b19fd778/단어_퀴즈.gif)
+![단어_퀴즈](https://user-images.githubusercontent.com/68943993/231978561-e6db1aff-a436-41b3-a6b1-d7c2e10ab5ff.gif)
 
 ### 다시 풀어보기
-![다시_풀어보기](/uploads/634dca72a25699d2666c06da0085521d/다시_풀어보기.gif)
+![다시_풀어보기](https://user-images.githubusercontent.com/68943993/231978686-8119b8b5-73ba-4f77-ab32-1e6042411751.gif)
 
 ### 실시간으로 확인하기
-![실시간_캡셔닝](/uploads/9f6a12e4c14d1f14c25cbc098784064d/실시간_캡셔닝.gif)
+![실시간_캡셔닝](https://user-images.githubusercontent.com/68943993/231978734-52db73cd-4bf9-4450-851b-4c4c90a841b4.gif)
 
 ### 사진 찍기
-![사진으로_찾기](/uploads/0864228a2ae7098adf3beb54ba75f933/사진으로_찾기.gif)
+![사진으로_찾기](https://user-images.githubusercontent.com/68943993/231978738-f43ed3e8-002f-477e-9e1a-c1f8ed0ea7f6.gif)
 
 ### 갤러리에서 불러오기
-![갤러리에서_불러오기](/uploads/9d2b807034977ed8f8a5ea1c5ef1dc2f/갤러리에서_불러오기.gif)
+![갤러리에서_불러오기](https://user-images.githubusercontent.com/68943993/231978779-a8c634e8-33c7-4ddf-af67-a54aaeb1c0e7.gif)
 
 ### 그림으로 찾기
-![그림으로_찾기](/uploads/f0f01f215c7af75879702c271aa5da3f/그림으로_찾기.gif)
+![그림으로_찾기](https://user-images.githubusercontent.com/68943993/231979635-924bb6ca-96f5-4cf2-aa4c-5b4102a9e995.gif)
 
 ### 음성으로 찾기
-![음성으로_찾기](/uploads/eb9ed9e22862ac73e87b56f680d70777/음성으로_찾기.gif)
+![음성으로_찾기](https://user-images.githubusercontent.com/68943993/231979641-417d5184-ba1b-443b-9fb1-7d25e8884343.gif)
 
 ### 게시글 수정, 댓글, 카테고리 확인
-![게시글_수정__댓글__카테고리별](/uploads/02f1acf8c8a20f7ee9d09f12a3668d84/게시글_수정__댓글__카테고리별.gif)
+![게시글_수정__댓글__카테고리별](https://user-images.githubusercontent.com/68943993/231979353-c7f81bbb-22c0-43ff-a893-47fab700dc63.gif)
 
 ### 그림게시판 확인 및 작성
-![그림게시판_확인_및_작성](/uploads/928549575ef2fac52882d9018e18fdfe/그림게시판_확인_및_작성.gif)
+![그림게시판_확인_및_작성](https://user-images.githubusercontent.com/68943993/231979201-767006cc-015e-4551-9e0a-6871deecdabc.gif)
 
 ### 댓글 수정, 게시글 작성 및 확인
-![댓글_수정__게시글_작성_및_확인](/uploads/feef186cd2623d32ca4597fa955d93bb/댓글_수정__게시글_작성_및_확인.gif)
+![댓글_수정__게시글_작성_및_확인](https://user-images.githubusercontent.com/68943993/231979108-0412f719-1bf7-4603-a9b2-09a6e015f175.gif)
