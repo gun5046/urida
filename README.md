@@ -1,5 +1,5 @@
 # 특화 프로젝트 D202
-![016](/uploads/3b89cafc449d6c09f62a7778af931cc8/016.png)
+![016](https://user-images.githubusercontent.com/68943993/231980305-2bf20024-4c3d-46c6-ace4-ca133b7c23c9.png)
 # :rocket: 프로젝트 소개
 ## :pencil2: 점점 증가하는 다문화 학생들을 위한 교육 앱 'URIDA' :pencil2:
 - 한국어ㆍ베트남어ㆍ중국어ㆍ영어 4개 국어를 지원하여 **약 70%** 의 다문화 학생들이 사용할 수 있습니다.
@@ -43,11 +43,11 @@
 
 - - -
 # :bulb: 아키텍처
-![Architecture1.png](./Architecture1.png)
+![Architecture1.png](https://user-images.githubusercontent.com/68943993/231980316-9a8dafa3-2044-4de1-baca-85d595241685.png)
 - - - 
 # :chart_with_upwards_trend: ERD
 
-![image.png](./image.png)
+![image.png](https://user-images.githubusercontent.com/68943993/231980328-c939736a-c6ba-4416-870f-657e235c114f.png)
 - - -
 # :see_no_evil: 기능 엿보기 (GIF)
 
